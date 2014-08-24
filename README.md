@@ -11,7 +11,7 @@
 #### 编译安装 VIM
 
 这里主要需要注意的是开启 `lua` 和 `python` 的支持, 来支持使用 lua 和 python 开发的插件。
-如：`[gundo]`, `[YouCompleteMe]` 等需要 python 支持, `[neocomplete]` 需要 lua 的支持。
+如：[gundo], [YouCompleteMe] 等需要 python 支持, [neocomplete] 需要 lua 的支持。
 
     # tar xf vim-7.4.tar.bz2 -C /usr/local/src/
     # cd /usr/local/src/vim74/
