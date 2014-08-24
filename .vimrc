@@ -1,6 +1,7 @@
 "
 " Author ueaner <ueaner at gmail.com>
 "
+
 " 目录：
 " 界面主题
 " 插件管理
@@ -11,9 +12,6 @@
 " 键映射
 " 杂项
 " 辅助函数
-"
-" !!尽量再编码上提高效率, 象 git 集成到vim这样的工具可以在终端熟练之后再加入,
-" 或者先把 phptags 搞定, ctrlp 练熟, 把vim的精髓搞到等
 "
 
 " 关闭兼容模式(nocompatible)
@@ -239,4 +237,4 @@ nnoremap <leader>l <C-W>l
 nnoremap <TAB> :bnext<CR>
 
 " 引入相关插件配置
-source $HOME/.plugin_config.vim
+source $HOME/.vim_plugin_config.vim
