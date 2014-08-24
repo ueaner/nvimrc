@@ -1,4 +1,4 @@
-## 编译安装 VIM 7.4 最新版本
+## 编译安装 VIM 7.4 最新版本 & 配置 VIM
 
 #### 安装依赖
 
@@ -56,7 +56,7 @@
     https://github.com/mikecanann/vim_config
     https://github.com/larrupingpig/vimgdb-for-vim7.4
 
-## 配置 VIM
+#### 配置 VIM
 
 clone 本地址:
 
