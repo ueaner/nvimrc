@@ -53,7 +53,7 @@ let g:airline#extensions#tabline#show_tab_nr = 1 " show tab number
 " tagbar
 let g:airline#extensions#tagbar#enabled = 1
 " ctrlp
-let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+"let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 
 let g:airline#extensions#branch#enabled = 1
 
