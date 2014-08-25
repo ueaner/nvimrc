@@ -7,7 +7,8 @@
 
     # yum install ncurses-devel lua-devel python-devel cscope ctags git
 
-如果你的 Linux 发行版本的源里是 VIM 7.3+ 的版本，那么可以使用先移除再安装的方式：
+如果你的 Linux 发行版本的源里是 VIM 7.3+ 的版本，那么可以使用先移除再安装的方式，
+它会检测到你已安装 `lua-devel python-devel` 而自动为你的 VIM 添加 `lua` 和 `python` 支持：
 
     # yum remove vim-common vim-enhanced
     # yum install vim-common vim-enhanced
