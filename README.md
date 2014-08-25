@@ -92,7 +92,11 @@ clone 本地址:
 
 #### 安装插件
 
-我这里使用的 `Vundle` 来管理 VIM 插件，你也可以选用 [pathogen] 等相关功能的插件来管理你的 VIM 插件。
+我这里使用的 [Vundle] 来管理 VIM 插件，你也可以选用 [pathogen] 等相关功能的插件来管理你的 VIM 插件。
+
+安装 Vundle 插件:
+
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 打开 vim, 命令行执行：
 
@@ -116,4 +120,5 @@ clone 本地址:
 [YouCompleteMe]: https://github.com/Valloric/YouCompleteMe
 [neocomplete]: https://github.com/Shougo/neocomplete.vim
 [pathogen]: http://github.com/tpope/vim-pathogen
+[Vundle]: https://github.com/gmarik/Vundle.vim
 [issues]: https://github.com/ueaner/vim/issues
