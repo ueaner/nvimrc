@@ -175,6 +175,8 @@ set foldmethod=indent
 set foldlevel=99
 " 使用鼠标
 set mouse=a
+" timeout
+set ttimeoutlen=50
 
 " ############# 搜索/帮助 #############
 " 实时显示搜索结果

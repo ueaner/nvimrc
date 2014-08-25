@@ -55,6 +55,8 @@ let g:airline#extensions#tagbar#enabled = 1
 " ctrlp
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 
+let g:airline#extensions#branch#enabled = 1
+
 "%{tagbar#currenttag('[%s] ','')}
 "%{fugitive#statusline()}
 
