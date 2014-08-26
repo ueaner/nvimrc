@@ -55,6 +55,18 @@ let g:airline#extensions#tagbar#enabled = 1
 " ctrlp
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 
+" unicode symbols
+"if !exists('g:airline_symbols')
+"    let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep = '»'
+"let g:airline_right_sep = '«'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.whitespace = 'Ξ'
+
+"let g:airline_section_z='%{g:airline_externals_fugitive}
 "%{tagbar#currenttag('[%s] ','')}
 "%{fugitive#statusline()}
 
@@ -165,4 +177,15 @@ augroup END
 "let NERDTreeDirArrows = 0 " 目录箭头:1显示箭头 0传统+-|号
 "let NERDTreeMouseMode = 2 " 单击打开目录，双击打开文件
 
+" ############# Syntastic #############
+let g:syntastic_check_on_open=1
+let g:syntastic_echo_current_error=1
+let g:syntastic_enable_signs=1
+let g:syntastic_enable_balloons = 1
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_auto_jump=0
+let g:syntastic_auto_loc_list=2
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
 

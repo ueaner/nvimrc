@@ -128,6 +128,8 @@ set fillchars+=vert:\ " 最后边是一个空格
 set scrolloff=3
 " 显示状态栏
 set laststatus=2
+" 动态显示标题
+set title
 " 状态栏/右下角显示行号和列号
 set ruler
 " 显示命令行栏

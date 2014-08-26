@@ -60,9 +60,9 @@
 
 clone 本地址:
 
-    git clone https://github.com/ueaner/vim.git
-
-将 `.vimrc` 和 `.vim_plugin_config.vim` 两个文件放到 home 目录下。
+    git clone https://github.com/ueaner/vim.git ~/.vim
+    ln -s ~/.vim/vimrc ~/.vimrc
+    ln -s ~/.vim/vim_plugin_config.vim ~/.vim_plugin_config.vim
 
 #### 插件列表一览
 
