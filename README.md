@@ -1,8 +1,19 @@
-## 编译安装 VIM 7.4 最新版本 & 配置 VIM
+## 安装 VIM 7.4 最新版本 & 配置 VIM
+
+* 如果你的 VIM 版本是 7.3+, 并且通过 vim --version 可以看到 `+lua` 和 `+python`, 
+那么可以直接阅读 `配置 VIM` 的部分。
 
 #### 安装依赖
 
     # yum install ncurses-devel lua-devel python-devel cscope ctags git
+
+如果你的 Linux 发行版本的源里是 VIM 7.3+ 的版本，那么可以使用先移除再安装的方式，
+它会检测到你已安装 `lua-devel python-devel` 而自动为你的 VIM 添加 `lua` 和 `python` 支持：
+
+    # yum remove vim-common vim-enhanced
+    # yum install vim-common vim-enhanced
+
+符合此条件，也可以直接跳到 `配置 VIM` 的部分。`不符合的继续`。
 
 #### 下载 VIM 源码包
 
@@ -92,7 +103,11 @@ clone 本地址:
 
 #### 安装插件
 
-我这里使用的 `Vundle` 来管理 VIM 插件，你也可以选用 [pathogen] 等相关功能的插件来管理你的 VIM 插件。
+我这里使用的 [Vundle] 来管理 VIM 插件，你也可以选用 [pathogen] 等相关功能的插件来管理你的 VIM 插件。
+
+安装 Vundle 插件:
+
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 打开 vim, 命令行执行：
 
@@ -116,4 +131,5 @@ clone 本地址:
 [YouCompleteMe]: https://github.com/Valloric/YouCompleteMe
 [neocomplete]: https://github.com/Shougo/neocomplete.vim
 [pathogen]: http://github.com/tpope/vim-pathogen
+[Vundle]: https://github.com/gmarik/Vundle.vim
 [issues]: https://github.com/ueaner/vim/issues
