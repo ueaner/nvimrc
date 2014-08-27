@@ -83,7 +83,7 @@ Plugin 'elzr/vim-json'
 " git mirror, 需要 python 支持
 "Plugin 'sjl/gundo.vim'
 " git
-"Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " git 使用 NERDTree 时此插件无法使用，应该多练习下 ctrlp 的使用
 "Plugin 'airblade/vim-gitgutter'
 

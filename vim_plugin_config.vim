@@ -57,6 +57,7 @@ let g:airline#extensions#tagbar#enabled = 1
 
 let g:airline#extensions#branch#enabled = 1
 
+let g:airline#extensions#branch#enabled = 1
 " unicode symbols
 "if !exists('g:airline_symbols')
 "    let g:airline_symbols = {}
