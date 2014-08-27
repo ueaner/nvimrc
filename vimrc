@@ -81,7 +81,7 @@ Plugin 'elzr/vim-json'
 "Plugin 'skammer/vim-css-color'
 
 " git mirror, 需要 python 支持
-"Plugin 'sjl/gundo.vim'
+Plugin 'sjl/gundo.vim'
 " git
 "Plugin 'tpope/vim-fugitive'
 " git 使用 NERDTree 时此插件无法使用，应该多练习下 ctrlp 的使用
