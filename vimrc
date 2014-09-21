@@ -31,6 +31,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " 主题
 Plugin 'tomasr/molokai'
+"Plugin 'zenorocha/dracula-theme'
 " 状态条 & buffers tabline & tagbar & ctrlp ...
 Plugin 'bling/vim-airline'
 " 目录管理
