@@ -242,4 +242,4 @@ nnoremap <leader>l <C-W>l
 nnoremap <TAB> :bnext<CR>
 
 " 引入相关插件配置
-source $HOME/.vim_plugin_config.vim
+source vim_plugin_config.vim

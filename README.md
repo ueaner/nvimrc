@@ -14,6 +14,7 @@
     # yum install vim-common vim-enhanced
 
 符合此条件，也可以直接跳到 `配置 VIM` 的部分。`不符合的继续`。
+__注：CentOS 7 中不支持此方法.__
 
 #### 下载 VIM 源码包
 
@@ -72,8 +73,6 @@
 clone 本地址:
 
     git clone https://github.com/ueaner/vim.git ~/.vim
-    ln -s ~/.vim/vimrc ~/.vimrc
-    ln -s ~/.vim/vim_plugin_config.vim ~/.vim_plugin_config.vim
 
 #### 插件列表一览
 
