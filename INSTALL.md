@@ -52,6 +52,7 @@
       #[ -n "$ID" -a "$ID" -le 200 ] && return
       # for bash and zsh, only if no alias is already set
       alias vi >/dev/null 2>&1 || alias vi=/usr/local/vim74/bin/vim
+      alias vim >/dev/null 2>&1 || alias vim=/usr/local/vim74/bin/vim
     fi
 
 运行 `. /etc/profile.d/vim.sh` 使之在当前终端生效，注销或重启永久生效。
