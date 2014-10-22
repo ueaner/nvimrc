@@ -42,8 +42,8 @@ let g:molokai_original = 1
 
 " ############# airline #############
 " 查看 airline 的可用主题：~/.vim/bundle/vim-airline/autoload/airline/themes/
-let g:airline_theme='jellybeans'
-"let g:airline_theme='powerlineish'
+"let g:airline_theme='jellybeans'
+let g:airline_theme='powerlineish'
 "let g:airline_theme='dark'
 " tabline 启动时会将文件列表在顶栏显示，干的漂亮
 let g:airline#extensions#tabline#enabled = 1

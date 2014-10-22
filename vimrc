@@ -30,7 +30,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " 主题
-Plugin 'tomasr/molokai'
+"Plugin 'tomasr/molokai'
+Plugin 'fatih/molokai'
 "Plugin 'zenorocha/dracula-theme'
 " 状态条 & buffers tabline & tagbar & ctrlp ...
 Plugin 'bling/vim-airline'
@@ -92,6 +93,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tyru/open-browser.vim'
 " 画图
 "Plugin 'drawit'
+
+" nginx
+Plugin 'evanmiller/nginx-vim-syntax'
 
 call vundle#end()            " required
 " 为特定的文件类型载入相应的插件
@@ -177,7 +181,7 @@ syntax on
 set foldmethod=indent
 set foldlevel=99
 " 使用鼠标
-set mouse=a
+"set mouse=a
 " timeout
 set ttimeoutlen=50
 
@@ -243,3 +247,4 @@ nnoremap <TAB> :bnext<CR>
 
 " 引入相关插件配置
 source ~/.vim/vim_plugin_config.vim
+" source ~/.vim/filetype.vim
