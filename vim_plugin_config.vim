@@ -51,7 +51,7 @@ let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#show_tab_nr = 1 " show tab number
 " font
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 " tagbar
 let g:airline#extensions#tagbar#enabled = 1
 " ctrlp

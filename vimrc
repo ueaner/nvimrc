@@ -216,10 +216,12 @@ let mapleader = ','
 " 输入模式下键入jj映射到<ESC>
 inoremap jj <Esc>
 " 插入模式 hjkl 移动, 左右键与 neocomplete 冲突, " 删除下面 neocomplete 的 <C-h> 和 <C-l> 键映射
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+inoremap <C-J> <Down>
+inoremap <C-K> <Up>
+inoremap <C-B> <Left>
+inoremap <C-F> <Right>
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
 " <C-W> 删除前一个单词
 
 " undo & redo
