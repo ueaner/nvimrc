@@ -10,7 +10,7 @@
 * 杂项
 * 辅助函数
 
-如果你的 VIM 版本 < 7.3 或不支持 `lua` 和 `python`，请查看 [INSTALL.md] 文件，进行安装。
+如果你的 VIM 版本 < 7.3 或不支持 `lua` 和 `python`，请查看 [INSTALL_VIM.md] 文件，进行安装。
 
 #### 使用
 
@@ -82,7 +82,7 @@
 
 感谢您阅读完本文档。
 
-[INSTALL.md]: https://github.com/ueaner/vim/blob/master/INSTALL.md "安装 VIM7.4"
+[INSTALL_VIM.md]: INSTALL_VIM.md "安装 VIM7.4"
 
 [pathogen]: http://github.com/tpope/vim-pathogen
 [Vundle]: https://github.com/gmarik/Vundle.vim
