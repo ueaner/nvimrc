@@ -75,6 +75,8 @@ Plugin 'tpope/vim-markdown'
 Plugin 'mattn/emmet-vim'
 " json
 Plugin 'elzr/vim-json'
+" twig
+Plugin 'evidens/vim-twig'
 " 16 进制高亮
 "Plugin 'hexHighlight.vim'
 " 添加注释
@@ -247,6 +249,12 @@ nnoremap <leader>l <C-W>l
 " 切换buffers
 nnoremap <TAB> :bnext<CR>
 
+" 设置 gvim/macvim 字体
+if has("gui_running")
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+endif
+
 " 引入相关插件配置
-source ~/.vim/vim_plugin_config.vim
-" source ~/.vim/filetype.vim
+" 插件配置文件现放在名为 plugin 的文件夹下可被自动加载，不再另作引入操作
+"source ~/.vim/vim_plugin_config.vim
+" source ~/.vim/filetype.vim " 自动加载

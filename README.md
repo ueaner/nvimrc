@@ -10,30 +10,6 @@
 * 杂项
 * 辅助函数
 
-所使用的插件列表：
-
-* [gmarik/Vundle.vim]
-* [tomasr/molokai]
-* [bling/vim-airline]
-* [kien/ctrlp.vim]
-* [shougo/neocomplete.vim]
-* [tpope/vim-surround]
-* [mhinz/vim-signify]
-* [justinmk/vim-sneak]
-* [easygrep]
-* [Shougo/neosnippet]
-* [Shougo/neosnippet-snippets]
-* [zhisheng/visualmark.vim]
-* [scrooloose/syntastic]
-* [majutsushi/tagbar]
-* [stanangeloff/php.vim]
-* [nathanaelkane/vim-indent-guides]
-* [scrooloose/nerdcommenter]
-* [tpope/vim-markdown]
-* [mattn/emmet-vim]
-* [elzr/vim-json]
-* [tyru/open-browser.vim]
-
 如果你的 VIM 版本 < 7.3 或不支持 `lua` 和 `python`，请查看 [INSTALL.md] 文件，进行安装。
 
 #### 使用
@@ -52,7 +28,47 @@
 
     :PluginInstall
 
-等待少许时间, 你的插件就自动安装完成了，现在使用 vim 打开一个文件，焕然一新。享受的你的开发旅程吧。
+等待少许时间, 你的插件就自动安装完成了。
+
+下面的操作是为了美化标签页和状态栏，如果你不想要或不支持，可以打开 `.vim/plugin/line.vim` 文件，
+修改 `let g:airline_powerline_fonts = 1` 参数为 `0`。
+
+#### 安装 Powerline Fonts
+
+你可以在 [Powerline Patched Fonts](https://github.com/powerline/fonts) 选择自己喜欢的字体，
+我这里使用的 `Source Code Pro for Powerline` 字体。
+
+下载字体:
+
+    curl -L "https://github.com/powerline/fonts/raw/master/SourceCodePro/Sauce%20Code%20Powerline%20Regular.otf" -o "Source Code Pro for Powerline.otf"
+
+*Linux* 下安装字体：
+
+    # mkdir -p /usr/share/fonts/PowerlineFonts
+    # cp Source\ Code\ Pro\ for\ Powerline.otf /usr/share/fonts/PowerlineFonts/
+    # cd /usr/share/fonts/PowerlineFonts/
+    # mkfontscale
+    # mkfontdir
+    # fc-cache -f
+
+*Mac* 下安装字体：
+
+    $ mkdir -p ~/Library/Fonts/PowerlineFonts
+    $ cp Source\ Code\ Pro\ for\ Powerline.otf ~/Library/Fonts/PowerlineFonts/
+
+这样就可以了，Mac 下会自动识别放在 `~/Library/Fonts/` 子目录下的字体文件。
+
+#### 设置终端字体
+
+对于 gvim 和 macvim 是基于自己的 ui，可以通过配置 guifont 控制字体显示象形符号，
+而 vim 基于终端运行，所以终端的字体的设置决定了 vim 的标签页和状态条中的象形符号是否可以正常显示。
+
+打开你所用的终端，将字体设置为你刚安装 Powerline 字体。
+
+现在打开你的 vim，焕然一新。享受的你的开发之旅吧。
+
+来张图：
+![截图](preview.png)
 
 #### 交流
 
@@ -71,25 +87,3 @@
 [pathogen]: http://github.com/tpope/vim-pathogen
 [Vundle]: https://github.com/gmarik/Vundle.vim
 [issues]: https://github.com/ueaner/vim/issues
-
-[gmarik/Vundle.vim]: https://github.com/gmarik/Vundle.vim
-[tomasr/molokai]: https://github.com/tomasr/molokai
-[bling/vim-airline]: https://github.com/bling/vim-airline
-[kien/ctrlp.vim]: https://github.com/kien/ctrlp.vim
-[shougo/neocomplete.vim]: https://github.com/shougo/neocomplete.vim
-[tpope/vim-surround]: https://github.com/tpope/vim-surround
-[mhinz/vim-signify]: https://github.com/mhinz/vim-signify
-[justinmk/vim-sneak]: https://github.com/justinmk/vim-sneak
-[easygrep]: https://github.com/easygrep
-[Shougo/neosnippet]: https://github.com/Shougo/neosnippet
-[Shougo/neosnippet-snippets]: https://github.com/Shougo/neosnippet-snippets
-[zhisheng/visualmark.vim]: https://github.com/zhisheng/visualmark.vim
-[scrooloose/syntastic]: https://github.com/scrooloose/syntastic
-[majutsushi/tagbar]: https://github.com/majutsushi/tagbar
-[stanangeloff/php.vim]: https://github.com/stanangeloff/php.vim
-[nathanaelkane/vim-indent-guides]: https://github.com/nathanaelkane/vim-indent-guides
-[scrooloose/nerdcommenter]: https://github.com/scrooloose/nerdcommenter
-[tpope/vim-markdown]: https://github.com/tpope/vim-markdown
-[mattn/emmet-vim]: https://github.com/mattn/emmet-vim
-[elzr/vim-json]: https://github.com/elzr/vim-json
-[tyru/open-browser.vim]: https://github.com/tyru/open-browser.vim

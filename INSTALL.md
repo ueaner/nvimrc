@@ -1,5 +1,12 @@
 安装 VIM 7.4 并支持 lua 和 python  或其他语言写的扩展。
 
+#### Mac 下
+
+    $ brew install vim --with-lua --with-luajit
+
+
+以下为 CentOS 下的安装。
+
 #### 安装依赖
 
     # yum install ncurses-devel lua-devel python-devel cscope ctags git
