@@ -5,7 +5,7 @@
     $ brew install vim --with-lua --with-luajit
 
 
-以下为 CentOS 下的安装。
+**以下为 CentOS 下的安装**。
 
 #### 安装依赖
 
