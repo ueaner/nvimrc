@@ -57,8 +57,8 @@ Plugin 'evidens/vim-twig'
 " css color 加载太慢
 "Plugin 'skammer/vim-css-color'
 
-" git
-"Plugin 'tpope/vim-fugitive'
+" git, airline 上会默认显示分支
+Plugin 'tpope/vim-fugitive'
 " git 使用 NERDTree 时此插件无法使用，应该多练习下 ctrlp 的使用
 Plugin 'airblade/vim-gitgutter'
 

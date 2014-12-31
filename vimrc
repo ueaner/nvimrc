@@ -185,10 +185,23 @@ nnoremap <leader>o o<Esc>
 " 去除尾部空字符
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
-" 切换下一个 buffer
+" buffer 操作
 nnoremap <TAB> :bnext<CR>
-" buffer 列表
+nnoremap <leader><TAB> :bprevious<CR>
 nnoremap <leader>l :ls<CR>
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>g :e#<CR> " 切换到上一个打开的 buffer
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
 
 " http://stackoverflow.com/questions/4298910/vim-close-buffer-but-not-split-window
 function! CloseSplitOrDeleteBuffer()
