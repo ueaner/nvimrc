@@ -14,95 +14,14 @@
 " 辅助函数
 "
 
-" 关闭兼容模式(nocompatible)
-set nocompatible              " be iMproved, required
+" 引入插件管理配置文件
+source ~/.vim/bundles.vim
+
+" 自动加载 .vimrc 文件
+au BufWritePost .vimrc so ~/.vim/vimrc
+
 " ttyfast
 set ttyfast
-" 自动加载 .vimrc 文件
-au BufWritePost .vimrc so ~/.vimrc
-
-" -------------- 插件管理开始 --------------------
-filetype off                  " required
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
-
-" 主题
-"Plugin 'tomasr/molokai'
-Plugin 'fatih/molokai'
-"Plugin 'zenorocha/dracula-theme'
-" 状态条 & buffers tabline & tagbar & ctrlp ...
-Plugin 'bling/vim-airline'
-" 目录管理
-"Plugin 'scrooloose/nerdtree'
-
-" 快捷查找
-Plugin 'kien/ctrlp.vim'
-" 自动完成
-Plugin 'shougo/neocomplete.vim'
-" 括号匹配
-Plugin 'tpope/vim-surround'
-" sign
-Plugin 'mhinz/vim-signify'
-" mothon: as a minimalist [Lokaltog/vim-easymotion]
-Plugin 'justinmk/vim-sneak'
-" grep
-Plugin 'easygrep'
-" snippets
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
-" marks, 高亮 mark
-Plugin 'zhisheng/visualmark.vim'
-" marks, 快捷键帮助:help showmarks-mappings
-"Plugin 'juanpabloaj/ShowMarks'
-
-" 语法检查
-Plugin 'scrooloose/syntastic'
-" tags outline
-Plugin 'majutsushi/tagbar'
-" php tags
-"Plugin 'vim-php/tagbar-phpctags.vim'
-" PHP 5.3+ 语法
-Plugin 'stanangeloff/php.vim'
-" 对齐线
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'scrooloose/nerdcommenter'
-" markdown
-Plugin 'tpope/vim-markdown'
-" emmet, html & css
-Plugin 'mattn/emmet-vim'
-" json
-Plugin 'elzr/vim-json'
-" twig
-Plugin 'evidens/vim-twig'
-" 16 进制高亮
-"Plugin 'hexHighlight.vim'
-" 添加注释
-"Plugin 'DoxygenToolkit.vim'
-" css color 加载太慢
-"Plugin 'skammer/vim-css-color'
-
-" git mirror, 需要 python 支持
-Plugin 'sjl/gundo.vim'
-" git
-Plugin 'tpope/vim-fugitive'
-" git 使用 NERDTree 时此插件无法使用，应该多练习下 ctrlp 的使用
-"Plugin 'airblade/vim-gitgutter'
-
-" 从浏览器打开链接
-Plugin 'tyru/open-browser.vim'
-" 画图
-"Plugin 'drawit'
-
-" nginx
-Plugin 'evanmiller/nginx-vim-syntax'
-
-call vundle#end()            " required
-" 为特定的文件类型载入相应的插件
-filetype plugin indent on    " required
-" -------------- 插件管理结束 --------------------
 
 " ############# 颜色主题 #############
 " 颜色数目
@@ -124,9 +43,13 @@ set nobackup
 set nowb
 set noswapfile
 " 关闭时记住上次打开的文件信息
-set viminfo^=%
+"set viminfo^=%
 " 当前编辑文件被外部编译器修改过，自动加载
 set autoread
+" 自动保存切换标签前
+set autowrite
+
+set fileformats=unix,mac,dos
 
 " ############# 文本和缩进 #############
 " 窗口分割字符
@@ -141,8 +64,15 @@ set title
 set ruler
 " 显示命令行栏
 set showcmd
+set showmode
 " 命令行列出所有的补全可能性(不进行补全)
-set wildmode=list:longest
+"set wildmode=list:longest
+set wildmode=list:full
+" 命令行补全忽略
+set wildignore+=.hg,.git,.svn
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.DS_Store
+
 " 设置行宽
 "set cc=78
 
@@ -151,9 +81,7 @@ set nu
 " 显示相对行号(relativenumber)
 set rnu
 " 突出显示当前行
-set cursorline
-" 不自动折叠(zR 展开所有折叠航)
-set foldlevel=100
+"set cursorline
 " 显示匹配括号
 set magic
 set lazyredraw
@@ -174,22 +102,33 @@ set backspace=indent,eol,start
 " 自动缩进
 set autoindent
 " 智能缩进
-" set smartindent
+set smartindent
 " 使用 C 语言风格缩进
 "set cindent
 " 打开语法高亮
 syntax on
 " 代码折叠
 set foldmethod=indent
-set foldlevel=99
+" 不自动折叠(zR 展开所有折叠航, l 可展开当前光标下的折叠)
+set foldlevel=100
 " 使用鼠标
-"set mouse=a
+set mouse=a
 " timeout
-set ttimeoutlen=50
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+
+" http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
+set clipboard^=unnamed
+set clipboard^=unnamedplus
+
+syntax sync minlines=256
+set synmaxcol=128
+set re=1
 
 " ############# 搜索/帮助 #############
 " 实时显示搜索结果
-" set incsearch
+set incsearch
 " 忽略大小写
 set ignorecase
 " 智能搜索
@@ -207,7 +146,7 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" 默认使用中文帮助
+" 默认使用中文帮助，默认优先获取 ~/.vim/doc 中的帮助
 "set helplang=cn
 
 " ############# 键映射 #############
@@ -215,39 +154,64 @@ set tm=500
 " set winaltkeys=no
 " leader
 let mapleader = ','
-" 输入模式下键入jj映射到<ESC>
-inoremap jj <Esc>
-" 插入模式 hjkl 移动, 左右键与 neocomplete 冲突, " 删除下面 neocomplete 的 <C-h> 和 <C-l> 键映射
-inoremap <C-J> <Down>
-inoremap <C-K> <Up>
-inoremap <C-B> <Left>
-inoremap <C-F> <Right>
-inoremap <C-A> <Home>
-inoremap <C-E> <End>
+let g:mapleader = ','
+" 去除高亮
+nnoremap <leader><space> :nohlsearch<CR>
+" 开启搜索当前光标下的单词，但是不跳转下一个
+nnoremap <leader>f *N
+" 输入模式下键入jk映射到<ESC>l
+imap jk <ESC>l
+
+" 插入模式上下行移动操作
+inoremap <C-J> <Down>   " 向下一行
+inoremap <C-K> <Up>     " 向上一行
+" 插入模式行内移动操作：使用 readline 命令行风格
+inoremap <C-B> <Left>   " 向左一个字符
+inoremap <C-F> <Right>  " 向右一个字符
+inoremap <C-A> <Home>   " 行首
+inoremap <C-E> <End>    " 行尾
 " <C-W> 删除前一个单词
 
 " undo & redo
 " noremal 模式下: u & <C-R>
+" 跳转至屏幕中间
+nnoremap <space> zz
+
+" 复制到行尾，类似大写的 C 和 D 操作
+nnoremap Y y$
 
 " 插入空行
-nnoremap <leader>a o<Esc>
+nnoremap <leader>o o<Esc>
 " 去除尾部空字符
-"nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-nnoremap <leader>W :%s/\s\+$//<CR> :w!<CR>
-" 将 4 个空格转换为一个 TAB
-"nnoremap <leader>T :%s/    /\t/g<CR>
-" 更改窗口大小
-nnoremap <C-H> :vertical resize -1<CR>
-nnoremap <C-J> :resize -1<CR>
-nnoremap <C-K> :resize +1<CR>
-nnoremap <C-L> :vertical resize +1<CR>
-" 切换窗口
-nnoremap <leader>h <C-W>h
-nnoremap <leader>j <C-W>j
-nnoremap <leader>k <C-W>k
-nnoremap <leader>l <C-W>l
-" 切换buffers
+nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+
+" 切换下一个 buffer
 nnoremap <TAB> :bnext<CR>
+" buffer 列表
+nnoremap <leader>l :ls<CR>
+
+" http://stackoverflow.com/questions/4298910/vim-close-buffer-but-not-split-window
+function! CloseSplitOrDeleteBuffer()
+  let curNr = winnr()
+  let curBuf = bufnr('%')
+  wincmd w                    " try to move on next split
+  if winnr() == curNr         " there is no split
+    exe 'bdelete'
+  elseif curBuf != bufnr('%') " there is split with another buffer
+    wincmd W                  " move back
+    exe 'bdelete'
+  else                        " there is split with same buffer"
+    wincmd W
+    wincmd c
+  endif
+endfunction
+" 关闭 buffer 或关闭 window
+nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
+" 快速保存文件
+nmap <leader>w :w!<CR>
+
+" 格式化JSON命令
+com! JSONFormat %!python -m json.tool
 
 " 设置 gvim/macvim 字体
 if has("gui_running")

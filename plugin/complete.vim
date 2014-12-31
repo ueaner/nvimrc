@@ -1,3 +1,8 @@
+" Better Completion
+set complete=.,w,b,u,t
+set completeopt=longest,menuone
+"set completeopt+=preview
+
 " ############# neocomplete	#############
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -26,14 +31,18 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  " For no inserting <CR> key. 回车插入补全但是不换行
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " AutoComplPop like behavior.
+" 自动选中第一个
 let g:neocomplete#enable_auto_select = 1
+" 使用 CTRL+X+O 提示参数时只显示下拉提示，不显示 preview
+" 为 1 且配合set completeopt+=preview 则永久显示
+" https://github.com/Shougo/neocomplete.vim/issues/95
+let g:neocomplete#enable_auto_close_preview = 0
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
