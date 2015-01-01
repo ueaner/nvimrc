@@ -16,16 +16,19 @@
 
 #### 下载 VIM 源码包
 
-    # wget ftp://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
+到 http://ftp.debian.org/debian/pool/main/v/vim/ 下载最新版本的 orig 包，
+这里包含了 vim 7.4 版本很多不存在的 patches。我这里下载到的最新版本是 7.4.488。
+
+    # wget http://ftp.debian.org/debian/pool/main/v/vim/vim_7.4.488.orig.tar.gz
 
 #### 编译安装 VIM
 
 这里需要注意的是通过开启 `lua` 和 `python` 的支持, 来使用 lua 和 python 开发的插件。
 如：[gundo], [YouCompleteMe] 等需要 python 支持, [neocomplete] 需要 lua 的支持。
 
-    # tar xf vim-7.4.tar.bz2 -C /usr/local/src/
-    # cd /usr/local/src/vim74/
-    # ./configure --prefix=/usr/local/vim74 \
+    # tar xf vim_7.4.488.orig.tar.gz
+    # cd vim-7.4.488/
+    # ./configure --prefix=/usr \
      --with-compiledby="ueaner" \
      --with-features=huge \
      --enable-fail-if-missing \
@@ -35,12 +38,12 @@
      --enable-pythoninterp \
      --enable-gui=no
 
-    make -j8
+    make -j4
     make install
 
 使用 `./configure --help` 查看更多编译参数帮组。
 
-* 现在可以通过 `/usr/local/vim74/bin/vim --version` 看到 `+lua` 和 `+python` 字样，表示成功。
+* 现在可以通过 `vim --version` 看到 `+lua` 和 `+python` 字样，表示成功。
 
 如果需要重新编译，先执行：
 
@@ -49,20 +52,7 @@
 
 再把上述 `configure make make install` 来一遍。
 
-#### 配置默认使用 vim74 版本
-
-编辑或新建 `/etc/profile.d/vim.sh` 文件, 输入以下内容：
-
-    if [ -n "$BASH_VERSION" -o -n "$KSH_VERSION" -o -n "$ZSH_VERSION" ]; then
-      [ -x /usr/bin/id ] || return
-      #ID=`/usr/bin/id -u`
-      #[ -n "$ID" -a "$ID" -le 200 ] && return
-      # for bash and zsh, only if no alias is already set
-      alias vi >/dev/null 2>&1 || alias vi=/usr/local/vim74/bin/vim
-      alias vim >/dev/null 2>&1 || alias vim=/usr/local/vim74/bin/vim
-    fi
-
-运行 `. /etc/profile.d/vim.sh` 使之在当前终端生效，注销或重启永久生效。
+如果有新版本可以直接覆盖编译。
 
 #### 参考
 
