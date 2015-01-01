@@ -13,15 +13,17 @@
 " 杂项
 " 辅助函数
 "
+" 查看某个配置选项的值或默认值，使用 :echo &<option>
+" 如 :echo &fileencoding 可查看文件编码
 
-" 引入插件管理配置文件
-source ~/.vim/bundles.vim
+" ttyfast
+set ttyfast
 
 " 自动加载 .vimrc 文件
 au BufWritePost .vimrc so ~/.vim/vimrc
 
-" ttyfast
-set ttyfast
+" 引入插件管理配置文件
+source ~/.vim/bundles.vim
 
 " ############# 颜色主题 #############
 " 颜色数目
@@ -32,11 +34,15 @@ colorscheme molokai
 " ############# 文件/编码/备份 #############
 " vim 内部编码(buffer,菜单文本[gvim],消息文本等)
 set encoding=utf-8
+" 拼写检查，中日韩字符不进行检查，7.4.092+，:help spell-cjk
+set spelllang=en_us,cjk
+" 10 条最佳拼写建议
+set spellsuggest=best,10
 " 编辑的文件的编码
 set fileencoding=utf-8
 " 去除 utf-8 BOM
 set nobomb
-" 为特定的文件类型载入相应的插件
+" 为特定的文件类型载入相应的插件, 已在 bundles.php 中开启
 "filetype plugin on
 " 不生成备份文件, 和 .swp 文件
 set nobackup
@@ -159,8 +165,8 @@ let g:mapleader = ','
 nnoremap <leader><space> :nohlsearch<CR>
 " 开启搜索当前光标下的单词，但是不跳转下一个
 nnoremap <leader>f *N
-" 输入模式下键入jk映射到<ESC>l
-imap jk <ESC>l
+" 输入模式下键入jj映射到<ESC>
+imap jj <ESC>
 
 " 插入模式上下行移动操作
 inoremap <C-J> <Down>   " 向下一行
