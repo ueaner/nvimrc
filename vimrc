@@ -31,13 +31,24 @@ set t_Co=256
 " 配色方案
 colorscheme molokai
 
+" leader
+let mapleader = ','
+let g:mapleader = ','
+
 " ############# 文件/编码/备份 #############
 " vim 内部编码(buffer,菜单文本[gvim],消息文本等)
 set encoding=utf-8
-" 拼写检查，中日韩字符不进行检查，7.4.092+，:help spell-cjk
-set spelllang=en_us,cjk
-" 10 条最佳拼写建议
-set spellsuggest=best,10
+" 拼写检查，7.4+
+if has('spell')
+    " 中日韩字符不进行检查，7.4.092+，:help spell-cjk
+    set spelllang=en_us,cjk
+    " 10 条最佳拼写建议
+    set spellsuggest=best,10
+    " markdown, vim 类型文件自动进行拼写检查
+    autocmd FileType markdown,vim set spell
+    " 快捷键 ,s
+    nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+endif
 " 编辑的文件的编码
 set fileencoding=utf-8
 " 去除 utf-8 BOM
@@ -155,12 +166,7 @@ set tm=500
 " 默认使用中文帮助，默认优先获取 ~/.vim/doc 中的帮助
 "set helplang=cn
 
-" ############# 键映射 #############
-" 开启 ALT 键映射(默认调用菜单) #不好使
-" set winaltkeys=no
-" leader
-let mapleader = ','
-let g:mapleader = ','
+" ==================== 键映射 ====================
 " 去除高亮
 nnoremap <leader><space> :nohlsearch<CR>
 " 开启搜索当前光标下的单词，但是不跳转下一个
