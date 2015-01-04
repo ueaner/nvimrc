@@ -68,6 +68,10 @@ Plugin 'airblade/vim-gitgutter'
 " nginx
 Plugin 'evanmiller/nginx-vim-syntax'
 
+" ---------------- 试用插件 -----------------
+" 对齐
+Plugin 'godlygeek/tabular'
+
 call vundle#end()            " required
 " 为特定的文件类型载入相应的插件
 filetype plugin indent on    " required

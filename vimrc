@@ -19,21 +19,24 @@
 " ttyfast
 set ttyfast
 
+" leader
+let mapleader = ','
+let g:mapleader = ','
+
 " 自动加载 .vimrc 文件
 au BufWritePost .vimrc so ~/.vim/vimrc
 
 " 引入插件管理配置文件
 source ~/.vim/bundles.vim
 
+" phpmanual
+set rtp+=~/.vim/phpmanual
+
 " ############# 颜色主题 #############
 " 颜色数目
 set t_Co=256
 " 配色方案
 colorscheme molokai
-
-" leader
-let mapleader = ','
-let g:mapleader = ','
 
 " ############# 文件/编码/备份 #############
 " vim 内部编码(buffer,菜单文本[gvim],消息文本等)
@@ -174,14 +177,11 @@ nnoremap <leader>f *N
 " 输入模式下键入jj映射到<ESC>
 imap jj <ESC>
 
-" 插入模式上下行移动操作
-inoremap <C-J> <Down>   " 向下一行
-inoremap <C-K> <Up>     " 向上一行
 " 插入模式行内移动操作：使用 readline 命令行风格
-inoremap <C-B> <Left>   " 向左一个字符
-inoremap <C-F> <Right>  " 向右一个字符
-inoremap <C-A> <Home>   " 行首
-inoremap <C-E> <End>    " 行尾
+inoremap <C-B> <Left>
+inoremap <C-F> <Right>
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
 " <C-W> 删除前一个单词
 
 " undo & redo
@@ -203,7 +203,8 @@ nnoremap <leader><TAB> :bprevious<CR>
 nnoremap <leader>l :ls<CR>
 nnoremap <Leader>b :bp<CR>
 nnoremap <Leader>f :bn<CR>
-nnoremap <Leader>g :e#<CR> " 切换到上一个打开的 buffer
+" 切换到上一个打开的 buffer
+nnoremap <Leader>g :e#<CR>
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
 nnoremap <Leader>3 :3b<CR>
