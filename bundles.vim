@@ -18,18 +18,21 @@ Plugin 't9md/vim-choosewin'
 
 " 快捷查找
 Plugin 'kien/ctrlp.vim'
-" 自动完成
-Plugin 'shougo/neocomplete.vim'
 " 括号匹配
 Plugin 'tpope/vim-surround'
 " mothon: as a minimalist [Lokaltog/vim-easymotion]
 Plugin 'justinmk/vim-sneak'
 " grep
 Plugin 'easygrep'
-" snippets
-Bundle 'Shougo/neosnippet'
-" 提供了各语言的 snippets, 可以按自己的需要修改
-Bundle 'Shougo/neosnippet-snippets'
+
+if has('lua')
+	" 自动完成
+	Plugin 'shougo/neocomplete.vim'
+	" snippets
+	Bundle 'Shougo/neosnippet'
+	" 提供了各语言的 snippets, 可以按自己的需要修改
+	Bundle 'Shougo/neosnippet-snippets'
+endif
 
 " marks, 快捷键帮助:help showmarks-mappings
 Plugin 'juanpabloaj/ShowMarks'
@@ -71,6 +74,12 @@ Plugin 'evanmiller/nginx-vim-syntax'
 " ---------------- 试用插件 -----------------
 " 对齐
 Plugin 'godlygeek/tabular'
+
+if has('python')
+	" dbgp debugger
+	Plugin 'joonty/vdebug'
+	"Plugin 'brookhong/DBGPavim'
+endif
 
 call vundle#end()            " required
 " 为特定的文件类型载入相应的插件

@@ -15,6 +15,8 @@
 "
 " 查看某个配置选项的值或默认值，使用 :echo &<option>
 " 如 :echo &fileencoding 可查看文件编码
+" 输入 :help vimrc-intro 查看一些基本配置和目录结构信息
+" :help user-manual ...
 
 " ttyfast
 set ttyfast
@@ -144,7 +146,7 @@ set clipboard^=unnamedplus
 
 syntax sync minlines=256
 set synmaxcol=128
-set re=1
+"set re=1
 
 " ############# 搜索/帮助 #############
 " 实时显示搜索结果
