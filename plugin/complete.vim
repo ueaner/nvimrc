@@ -3,7 +3,7 @@ set complete=.,w,b,u,t
 set completeopt=longest,menuone
 "set completeopt+=preview
 
-" ############# neocomplete	#############
+" ==================== neocomplete ====================
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -58,4 +58,4 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
-" ############# Omni-complete #############
+" ==================== Omni-complete ====================

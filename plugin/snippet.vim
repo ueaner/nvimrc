@@ -1,4 +1,4 @@
-" ############# neosnippet #############
+" ==================== neosnippet ====================
 " Plugin key-mappings.
 imap <C-y>     <Plug>(neosnippet_expand_or_jump)
 smap <C-y>     <Plug>(neosnippet_expand_or_jump)

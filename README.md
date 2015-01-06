@@ -1,16 +1,6 @@
-此 VIM 配置，包括了：
+ 个人 Vim 配置.
 
-* 界面主题
-* 插件管理
-* 文件备份
-* buffers & windows
-* 文本和缩进
-* 状态条
-* 键映射
-* 杂项
-* 辅助函数
-
-如果你的 VIM 版本 < 7.3 或不支持 `lua` 和 `python`，请查看 [INSTALL_VIM.md] 文件，进行安装。
+![截图](preview.png)
 
 #### 使用
 
@@ -18,9 +8,7 @@
 
 #### 安装插件
 
-我这里使用的 [Vundle] 来管理 VIM 插件，你也可以选用 [pathogen] 等相关功能的插件来管理你的 VIM 插件。
-
-安装 Vundle 插件:
+安装 [Vundle]: https://github.com/gmarik/Vundle.vim 插件 管理工具:
 
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
@@ -28,15 +16,12 @@
 
     :PluginInstall
 
-等待少许时间, 你的插件就自动安装完成了。
-
-下面的操作是为了美化标签页和状态栏，如果你不想要或不支持，可以打开 `.vim/plugin/line.vim` 文件，
-修改 `let g:airline_powerline_fonts = 1` 参数为 `0`。
+等待少许时间, Vim 常用 插件就自动安装完成了。
 
 #### 安装 Powerline Fonts
 
-你可以在 [Powerline Patched Fonts](https://github.com/powerline/fonts) 选择自己喜欢的字体，
-我这里使用的 `Source Code Pro for Powerline` 字体。
+这里使用的 `Source Code Pro for Powerline` 字体。
+可以在 [Powerline Patched Fonts](https://github.com/powerline/fonts) 选择更多 字体.
 
 下载字体:
 
@@ -61,29 +46,7 @@
 #### 设置终端字体
 
 对于 gvim 和 macvim 是基于自己的 ui，可以通过配置 guifont 控制字体显示象形符号，
-而 vim 基于终端运行，所以终端的字体的设置决定了 vim 的标签页和状态条中的象形符号是否可以正常显示。
+而 vim 基于终端运行，所以终端的字体的设置决定了 vim 的标签页和状态条中的象形符号是否可以正常显示
+(无论是在本地的还是远程连接的)。
 
-打开你所用的终端，将字体设置为你刚安装 Powerline 字体。
-
-现在打开你的 vim，无论是本地的还是远程的，焕然一新。享受的你的开发之旅吧。
-
-来张图：
-![截图](preview.png)
-
-#### 交流
-
-如果有任何关于 VIM 或本文档的疑问，或者好的建议，好的 VIM 插件或配置，关于 VIM 的交流...
-
-你都可以：
-
-* 发 [issues],
-* 发邮件到 ueaner at gmail.com
-* fork 本项目
-
-感谢您阅读完本文档。
-
-[INSTALL_VIM.md]: INSTALL_VIM.md "安装 VIM7.4"
-
-[pathogen]: http://github.com/tpope/vim-pathogen
-[Vundle]: https://github.com/gmarik/Vundle.vim
-[issues]: https://github.com/ueaner/vim/issues
+打开终端，将字体设置为刚安装 Powerline 字体即可。

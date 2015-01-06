@@ -1,4 +1,4 @@
-" ############# tagbar #############
+" ==================== tagbar ====================
 nnoremap <leader>t :TagbarToggle<CR>
 let g:tagbar_width = 30
 let g:tagbar_show_linenumbers = -1
@@ -13,7 +13,7 @@ function! TagbarStatusFunc(current, sort, fname, flags, ...) abort
 endfunction
 let g:tagbar_status_func = 'TagbarStatusFunc'
 
-" ############# ctags #############
+" ==================== ctags ====================
 " 设置 tags 文件路径: set tags=./tags,tags;$HOME
 "set tags=.tags
 let g:tagbar_type_php = {

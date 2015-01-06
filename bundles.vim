@@ -1,5 +1,3 @@
-" 关闭兼容模式(nocompatible)
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -16,7 +14,7 @@ Plugin 'scrooloose/nerdtree'
 " 选择窗口
 Plugin 't9md/vim-choosewin'
 
-" 快捷查找
+" 文件快捷查找
 Plugin 'kien/ctrlp.vim'
 " 括号匹配
 Plugin 'tpope/vim-surround'
@@ -77,11 +75,8 @@ Plugin 'godlygeek/tabular'
 
 if has('python')
 	" dbgp debugger
-	Plugin 'joonty/vdebug'
+	"Plugin 'joonty/vdebug'
 	"Plugin 'brookhong/DBGPavim'
 endif
 
 call vundle#end()            " required
-" 为特定的文件类型载入相应的插件
-filetype plugin indent on    " required
-
