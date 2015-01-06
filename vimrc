@@ -6,6 +6,7 @@
 " 输入 :help vimrc-intro 查看一些基本配置和目录结构信息
 " :help user-manual ...
 " :help options 查看所有可选配置, 使用 :help 'someoption' 加引号,查看具体某项的帮助
+" vim --startuptime <logfile> 测试配置修改后的加载速度
 
 " ttyfast
 set ttyfast
@@ -74,7 +75,7 @@ syntax sync minlines=256
 set synmaxcol=128
 " 括号匹配
 set showmatch
-" 括号匹配高亮时间 100ms
+" 跳转到匹配括号的停留时间 100ms
 set matchtime=1
 " 突出显示当前行
 "set cursorline
@@ -226,6 +227,11 @@ nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " 粘贴模式 ,p
 nnoremap <leader>p :set paste<CR>p :set nopaste<CR>
 
+" 快速保存文件
+nmap <leader>w :w!<CR>
+" 保存无权限文件
+command W w !sudo tee % > /dev/null
+
 " buffer 操作
 nnoremap <TAB> :bnext<CR>
 nnoremap <leader><TAB> :bprevious<CR>
@@ -262,8 +268,6 @@ function! CloseSplitOrDeleteBuffer()
 endfunction
 " 关闭 buffer 或关闭 window
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
-" 快速保存文件
-nmap <leader>w :w!<CR>
 
 " 格式化JSON命令
 com! JSONFormat %!python -m json.tool
