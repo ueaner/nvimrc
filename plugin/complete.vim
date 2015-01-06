@@ -1,3 +1,4 @@
+" ==================== Omni-complete ====================
 " Better Completion
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
@@ -48,7 +49,7 @@ let g:neocomplete#enable_auto_close_preview = 0
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" 参见：/usr/local/vim74/share/vim/vim74/autoload/phpcomplete.vim
+" 参见：/usr/share/vim/vim74/autoload/phpcomplete.vim
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
@@ -57,5 +58,3 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-
-" ==================== Omni-complete ====================

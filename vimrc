@@ -79,9 +79,9 @@ set matchtime=1
 " 突出显示当前行
 "set cursorline
 " 设置行宽
-silent! set colorcolumn=78
+"silent! set colorcolumn=78
 " 不自动换行(超出窗口)
-set nowrap
+"set nowrap
 " 显示空白字符
 " set list
 " 空白字符显示格式(:help listchars)
@@ -223,6 +223,8 @@ nnoremap Y y$
 nnoremap <leader>o o<Esc>
 " 去除尾部空字符
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+" 粘贴模式 ,p
+nnoremap <leader>p :set paste<CR>p :set nopaste<CR>
 
 " buffer 操作
 nnoremap <TAB> :bnext<CR>

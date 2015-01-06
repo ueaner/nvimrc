@@ -9,18 +9,18 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/molokai'
 " 状态条 & buffers tabline & tagbar & ctrlp ...
 Plugin 'bling/vim-airline'
-" 目录管理
+" 目录管理, 加载时间稍长
 Plugin 'scrooloose/nerdtree'
 " 选择窗口
 Plugin 't9md/vim-choosewin'
 
 " 文件快捷查找
 Plugin 'kien/ctrlp.vim'
-" 括号匹配
+" 更改括号
 Plugin 'tpope/vim-surround'
 " mothon: as a minimalist [Lokaltog/vim-easymotion]
 Plugin 'justinmk/vim-sneak'
-" grep
+" grep, 加载时间稍长
 Plugin 'easygrep'
 
 if has('lua')
@@ -35,7 +35,7 @@ endif
 " marks, 快捷键帮助:help showmarks-mappings
 Plugin 'juanpabloaj/ShowMarks'
 
-" 语法检查
+" 语法检查, 加载时间稍长
 Plugin 'scrooloose/syntastic'
 " tags outline
 Plugin 'majutsushi/tagbar'
