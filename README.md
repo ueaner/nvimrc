@@ -4,7 +4,15 @@
 
 #### 使用
 
+`*nix` 下:
+
     git clone https://github.com/ueaner/vim.git ~/.vim
+
+Windows 下, clone 到 `C:\Documents and Settings\<your_username>\vimfiles` 目录下.
+
+`7.4` 之前的版本需要做个软链:
+
+    ln -s ~/.vim/vimrc ~/.vimrc
 
 #### 安装插件
 
@@ -42,6 +50,10 @@
     $ cp Source\ Code\ Pro\ for\ Powerline.otf ~/Library/Fonts/PowerlineFonts/
 
 这样就可以了，Mac 下会自动识别放在 `~/Library/Fonts/` 子目录下的字体文件。
+
+*Windows* 下安装字体：
+
+    直接将字体拖到 `C:\WINDOWS\Fonts` 下.
 
 #### 设置终端字体
 

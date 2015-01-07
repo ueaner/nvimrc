@@ -16,7 +16,13 @@ set lazyredraw
 set nocompatible             " be iMproved, required
 
 " 引入插件管理配置文件
-silent! source ~/.vim/bundles.vim
+if has('win32')
+	silent! source ~/vimfiles/bundles.vim
+	set rtp+=~/vimfiles/phpmanual
+else
+	silent! source ~/.vim/bundles.vim
+	set rtp+=~/.vim/phpmanual
+endif
 
 " 为特定的文件类型载入相应的插件
 filetype plugin indent on    " required
@@ -24,9 +30,6 @@ filetype plugin indent on    " required
 " leader
 let mapleader = ','
 let g:mapleader = ','
-
-" phpmanual
-set rtp+=~/.vim/phpmanual
 
 " ==================== 外观 ==================== {{{
 
@@ -69,10 +72,10 @@ set number
 silent! set relativenumber
 " 打开语法高亮
 syntax on
-" 准确的语法高亮和屏幕刷新速度的折衷
-syntax sync minlines=256
-" 搜索语法文件的最大列数
-set synmaxcol=128
+" 准确的语法高亮和屏幕刷新速度的折衷. v个别复杂文件显示不友好v
+"syntax sync minlines=256
+" 搜索语法文件的最大列数. ^暂时注释掉,如出现性能问题,再回头看^
+"set synmaxcol=128
 " 括号匹配
 set showmatch
 " 跳转到匹配括号的停留时间 100ms
@@ -110,7 +113,7 @@ silent! set foldlevel=100
 " vim 内部编码(buffer,菜单文本[gvim],消息文本等)
 set encoding=utf-8
 " 拼写检查，7.4+
-if has('spell')
+if has('spell') && v:version >= 704 && has('patch092')
 	" 中日韩字符不进行检查，7.4.092+，:help spell-cjk
 	set spelllang=en_us,cjk
 	" 10 条最佳拼写建议
@@ -271,10 +274,5 @@ nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 
 " 格式化JSON命令
 com! JSONFormat %!python -m json.tool
-
-" 设置 gvim/macvim 字体
-if has("gui_running")
-    set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-endif
 
 " 引入相关插件配置, 放在 plugin 目录下会被自动加载
