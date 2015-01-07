@@ -4,6 +4,9 @@
 
     $ brew install vim --with-lua --with-luajit
 
+#### Windows 下
+
+    ftp://ftp.vim.org/pub/vim/pc/gvim74.exe
 
 **以下为 CentOS 下的安装**。
 
