@@ -50,6 +50,9 @@ Plugin 'majutsushi/tagbar'
 "Plugin 'vim-php/tagbar-phpctags.vim'
 " 注释
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'tomtom/tcomment_vim'
+" 对齐
+"Plugin 'godlygeek/tabular'
 " markdown
 Plugin 'tpope/vim-markdown'
 " emmet, html & css
@@ -77,9 +80,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'evanmiller/nginx-vim-syntax'
 
 " ---------------- 试用插件 -----------------
-" 对齐
-Plugin 'godlygeek/tabular'
-
 if has('python')
 	" dbgp debugger
 	"Plugin 'joonty/vdebug'

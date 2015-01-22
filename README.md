@@ -36,19 +36,18 @@
 
 *Linux* 下安装字体：
 
-    # mkdir -p /usr/share/fonts/PowerlineFonts
-    # cp Source\ Code\ Pro\ for\ Powerline.otf /usr/share/fonts/PowerlineFonts/
-    # cd /usr/share/fonts/PowerlineFonts/
-    # mkfontscale
-    # mkfontdir
-    # fc-cache -f
+    # mkdir -p ~/.fonts
+    # cp Source\ Code\ Pro\ for\ Powerline.otf ~/.fonts/
+    # fc-cache -f -v ~/.fonts/
+
+如果让所有用户可用, 则放在 `/usr/share/fonts/<somedir>/` 目录下, 执行 `fc-cache -f /usr/share/fonts/<somedir>/` 即可.
 
 *Mac* 下安装字体：
 
     $ mkdir -p ~/Library/Fonts/PowerlineFonts
     $ cp Source\ Code\ Pro\ for\ Powerline.otf ~/Library/Fonts/PowerlineFonts/
 
-这样就可以了，Mac 下会自动识别放在 `~/Library/Fonts/` 子目录下的字体文件。
+这样就可以了，Mac 下会自动识别放在 `~/Library/Fonts/` `子目录`下的字体文件。[参见](http://support.apple.com/en-us/HT201722).
 
 *Windows* 下安装字体：
 

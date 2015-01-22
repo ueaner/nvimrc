@@ -49,7 +49,7 @@ set laststatus=2
 set title
 " 状态栏/右下角显示行号和列号
 set ruler
-" 显示命令行栏
+" 显示命令字符
 set showcmd
 " 显示当前模式
 set showmode
@@ -123,12 +123,10 @@ if has('spell') && v:version >= 704 && has('patch092')
 	" 快捷键 ,s
 	nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 endif
-" 当前编辑的文件的编码
-set fileencoding=utf-8
+" utf-8 编码, 去除 BOM
+set fileencoding=utf-8 nobomb
 " 换行符格式
 set fileformats=unix,mac,dos
-" 去除 utf-8 BOM
-set nobomb
 " 不生成备份文件, 和 .swp 文件
 set nobackup
 set nowritebackup
@@ -161,6 +159,7 @@ au BufRead,BufNewFile */php-fpm.conf,*/my.cnf*,*.ini* setf dosini
 autocmd BufNewFile,Bufread *.{inc,php} setf php
 " markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=markdown
+au BufRead,BufNewFile *.{twig,volt} set filetype=twig
 " @link http://www.laruence.com/2010/08/18/1718.html
 autocmd FileType php set fdm=indent keywordprg="help"
 " 使用  foldmarker 标记,作为折叠的开始和结束标记
