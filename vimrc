@@ -286,7 +286,7 @@ nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 " 格式化JSON命令
 com! JSONFormat %!python -m json.tool
 
-
+"}}}
 " ==================== Omni-complete ==================== {{{
 
 " Better Completion
