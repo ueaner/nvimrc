@@ -1,9 +1,3 @@
-" ==================== Omni-complete ====================
-" Better Completion
-set complete=.,w,b,u,t
-set completeopt=longest,menuone
-"set completeopt+=preview
-
 " ==================== neocomplete ====================
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0

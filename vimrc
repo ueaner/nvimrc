@@ -1,12 +1,18 @@
 "
 " Author ueaner <ueaner at gmail.com>
 "
-" 查看某个配置选项的值或默认值，使用 :echo &<option>
-" 如 :echo &fileencoding 可查看文件编码
-" 输入 :help vimrc-intro 查看一些基本配置和目录结构信息
-" :help user-manual ...
-" :help options 查看所有可选配置, 使用 :help 'someoption' 加引号,查看具体某项的帮助
-" vim --startuptime <logfile> 测试配置修改后的加载速度
+" :help option-list   可用选项列表，或 :help options
+" :help 'someoption'  查看具体某选项的帮助，加引号
+" :echo &someoption   查看某选项在的设定值，加地址符
+"
+" :help  查看简介及帮助目录(view doc/help.cnx)
+" :only	 使当前窗口成为屏幕上唯一的窗口。其它窗口都关闭。
+" :h abando
+" :h K
+" :help quickref  快速参考指南
+"
+" vim --startuptime <logfile>  测试 Vim 的加载速度
+"
 
 " ttyfast
 set ttyfast
@@ -17,11 +23,12 @@ set nocompatible             " be iMproved, required
 
 " 引入插件管理配置文件
 if has('win32')
-	silent! source ~/vimfiles/bundles.vim
-	set rtp+=~/vimfiles/phpmanual
+    silent! source ~/vimfiles/bundles.vim
+    set rtp+=~/vimfiles/phpmanual
 else
-	silent! source ~/.vim/bundles.vim
-	set rtp+=~/.vim/phpmanual
+    silent! source ~/.vim/bundles.vim
+    set rtp+=~/.vim/phpmanual
+    "autocmd! bufwritepost ~/.vim/vimrc source %
 endif
 
 " 为特定的文件类型载入相应的插件
@@ -82,6 +89,8 @@ set showmatch
 set matchtime=1
 " 突出显示当前行
 "set cursorline
+" 突出显示当前列
+"set cursorcolumn
 " 设置行宽
 "silent! set colorcolumn=78
 " 不自动换行(超出窗口)
@@ -94,7 +103,7 @@ set matchtime=1
 " }}}
 " ==================== 缩进和折叠 ==================== {{{
 
-" 使用空格代替 tab
+" 使用空格代替 tab, 启用此选项 listchars 中的 tab 参数会失效, 必需用插件代替
 set expandtab
 set smarttab
 " 1 个 TAB 占 4 个位置
@@ -104,8 +113,10 @@ set shiftwidth=4
 set autoindent smartindent
 " 回退
 set backspace=indent,eol,start
-" 不自动折叠(zR 展开所有折叠, zM 关闭所有折叠, zA 循环展开或关闭当前光标下的所有折叠)
+" 不自动折叠
 silent! set foldlevel=100
+" 左侧添加一列, 指示折叠的打开和关闭
+silent! set foldcolumn=1
 
 " }}}
 " ==================== 文件 ==================== {{{
@@ -114,14 +125,14 @@ silent! set foldlevel=100
 set encoding=utf-8
 " 拼写检查，7.4+
 if has('spell') && v:version >= 704 && has('patch092')
-	" 中日韩字符不进行检查，7.4.092+，:help spell-cjk
-	set spelllang=en_us,cjk
-	" 10 条最佳拼写建议
-	set spellsuggest=best,10
-	" markdown, vim 类型文件自动进行拼写检查
-	autocmd FileType markdown,vim set spell
-	" 快捷键 ,s
-	nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+    " 中日韩字符不进行检查，7.4.092+，:help spell-cjk
+    set spelllang=en_us,cjk
+    " 10 条最佳拼写建议
+    set spellsuggest=best,10
+    " markdown, vim 类型文件自动进行拼写检查
+    "autocmd FileType markdown,vim set spell
+    " 快捷键 ,s
+    nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 endif
 " utf-8 编码, 去除 BOM
 set fileencoding=utf-8 nobomb
@@ -134,7 +145,7 @@ set noswapfile
 " 当前编辑文件被外部编译器修改过，自动加载
 set autoread
 " 自动保存切换标签前
-set autowrite
+set autowriteall
 " 关闭时记住上次打开的文件信息
 "set viminfo^=%
 
@@ -153,32 +164,33 @@ set hlsearch
 " }}}
 " ==================== filetype & autocmd ==================== {{{
 
-au BufRead,BufNewFile */nginx*/etc/*,*/nginx*/etc/conf.d/* if &ft == '' | setf nginx | endif
-au BufRead,BufNewFile */nginx*/*,*/nginx*/conf.d/* if &ft == '' | setf nginx | endif
-au BufRead,BufNewFile */php-fpm.conf,*/my.cnf*,*.ini* setf dosini
+au BufRead,BufNewFile *etc/nginx/* if &ft == '' | setf nginx | endif
+au BufRead,BufNewFile *.{conf,cnf,ini} setf dosini
 autocmd BufNewFile,Bufread *.{inc,php} setf php
 " markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=markdown
 au BufRead,BufNewFile *.{twig,volt} set filetype=twig
 " @link http://www.laruence.com/2010/08/18/1718.html
-autocmd FileType php set fdm=indent keywordprg="help"
-" 使用  foldmarker 标记,作为折叠的开始和结束标记
-autocmd FileType vim set noet ts=2 sw=2 sts=2 fdm=marker keywordprg="help"
+autocmd FileType vim,php set keywordprg="help"
+" 折叠方式：缩进
+autocmd FileType php,nginx set foldmethod=indent
+" 折叠方式：foldmarker 标记
+autocmd FileType vim set foldmethod=marker
 
 " }}}
 " ==================== 其他支持 ==================== {{{
 
 " 使用鼠标
 if has('mouse')
-	set mouse=a
+    set mouse=a
 endif
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
 set clipboard^=unnamed
 set clipboard^=unnamedplus
 " 去除提示音
 set noerrorbells
-" 使用 可视响铃代替鸣叫
-set novisualbell t_vb=
+" 关闭可视响铃和鸣叫
+set visualbell t_vb=
 " timeout
 set notimeout
 set ttimeout
@@ -188,7 +200,7 @@ set ttimeoutlen=10
 set magic
 " 选择缺省正则表达式引擎, :help new-regexp-engine
 if exists('&regexpengine')
-	set regexpengine=1
+    set regexpengine=1
 endif
 
 " 不显示欢迎页
@@ -203,7 +215,7 @@ set shortmess+=I
 " 去除高亮
 nnoremap <leader><space> :nohlsearch<CR>
 " 开启搜索当前光标下的单词，但是不跳转下一个
-nnoremap <leader>f *N
+nnoremap <leader><leader> *N
 " 输入模式下键入jj映射到<ESC>
 imap jj <ESC>
 
@@ -216,8 +228,8 @@ inoremap <C-E> <End>
 
 " undo & redo
 " noremal 模式下: u & <C-R>
-" 跳转至屏幕中间
-nnoremap <space> zz
+" 使用空格关闭／打开折叠
+nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 " 复制到行尾，类似大写的 C 和 D 操作
 nnoremap Y y$
@@ -231,15 +243,15 @@ nnoremap <leader>p :set paste<CR>p :set nopaste<CR>
 
 " 快速保存文件
 nmap <leader>w :w!<CR>
-" 保存无权限文件
-command W w !sudo tee % > /dev/null
+" 保存无权限文件,:h E174
+command! W w !sudo tee % > /dev/null
 
 " buffer 操作
 nnoremap <TAB> :bnext<CR>
 nnoremap <leader><TAB> :bprevious<CR>
 nnoremap <leader>l :ls<CR>
-nnoremap <Leader>b :bp<CR>
-nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>f :bp<CR>
+nnoremap <Leader>b :bn<CR>
 " 切换到上一个打开的 buffer
 nnoremap <Leader>g :e#<CR>
 nnoremap <Leader>1 :1b<CR>
@@ -273,5 +285,32 @@ nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 
 " 格式化JSON命令
 com! JSONFormat %!python -m json.tool
+
+
+" ==================== Omni-complete ==================== {{{
+
+" Better Completion
+set complete=.,w,b,u,t
+set completeopt=longest,menuone
+" :help preview-window
+"set completeopt+=preview
+
+"}}}
+" ==================== netrw-browse ==================== {{{
+
+" ,e 打开目录浏览，回车打开文件或目录
+nnoremap <leader>e :Explore<CR>
+" 打开文件关闭 Explore
+let g:netrw_browse_split = 0
+" 不显示横幅
+let g:netrw_banner = 0
+" 树形浏览
+let g:netrw_liststyle = 3
+" 隐藏 . 开头的文件
+let g:netrw_list_hide = '^\..*'
+" 目录在前文件在后
+let g:netrw_sort_sequence = '[\/]$,*'
+
+"}}}
 
 " 引入相关插件配置, 放在 plugin 目录下会被自动加载

@@ -1,89 +1,98 @@
 filetype off                  " required
 
 if has('win32')
-	" @link https://github.com/gmarik/Vundle.vim/wiki/Vundle-for-Windows
-	set rtp+=~/vimfiles/bundle/Vundle.vim
-	let path='~/vimfiles/bundle'
-	call vundle#begin(path)
+    " @link https://github.com/gmarik/Vundle.vim/wiki/Vundle-for-Windows
+    set rtp+=~/vimfiles/bundle/Vundle.vim
+    let path='~/vimfiles/bundle'
+    call vundle#begin(path)
 else
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 endif
 
 Plugin 'gmarik/Vundle.vim'
 
 " 主题
 Plugin 'fatih/molokai'
-" 状态条 & buffers tabline & tagbar & ctrlp ...
+" status/tabline
 Plugin 'bling/vim-airline'
-" 目录管理, 加载时间稍长
-Plugin 'scrooloose/nerdtree'
 " 选择窗口
 Plugin 't9md/vim-choosewin'
-
-" 文件快捷查找
-Plugin 'kien/ctrlp.vim'
-" 更改括号
-Plugin 'tpope/vim-surround'
-" mothon: as a minimalist [Lokaltog/vim-easymotion]
-Plugin 'justinmk/vim-sneak'
-" grep, 加载时间稍长
-Plugin 'easygrep'
-
-if has('lua')
-	" 自动完成
-	Plugin 'shougo/neocomplete.vim'
-	" snippets
-	Bundle 'Shougo/neosnippet'
-	" 提供了各语言的 snippets, 可以按自己的需要修改
-	Bundle 'Shougo/neosnippet-snippets'
-endif
-
 " marks, 快捷键帮助:help showmarks-mappings
 Plugin 'juanpabloaj/ShowMarks'
 
-" 语法检查, 加载时间稍长
-Plugin 'scrooloose/syntastic'
-" tags outline
-Plugin 'majutsushi/tagbar'
-" php tags
-"Plugin 'vim-php/tagbar-phpctags.vim'
-" 注释
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tomtom/tcomment_vim'
-" 对齐
-"Plugin 'godlygeek/tabular'
+" git, airline 上会默认显示分支，变更行数等信息
+Plugin 'tpope/vim-fugitive'
+" git, 文件 diff 状态
+Plugin 'airblade/vim-gitgutter'
+
+if has('lua')
+    " 自动完成
+    Plugin 'shougo/neocomplete.vim'
+    " snippets
+    Plugin 'Shougo/neosnippet'
+    " 提供了各语言的 snippets, 可以按自己的需要修改
+    Plugin 'Shougo/neosnippet-snippets'
+endif
+
+" 文件快捷查找
+Plugin 'kien/ctrlp.vim'
+" 目录管理, 加载时间稍长
+"Plugin 'scrooloose/nerdtree'
+
+" 更改括号
+Plugin 'tpope/vim-surround'
+
+" 语法高亮
+" nginx
+Plugin 'evanmiller/nginx-vim-syntax'
 " markdown
 Plugin 'tpope/vim-markdown'
+
+" -------------------------------------------------- "
+" 注释
+Plugin 'tomtom/tcomment_vim'
+"Plugin 'scrooloose/nerdcommenter'
+"Plugin 'DoxygenToolkit.vim'
+
+" mothon: as a minimalist [Lokaltog/vim-easymotion]
+"Plugin 'justinmk/vim-sneak'
+" grep, 加载时间稍长
+"Plugin 'easygrep'
+
+" 语法检查, 加载时间稍长
+"Plugin 'scrooloose/syntastic'
+" tags outline
+"Plugin 'majutsushi/tagbar'
+" php tags
+"Plugin 'vim-php/tagbar-phpctags.vim'
+" 对齐
+"Plugin 'godlygeek/tabular'
 " emmet, html & css
-Plugin 'mattn/emmet-vim'
+"Plugin 'mattn/emmet-vim'
 " json
-Plugin 'elzr/vim-json'
+"Plugin 'elzr/vim-json'
 " twig
-Plugin 'evidens/vim-twig'
+"Plugin 'evidens/vim-twig'
 " 16 进制高亮
 "Plugin 'hexHighlight.vim'
 " 添加注释
-"Plugin 'DoxygenToolkit.vim'
 " css color 加载太慢
 "Plugin 'skammer/vim-css-color'
-
-" git, airline 上会默认显示分支
-Plugin 'tpope/vim-fugitive'
-" git 使用 NERDTree 时此插件无法使用，应该多练习下 ctrlp 的使用
-Plugin 'airblade/vim-gitgutter'
 
 " 画图
 "Plugin 'drawit'
 
-" nginx
-Plugin 'evanmiller/nginx-vim-syntax'
+" ini
+"Plugin 'matze/vim-ini-fold'
+
+"Plugin 'Yggdroot/indentLine'
 
 " ---------------- 试用插件 -----------------
 if has('python')
-	" dbgp debugger
-	"Plugin 'joonty/vdebug'
-	"Plugin 'brookhong/DBGPavim'
+    " dbgp debugger
+    "Plugin 'joonty/vdebug'
+    "Plugin 'brookhong/DBGPavim'
 endif
 
 call vundle#end()            " required
