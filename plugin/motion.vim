@@ -18,3 +18,6 @@ if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader
 
 " ==================== sneak ====================
 " s{char}{char} 支持两个字符搜索
+let g:sneak#streak = 1
+nmap s <Plug>(SneakStreak)
+nmap S <Plug>(SneakStreakBackward)

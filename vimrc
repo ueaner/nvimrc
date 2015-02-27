@@ -148,6 +148,9 @@ set autoread
 set autowriteall
 " 关闭时记住上次打开的文件信息
 "set viminfo^=%
+" .tags 在 Vim 工作目录下, <C-]> 跳转，<C-t> 跳回
+set tags+=.tags
+command! CTags !ctags -f .tags --languages=PHP -R
 
 " }}}
 " ==================== 搜索 ==================== {{{
@@ -204,7 +207,7 @@ if exists('&regexpengine')
 endif
 
 " 不显示欢迎页
-set shortmess+=I
+" set shortmess+=I
 
 " 默认使用中文帮助，默认优先获取 ~/.vim/doc 中的帮助
 "set helplang=cn
@@ -250,8 +253,9 @@ command! W w !sudo tee % > /dev/null
 nnoremap <TAB> :bnext<CR>
 nnoremap <leader><TAB> :bprevious<CR>
 nnoremap <leader>l :ls<CR>
-nnoremap <Leader>f :bp<CR>
-nnoremap <Leader>b :bn<CR>
+" 多插件抢这个快捷键
+"nnoremap <Leader>f :bp<CR>
+"nnoremap <Leader>b :bn<CR>
 " 切换到上一个打开的 buffer
 nnoremap <Leader>g :e#<CR>
 nnoremap <Leader>1 :1b<CR>
