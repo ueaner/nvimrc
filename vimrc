@@ -34,6 +34,9 @@ endif
 " 为特定的文件类型载入相应的插件
 filetype plugin indent on    " required
 
+" 快速编辑 vimrc 文件
+command! Vimrc e ~/.vim/vimrc
+
 " leader
 let mapleader = ','
 let g:mapleader = ','
@@ -42,10 +45,12 @@ let g:mapleader = ','
 
 " 颜色数目
 set t_Co=256
+" 背景透明
+hi Normal ctermfg=252 ctermbg=none
 " 配色方案
+silent! colorscheme molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
-silent! colorscheme molokai
 "  垂直窗口分割字符, 和折叠填充字符
 set fillchars+=vert:\ ,fold:-
 " 屏幕上下保留 3 行(光标滚动过程中)
@@ -88,7 +93,7 @@ set showmatch
 " 跳转到匹配括号的停留时间 100ms
 set matchtime=1
 " 突出显示当前行
-"set cursorline
+set cursorline
 " 突出显示当前列
 "set cursorcolumn
 " 设置行宽
@@ -99,6 +104,7 @@ set matchtime=1
 " set list
 " 空白字符显示格式(:help listchars)
 "set listchars=tab:▸\ ,trail:-
+" tab 转为空格 :%ret! 4
 
 " }}}
 " ==================== 缩进和折叠 ==================== {{{
@@ -150,7 +156,7 @@ set autowriteall
 "set viminfo^=%
 " .tags 在 Vim 工作目录下, <C-]> 跳转，<C-t> 跳回
 set tags+=.tags
-command! CTags !ctags -f .tags --languages=PHP -R
+command! CTags !ctags -f .tags --languages=PHP --PHP-kinds=+cf -R
 
 " }}}
 " ==================== 搜索 ==================== {{{
@@ -241,6 +247,8 @@ nnoremap Y y$
 nnoremap <leader>o o<Esc>
 " 去除尾部空字符
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+" 去除尾部 ^M
+nnoremap <leader>M :%s/\r/<CR>
 " 粘贴模式 ,p
 nnoremap <leader>p :set paste<CR>p :set nopaste<CR>
 
@@ -286,6 +294,7 @@ function! CloseSplitOrDeleteBuffer()
 endfunction
 " 关闭 buffer 或关闭 window
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
+nnoremap <leader>Q :qa<CR>
 
 " 格式化JSON命令
 com! JSONFormat %!python -m json.tool

@@ -38,6 +38,9 @@ endif
 " 文件快捷查找: files, buffer, tag
 Plugin 'kien/ctrlp.vim'
 
+" 多点编辑
+Bundle 'terryma/vim-multiple-cursors'
+
 " 目录管理, 加载时间稍长
 Plugin 'scrooloose/nerdtree'
 " tags outline
@@ -51,6 +54,13 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-surround'
 " motion
 Plugin 'justinmk/vim-sneak'
+
+" yii2
+"Plugin 'mikehaertl/yii2-apidoc-vim'
+" php namespace
+"Bundle 'arnaud-lb/vim-php-namespace'
+
+Bundle 'mattn/emmet-vim'
 
 if has('python')
     " dbgp debugger
