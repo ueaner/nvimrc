@@ -55,6 +55,9 @@ Plugin 'tpope/vim-surround'
 " motion
 Plugin 'justinmk/vim-sneak'
 
+" golang
+Plugin 'fatih/vim-go'
+
 " yii2
 "Plugin 'mikehaertl/yii2-apidoc-vim'
 " php namespace
