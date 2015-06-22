@@ -8,7 +8,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#buffer_nr_format = '%s: '
 " tagbar
-let g:airline#extensions#tagbar#enabled = 0
+" 关闭 airline 的 tagbar，在切换 tagbar 时会有一些小错误
+let g:airline#extensions#tagbar#enabled = 1
 " ctrlp
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 
