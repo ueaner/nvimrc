@@ -13,9 +13,10 @@ endif
 Plugin 'gmarik/Vundle.vim'
 
 " 主题
-Plugin 'fatih/molokai'
+Plugin 'ueaner/molokai'
 " statusline/tabline
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
+Plugin 'ap/vim-buftabline'
 " 选择窗口
 Plugin 't9md/vim-choosewin'
 " marks, 快捷键帮助:help showmarks-mappings
@@ -25,6 +26,11 @@ Plugin 'juanpabloaj/ShowMarks'
 "Plugin 'tpope/vim-fugitive'
 " git, 文件 diff 状态
 Plugin 'airblade/vim-gitgutter'
+
+" tmux
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+" editorconfig
+"Plugin 'editorconfig/editorconfig-vim'
 
 if has('lua')
     " 自动完成
@@ -47,9 +53,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 " 语法检查
 "Plugin 'scrooloose/syntastic'
+"Plugin 'wesleyche/SrcExpl'
 
-" 注释
-Plugin 'tomtom/tcomment_vim'
+" 注释: <C-V> -> <S-I> -> 操作 -> <Esc>
+"Plugin 'tomtom/tcomment_vim'
 " 更改括号
 Plugin 'tpope/vim-surround'
 " motion

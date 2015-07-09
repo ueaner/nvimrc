@@ -12,6 +12,7 @@
 " :help quickref  快速参考指南
 "
 " vim --startuptime <logfile>  测试 Vim 的加载速度
+" less is more
 "
 
 " ttyfast
@@ -20,6 +21,8 @@ set ttyfast
 set lazyredraw
 " 关闭兼容模式
 set nocompatible             " be iMproved, required
+" 默认使用 bash shell, 用于 ! 和 :! 命令的外壳名
+set shell=bash
 
 " 引入插件管理配置文件
 if has('win32')
@@ -219,6 +222,28 @@ endif
 "set helplang=cn
 
 " }}}
+" ==================== 插入模式 readline 命令行风格键映射 ==================== {{{
+
+" 移动: 行首/行尾
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
+" 移动: 向左/右一个字符
+inoremap <C-B> <Left>
+inoremap <C-F> <Right>
+" 删除一个字符
+" <C-H>  :h i_CTRL-H
+inoremap <C-D> <Del>
+" 删除光标前一个单词
+" <C-W>  :h i_CTRL-U
+" 删除光标前/后所有字符
+" <C-U>  :h i_CTRL-U
+inoremap <C-K> <C-O>D
+
+" 直接进入可视模式
+inoremap <C-V> <Esc>lv
+" <C-o> 插入模式下进入 临时插入模式 可以执行一条命令后再次进入插入模式
+
+" }}}
 " ==================== 键映射 ==================== {{{
 
 " 去除高亮
@@ -227,13 +252,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <leader><leader> *N
 " 输入模式下键入jj映射到<ESC>
 imap jj <ESC>
-
-" 插入模式行内移动操作：使用 readline 命令行风格
-inoremap <C-B> <Left>
-inoremap <C-F> <Right>
-inoremap <C-A> <Home>
-inoremap <C-E> <End>
-" <C-W> 删除前一个单词
+" <C-c> = <ESC>
 
 " undo & redo
 " noremal 模式下: u & <C-R>
