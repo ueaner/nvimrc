@@ -2,6 +2,7 @@
 # PHP 手册转 Vim 手册脚本
 # 依赖：php, w3m(使用 brew, apt-get, yum 等包管理工具一般可直接安装)
 # 使用：sh phpmanual-for-vim.sh
+# @author ueaner#gmail.com
 
 script_path=`pwd`
 

@@ -38,7 +38,9 @@ endif
 filetype plugin indent on    " required
 
 " 快速编辑 vimrc 文件
-command! Vimrc e ~/.vim/vimrc
+command! Ev e ~/.vim/vimrc
+command! Ez e ~/.zshrc
+command! Et e ~/.tmux.conf
 
 " leader
 let mapleader = ','
@@ -123,7 +125,7 @@ set autoindent smartindent
 " 回退
 set backspace=indent,eol,start
 " 不自动折叠
-silent! set foldlevel=100
+silent! set foldlevel=10
 " 左侧添加一列, 指示折叠的打开和关闭
 silent! set foldcolumn=1
 
@@ -180,7 +182,7 @@ au BufRead,BufNewFile *etc/nginx/* if &ft == '' | setf nginx | endif
 au BufRead,BufNewFile *.{conf,cnf,ini} setf dosini
 autocmd BufNewFile,Bufread *.{inc,php} setf php
 " markdown
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=markdown
+au BufRead,BufNewFile *.{md,markdown} set filetype=markdown
 au BufRead,BufNewFile *.{twig,volt} set filetype=twig
 " @link http://www.laruence.com/2010/08/18/1718.html
 autocmd FileType vim,php set keywordprg="help"
@@ -188,6 +190,9 @@ autocmd FileType vim,php set keywordprg="help"
 autocmd FileType php,nginx set foldmethod=indent
 " 折叠方式：foldmarker 标记
 autocmd FileType vim set foldmethod=marker
+" 记录折叠视图
+au BufWinLeave vimrc,*.php silent! mkview
+au BufWinEnter vimrc,*.php silent! loadview
 
 " }}}
 " ==================== 其他支持 ==================== {{{
@@ -254,6 +259,16 @@ nnoremap <leader><leader> *N
 imap jj <ESC>
 " <C-c> = <ESC>
 
+" 自动换行时，可以在一行内上下移动
+map j gj
+map k gk
+
+" % 映射到 ;;
+nnoremap ;; %
+
+" highlight last inserted text
+nnoremap gV `[v`]
+
 " undo & redo
 " noremal 模式下: u & <C-R>
 " 使用空格关闭／打开折叠
@@ -270,6 +285,12 @@ nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 nnoremap <leader>M :%s/\r/<CR>
 " 粘贴模式 ,p
 nnoremap <leader>p :set paste<CR>p :set nopaste<CR>
+" 快速插入日期
+nnoremap <leader>d "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
+inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
+" 编辑一个 table 文件时可以直接将一个 table 文件内容格式化
+"map <leader>? :%!column -t
 
 " 快速保存文件
 nmap <leader>w :w!<CR>
@@ -277,24 +298,13 @@ nmap <leader>w :w!<CR>
 command! W w !sudo tee % > /dev/null
 
 " buffer 操作
-nnoremap <TAB> :bnext<CR>
-nnoremap <leader><TAB> :bprevious<CR>
-nnoremap <leader>l :ls<CR>
-" 多插件抢这个快捷键
-"nnoremap <Leader>f :bp<CR>
-"nnoremap <Leader>b :bn<CR>
+nnoremap <TAB> :bn<CR>
+nnoremap <leader><TAB> :bp<CR>
+nnoremap <leader>l :CtrlPBuffer<CR>
 " 切换到上一个打开的 buffer
 nnoremap <Leader>g :e#<CR>
-nnoremap <Leader>1 :1b<CR>
-nnoremap <Leader>2 :2b<CR>
-nnoremap <Leader>3 :3b<CR>
-nnoremap <Leader>4 :4b<CR>
-nnoremap <Leader>5 :5b<CR>
-nnoremap <Leader>6 :6b<CR>
-nnoremap <Leader>7 :7b<CR>
-nnoremap <Leader>8 :8b<CR>
-nnoremap <Leader>9 :9b<CR>
-nnoremap <Leader>0 :10b<CR>
+" :bl :blast  最后一个
+" :bf :bfirst 第一个
 
 " http://stackoverflow.com/questions/4298910/vim-close-buffer-but-not-split-window
 function! CloseSplitOrDeleteBuffer()
@@ -314,6 +324,12 @@ endfunction
 " 关闭 buffer 或关闭 window
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 nnoremap <leader>Q :qa<CR>
+
+" 针对 class 文件的函数折叠 ,f 只显示函数名, 再次 ,f 显示函数全部内容
+function! FoldToggle()
+  let &foldlevel = &foldlevel == 1 ? 10 : 1
+endfunction
+autocmd FileType php nnoremap <leader>t :call FoldToggle()<CR>
 
 " 格式化JSON命令
 com! JSONFormat %!python -m json.tool

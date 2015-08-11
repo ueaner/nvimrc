@@ -44,7 +44,7 @@ if has("statusline") && !&cp
   " file encoding (eg. utf8, latin1, etc..)
   let &stl.=" %(%{(&fenc!=''?&fenc:&enc)} %)"
   "line number (pink) / total lines (percentage done)
-let &stl.="%3* LN %2*%4l/%-4.L%0* %03p%% ".g:statusline_separator
+  let &stl.="%3* LN %2*%4l/%-4.L%0* %03p%% ".g:statusline_separator
   " column number (minimum width is 4)
   let &stl.=" COL %-3.c "
   " modified / unmodified (purple)

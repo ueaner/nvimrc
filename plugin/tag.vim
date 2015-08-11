@@ -1,5 +1,5 @@
 " ==================== tagbar ====================
-nnoremap <leader>t :TagbarToggle<CR>
+"nnoremap <leader>t :TagbarToggle<CR>
 "let g:tagbar_width = 30
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_phpctags_bin='bin/phpctags'

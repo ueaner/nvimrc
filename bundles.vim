@@ -50,7 +50,7 @@ Bundle 'terryma/vim-multiple-cursors'
 " 目录管理, 加载时间稍长
 Plugin 'scrooloose/nerdtree'
 " tags outline
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
 " 语法检查
 "Plugin 'scrooloose/syntastic'
 "Plugin 'wesleyche/SrcExpl'
@@ -61,6 +61,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
 " motion
 Plugin 'justinmk/vim-sneak'
+" align
+Bundle 'junegunn/vim-easy-align'
 
 " golang
 Plugin 'fatih/vim-go'
@@ -71,6 +73,8 @@ Plugin 'fatih/vim-go'
 "Bundle 'arnaud-lb/vim-php-namespace'
 
 Bundle 'mattn/emmet-vim'
+
+Bundle 'mhinz/vim-startify'
 
 if has('python')
     " dbgp debugger
