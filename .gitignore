@@ -1,6 +1,8 @@
-/.netrwhist
-/bundle/
-/doc/
-/phpmanual/
-/bin/
-/view/
+runtime/view/*
+!runtime/view/.gitkeep
+runtime/undodir/*
+!runtime/undodir/.gitkeep
+.netrwhist
+bundle/
+doc/
+phpmanual/

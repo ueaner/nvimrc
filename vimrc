@@ -1,3 +1,4 @@
+" {{{
 "
 " Author ueaner <ueaner at gmail.com>
 "
@@ -11,9 +12,11 @@
 " :h K
 " :help quickref  快速参考指南
 "
-" vim --startuptime <logfile>  测试 Vim 的加载速度
+" vim --startuptime <logfile> <somefile>  测试 Vim 的加载速度
+" 查看已载入的脚本文件列表 :scriptnames
 " less is more
 "
+" }}}
 
 " ttyfast
 set ttyfast
@@ -23,6 +26,10 @@ set lazyredraw
 set nocompatible             " be iMproved, required
 " 默认使用 bash shell, 用于 ! 和 :! 命令的外壳名
 set shell=bash
+
+" leader
+let mapleader = ','
+let g:mapleader = ','
 
 " 引入插件管理配置文件
 if has('win32')
@@ -37,24 +44,42 @@ endif
 " 为特定的文件类型载入相应的插件
 filetype plugin indent on    " required
 
+function! ShellRCFile()
+  return "~/." . strpart($SHELL, strridx($SHELL, "/") + 1) . "rc"
+endfunction
+
 " 快速编辑 vimrc 文件
 command! Ev e ~/.vim/vimrc
-command! Ez e ~/.zshrc
+" command! Ez e ~/.zshrc
+command! Ez :execute "e " . ShellRCFile()
 command! Et e ~/.tmux.conf
 
-" leader
-let mapleader = ','
-let g:mapleader = ','
+" ==================== filetype & autocmd ==================== {{{
 
+au BufRead,BufNewFile *.{conf,cnf,ini} setf dosini
+au BufRead,BufNewFile *.{twig,volt} set filetype=twig
+" @link http://www.laruence.com/2010/08/18/1718.html
+autocmd FileType vim,php set keywordprg="help"
+" 折叠方式：缩进
+autocmd FileType php,nginx set foldmethod=indent
+" 折叠方式：foldmarker 标记
+autocmd FileType vim set foldmethod=marker
+
+" 记录折叠视图, 可以方便定位到上次打开的位置
+" 开启视图会使部分vimrc配置不能及时生效, 如果需要调试配置，建议先关闭视图
+set viewdir=~/.vim/runtime/view
+au BufWinLeave vimrc,*.php silent! mkview
+au BufWinEnter vimrc,*.php silent! loadview
+
+let php_sql_query = 1
+
+" }}}
 " ==================== 外观 ==================== {{{
 
 " 颜色数目
 set t_Co=256
-" 背景透明
-hi Normal ctermfg=252 ctermbg=none
 " 配色方案
 silent! colorscheme molokai
-let g:molokai_original = 1
 let g:rehash256 = 1
 "  垂直窗口分割字符, 和折叠填充字符
 set fillchars+=vert:\ ,fold:-
@@ -71,22 +96,9 @@ set showcmd
 " 显示当前模式
 set showmode
 
-" }}}
-" ==================== 命令行补全 ==================== {{{
-
-" 命令行列出所有的补全可能性
-set wildmode=longest,list
-" 命令行补全忽略
-set wildignore+=.hg,.git,.svn
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
-set wildignore+=*.DS_Store
-
-" }}}
-" ==================== 编辑区外观 ==================== {{{
-
 " 显示相对行号,当前行使用绝对行号
 set number
-silent! set relativenumber
+"silent! set relativenumber
 " 打开语法高亮
 syntax on
 " 准确的语法高亮和屏幕刷新速度的折衷. v个别复杂文件显示不友好v
@@ -99,20 +111,19 @@ set showmatch
 set matchtime=1
 " 突出显示当前行
 set cursorline
-" 突出显示当前列
-"set cursorcolumn
-" 设置行宽
-"silent! set colorcolumn=78
-" 不自动换行(超出窗口)
-"set nowrap
-" 显示空白字符
-" set list
-" 空白字符显示格式(:help listchars)
-"set listchars=tab:▸\ ,trail:-
-" tab 转为空格 :%ret! 4
 
 " }}}
-" ==================== 缩进和折叠 ==================== {{{
+" ==================== 命令行 ==================== {{{
+
+" 命令行列出所有的补全可能性, 配合 <C-N>, <C-P> 使用
+set wildmode=longest,list
+" 命令行补全忽略
+set wildignore+=.hg,.git,.svn
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.DS_Store
+
+" }}}
+" ==================== 缩进与折叠 ==================== {{{
 
 " 使用空格代替 tab, 启用此选项 listchars 中的 tab 参数会失效, 必需用插件代替
 set expandtab
@@ -120,6 +131,7 @@ set smarttab
 " 1 个 TAB 占 4 个位置
 set tabstop=4
 set shiftwidth=4
+" tab 转为空格 :%ret! 4
 " 智能缩进
 set autoindent smartindent
 " 回退
@@ -127,12 +139,30 @@ set backspace=indent,eol,start
 " 不自动折叠
 silent! set foldlevel=10
 " 左侧添加一列, 指示折叠的打开和关闭
-silent! set foldcolumn=1
+"silent! set foldcolumn=1
+
+" 针对 class 文件的函数折叠 ,f 只显示函数名, 再次 ,f 显示函数全部内容
+function! FoldToggle()
+  "let &foldlevel = &foldlevel == 1 ? 10 : 1
+  if &foldlevel == 10
+    if &filetype == 'vim'
+      silent! setlocal foldlevel=0
+    else
+      silent! setlocal foldlevel=1
+    endif
+  else
+    silent! setlocal foldlevel=10
+  endif
+endfunction
+autocmd FileType php,vim nnoremap <leader>f :call FoldToggle()<CR>
+
+" 使用空格关闭／打开折叠
+nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 " }}}
-" ==================== 文件 ==================== {{{
+" ==================== 文件编码与拼写 ==================== {{{
 
-" vim 内部编码(buffer,菜单文本[gvim],消息文本等)
+" vim 内部编码(buffer,菜单文本[gvim],消息文本等), :help ++enc
 set encoding=utf-8
 " 拼写检查，7.4+
 if has('spell') && v:version >= 704 && has('patch092')
@@ -153,10 +183,6 @@ set fileformats=unix,mac,dos
 set nobackup
 set nowritebackup
 set noswapfile
-" 当前编辑文件被外部编译器修改过，自动加载
-set autoread
-" 自动保存切换标签前
-set autowriteall
 " 关闭时记住上次打开的文件信息
 "set viminfo^=%
 " .tags 在 Vim 工作目录下, <C-]> 跳转，<C-t> 跳回
@@ -170,36 +196,15 @@ command! CTags !ctags -f .tags --languages=PHP --PHP-kinds=+cf -R
 set incsearch
 " 忽略大小写
 set ignorecase
-" 智能搜索
-set smartcase
 " 高亮搜索结果
 set hlsearch
-
-" }}}
-" ==================== filetype & autocmd ==================== {{{
-
-au BufRead,BufNewFile *etc/nginx/* if &ft == '' | setf nginx | endif
-au BufRead,BufNewFile *.{conf,cnf,ini} setf dosini
-autocmd BufNewFile,Bufread *.{inc,php} setf php
-" markdown
-au BufRead,BufNewFile *.{md,markdown} set filetype=markdown
-au BufRead,BufNewFile *.{twig,volt} set filetype=twig
-" @link http://www.laruence.com/2010/08/18/1718.html
-autocmd FileType vim,php set keywordprg="help"
-" 折叠方式：缩进
-autocmd FileType php,nginx set foldmethod=indent
-" 折叠方式：foldmarker 标记
-autocmd FileType vim set foldmethod=marker
-" 记录折叠视图
-au BufWinLeave vimrc,*.php silent! mkview
-au BufWinEnter vimrc,*.php silent! loadview
 
 " }}}
 " ==================== 其他支持 ==================== {{{
 
 " 使用鼠标
 if has('mouse')
-    set mouse=a
+    "set mouse=a
 endif
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
 set clipboard^=unnamed
@@ -215,10 +220,13 @@ set ttimeoutlen=10
 
 " 正则 magic
 set magic
-" 选择缺省正则表达式引擎, :help new-regexp-engine
-if exists('&regexpengine')
-    set regexpengine=1
-endif
+
+" undo
+try
+    set undodir=~/.vim/runtime/undodir
+    set undofile
+catch
+endtry
 
 " 不显示欢迎页
 " set shortmess+=I
@@ -253,7 +261,7 @@ inoremap <C-V> <Esc>lv
 
 " 去除高亮
 nnoremap <leader><space> :nohlsearch<CR>
-" 开启搜索当前光标下的单词，但是不跳转下一个
+" 开启搜索当前光标下的单词，但是不跳转下一个, :help gd
 nnoremap <leader><leader> *N
 " 输入模式下键入jj映射到<ESC>
 imap jj <ESC>
@@ -269,16 +277,9 @@ nnoremap ;; %
 " highlight last inserted text
 nnoremap gV `[v`]
 
-" undo & redo
-" noremal 模式下: u & <C-R>
-" 使用空格关闭／打开折叠
-nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-
 " 复制到行尾，类似大写的 C 和 D 操作
 nnoremap Y y$
 
-" 插入空行
-nnoremap <leader>o o<Esc>
 " 去除尾部空字符
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " 去除尾部 ^M
@@ -291,6 +292,17 @@ inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 
 " 编辑一个 table 文件时可以直接将一个 table 文件内容格式化
 "map <leader>? :%!column -t
+" align =, 但是 = 等号会被干掉?
+":'<'>! column -ts=
+
+" 格式化JSON命令
+com! JSONFormat %!python -m json.tool
+
+" }}}
+" ==================== 文件保存/关闭/切换 ==================== {{{
+
+" 隐藏缓冲区, 无需保存即可切换 buffer
+set hidden
 
 " 快速保存文件
 nmap <leader>w :w!<CR>
@@ -301,7 +313,7 @@ command! W w !sudo tee % > /dev/null
 nnoremap <TAB> :bn<CR>
 nnoremap <leader><TAB> :bp<CR>
 nnoremap <leader>l :CtrlPBuffer<CR>
-" 切换到上一个打开的 buffer
+" 切换到上一个打开的 buffer, 同 CTRL-^
 nnoremap <Leader>g :e#<CR>
 " :bl :blast  最后一个
 " :bf :bfirst 第一个
@@ -325,40 +337,37 @@ endfunction
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 nnoremap <leader>Q :qa<CR>
 
-" 针对 class 文件的函数折叠 ,f 只显示函数名, 再次 ,f 显示函数全部内容
-function! FoldToggle()
-  let &foldlevel = &foldlevel == 1 ? 10 : 1
-endfunction
-autocmd FileType php nnoremap <leader>t :call FoldToggle()<CR>
-
-" 格式化JSON命令
-com! JSONFormat %!python -m json.tool
-
-"}}}
+" }}}
 " ==================== Omni-complete ==================== {{{
+
+" Enable omni completion. :help ins-completion hotkey: <C-X><C-O>, <C-X><C-F>, <C-N>, <C-P>
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP dictionary=~/.vim/dict/php.dict
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Better Completion
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
+" auto select
+"set completeopt-=noinsert completeopt+=noselect
 " :help preview-window
 "set completeopt+=preview
 
-"}}}
-" ==================== netrw-browse ==================== {{{
+" }}}
+" ==================== statusline ==================== {{{
 
-" ,e 打开目录浏览，回车打开文件或目录
-nnoremap <leader>e :Explore<CR>
-" 打开文件关闭 Explore
-let g:netrw_browse_split = 0
-" 不显示横幅
-let g:netrw_banner = 0
-" 树形浏览
-let g:netrw_liststyle = 3
-" 隐藏 . 开头的文件
-let g:netrw_list_hide = '^\..*'
-" 目录在前文件在后
-let g:netrw_sort_sequence = '[\/]$,*'
+function! HasPaste()
+    if &paste
+        return 'PASTE'
+    en
+    return 'BUF #' . bufnr('%')
+endfunction
 
-"}}}
+if has("statusline")
+  " @link https://github.com/maciakl/vim-neatstatus
+  let &stl=" %{HasPaste()} %<%F%m %= %( %{&filetype} %) %{&fileformat} | %(%{(&fenc!=''?&fenc:&enc)} %) LN %4l/%-4.L %03p%% COL %-3.c "
+endif
 
-" 引入相关插件配置, 放在 plugin 目录下会被自动加载
+" }}}

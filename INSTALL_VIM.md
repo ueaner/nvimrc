@@ -12,25 +12,25 @@
 
 #### 安装依赖
 
-    # yum install ncurses-devel lua-devel python-devel cscope ctags git
+    # yum install ncurses-devel lua-devel python-devel cscope ctags git gcc
 
 如果需要支持 ruby 或其他语言写的扩展，请安装相应语言的开发包，并在 VIM 编译中添加相应的参数，
 如: `--enable-rubyinterp`。
 
 #### 下载 VIM 源码包
 
-到 http://ftp.debian.org/debian/pool/main/v/vim/ 下载最新版本的 orig 包，
-这里包含了 vim 7.4 版本很多不存在的 patches。我这里下载到的最新版本是 7.4.488。
+到 https://mirrors.kernel.org/debian/pool/main/v/vim/ 下载最新版本的 orig 包，
+这里包含了 vim 7.4 版本很多不存在的 patches。我这里下载到的最新版本是 7.4.826。
 
-    # wget http://ftp.debian.org/debian/pool/main/v/vim/vim_7.4.488.orig.tar.gz
+    # wget https://mirrors.kernel.org/debian/pool/main/v/vim/vim_7.4.826.orig.tar.gz
 
 #### 编译安装 VIM
 
 这里需要注意的是通过开启 `lua` 和 `python` 的支持, 来使用 lua 和 python 开发的插件。
 如：[gundo], [YouCompleteMe] 等需要 python 支持, [neocomplete] 需要 lua 的支持。
 
-    # tar xf vim_7.4.488.orig.tar.gz
-    # cd vim-7.4.488/
+    # tar xf vim_7.4.826.orig.tar.gz
+    # cd vim-7.4.826/
     # ./configure --prefix=/usr \
      --with-compiledby="ueaner" \
      --with-features=huge \
