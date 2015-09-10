@@ -168,10 +168,10 @@ set encoding=utf-8
 if has('spell') && v:version >= 704 && has('patch092')
     " 中日韩字符不进行检查，7.4.092+，:help spell-cjk
     set spelllang=en_us,cjk
-    " 10 条最佳拼写建议
+    " 10 条最佳拼写建议, 使用 z= 列出拼写建议
     set spellsuggest=best,10
-    " markdown, vim 类型文件自动进行拼写检查
-    "autocmd FileType markdown,vim set spell
+    " markdown, php 类型文件自动进行拼写检查
+    "autocmd FileType markdown,php set spell
     " 快捷键 ,s
     nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 endif
@@ -225,6 +225,7 @@ set magic
 try
     set undodir=~/.vim/runtime/undodir
     set undofile
+    set undolevels=400
 catch
 endtry
 
@@ -272,7 +273,7 @@ map j gj
 map k gk
 
 " % 映射到 ;;
-nnoremap ;; %
+"nnoremap ;; %
 
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -336,6 +337,17 @@ endfunction
 " 关闭 buffer 或关闭 window
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 nnoremap <leader>Q :qa<CR>
+
+" 最大化
+nnoremap + :on<CR>
+" 关闭, 最小化 ,g 唤出刚关闭的 buffer
+nnoremap - :call CloseSplitOrDeleteBuffer()<CR>
+
+" Window navigation
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+nnoremap <C-H> <C-W>h
 
 " }}}
 " ==================== Omni-complete ==================== {{{
