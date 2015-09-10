@@ -22,10 +22,15 @@ Plugin 'airblade/vim-gitgutter'
 " 文件快捷查找: files, buffers, mru
 Plugin 'kien/ctrlp.vim'
 
-" 多点编辑
-Plugin 'terryma/vim-multiple-cursors'
 " 文件浏览
 Plugin 'scrooloose/nerdtree'
+
+" buffer tabs
+Plugin 'ap/vim-buftabline'
+
+" 多点编辑, 也可以使用 *cw<要替换的内容><ESC>, n.n.n.
+" 参见：http://federicoramirez.name/why-vim-is-awesome/
+Plugin 'terryma/vim-multiple-cursors'
 " 对齐
 Plugin 'junegunn/vim-easy-align'
 " 自动关闭括号
@@ -34,8 +39,8 @@ Plugin 'cohama/lexima.vim'
 "Plugin 'justinmk/vim-sneak'
 
 if has('python')
-    " dbgp debugger
-    "Plugin 'joonty/vdebug'
+    " dbgp debugger, 默认端口 9000.
+    Plugin 'joonty/vdebug'
 endif
 
 call vundle#end()            " required

@@ -34,7 +34,7 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " AutoComplPop like behavior.
 " 自动选中第一个
-let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#enable_auto_select = 1
 " 使用 CTRL+X+O 提示参数时只显示下拉提示，不显示 preview
 " 为 1 且配合set completeopt+=preview 则永久显示
 " https://github.com/Shougo/neocomplete.vim/issues/95
@@ -142,14 +142,23 @@ let g:ctrlp_max_files = 10000
 " ==================== sneak ==================== {{{
 
 " s{char}{char} 支持两个字符搜索
-let g:sneak#streak = 1
-nmap s <Plug>(SneakStreak)
-nmap S <Plug>(SneakStreakBackward)
+"let g:sneak#streak = 1
+"nmap s <Plug>(SneakStreak)
+"nmap S <Plug>(SneakStreakBackward)
 
 " }}}
 " ==================== align ==================== {{{
 
 vmap <leader>a <Plug>(EasyAlign)
 nmap <leader>a <Plug>(EasyAlign)
+
+" }}}
+" ==================== buffer tabline ==================== {{{
+
+let g:buftabline_indicators = get(g:, 'buftabline_indicators', 1)
+hi default link BufTabLineCurrent TabLineSel
+hi default link BufTabLineActive  Pmenu
+hi default link BufTabLineHidden  TabLine
+hi default link BufTabLineFill    TabLineFill
 
 " }}}
