@@ -177,8 +177,8 @@ if has('spell') && v:version >= 704 && has('patch092')
 endif
 " utf-8 编码, 去除 BOM
 set fileencoding=utf-8 nobomb
-" 换行符格式
-set fileformats=unix,mac,dos
+" 换行符格式, Line Endings, :help ++ff
+set fileformats=unix,dos,mac
 " 不生成备份文件, 和 .swp 文件
 set nobackup
 set nowritebackup
