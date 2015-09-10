@@ -356,7 +356,7 @@ nnoremap <C-H> <C-W>h
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP dictionary=~/.vim/dict/php.dict
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP dictionary=~/.vim/phpmanual/php.dict
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Better Completion
