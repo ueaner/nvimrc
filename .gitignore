@@ -1,5 +1,5 @@
-runtime/view/*
-!runtime/view/.gitkeep
+runtime/viewdir/*
+!runtime/viewdir/.gitkeep
 runtime/undodir/*
 !runtime/undodir/.gitkeep
 .netrwhist

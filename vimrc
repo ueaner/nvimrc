@@ -71,7 +71,7 @@ autocmd FileType vim set foldmethod=marker
 " 所以在调试配置时，建议先关闭视图，调试完毕后，
 " 针对所调试的配置范围（如针对 PHP 的文件类型）
 " 删除对应的视图文件，或直接清空视图目录下的文件。
-set viewdir=~/.vim/runtime/view
+set viewdir=~/.vim/runtime/viewdir
 au BufWinLeave vimrc,*.php silent! mkview
 au BufWinEnter vimrc,*.php silent! loadview
 
