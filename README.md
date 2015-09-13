@@ -19,9 +19,8 @@
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     git clone https://github.com/gmarik/Vundle.vim.git "C:\Documents and Settings\<your_username>\vimfiles\bundle\Vundle.vim"
 
-打开 vim, 命令行执行：
+命令行执行, 开始安装插件:
 
-    :PluginInstall
+    vim +PluginInstall +qall
 
-等待少许时间, Vim 常用 插件就自动安装完成了。
-
+等待少许时间, Vim 常用插件就自动安装完成了。
