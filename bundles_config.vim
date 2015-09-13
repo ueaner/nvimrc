@@ -110,9 +110,9 @@ let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 
 let NERDTreeQuitOnOpen = 1 " 打开文件时关闭树
-let NERDTreeMinimalUI = 1 " 不显示帮助面板
-let NERDTreeDirArrows = 0 " 目录箭头:1显示箭头 0传统+-|号
-let NERDTreeMouseMode = 2 " 单击打开目录，双击打开文件
+let NERDTreeMinimalUI  = 1 " 不显示帮助面板
+let NERDTreeDirArrows  = 0 " 目录箭头:1显示箭头 0传统+-|号
+let NERDTreeMouseMode  = 2 " 单击打开目录，双击打开文件
 "let NERDTreeWinSize = 25 " 窗口大小
 
 " Open nerdtree in current dir, write our own custom function because
@@ -131,12 +131,14 @@ noremap <Leader>n :<C-u>call g:NerdTreeFindToggle()<cr>
 " }}}
 " ==================== ctrlp ==================== {{{
 
-" 对于删除的文件路径也会被缓存，注意使用 :CtrlPClearCache 清除缓存
+" 如果删除了文件或新建了文件, 使用 :CtrlPClearCache 或按 <F5> 刷新当前工作目录的缓存
 " C-f, C-b 切换 buffer, files, mru
-" Enter 打开一个文
-let g:ctrlp_use_caching = 1
+" Enter 打开当前光标下的文件
+let g:ctrlp_use_caching         = 1
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_max_files = 10000
+let g:ctrlp_max_files           = 10000
+" 使用 C-O 在 buffer 中打开 C-Z 标记的多个文件
+let g:ctrlp_open_multiple_files = 'i' " open in h[i]dden buffer
 
 " }}}
 " ==================== sneak ==================== {{{
