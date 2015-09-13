@@ -5,6 +5,7 @@
 " :help option-list   可用选项列表，或 :help options
 " :help 'someoption'  查看具体某选项的帮助，加引号
 " :echo &someoption   查看某选项在的设定值，加地址符
+" :echo g:option l:option s:option 全局变量、本地变量等的设定值, 不加地址符
 "
 " :help  查看简介及帮助目录(view doc/help.cnx)
 " :only	 使当前窗口成为屏幕上唯一的窗口。其它窗口都关闭。
@@ -76,19 +77,17 @@ let php_sql_query = 1
 " }}}
 " ==================== 外观 ==================== {{{
 
-" 颜色数目
-set t_Co=256
 " 配色方案
+if &t_Co == 256
+  let g:rehash256 = 1
+endif
 silent! colorscheme molokai
-let g:rehash256 = 1
 "  垂直窗口分割字符, 和折叠填充字符
 set fillchars+=vert:\ ,fold:-
 " 屏幕上下保留 3 行(光标滚动过程中)
 set scrolloff=3
 " 显示状态栏
 set laststatus=2
-" 动态显示标题
-set title
 " 状态栏/右下角显示行号和列号
 set ruler
 " 显示命令字符
@@ -101,10 +100,10 @@ set number
 "silent! set relativenumber
 " 打开语法高亮
 syntax on
-" 准确的语法高亮和屏幕刷新速度的折衷. v个别复杂文件显示不友好v
-"syntax sync minlines=256
-" 搜索语法文件的最大列数. ^暂时注释掉,如出现性能问题,再回头看^
-"set synmaxcol=128
+" 准确的语法高亮和屏幕刷新速度的折衷
+syntax sync minlines=256
+" 文件高亮的最大列数, 超出此列数后续行不一定能正确高亮
+set synmaxcol=200
 " 括号匹配
 set showmatch
 " 跳转到匹配括号的停留时间 100ms
@@ -366,20 +365,5 @@ set completeopt=longest,menuone
 "set completeopt-=noinsert completeopt+=noselect
 " :help preview-window
 "set completeopt+=preview
-
-" }}}
-" ==================== statusline ==================== {{{
-
-function! HasPaste()
-    if &paste
-        return 'PASTE'
-    en
-    return 'BUF #' . bufnr('%')
-endfunction
-
-if has("statusline")
-  " @link https://github.com/maciakl/vim-neatstatus
-  let &stl=" %{HasPaste()} %<%F%m %= %( %{&filetype} %) %{&fileformat} | %(%{(&fenc!=''?&fenc:&enc)} %) LN %4l/%-4.L %03p%% COL %-3.c "
-endif
 
 " }}}
