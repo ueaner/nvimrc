@@ -20,7 +20,7 @@ Plugin 'juanpabloaj/ShowMarks'
 Plugin 'airblade/vim-gitgutter'
 
 " 文件快捷查找: files, buffers, mru
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " 文件浏览
 Plugin 'scrooloose/nerdtree'
