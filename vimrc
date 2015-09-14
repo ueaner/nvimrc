@@ -8,7 +8,7 @@
 " :echo g:option l:option s:option 全局变量、本地变量等的设定值, 不加地址符
 "
 " :help  查看简介及帮助目录(view doc/help.cnx)
-" :only	 使当前窗口成为屏幕上唯一的窗口。其它窗口都关闭。
+" :only  使当前窗口成为屏幕上唯一的窗口。其它窗口都关闭。
 " :h abando
 " :h K
 " :help quickref  快速参考指南
@@ -34,12 +34,12 @@ let g:mapleader = ','
 
 " 引入插件管理配置文件
 if has('win32')
-    silent! source ~/vimfiles/bundles.vim
-    set rtp+=~/vimfiles/phpmanual
+  silent! source ~/vimfiles/bundles.vim
+  set rtp+=~/vimfiles/phpmanual
 else
-    silent! source ~/.vim/bundles.vim
-    set rtp+=~/.vim/phpmanual
-    "autocmd! bufwritepost ~/.vim/vimrc source %
+  silent! source ~/.vim/bundles.vim
+  set rtp+=~/.vim/phpmanual
+  "autocmd! bufwritepost ~/.vim/vimrc source %
 endif
 
 " 为特定的文件类型载入相应的插件
@@ -64,7 +64,7 @@ autocmd FileType vim,php set keywordprg="help"
 " 折叠方式：缩进
 autocmd FileType php,nginx set foldmethod=indent
 " 折叠方式：foldmarker 标记
-autocmd FileType vim set foldmethod=marker
+autocmd FileType vim set foldmethod=marker tabstop=2 shiftwidth=2
 
 " 记录折叠视图, 可以方便定位到上次打开的位置。:help :mkview
 " 注意：开启视图会使部分 vimrc 配置不能及时生效（如词典文件的配置）
@@ -168,14 +168,14 @@ nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 set encoding=utf-8
 " 拼写检查，7.4+
 if has('spell') && v:version >= 704 && has('patch092')
-    " 中日韩字符不进行检查，7.4.092+，:help spell-cjk
-    set spelllang=en_us,cjk
-    " 10 条最佳拼写建议, 使用 z= 列出拼写建议
-    set spellsuggest=best,10
-    " markdown, php 类型文件自动进行拼写检查
-    "autocmd FileType markdown,php set spell
-    " 快捷键 ,s
-    nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+  " 中日韩字符不进行检查，7.4.092+，:help spell-cjk
+  set spelllang=en_us,cjk
+  " 10 条最佳拼写建议, 使用 z= 列出拼写建议
+  set spellsuggest=best,10
+  " markdown, php 类型文件自动进行拼写检查
+  "autocmd FileType markdown,php set spell
+  " 快捷键 ,s
+  nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 endif
 " utf-8 编码, 去除 BOM
 set fileencoding=utf-8 nobomb
@@ -206,7 +206,7 @@ set hlsearch
 
 " 使用鼠标
 if has('mouse')
-    "set mouse=a
+  "set mouse=a
 endif
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
 set clipboard^=unnamed
@@ -225,9 +225,9 @@ set magic
 
 " undo
 try
-    set undodir=~/.vim/runtime/undodir
-    set undofile
-    set undolevels=400
+  set undodir=~/.vim/runtime/undodir
+  set undofile
+  set undolevels=400
 catch
 endtry
 
