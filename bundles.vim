@@ -225,10 +225,7 @@ endfunction
 
 if has("statusline")
   " @link https://github.com/maciakl/vim-neatstatus
-  let &stl="%1* %{HasPaste()} %0* %<%F%m %= %( %{&filetype} %) %{&fileformat} | %(%{(&fenc!=''?&fenc:&enc)} %) LN %4l/%-4.L %03p%% COL %-3.c "
-  hi User1           ctermfg=231 ctermbg=24    cterm=none
-  hi User2           ctermfg=67  ctermbg=233   cterm=none
-  hi User3           ctermfg=255 ctermbg=233   cterm=none
+  let &statusline=" %{HasPaste()} %<%F%m %= %( %{&filetype} %) %{&fileformat} | %(%{(&fenc!=''?&fenc:&enc)} %) LN %4l/%-4.L %03p%% COL %-3.c "
 endif
 
 " }}}

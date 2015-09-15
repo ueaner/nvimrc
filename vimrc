@@ -25,12 +25,12 @@ set ttyfast
 set lazyredraw
 " 关闭兼容模式
 set nocompatible             " be iMproved, required
-" 默认使用 bash shell, 用于 ! 和 :! 命令的外壳名
-set shell=bash
 
 " leader
 let mapleader = ','
 let g:mapleader = ','
+
+" ==================== 引入插件管理配置文件 ==================== {{{
 
 " 引入插件管理配置文件
 if has('win32')
@@ -39,11 +39,16 @@ if has('win32')
 else
   silent! source ~/.vim/bundles.vim
   set rtp+=~/.vim/phpmanual
+  " 使用 augroup 定义的 autocmd 可以防止 vimrc 再次执行时自动命令被多次定义
   "autocmd! bufwritepost ~/.vim/vimrc source %
+  " 默认使用 bash shell, 用于 ! 和 :! 命令的外壳名
+  set shell=bash
 endif
 
 " 为特定的文件类型载入相应的插件
 filetype plugin indent on    " required
+
+" }}}
 
 function! ShellRCFile()
   return "~/." . strpart($SHELL, strridx($SHELL, "/") + 1) . "rc"
@@ -66,16 +71,10 @@ autocmd FileType php,nginx set foldmethod=indent
 " 折叠方式：foldmarker 标记
 autocmd FileType vim set foldmethod=marker tabstop=2 shiftwidth=2
 
-" 记录折叠视图, 可以方便定位到上次打开的位置。:help :mkview
-" 注意：开启视图会使部分 vimrc 配置不能及时生效（如词典文件的配置）
-" 所以在调试配置时，建议先关闭视图，调试完毕后，
-" 针对所调试的配置范围（如针对 PHP 的文件类型）
-" 删除对应的视图文件，或直接清空视图目录下的文件。
-set viewdir=~/.vim/runtime/viewdir
+" 记录折叠视图, 及最后一次关闭文件时的光标所在位置。:help :mkview
+set viewdir=~/.vim/runtime/viewdir viewoptions-=options
 au BufWinLeave vimrc,*.php silent! mkview
 au BufWinEnter vimrc,*.php silent! loadview
-
-let php_sql_query = 1
 
 " }}}
 " ==================== 外观 ==================== {{{
@@ -364,7 +363,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " Better Completion
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
-" auto select
+" auto select, :help completeopt@en
 "set completeopt-=noinsert completeopt+=noselect
 " :help preview-window
 "set completeopt+=preview
