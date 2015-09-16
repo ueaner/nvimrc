@@ -2,8 +2,15 @@
 
 filetype off                  " required
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if has('win32')
+  " @link https://github.com/gmarik/Vundle.vim/wiki/Vundle-for-Windows
+  set rtp+=~/vimfiles/bundle/Vundle.vim
+  let path='~/vimfiles/bundle'
+  call vundle#begin(path)
+else
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+endif
 
 Plugin 'gmarik/Vundle.vim'
 

@@ -13,8 +13,8 @@ endif
 language message zh_CN.UTF-8
 
 " 菜单乱码
-"source $VIMRUNTIME/delmenu.vim
-"source $VIMRUNTIME/menu.vim
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 
 set guioptions-=m " 隐藏菜单栏
 set guioptions-=T " 隐藏工具栏
@@ -22,3 +22,6 @@ set guioptions-=r " 隐藏右侧滚动条
 set guioptions-=l " 隐藏左侧滚动条
 set guioptions-=R " 隐藏垂直窗口右侧滚动条
 set guioptions-=L " 隐藏垂直窗口左侧滚动条
+
+" 关闭 esc 闪屏
+au GuiEnter * set t_vb=
