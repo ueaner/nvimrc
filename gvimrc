@@ -5,7 +5,7 @@ if has('gui_gtk')
     set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
 elseif has('mac')
     set guifont=Sauce\ Code\ Powerline:h12
-elseif has('win32')
+elseif has('win32') || has('win64')
     set guifont=Sauce\ Code\ Powerline:h12:cANSI
 endif
 

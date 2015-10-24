@@ -3,6 +3,6 @@ runtime/viewdir/*
 runtime/undodir/*
 !runtime/undodir/.gitkeep
 .netrwhist
-bundle/
+bundle/*
 doc/
 phpmanual/

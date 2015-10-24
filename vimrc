@@ -1,6 +1,7 @@
 " {{{
 "
-" Author ueaner <ueaner at gmail.com>
+" Author ueaner <ueaner#gmail.com>
+" less is more
 "
 " :help option-list   可用选项列表，或 :help options
 " :help 'someoption'  查看具体某选项的帮助，加引号
@@ -15,8 +16,40 @@
 "
 " vim --startuptime <logfile> <somefile>  测试 Vim 的加载速度
 " 查看已载入的脚本文件列表 :scriptnames
-" less is more
 "
+" 对于非当前用户使用此配置，在相应用户 ~/.bashrc 中加入:
+" alias e='vim -u /home/<myusername>/.vim/vimrc --noplugin'
+"
+" 目录结构:
+"
+" .vim
+" ├── bundles.sh    插件配置文件
+" ├── bundle        第三方插件存储目录
+" ├── dict          用户函数的自动完成
+" │   └── php.dict
+" ├── runtime
+" │   ├── undodir
+" │   └── viewdir
+" └── vimrc         7.4之前的版本请在 HOME 目录下做 .vimrc 的软链
+"
+" sudo -s, 使用 $SUDO_USER 的插件配置
+if exists('$SUDO_USER')
+  " 不处理 $HOME/.vim 下的插件配置
+  set rtp-=$HOME/.vim
+  set rtp-=$HOME/.vim/after
+
+  if isdirectory('/home/' . $SUDO_USER)
+    let g:home='/home/' . $SUDO_USER
+  elseif isdirectory('/Users/' . $SUDO_USER)
+    let g:home='/Users/' . $SUDO_USER
+  endif
+else
+  let g:home=$HOME
+endif
+
+" 当前 shell 的配置文件路径, 只拿到自己的就可以
+let g:shellrcfile=g:home . '/.' . strpart($SHELL, strridx($SHELL, '/') + 1) . 'rc'
+
 " }}}
 
 " ttyfast
@@ -33,7 +66,7 @@ let g:mapleader = ','
 " ==================== 引入插件管理配置文件 ==================== {{{
 
 " 引入插件管理配置文件
-if has('win32')
+if has('win32') || has('win64')
   silent! source ~/vimfiles/bundles.vim
   set rtp+=~/vimfiles/phpmanual
 else
@@ -45,36 +78,15 @@ else
   set shell=bash
 endif
 
+" }}}
+
 " 为特定的文件类型载入相应的插件
 filetype plugin indent on    " required
 
-" }}}
-
-function! ShellRCFile()
-  return "~/." . strpart($SHELL, strridx($SHELL, "/") + 1) . "rc"
-endfunction
-
 " 快速编辑 vimrc 文件
-command! Ev e ~/.vim/vimrc
-" command! Ez e ~/.zshrc
-command! Ez :execute "e " . ShellRCFile()
-command! Et e ~/.tmux.conf
-
-" ==================== filetype & autocmd ==================== {{{
-
-au BufRead,BufNewFile *.{conf,cnf,ini} setf dosini
-au BufRead,BufNewFile *.{twig,volt} set filetype=twig
-" @link http://www.laruence.com/2010/08/18/1718.html
-autocmd FileType vim,php set keywordprg="help"
-" 折叠方式：缩进
-autocmd FileType php,nginx set foldmethod=indent
-" 折叠方式：foldmarker 标记
-autocmd FileType vim set foldmethod=marker tabstop=2 shiftwidth=2
-
-" 记录折叠视图, 及最后一次关闭文件时的光标所在位置。:help :mkview
-set viewdir=~/.vim/runtime/viewdir viewoptions-=options
-au BufWinLeave vimrc,*.php silent! mkview
-au BufWinEnter vimrc,*.php silent! loadview
+command! Ev :execute 'e ' . g:home . '/.vim/vimrc'
+command! Ez :execute 'e ' . g:shellrcfile
+command! Et :execute 'e ' . g:home . '/.tmux.conf'
 
 " }}}
 " ==================== 外观 ==================== {{{
@@ -86,8 +98,8 @@ endif
 silent! colorscheme molokai
 "  垂直窗口分割字符, 和折叠填充字符
 set fillchars+=vert:\ ,fold:-
-" 屏幕上下保留 3 行(光标滚动过程中)
-set scrolloff=3
+" 滚动时会使光标永远保持在中间行
+let &scrolloff=&lines
 " 显示状态栏
 set laststatus=2
 " 状态栏/右下角显示行号和列号
@@ -96,10 +108,8 @@ set ruler
 set showcmd
 " 显示当前模式
 set showmode
-
-" 显示相对行号,当前行使用绝对行号
+" 显示行号
 set number
-"silent! set relativenumber
 " 打开语法高亮
 syntax on
 " 准确的语法高亮和屏幕刷新速度的折衷
@@ -224,17 +234,15 @@ set magic
 
 " undo
 try
-  set undodir=~/.vim/runtime/undodir
+  let &undodir=g:home . '/.vim/runtime/undodir'
   set undofile
   set undolevels=400
 catch
 endtry
 
-" 不显示欢迎页
-" set shortmess+=I
-
-" 默认使用中文帮助，默认优先获取 ~/.vim/doc 中的帮助
-"set helplang=cn
+" 记录视图的缓存目录
+let &viewdir=g:home . '/.vim/runtime/viewdir'
+set viewoptions-=options
 
 " }}}
 " ==================== 插入模式 readline 命令行风格键映射 ==================== {{{
@@ -273,9 +281,6 @@ imap jj <ESC>
 map j gj
 map k gk
 
-" % 映射到 ;;
-"nnoremap ;; %
-
 " highlight last inserted text
 nnoremap gV `[v`]
 
@@ -293,12 +298,7 @@ nnoremap <leader>d "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
 inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 
 " 编辑一个 table 文件时可以直接将一个 table 文件内容格式化
-"map <leader>? :%!column -t
-" align =, 但是 = 等号会被干掉?
-":'<'>! column -ts=
-
-" 格式化JSON命令
-com! JSONFormat %!python -m json.tool
+map <leader>t :'<'>! column -t<CR>
 
 " }}}
 " ==================== 文件保存/关闭/切换 ==================== {{{
@@ -357,8 +357,9 @@ nnoremap <C-H> <C-W>h
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP dictionary=~/.vim/phpmanual/php.dict
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 " Better Completion
 set complete=.,w,b,u,t
@@ -367,5 +368,40 @@ set completeopt=longest,menuone
 "set completeopt-=noinsert completeopt+=noselect
 " :help preview-window
 "set completeopt+=preview
+
+" }}}
+" ==================== filetype ==================== {{{
+
+au BufRead,BufNewFile *.{conf,cnf,ini} setf dosini
+
+autocmd FileType vim set keywordprg="help"
+" 折叠方式：foldmarker 标记
+autocmd FileType vim set foldmethod=marker
+
+"++ PHP, 其他语言的词典文件可依次配置
+autocmd FileType php exec 'setlocal dictionary=' . g:home . '/.vim/dict/php.dict'
+" @link http://www.laruence.com/2010/08/18/1718.html
+autocmd FileType php set keywordprg="help"
+" 折叠方式：缩进
+autocmd FileType php set foldmethod=indent
+
+" 记录折叠视图，及最后一次关闭文件时的光标所在位置。:help :mkview
+au BufWinLeave *.php silent! mkview
+au BufWinEnter *.php silent! loadview
+
+" }}}
+" ==================== statusline ==================== {{{
+
+function! HasPaste()
+  if &paste
+    return 'PASTE'
+  en
+  return 'BUF #' . bufnr('%')
+endfunction
+
+if has('statusline')
+  " @link https://github.com/maciakl/vim-neatstatus
+  let &statusline=" %{HasPaste()} %<%F%m %= %( %{&filetype} %) %{&fileformat} | %(%{(&fenc!=''?&fenc:&enc)} %) LN %4l/%-4.L %03p%% COL %-3.c "
+endif
 
 " }}}

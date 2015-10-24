@@ -2,7 +2,7 @@
 
 filetype off                  " required
 
-if has('win32')
+if has('win32') || has('win64')
   " @link https://github.com/gmarik/Vundle.vim/wiki/Vundle-for-Windows
   set rtp+=~/vimfiles/bundle/Vundle.vim
   let path='~/vimfiles/bundle'
@@ -40,12 +40,18 @@ Plugin 'ap/vim-buftabline'
 " 多点编辑, 也可以使用 *cw<要替换的内容><ESC>, n.n.n.
 " 参见：http://federicoramirez.name/why-vim-is-awesome/
 Plugin 'terryma/vim-multiple-cursors'
-" 对齐
-Plugin 'junegunn/vim-easy-align'
 " 自动关闭括号
 Plugin 'cohama/lexima.vim'
-" motion
+
+"
+" and more ...
+"
+"Plugin 'junegunn/vim-easy-align'
 "Plugin 'justinmk/vim-sneak'
+"Plugin 'fatih/vim-go'
+"Plugin 'keith/swift.vim'
+"Plugin 'mattn/emmet-vim'
+"Plugin 'xwsoul/vim-zephir'
 
 if has('python')
   " dbgp debugger, 默认端口 9000.
@@ -113,31 +119,6 @@ function! Multiple_cursors_after()
   exe 'NeoCompleteUnlock'
   echo 'Enabled autocomplete'
 endfunction
-
-" }}}
-" ==================== 自定义tab补全 ==================== {{{
-
-"" 扫描 'dictionary' 选项给出的文件
-"autocmd FileType php setlocal complete-=k complete+=k
-"
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-"  " For no inserting <CR> key.
-"  return pumvisible() ? "\<C-y>" : "\<CR>"
-"endfunction
-"
-"" 使用 tab 键自动完成或尝试自动完成
-"function! InsertTabWrapper()
-"  let col=col('.')-1
-"  if !col || getline('.')[col-1] !~ '\k'
-"    return "\<TAB>"
-"  else
-"    return "\<C-N>"
-"  endif
-"endfunction
-"
-"" 重新映射 tab 键到 InsertTabWrapper 函数
-"inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
 
 " }}}
 " ==================== showmarks ==================== {{{
@@ -208,8 +189,8 @@ let g:ctrlp_open_multiple_files = 'i' " open in h[i]dden buffer
 " }}}
 " ==================== align ==================== {{{
 
-vmap <leader>a <Plug>(EasyAlign)
-nmap <leader>a <Plug>(EasyAlign)
+"vmap <leader>a <Plug>(EasyAlign)
+"nmap <leader>a <Plug>(EasyAlign)
 
 " }}}
 " ==================== buffer tabline ==================== {{{
@@ -221,18 +202,29 @@ hi default link BufTabLineHidden  TabLine
 hi default link BufTabLineFill    TabLineFill
 
 " }}}
-" ==================== statusline ==================== {{{
+" ==================== 自定义tab补全 ==================== {{{
 
-function! HasPaste()
-  if &paste
-    return 'PASTE'
-  en
-  return 'BUF #' . bufnr('%')
-endfunction
-
-if has("statusline")
-  " @link https://github.com/maciakl/vim-neatstatus
-  let &statusline=" %{HasPaste()} %<%F%m %= %( %{&filetype} %) %{&fileformat} | %(%{(&fenc!=''?&fenc:&enc)} %) LN %4l/%-4.L %03p%% COL %-3.c "
-endif
+"" 扫描 'dictionary' 选项给出的文件
+"autocmd FileType php setlocal complete-=k complete+=k
+"
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+"  " For no inserting <CR> key.
+"  return pumvisible() ? "\<C-y>" : "\<CR>"
+"endfunction
+"
+"" 使用 tab 键自动完成或尝试自动完成: 补全 'complete' 选项的词
+"" :help i_CTRL-N and :help 'complete'
+"function! InsertTabWrapper()
+"  let col=col('.')-1
+"  if !col || getline('.')[col-1] !~ '\k'
+"    return "\<TAB>"
+"  else
+"    return "\<C-N>"
+"  endif
+"endfunction
+"
+"" 重新映射 tab 键到 InsertTabWrapper 函数
+"inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
 
 " }}}
