@@ -48,7 +48,7 @@ Plugin 'cohama/lexima.vim'
 "
 "Plugin 'junegunn/vim-easy-align'
 "Plugin 'justinmk/vim-sneak'
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 "Plugin 'keith/swift.vim'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'xwsoul/vim-zephir'
@@ -200,31 +200,5 @@ hi default link BufTabLineCurrent TabLineSel
 hi default link BufTabLineActive  Pmenu
 hi default link BufTabLineHidden  TabLine
 hi default link BufTabLineFill    TabLineFill
-
-" }}}
-" ==================== 自定义tab补全 ==================== {{{
-
-"" 扫描 'dictionary' 选项给出的文件
-"autocmd FileType php setlocal complete-=k complete+=k
-"
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-"  " For no inserting <CR> key.
-"  return pumvisible() ? "\<C-y>" : "\<CR>"
-"endfunction
-"
-"" 使用 tab 键自动完成或尝试自动完成: 补全 'complete' 选项的词
-"" :help i_CTRL-N and :help 'complete'
-"function! InsertTabWrapper()
-"  let col=col('.')-1
-"  if !col || getline('.')[col-1] !~ '\k'
-"    return "\<TAB>"
-"  else
-"    return "\<C-N>"
-"  endif
-"endfunction
-"
-"" 重新映射 tab 键到 InsertTabWrapper 函数
-"inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
 
 " }}}
