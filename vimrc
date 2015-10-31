@@ -5,7 +5,7 @@
 "
 " :help option-list   可用选项列表，或 :help options
 " :help 'someoption'  查看具体某选项的帮助，加引号
-" :echo &someoption   查看某选项在的设定值，加地址符
+" :echo &someoption   查看某选项的设定值，加地址符
 " :echo g:option l:option s:option 全局变量、本地变量等的设定值, 不加地址符
 "
 " :help  查看简介及帮助目录(view doc/help.cnx)
@@ -15,7 +15,7 @@
 " :help quickref  快速参考指南
 "
 " vim --startuptime <logfile> <somefile>  测试 Vim 的加载速度
-" 查看已载入的脚本文件列表 :scriptnames
+" :scriptnames 查看已载入的脚本文件列表
 "
 " 对于非当前用户使用此配置，在相应用户 ~/.bashrc 中加入:
 " alias e='vim -u /home/<myusername>/.vim/vimrc --noplugin'
@@ -23,7 +23,7 @@
 " 目录结构:
 "
 " .vim
-" ├── bundles.sh    插件配置文件
+" ├── bundles.vim   插件配置文件
 " ├── bundle        第三方插件存储目录
 " ├── dict          用户函数的自动完成
 " │   └── php.dict
