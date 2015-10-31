@@ -7,6 +7,8 @@
 #### Windows 下
 
     ftp://ftp.vim.org/pub/vim/pc/gvim74.exe
+    如果需要的 lua，python 等语言支持的, 请查看 http://vim.wikia.com/wiki/Where_to_download_Vim 这个页面, 
+    有提供相应的 dll 文件。
 
 **以下为 CentOS 下的安装**。
 
@@ -19,18 +21,14 @@
 
 #### 下载 VIM 源码包
 
-到 https://mirrors.kernel.org/debian/pool/main/v/vim/ 下载最新版本的 orig 包，
-这里包含了 vim 7.4 版本很多不存在的 patches。我这里下载到的最新版本是 7.4.826。
-
-    # wget https://mirrors.kernel.org/debian/pool/main/v/vim/vim_7.4.826.orig.tar.gz
+    # git clone https://github.com/vim/vim.git
 
 #### 编译安装 VIM
 
 这里需要注意的是通过开启 `lua` 和 `python` 的支持, 来使用 lua 和 python 开发的插件。
 如：[gundo], [YouCompleteMe] 等需要 python 支持, [neocomplete] 需要 lua 的支持。
 
-    # tar xf vim_7.4.826.orig.tar.gz
-    # cd vim-7.4.826/
+    # cd vim/
     # ./configure --prefix=/usr \
      --with-compiledby="ueaner" \
      --with-features=huge \
