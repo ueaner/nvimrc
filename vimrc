@@ -326,6 +326,9 @@ endif
 " 当使用 --noplugin 参数禁用插件时启用
 
 if &loadplugins == 0
+    silent! source $VIMRUNTIME/plugin/logiPat.vim
+    silent! source $VIMRUNTIME/plugin/matchparen.vim
+
     " 扫描 'dictionary' 选项给出的文件
     autocmd FileType php setlocal complete-=k complete+=k
 
