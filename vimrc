@@ -16,6 +16,7 @@
 "
 " vim --startuptime <logfile> <somefile>  测试 Vim 的加载速度
 " :scriptnames 查看已载入的脚本文件列表
+" vim -V 2>verbose 记录 Vim 的启动过程
 "
 " 对于非当前用户使用此配置，在相应用户 ~/.bashrc 中加入:
 " alias e='vim -u /home/<myusername>/.vim/vimrc --noplugin'
@@ -71,8 +72,10 @@ let g:mapleader = ','
 " ==================== 引入插件管理配置文件 ==================== {{{
 
 " 引入插件管理配置文件
-silent! source $VIMHOME/bundles.vim
-silent! source $VIMHOME/extend.vim
+if &loadplugins
+    silent! source $VIMHOME/bundles.vim
+    silent! source $VIMHOME/extend.vim
+endif
 
 " 为特定的文件类型载入相应的插件
 filetype plugin indent on    " required
@@ -244,6 +247,9 @@ endfunction
 " 关闭 buffer 或关闭 window
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 
+" 快速保存文件
+nmap <leader>w :w!<CR>
+
 if exists("*CtrlPBuffer")
     nnoremap <leader>l :CtrlPBuffer<CR>
 else
@@ -317,28 +323,31 @@ endif
 
 " }}}
 " ==================== 自定义tab补全 ==================== {{{
+" 当使用 --noplugin 参数禁用插件时启用
 
-"" 扫描 'dictionary' 选项给出的文件
-"autocmd FileType php setlocal complete-=k complete+=k
+if &loadplugins == 0
+    " 扫描 'dictionary' 选项给出的文件
+    autocmd FileType php setlocal complete-=k complete+=k
 
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-"  " For no inserting <CR> key.
-"  return pumvisible() ? "\<C-y>" : "\<CR>"
-"endfunction
-"
-"" 使用 tab 键自动完成或尝试自动完成: 补全 'complete' 选项的词
-"" :help i_CTRL-N and :help 'complete'
-"function! InsertTabWrapper()
-"  let col=col('.')-1
-"  if !col || getline('.')[col-1] !~ '\k'
-"    return "\<TAB>"
-"  else
-"    return "\<C-N>"
-"  endif
-"endfunction
-"
-"" 重新映射 tab 键到 InsertTabWrapper 函数
-"inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+        " For no inserting <CR> key.
+        return pumvisible() ? "\<C-y>" : "\<CR>"
+    endfunction
+
+    " 使用 tab 键自动完成或尝试自动完成: 补全 'complete' 选项的词
+    " :help i_CTRL-N and :help 'complete'
+    function! InsertTabWrapper()
+        let col = col('.') - 1
+        if !col || getline('.')[col-1] !~ '\k'
+            return "\<TAB>"
+        else
+            return "\<C-N>"
+        endif
+    endfunction
+
+    " 重新映射 tab 键到 InsertTabWrapper 函数
+    inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
+endif
 
 " }}}

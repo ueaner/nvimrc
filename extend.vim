@@ -69,9 +69,6 @@ inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 " 选中一个表格格式区域 ,t 将其格式化
 map <leader>t :'<'>! column -t<CR>
 
-" 快速保存文件
-nmap <leader>w :w!<CR>
-
 nnoremap <leader>Q :qa<CR>
 
 " 最大化
