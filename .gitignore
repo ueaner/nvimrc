@@ -4,5 +4,6 @@ runtime/undodir/*
 !runtime/undodir/.gitkeep
 .netrwhist
 bundle/*
+!bundle/Vundle.vim
 doc/
 phpmanual/
