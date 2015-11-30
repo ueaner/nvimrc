@@ -40,18 +40,21 @@ Plugin 'ap/vim-buftabline'
 " 多点编辑, 也可以使用 *cw<要替换的内容><ESC>, n.n.n.
 " 参见：http://federicoramirez.name/why-vim-is-awesome/
 Plugin 'terryma/vim-multiple-cursors'
-" 自动关闭括号
-Plugin 'cohama/lexima.vim'
 
 "
 " and more ...
 "
+" 自动关闭括号
+"Plugin 'cohama/lexima.vim'
 "Plugin 'junegunn/vim-easy-align'
 "Plugin 'justinmk/vim-sneak'
 Plugin 'fatih/vim-go'
 "Plugin 'keith/swift.vim'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'xwsoul/vim-zephir'
+
+" 中文文档
+Plugin 'vimchina/vimcdoc'
 
 if has('python')
   " dbgp debugger, 默认端口 9000.
@@ -177,6 +180,9 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_max_files           = 10000
 " 使用 C-O 在 buffer 中打开 C-Z 标记的多个文件
 let g:ctrlp_open_multiple_files = 'i' " open in h[i]dden buffer
+
+" 在已打开的文件列表中，进行快速搜索切换
+nnoremap <leader>l :CtrlPBuffer<CR>
 
 " }}}
 " ==================== sneak ==================== {{{

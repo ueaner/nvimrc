@@ -17,6 +17,7 @@
 " vim --startuptime <logfile> <somefile>  测试 Vim 的加载速度
 " :scriptnames 查看已载入的脚本文件列表
 " vim -V 2>verbose 记录 Vim 的启动过程
+" view ~/.vim/doc/starting.cnx
 "
 " 对于非当前用户使用此配置，在相应用户 ~/.bashrc 中加入:
 " alias e='vim -u /home/<myusername>/.vim/vimrc --noplugin'
@@ -85,7 +86,7 @@ filetype plugin indent on    " required
 
 "  垂直窗口分割字符, 和折叠填充字符
 set fillchars+=vert:\ ,fold:-
-" 滚动时会使光标永远保持在中间行
+" 滚动时会使光标永远保持在中间行, 属于非 H M L 和 zz zt zb 的另一种操作习惯
 let &scrolloff=&lines
 " 显示状态栏
 set laststatus=2
@@ -103,8 +104,11 @@ syntax on
 syntax sync minlines=256
 " 文件高亮的最大列数, 超出此列数后续行不一定能正确高亮
 set synmaxcol=200
-" 括号匹配
+" 括号匹配，依赖 matchparen.vim
 set showmatch
+if !exists("g:loaded_matchparen")
+    silent! source $VIMRUNTIME/plugin/matchparen.vim
+endif
 " 跳转到匹配括号的停留时间 100ms
 set matchtime=1
 " 突出显示当前行
@@ -172,9 +176,6 @@ set hlsearch
 " }}}
 " ==================== 其他支持 ==================== {{{
 
-" http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
-set clipboard^=unnamed
-set clipboard^=unnamedplus
 " 去除提示音
 set noerrorbells
 " 关闭可视响铃和鸣叫
@@ -195,6 +196,25 @@ endtry
 " 记录视图的缓存目录
 set viewdir=$VIMHOME/runtime/viewdir
 set viewoptions-=options
+
+" 合并注释行时自动删除注释标志
+set formatoptions+=j
+
+" http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
+"set clipboard^=unnamed
+"set clipboard^=unnamedplus
+
+" https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim#L295
+" Make sure pasting in visual mode doesn't replace paste buffer
+function! RestoreRegister()
+    let @" = s:restore_reg
+    return ''
+endfunction
+function! s:Repl()
+    let s:restore_reg = @"
+    return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()
 
 " }}}
 " ==================== 键映射 ==================== {{{
@@ -248,13 +268,7 @@ endfunction
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 
 " 快速保存文件
-nmap <leader>w :w!<CR>
-
-if exists("*CtrlPBuffer")
-    nnoremap <leader>l :CtrlPBuffer<CR>
-else
-    nnoremap <leader>l :ls<CR>
-endif
+nnoremap <leader>w :w!<CR>
 
 " }}}
 " ==================== Omni-complete ==================== {{{
@@ -326,8 +340,7 @@ endif
 " 当使用 --noplugin 参数禁用插件时启用
 
 if &loadplugins == 0
-    silent! source $VIMRUNTIME/plugin/logiPat.vim
-    silent! source $VIMRUNTIME/plugin/matchparen.vim
+    silent! source $VIMHOME/bundle/vim-buftabline/plugin/buftabline.vim
 
     " 扫描 'dictionary' 选项给出的文件
     autocmd FileType php setlocal complete-=k complete+=k
