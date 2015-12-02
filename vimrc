@@ -119,6 +119,10 @@ set matchtime=1
 
 " 命令行列出所有的补全可能性, 配合 <C-N>, <C-P> 使用
 set wildmode=longest,list
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+cnoremap <C-D> <Del>
 
 " }}}
 " ==================== 缩进与折叠 ==================== {{{
