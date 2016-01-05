@@ -344,10 +344,8 @@ endif
 
 " }}}
 " ==================== 自定义tab补全 ==================== {{{
-" 当使用 --noplugin 参数禁用插件时启用
 
-if &loadplugins == 0
-    silent! source $VIMHOME/bundle/vim-buftabline/plugin/buftabline.vim
+if !mapcheck("<TAB>", "i")
 
     " 扫描 'dictionary' 选项给出的文件
     autocmd FileType php setlocal complete-=k complete+=k
@@ -358,7 +356,7 @@ if &loadplugins == 0
         return pumvisible() ? "\<C-y>" : "\<CR>"
     endfunction
 
-    " 使用 tab 键自动完成或尝试自动完成: 补全 'complete' 选项的词
+    " 使用 tab 键自动补全或尝试自动补全: 补全 'complete' 选项的词
     " :help i_CTRL-N and :help 'complete'
     function! InsertTabWrapper()
         let col = col('.') - 1
@@ -372,5 +370,12 @@ if &loadplugins == 0
     " 重新映射 tab 键到 InsertTabWrapper 函数
     inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
 endif
+
+" }}}
+" ==================== 加载 buftabline ==================== {{{
+
+"if &loadplugins == 0
+    silent! source $VIMHOME/bundle/vim-buftabline/plugin/buftabline.vim
+"endif
 
 " }}}
