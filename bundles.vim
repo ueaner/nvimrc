@@ -156,6 +156,8 @@ let NERDTreeDirArrows  = 0 " 目录箭头:1显示箭头 0传统+-|号
 let NERDTreeMouseMode  = 2 " 单击打开目录，双击打开文件
 "let NERDTreeWinSize = 25 " 窗口大小
 
+let NERDTreeIgnore     = ['\.idea$', '\.tags$']
+
 " Open nerdtree in current dir, write our own custom function because
 " NerdTreeToggle just sucks and doesn't work for buffers
 function! g:NerdTreeFindToggle()
@@ -182,7 +184,7 @@ let g:ctrlp_max_files           = 10000
 let g:ctrlp_open_multiple_files = 'i' " open in h[i]dden buffer
 
 " 在已打开的文件列表中，进行快速搜索切换
-nnoremap <leader>l :CtrlPBuffer<CR>
+"nnoremap <leader>l :CtrlPBuffer<CR>
 
 " }}}
 " ==================== sneak ==================== {{{

@@ -274,6 +274,9 @@ nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 " 快速保存文件
 nnoremap <leader>w :w!<CR>
 
+" :b <pattern>
+nnoremap <leader>l :ls<CR>:b<space>
+
 " }}}
 " ==================== Omni-complete ==================== {{{
 
@@ -331,7 +334,7 @@ command! CTags !ctags -f .tags --languages=PHP --PHP-kinds=+cf -R
 function! HasPaste()
     if &paste
         return 'PASTE'
-    en
+    endif
     return 'BUF #' . bufnr('%')
 endfunction
 
