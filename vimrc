@@ -314,7 +314,7 @@ augroup PHP
     "词典文件
     autocmd FileType php setlocal dictionary=$VIMHOME/dict/php.dict
     " @link http://www.laruence.com/2010/08/18/1718.html
-    autocmd FileType php setlocal keywordprg="help"
+    autocmd FileType php setlocal keywordprg=:help
     " 折叠方式：缩进
     autocmd FileType php setlocal foldmethod=indent
 
