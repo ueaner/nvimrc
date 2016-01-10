@@ -1,40 +1,21 @@
 " {{{
 "
 " Author ueaner <ueaner#gmail.com>
-" less is more
-"
-" :help option-list   可用选项列表，或 :help options
-" :help 'someoption'  查看具体某选项的帮助，加引号
-" :echo &someoption   查看某选项的设定值，加地址符
-" :echo g:option l:option s:option 全局变量、本地变量等的设定值, 不加地址符
-"
-" :help  查看简介及帮助目录(view doc/help.cnx)
-" :only  使当前窗口成为屏幕上唯一的窗口。其它窗口都关闭。
-" :h abando
-" :h K
-" :help quickref  快速参考指南
-"
-" vim --startuptime <logfile> <somefile>  测试 Vim 的加载速度
-" :scriptnames 查看已载入的脚本文件列表
-" vim -V 2>verbose 记录 Vim 的启动过程
-" view ~/.vim/doc/starting.cnx
-"
-" 对于非当前用户使用此配置，在相应用户 ~/.bashrc 中加入:
-" alias e='vim -u /home/<myusername>/.vim/vimrc --noplugin'
 "
 " 目录结构:
 "
 " .vim
-" ├── bundles.vim   插件配置文件
-" ├── bundle        第三方插件存储目录
+" ├── bundle/       第三方插件存储目录
+" ├── bundles.vim   第三方插件配置文件
+" ├── extend.vim    扩展功能
+" ├── support/      一些支持性的脚本及文件
 " ├── dict          用户函数的自动完成
 " │   └── php.dict
 " ├── runtime
 " │   ├── undodir
 " │   └── viewdir
-" ├── extend.vim    扩展功能
-" └── vimrc         7.4之前的版本请在 HOME 目录下做 .vimrc 的软链
-"
+" ├── vimrc         主配置文件, Vim 7.4 之前的版本请做 $HOME/.vimrc 的软链
+" └── gvimrc        gvim/macvim 配置
 "
 " }}}
 " ==================== $VIMHOME ==================== {{{
@@ -238,6 +219,9 @@ nnoremap Y y$
 " 保存无权限文件, :h E174
 command! W w !sudo tee % > /dev/null
 
+" 快速编辑当前加载的 vimrc 配置文件
+nnoremap <leader>x :e $MYVIMRC<CR>
+
 " }}}
 " ==================== buffer 操作 ==================== {{{
 
@@ -300,6 +284,7 @@ augroup VIM
     "autocmd! bufwritepost $VIMHOME/vimrc source %
 
     autocmd FileType vim setlocal keywordprg=:help
+    autocmd FileType help setlocal keywordprg=:help
     " 折叠方式：foldmarker 标记
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
@@ -315,6 +300,7 @@ augroup PHP
     autocmd FileType php setlocal dictionary=$VIMHOME/dict/php.dict
     " @link http://www.laruence.com/2010/08/18/1718.html
     autocmd FileType php setlocal keywordprg=:help
+    "nnoremap K :help <C-r><C-w><CR>
     " 折叠方式：缩进
     autocmd FileType php setlocal foldmethod=indent
 
@@ -374,8 +360,6 @@ endif
 " }}}
 " ==================== 加载 buftabline ==================== {{{
 
-"if &loadplugins == 0
-    silent! source $VIMHOME/bundle/vim-buftabline/plugin/buftabline.vim
-"endif
+silent! source $VIMHOME/bundle/vim-buftabline/plugin/buftabline.vim
 
 " }}}
