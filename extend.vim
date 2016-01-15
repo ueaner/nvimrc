@@ -26,24 +26,12 @@ if has('mouse')
     "set mouse=a
 endif
 
-" ==================== 插入模式 readline 命令行风格键映射 ==================== {{{
+" http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
+"set clipboard^=unnamed
+"set clipboard^=unnamedplus
 
-" 移动: 行首/行尾
-inoremap <C-A> <Home>
-inoremap <C-E> <End>
-" 移动: 向左/右一个字符
-inoremap <C-B> <Left>
-inoremap <C-F> <Right>
-" 删除一个字符
-" <C-H>  :h i_CTRL-H
-inoremap <C-D> <Del>
-" 删除光标前一个单词
-" <C-W>  :h i_CTRL-U
-" 删除光标前/后所有字符
-" <C-U>  :h i_CTRL-U
-inoremap <C-K> <C-O>D
-
-" }}}
+" 粘贴模式 ,p
+"nnoremap <leader>p :set paste<CR>p :set nopaste<CR>
 
 " 直接进入可视模式
 inoremap <C-V> <Esc>lv
@@ -56,16 +44,6 @@ nnoremap gV `[v`]
 imap jj <ESC>
 " <C-c> = <ESC>
 
-" 去除尾部空字符
-nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
-" 去除尾部 ^M
-nnoremap <leader>M :%s/\r/<CR>
-" 粘贴模式 ,p
-nnoremap <leader>p :set paste<CR>p :set nopaste<CR>
-" 快速插入日期
-nnoremap <leader>d "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
-inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
-
 " 选中一个表格格式区域 ,t 将其格式化
 map <leader>t :'<'>! column -t<CR>
 
@@ -75,12 +53,6 @@ nnoremap <leader>Q :qa<CR>
 nnoremap + :on<CR>
 " 关闭, 最小化 ,g 唤出刚关闭的 buffer
 nnoremap - :call CloseSplitOrDeleteBuffer()<CR>
-
-" Window navigation
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-L> <C-W>l
-nnoremap <C-H> <C-W>h
 
 " 针对 class 文件的函数折叠 ,f 只显示函数名, 再次 ,f 显示函数全部内容
 function! FoldToggle()
@@ -95,6 +67,11 @@ function! FoldToggle()
         silent! setlocal foldlevel=10
     endif
 endfunction
+
+augroup FoldToggle
+    autocmd!
+    autocmd FileType php,vim nnoremap <leader>f :call FoldToggle()<CR>
+augroup END
 
 " ==================== filetype ==================== {{{
 

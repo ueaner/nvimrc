@@ -29,7 +29,7 @@ Plugin 'juanpabloaj/ShowMarks'
 Plugin 'airblade/vim-gitgutter'
 
 " 文件快捷查找: files, buffers, mru
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 
 " 文件浏览
 Plugin 'scrooloose/nerdtree'
@@ -52,6 +52,7 @@ Plugin 'fatih/vim-go'
 "Plugin 'keith/swift.vim'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'xwsoul/vim-zephir'
+"Plugin 't9md/vim-choosewin'
 
 " 中文文档
 Plugin 'vimchina/vimcdoc'

@@ -124,13 +124,6 @@ silent! set foldlevel=10
 " 左侧添加一列, 指示折叠的打开和关闭
 "silent! set foldcolumn=1
 
-augroup FoldToggle
-    autocmd!
-    if exists("*FoldToggle")
-        autocmd FileType php,vim nnoremap <leader>f :call FoldToggle()<CR>
-    endif
-augroup END
-
 " 使用空格关闭／打开折叠
 nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
@@ -185,10 +178,6 @@ set viewoptions-=options
 " 合并注释行时自动删除注释标志
 set formatoptions+=j
 
-" http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
-"set clipboard^=unnamed
-"set clipboard^=unnamedplus
-
 " https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim#L295
 " Make sure pasting in visual mode doesn't replace paste buffer
 function! RestoreRegister()
@@ -219,8 +208,40 @@ nnoremap Y y$
 " 保存无权限文件, :h E174
 command! W w !sudo tee % > /dev/null
 
+" 去除尾部空字符
+nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+" 去除尾部 ^M
+nnoremap <leader>M :%s/\r/<CR>
+" 快速插入日期
+nnoremap <leader>d "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
+inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
+" Window navigation
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+nnoremap <C-H> <C-W>h
+
 " 快速编辑当前加载的 vimrc 配置文件
 nnoremap <leader>x :e $MYVIMRC<CR>
+
+" }}}
+" ==================== 插入模式 readline 命令行风格键映射 ==================== {{{
+
+" 移动: 行首/行尾
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
+" 移动: 向左/右一个字符
+inoremap <C-B> <Left>
+inoremap <C-F> <Right>
+" 删除一个字符
+" <C-H>  :h i_CTRL-H
+inoremap <C-D> <Del>
+" 删除光标前一个单词
+" <C-W>  :h i_CTRL-U
+" 删除光标前/后所有字符
+" <C-U>  :h i_CTRL-U
+inoremap <C-K> <C-O>D
 
 " }}}
 " ==================== buffer 操作 ==================== {{{
@@ -294,8 +315,7 @@ augroup END
 
 augroup PHP
     autocmd!
-    " setlocal 对于 rtp 不起作用?
-    autocmd FileType php setlocal rtp+=$VIMHOME/phpmanual
+    set rtp+=$VIMHOME/phpmanual
     "词典文件
     autocmd FileType php setlocal dictionary=$VIMHOME/dict/php.dict
     " @link http://www.laruence.com/2010/08/18/1718.html
@@ -311,6 +331,7 @@ augroup END
 
 " .tags 在 Vim 工作目录下, <C-]> 跳转，<C-t> 跳回
 set tags+=.tags
+set tags+=$VIMHOME/dict/.tags
 " 有新的 tags 生成时，执行 :NeoCompleteBufferMakeCache 刷新自动补全缓存
 command! CTags !ctags -f .tags --languages=PHP --PHP-kinds=+cf -R
 
