@@ -331,7 +331,7 @@ augroup END
 
 " .tags 在 Vim 工作目录下, <C-]> 跳转，<C-t> 跳回
 set tags+=.tags
-set tags+=$VIMHOME/dict/.tags
+set tags+=$HOME/Sites/ide-helper/.tags
 " 有新的 tags 生成时，执行 :NeoCompleteBufferMakeCache 刷新自动补全缓存
 command! CTags !ctags -f .tags --languages=PHP --PHP-kinds=+cf -R
 
