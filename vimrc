@@ -18,6 +18,21 @@
 " └── gvimrc        gvim/macvim 配置
 "
 " }}}
+" ==================== GLOBAL ==================== {{{
+
+" 关闭兼容模式, 尽量在靠前的位置
+set nocompatible             " be iMproved, required
+
+" ttyfast
+set ttyfast
+" lazyredraw
+set lazyredraw
+
+" leader
+let mapleader = ','
+let g:mapleader = ','
+
+" }}}
 " ==================== $VIMHOME ==================== {{{
 if has('win32') || has('win64')
     let $VIMHOME = $HOME . "/vimfiles"
@@ -35,20 +50,6 @@ else
         let $VIMHOME = $HOME . "/.vim"
     endif
 endif
-
-" }}}
-" ==================== GLOBAL ==================== {{{
-
-" ttyfast
-set ttyfast
-" lazyredraw
-set lazyredraw
-" 关闭兼容模式
-set nocompatible             " be iMproved, required
-
-" leader
-let mapleader = ','
-let g:mapleader = ','
 
 " }}}
 " ==================== 引入插件管理配置文件 ==================== {{{
@@ -85,11 +86,8 @@ syntax on
 syntax sync minlines=256
 " 文件高亮的最大列数, 超出此列数后续行不一定能正确高亮
 set synmaxcol=200
-" 括号匹配，依赖 matchparen.vim
+" 括号匹配，依赖 $VIMRUNTIME/plugin/matchparen.vim
 set showmatch
-if !exists("g:loaded_matchparen")
-    silent! source $VIMRUNTIME/plugin/matchparen.vim
-endif
 " 跳转到匹配括号的停留时间 100ms
 set matchtime=1
 " 突出显示当前行
@@ -114,6 +112,7 @@ set smarttab
 " 1 个 TAB 占 4 个位置
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 " tab 转为空格 :%ret! 4
 " 智能缩进
 set autoindent smartindent
@@ -164,12 +163,11 @@ set ttimeout
 set ttimeoutlen=10
 
 " undo
-try
+if has('persistent_undo')
     set undodir=$VIMHOME/runtime/undodir
     set undofile
     set undolevels=400
-catch
-endtry
+endif
 
 " 记录视图的缓存目录
 set viewdir=$VIMHOME/runtime/viewdir
