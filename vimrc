@@ -145,8 +145,8 @@ set noswapfile
 
 " 实时显示搜索结果
 set incsearch
-" 忽略大小写
-set ignorecase
+" 忽略大小写, 如果输入搜索模式下含有大写字母则不启用忽略大小写
+set ignorecase smartcase
 " 高亮搜索结果
 set hlsearch
 
@@ -296,16 +296,17 @@ set complete=.,w,b,u,t
 set completeopt=longest,menuone
 
 " }}}
-" ==================== VIM ==================== {{{
+" ==================== filetypes ==================== {{{
 
-augroup VIM
+augroup FTS
     autocmd!
     "autocmd! bufwritepost $VIMHOME/vimrc source %
 
-    autocmd FileType vim setlocal keywordprg=:help
-    autocmd FileType help setlocal keywordprg=:help
+    autocmd FileType vim,help setlocal keywordprg=:help
     " 折叠方式：foldmarker 标记
     autocmd FileType vim setlocal foldmethod=marker
+
+    autocmd FileType text,markdown setlocal textwidth=78
 augroup END
 
 " }}}
