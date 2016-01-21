@@ -174,7 +174,7 @@ set viewdir=$VIMHOME/runtime/viewdir
 set viewoptions-=options
 
 " 合并注释行时自动删除注释标志
-set formatoptions+=j
+silent! set formatoptions+=j
 
 " https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim#L295
 " Make sure pasting in visual mode doesn't replace paste buffer
@@ -250,6 +250,9 @@ set hidden
 " buffer 操作
 nnoremap <TAB> :bn<CR>
 nnoremap <leader><TAB> :bp<CR>
+" 如果不怎么用 H L 跳转光标的话，就用它来切换 buffer 吧
+nnoremap <expr> <S-H> &buftype == "" ? ":bp\<CR>" : ''
+nnoremap <expr> <S-L> &buftype == "" ? ":bn\<CR>" : ''
 " 切换到上一个打开的 buffer, 同 CTRL-^
 nnoremap <leader>g :e#<CR>
 " :bl :blast  最后一个
