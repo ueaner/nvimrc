@@ -68,9 +68,21 @@ function! FoldToggle()
     endif
 endfunction
 
-augroup FoldToggle
+function! SimplePhpLint()
+    let l:output = system("php -l " . @%)
+    let l:list = split(l:output, "\n")
+
+    if 0 != v:shell_error && match(l:list[0], "No syntax errors") == -1
+        echohl Error | echo l:list[0] | echohl None
+    else
+        echo "No syntax errors"
+    endif
+endfunction
+
+augroup Multi
     autocmd!
     autocmd FileType php,vim nnoremap <leader>f :call FoldToggle()<CR>
+    autocmd FileType php nnoremap <leader>c :call SimplePhpLint()<CR>
 augroup END
 
 " ==================== filetype ==================== {{{
