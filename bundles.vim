@@ -59,7 +59,7 @@ Plugin 'vimchina/vimcdoc'
 
 if has('python')
   " dbgp debugger, 默认端口 9000.
-  Plugin 'joonty/vdebug'
+  "Plugin 'joonty/vdebug'
 endif
 
 call vundle#end()            " required
@@ -112,6 +112,7 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.python = '[^. *\t]\.\w*\|\h\w*'
 
 " 使用 vim-multiple-cursors 插件进行多点编辑时锁定 NeoComplete
 function! Multiple_cursors_before()
