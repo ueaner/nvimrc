@@ -106,13 +106,13 @@ cnoremap <C-D> <Del>
 " }}}
 " ==================== 缩进与折叠 ==================== {{{
 
-" 使用空格代替 tab, 启用此选项 listchars 中的 tab 参数会失效, 必需用插件代替
-set expandtab
-set smarttab
 " 1 个 TAB 占 4 个位置
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+" 使用空格代替 tab, 启用此选项 listchars 中的 tab 参数会失效, 必需用插件代替
+set expandtab
+set smarttab
 " tab 转为空格 :%ret! 4
 " 智能缩进
 set autoindent smartindent
@@ -248,8 +248,8 @@ inoremap <C-K> <C-O>D
 set hidden
 
 " buffer 操作
-nnoremap <TAB> :bn<CR>
-nnoremap <leader><TAB> :bp<CR>
+"nnoremap <TAB> :bn<CR>
+"nnoremap <leader><TAB> :bp<CR>
 " 如果不怎么用 H L 跳转光标的话，就用它来切换 buffer 吧
 nnoremap <expr> <S-H> &buftype == "" ? ":bp\<CR>" : ''
 nnoremap <expr> <S-L> &buftype == "" ? ":bn\<CR>" : ''
