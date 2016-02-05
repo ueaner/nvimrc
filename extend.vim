@@ -49,7 +49,7 @@ map <leader>t :'<'>! column -t<CR>
 
 nnoremap <leader>Q :qa<CR>
 
-" 最大化
+" 最大化, 另一个调整窗口大小的命令 :resize
 nnoremap + :on<CR>
 " 关闭, 最小化 ,g 唤出刚关闭的 buffer
 nnoremap - :call CloseSplitOrDeleteBuffer()<CR>
