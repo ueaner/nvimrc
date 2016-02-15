@@ -25,3 +25,6 @@ set guioptions-=L " 隐藏垂直窗口左侧滚动条
 
 " 关闭 esc 闪屏
 au GuiEnter * set t_vb=
+
+" 行距
+set linespace=3
