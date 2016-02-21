@@ -3,20 +3,20 @@
 filetype off                  " required
 
 if has('win32') || has('win64')
-  " @link https://github.com/gmarik/Vundle.vim/wiki/Vundle-for-Windows
-  set rtp+=~/vimfiles/bundle/Vundle.vim
-  let path='~/vimfiles/bundle'
-  call vundle#begin(path)
+    " @link https://github.com/gmarik/Vundle.vim/wiki/Vundle-for-Windows
+    set rtp+=~/vimfiles/bundle/Vundle.vim
+    let path='~/vimfiles/bundle'
+    call vundle#begin(path)
 else
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 endif
 
 Plugin 'gmarik/Vundle.vim'
 
 if has('lua')
-  " 自动完成
-  Plugin 'shougo/neocomplete.vim'
+    " 自动完成
+    Plugin 'shougo/neocomplete.vim'
 endif
 
 " 主题
@@ -58,14 +58,15 @@ Plugin 'fatih/vim-go'
 Plugin 'vimchina/vimcdoc'
 
 if has('python')
-  " dbgp debugger, 默认端口 9000.
-  "Plugin 'joonty/vdebug'
+    " dbgp debugger, 默认端口 9000.
+    "Plugin 'joonty/vdebug'
 endif
 
 call vundle#end()            " required
 
 " }}}
 " ==================== neocomplete ==================== {{{
+
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -78,14 +79,14 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
+            \ 'default' : '',
+            \ 'vimshell' : $HOME.'/.vimshell_hist',
+            \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
+    let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
@@ -93,8 +94,8 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  " For no inserting <CR> key. 回车插入补全但是不换行
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+    " For no inserting <CR> key. 回车插入补全但是不换行
+    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -109,20 +110,20 @@ let g:neocomplete#enable_auto_close_preview = 0
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+    let g:neocomplete#sources#omni#input_patterns = {}
 endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.php    = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 let g:neocomplete#sources#omni#input_patterns.python = '[^. *\t]\.\w*\|\h\w*'
 
 " 使用 vim-multiple-cursors 插件进行多点编辑时锁定 NeoComplete
 function! Multiple_cursors_before()
-  exe 'NeoCompleteLock'
-  echo 'Disabled autocomplete'
+    exe 'NeoCompleteLock'
+    echo 'Disabled autocomplete'
 endfunction
 
 function! Multiple_cursors_after()
-  exe 'NeoCompleteUnlock'
-  echo 'Enabled autocomplete'
+    exe 'NeoCompleteUnlock'
+    echo 'Enabled autocomplete'
 endfunction
 
 " }}}
@@ -163,11 +164,11 @@ let NERDTreeIgnore     = ['\.idea$', '\.tags$']
 " Open nerdtree in current dir, write our own custom function because
 " NerdTreeToggle just sucks and doesn't work for buffers
 function! g:NerdTreeFindToggle()
-  if g:NERDTree.IsOpen()
-    exec 'NERDTreeClose'
-  else
-    exec 'NERDTreeFind'
-  endif
+    if g:NERDTree.IsOpen()
+        exec 'NERDTreeClose'
+    else
+        exec 'NERDTreeFind'
+    endif
 endfunction
 
 " For toggling
