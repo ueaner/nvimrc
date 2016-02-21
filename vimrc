@@ -34,10 +34,11 @@ let g:mapleader = ','
 
 " }}}
 " ==================== $VIMHOME ==================== {{{
+
 if has('win32') || has('win64')
     let $VIMHOME = $HOME . "/vimfiles"
 else
-    " 对于 ! 和 :! 命令, 默认使用 bash shell 环境
+    " 对于 :! 命令, 默认使用 bash shell 环境
     set shell=bash
     " sudo -s, 使用 $SUDO_USER 的插件配置
     if exists('$SUDO_USER') && !has('mac')
@@ -110,7 +111,7 @@ cnoremap <C-D> <Del>
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-" 使用空格代替 tab, 启用此选项 listchars 中的 tab 参数会失效, 必需用插件代替
+" 使用空格代替 tab
 set expandtab
 set smarttab
 " tab 转为空格 :%ret! 4
@@ -196,7 +197,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 " 开启搜索当前光标下的单词，但是不跳转下一个, :help gd
 nnoremap <leader><leader> *N
 
-" 自动换行时，可以在一行内上下移动
+" 对较长行自动换行时，可以作为多行上下移动
 map j gj
 map k gk
 
@@ -222,24 +223,6 @@ nnoremap <C-H> <C-W>h
 
 " 快速编辑当前加载的 vimrc 配置文件
 nnoremap <leader>x :e $MYVIMRC<CR>
-
-" }}}
-" ==================== 插入模式 readline 命令行风格键映射 ==================== {{{
-
-" 移动: 行首/行尾
-inoremap <C-A> <Home>
-inoremap <C-E> <End>
-" 移动: 向左/右一个字符
-inoremap <C-B> <Left>
-inoremap <C-F> <Right>
-" 删除一个字符
-" <C-H>  :h i_CTRL-H
-inoremap <C-D> <Del>
-" 删除光标前一个单词
-" <C-W>  :h i_CTRL-U
-" 删除光标前/后所有字符
-" <C-U>  :h i_CTRL-U
-inoremap <C-K> <C-O>D
 
 " }}}
 " ==================== buffer 操作 ==================== {{{

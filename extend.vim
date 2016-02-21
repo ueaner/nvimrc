@@ -21,6 +21,25 @@ if has('spell') && v:version >= 704 && has('patch092')
     nnoremap <leader>s :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 endif
 
+" ==================== 插入模式下 readline 命令行风格键映射 ==================== {{{
+
+" 移动: 行首/行尾
+inoremap <C-A> <Home>
+inoremap <C-E> <ESC><S-A>
+" 移动: 向左/右一个字符
+inoremap <C-B> <Left>
+inoremap <C-F> <Right>
+" 删除光标前/后一个字符
+" <C-H>  :h i_CTRL-H
+inoremap <C-D> <Del>
+" 删除光标前一个单词
+" <C-W>  :h i_CTRL-W
+" 删除光标前/后所有字符
+" <C-U>  :h i_CTRL-U
+inoremap <C-K> <C-O>D
+
+" }}}
+
 " 使用鼠标
 if has('mouse')
     "set mouse=a
