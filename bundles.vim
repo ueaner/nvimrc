@@ -53,6 +53,7 @@ Plugin 'fatih/vim-go'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'xwsoul/vim-zephir'
 "Plugin 't9md/vim-choosewin'
+"Plugin 'StanAngeloff/php.vim'
 
 " 中文文档
 Plugin 'vimchina/vimcdoc'
@@ -153,7 +154,7 @@ if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 
-let NERDTreeQuitOnOpen = 1 " 打开文件时关闭树
+"let NERDTreeQuitOnOpen = 1 " 打开文件时关闭树
 let NERDTreeMinimalUI  = 1 " 不显示帮助面板
 let NERDTreeDirArrows  = 0 " 目录箭头:1显示箭头 0传统+-|号
 let NERDTreeMouseMode  = 2 " 单击打开目录，双击打开文件
@@ -172,7 +173,7 @@ function! g:NerdTreeFindToggle()
 endfunction
 
 " For toggling
-noremap <Leader>n :<C-u>call g:NerdTreeFindToggle()<cr>
+noremap <leader>n :<C-u>call g:NerdTreeFindToggle()<cr>
 
 " }}}
 " ==================== ctrlp ==================== {{{

@@ -312,6 +312,9 @@ augroup PHP
     " 记录折叠视图，及最后一次关闭文件时的光标所在位置。:help :mkview
     au BufWinLeave *.php silent! mkview
     au BufWinEnter *.php silent! loadview
+
+    let php_html_load = 0
+    let php_sql_heredoc = 0
 augroup END
 
 " .tags 在 Vim 工作目录下, <C-]> 跳转，<C-t> 跳回
