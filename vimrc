@@ -69,8 +69,10 @@ filetype plugin indent on    " required
 
 "  垂直窗口分割字符, 和折叠填充字符
 set fillchars=vert:\ ,fold:-
-" 滚动时会使光标永远保持在中间行, 属于非 H M L 和 zz zt zb 的另一种操作习惯
-let &scrolloff=&lines
+" 光标滚动时始终保持在中间行, 属于非 H M L 和 zz zt zb 的另一种操作习惯
+"let &scrolloff=&lines
+" 光标滚动时屏幕上下保留 3 行
+set scrolloff=3
 " 显示状态栏
 set laststatus=2
 " 状态栏/右下角显示行号和列号
@@ -231,11 +233,8 @@ nnoremap <leader>x :e $MYVIMRC<CR>
 set hidden
 
 " buffer 操作
-"nnoremap <TAB> :bn<CR>
-"nnoremap <leader><TAB> :bp<CR>
-" 如果不怎么用 H L 跳转光标的话，就用它来切换 buffer 吧
-nnoremap <expr> <S-H> &buftype == "" ? ":bp\<CR>" : ''
-nnoremap <expr> <S-L> &buftype == "" ? ":bn\<CR>" : ''
+nnoremap <expr> <TAB> &buftype == "" ? ":bn\<CR>" : ''
+nnoremap <expr> <leader><TAB> &buftype == "" ? ":bp\<CR>" : ''
 " 切换到上一个打开的 buffer, 同 CTRL-^
 nnoremap <leader>g :e#<CR>
 " :bl :blast  最后一个
