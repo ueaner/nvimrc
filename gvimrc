@@ -1,12 +1,12 @@
 " gvim/macvim 设置, has('gui_running')
 
-" Powerline 字体
+" Source Code Pro 字体
 if has('gui_gtk')
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
+    set guifont=Source\ Code\ Pro\ 12
 elseif has('mac')
-    set guifont=Sauce\ Code\ Powerline:h12
+    set guifont=Source\ Code\ Pro\:h12
 elseif has('win32') || has('win64')
-    set guifont=Sauce\ Code\ Powerline:h12:cANSI
+    set guifont=Source\ Code\ Pro:h12:cANSI
 endif
 
 " 信息提示编码
