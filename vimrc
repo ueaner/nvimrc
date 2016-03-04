@@ -68,7 +68,7 @@ filetype plugin indent on    " required
 " ==================== 外观 ==================== {{{
 
 "  垂直窗口分割字符, 和折叠填充字符
-set fillchars+=vert:\ ,fold:-
+set fillchars=vert:\ ,fold:-
 " 滚动时会使光标永远保持在中间行, 属于非 H M L 和 zz zt zb 的另一种操作习惯
 let &scrolloff=&lines
 " 显示状态栏
