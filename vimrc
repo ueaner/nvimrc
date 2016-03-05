@@ -196,8 +196,8 @@ vmap <silent> <expr> p <sid>Repl()
 
 " 去除高亮
 nnoremap <leader><space> :nohlsearch<CR>
-" 开启搜索当前光标下的单词，但是不跳转下一个, :help gd
-nnoremap <leader><leader> *N
+" 搜索当前光标下的单词，但是不跳转下一个, :help gd
+nnoremap <leader><leader> wb/\<<C-r><C-w>\>/e<CR>
 
 " 对较长行自动换行时，可以作为多行上下移动
 map j gj
