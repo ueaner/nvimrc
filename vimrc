@@ -91,8 +91,8 @@ syntax sync minlines=256
 set synmaxcol=200
 " 括号匹配，依赖 $VIMRUNTIME/plugin/matchparen.vim
 set showmatch
-" 跳转到匹配括号的停留时间 100ms
-set matchtime=1
+" 跳转到匹配括号的停留时间 0.3s
+set matchtime=3
 " 突出显示当前行
 "set cursorline
 
@@ -111,8 +111,8 @@ cnoremap <C-D> <Del>
 
 " 1 个 TAB 占 4 个位置
 set tabstop=4
-set shiftwidth=4
 set softtabstop=4
+set shiftwidth=4
 " 使用空格代替 tab
 set expandtab
 set smarttab
@@ -127,7 +127,7 @@ silent! set foldlevel=10
 "silent! set foldcolumn=1
 
 " 使用空格关闭／打开折叠
-nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<space>")<CR>
 
 " }}}
 " ==================== 文件编码与备份 ==================== {{{
@@ -197,7 +197,7 @@ vmap <silent> <expr> p <sid>Repl()
 " 去除高亮
 nnoremap <leader><space> :nohlsearch<CR>
 " 搜索当前光标下的单词，但是不跳转下一个, :help gd
-nnoremap <leader><leader> wb/\<<C-r><C-w>\>/e<CR>
+nnoremap <leader>k wb/\<<C-r><C-w>\>/e<CR>
 
 " 对较长行自动换行时，可以作为多行上下移动
 map j gj
@@ -231,15 +231,14 @@ nnoremap <leader>x :e $MYVIMRC<CR>
 
 " 隐藏缓冲区, 无需保存即可切换 buffer
 set hidden
+" 重用已打开的 buffer
+set switchbuf=useopen
 
-" buffer 操作
+" 切换 buffer, 也可以映射为 gb/gB 类似 tab 的 gt/gT 操作
 nnoremap <expr> <TAB> &buftype == "" ? ":bn\<CR>" : ''
-nnoremap <expr> <leader><TAB> &buftype == "" ? ":bp\<CR>" : ''
+nnoremap <expr> <S-TAB> &buftype == "" ? ":bp\<CR>" : ''
 " 切换到上一个打开的 buffer, 同 CTRL-^
-nnoremap <leader>g :e#<CR>
-" :bl :blast  最后一个
-" :bf :bfirst 第一个
-" :bd :bdelete 关闭当前 buffer
+nnoremap <leader><leader> :e#<CR>
 
 " http://stackoverflow.com/questions/4298910/vim-close-buffer-but-not-split-window
 function! CloseSplitOrDeleteBuffer()
@@ -256,8 +255,36 @@ function! CloseSplitOrDeleteBuffer()
         wincmd c
     endif
 endfunction
+
+" 关闭除当前 buffer 以外的其他 buffers, nerdtree 不会被关闭,
+" 未保存的文件不会被关闭
+function! CloseOtherBuffers(...)
+    let range = a:0 > 0 ? a:1 : 'others'
+    " 获取 buffer number 列表，不包含未保存的 buffer
+    let bufNums = filter(range(1,bufnr('$')),'buflisted(v:val) && !getbufvar(v:val, "&modified")')
+    let curBufNum = bufnr('%')
+    for bufNum in bufNums
+        if range ==# 'others'    " 关闭其他 buffer
+            if bufNum != curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        elseif range ==# 'left'  " 关闭左侧 buffer
+            if bufNum < curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        elseif range ==# 'right' " 关闭右侧 buffer
+            if bufNum > curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        endif
+    endfor
+endfunction
+
 " 关闭 buffer 或关闭 window
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
+
+" 关闭除当前 buffer 以外的其他 buffers
+nnoremap <leader>Q :call CloseOtherBuffers()<CR>
 
 " 快速保存文件
 nnoremap <leader>w :w!<CR>
