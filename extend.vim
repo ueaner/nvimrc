@@ -66,8 +66,6 @@ imap jj <ESC>
 " 选中一个表格格式区域 ,t 将其格式化
 map <leader>t :'<'>! column -t<CR>
 
-nnoremap <leader>Q :qa<CR>
-
 " 最大化, 另一个调整窗口大小的命令 :resize
 nnoremap + :on<CR>
 " 关闭, 最小化 ,g 唤出刚关闭的 buffer
@@ -109,3 +107,25 @@ augroup END
 au BufRead,BufNewFile *.{conf,cnf,ini} setf dosini
 
 " }}}
+
+" @see https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim#L202
+vnoremap <silent> * :call VisualSelection('f', '')<CR>
+vnoremap <silent> # :call VisualSelection('b', '')<CR>
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'f'
+        echo "normal /" . l:pattern . "^M"
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
