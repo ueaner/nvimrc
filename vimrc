@@ -174,7 +174,7 @@ endif
 
 " 记录视图的缓存目录
 set viewdir=$VIMHOME/runtime/viewdir
-set viewoptions-=options
+set viewoptions=cursor,folds
 
 " 合并注释行时自动删除注释标志
 silent! set formatoptions+=j
@@ -238,7 +238,7 @@ set switchbuf=useopen
 nnoremap <expr> <TAB> &buftype == "" ? ":bn\<CR>" : ''
 nnoremap <expr> <S-TAB> &buftype == "" ? ":bp\<CR>" : ''
 " 切换到上一个打开的 buffer, 同 CTRL-^
-nnoremap <leader><leader> :e#<CR>
+nnoremap <expr> <leader><leader> &buftype == "" ? ":e#\<CR>" : ''
 
 " http://stackoverflow.com/questions/4298910/vim-close-buffer-but-not-split-window
 function! CloseSplitOrDeleteBuffer()
