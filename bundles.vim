@@ -86,13 +86,6 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-R>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    " 有补全菜单进行补全，否则插入回车
-    return (pumvisible() ? "\<C-Y>" : "" ) . "\<CR>"
-endfunction
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-N>" : "\<TAB>"
 

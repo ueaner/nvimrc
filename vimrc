@@ -366,20 +366,17 @@ endif
 " }}}
 " ==================== 自定义tab补全 ==================== {{{
 
+" 有补全菜单进行补全，否则插入回车
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+
 if !mapcheck("<TAB>", "i")
 
     " 扫描 'dictionary' 选项给出的文件
     autocmd FileType php setlocal complete-=k complete+=k
 
-    inoremap <silent> <CR> <C-R>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-        " For no inserting <CR> key.
-        return pumvisible() ? "\<C-Y>" : "\<CR>"
-    endfunction
-
     " 使用 tab 键自动补全或尝试自动补全: 补全 'complete' 选项的词
     " :help i_CTRL-N and :help 'complete'
-    function! InsertTabWrapper()
+    function! s:InsertTabWrapper()
         let col = col('.') - 1
         if !col || getline('.')[col-1] !~ '\k'
             return "\<TAB>"
@@ -389,7 +386,7 @@ if !mapcheck("<TAB>", "i")
     endfunction
 
     " 重新映射 tab 键到 InsertTabWrapper 函数
-    inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
+    inoremap <silent> <TAB> <C-R>=<SID>InsertTabWrapper()<CR>
 endif
 
 " }}}
