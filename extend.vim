@@ -54,14 +54,14 @@ endif
 
 " 直接进入可视模式
 inoremap <C-V> <Esc>lv
-" <C-o> 插入模式下进入 临时插入模式 可以执行一条命令后再次进入插入模式
+" <C-O> 插入模式下进入 临时插入模式 可以执行一条命令后再次进入插入模式
 
 " 高亮最后一次插入的文本，gv 高亮最后一次的选中: h gv, h v_o
 nnoremap gV `[v`]
 
 " 输入模式下键入jj映射到<ESC>
 imap jj <ESC>
-" <C-c> = <ESC>
+" <C-C> = <ESC>
 
 " 选中一个表格格式区域 ,t 将其格式化
 map <leader>t :'<'>! column -t<CR>

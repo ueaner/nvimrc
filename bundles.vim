@@ -93,13 +93,13 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+inoremap <silent> <CR> <C-R>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     " For no inserting <CR> key. 回车插入补全但是不换行
     return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-N>" : "\<TAB>"
 
 " AutoComplPop like behavior.
 " 自动选中第一个
@@ -173,13 +173,13 @@ function! g:NerdTreeFindToggle()
 endfunction
 
 " For toggling
-noremap <leader>n :<C-u>call g:NerdTreeFindToggle()<cr>
+noremap <leader>n :<C-U>call g:NerdTreeFindToggle()<cr>
 
 " }}}
 " ==================== ctrlp ==================== {{{
 
 " 如果删除了文件或新建了文件, 使用 :CtrlPClearCache 或按 <F5> 刷新当前工作目录的缓存
-" C-f, C-b 切换 buffer, files, mru
+" C-F, C-B 切换 buffer, files, mru
 " Enter 打开当前光标下的文件
 let g:ctrlp_use_caching         = 1
 let g:ctrlp_clear_cache_on_exit = 0

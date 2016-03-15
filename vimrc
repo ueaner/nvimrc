@@ -197,7 +197,7 @@ vmap <silent> <expr> p <sid>Repl()
 " 去除高亮
 nnoremap <leader><space> :nohlsearch<CR>
 " 搜索当前光标下的单词，但是不跳转下一个, :help gd
-nnoremap <leader>k wb/\<<C-r><C-w>\>/e<CR>
+nnoremap <leader>k wb/\<<C-R><C-W>\>/e<CR>
 
 " 对较长行自动换行时，可以作为多行上下移动
 map j gj
@@ -331,7 +331,7 @@ augroup PHP
     autocmd FileType php setlocal dictionary=$VIMHOME/dict/php.dict
     " @link http://www.laruence.com/2010/08/18/1718.html
     autocmd FileType php setlocal keywordprg=:help
-    "nnoremap K :help <C-r><C-w><CR>
+    "nnoremap K :help <C-R><C-W><CR>
     " 折叠方式：缩进
     autocmd FileType php setlocal foldmethod=indent
 
@@ -343,7 +343,7 @@ augroup PHP
     let php_sql_heredoc = 0
 augroup END
 
-" .tags 在 Vim 工作目录下, <C-]> 跳转，<C-t> 跳回
+" .tags 在 Vim 工作目录下, <C-]> 跳转，<C-T> 跳回
 set tags+=.tags
 set tags+=$HOME/Sites/ide-helper/.tags
 " 有新的 tags 生成时，执行 :NeoCompleteBufferMakeCache 刷新自动补全缓存
@@ -371,10 +371,10 @@ if !mapcheck("<TAB>", "i")
     " 扫描 'dictionary' 选项给出的文件
     autocmd FileType php setlocal complete-=k complete+=k
 
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    inoremap <silent> <CR> <C-R>=<SID>my_cr_function()<CR>
     function! s:my_cr_function()
         " For no inserting <CR> key.
-        return pumvisible() ? "\<C-y>" : "\<CR>"
+        return pumvisible() ? "\<C-Y>" : "\<CR>"
     endfunction
 
     " 使用 tab 键自动补全或尝试自动补全: 补全 'complete' 选项的词
