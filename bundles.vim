@@ -25,35 +25,30 @@ Plugin 'ueaner/molokai'
 " marks, 快捷键帮助:help showmarks-mappings
 Plugin 'juanpabloaj/ShowMarks'
 
-" git, 文件 diff 状态
-Plugin 'airblade/vim-gitgutter'
-
-" 文件快捷查找: files, buffers, mru
-"Plugin 'ctrlpvim/ctrlp.vim'
-
 " 文件浏览
 Plugin 'scrooloose/nerdtree'
 
 " buffer tabs
 Plugin 'ap/vim-buftabline'
 
-" 多点编辑, 也可以使用 *cw<要替换的内容><ESC>, n.n.n.
-" 参见：http://federicoramirez.name/why-vim-is-awesome/
-Plugin 'terryma/vim-multiple-cursors'
-
 "
 " and more ...
 "
 " 自动关闭括号
-"Plugin 'cohama/lexima.vim'
-"Plugin 'junegunn/vim-easy-align'
-"Plugin 'justinmk/vim-sneak'
 Plugin 'fatih/vim-go'
 "Plugin 'keith/swift.vim'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'xwsoul/vim-zephir'
+"Plugin 'cohama/lexima.vim'
+"Plugin 'junegunn/vim-easy-align'
+"Plugin 'justinmk/vim-sneak'
 "Plugin 't9md/vim-choosewin'
+"Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'StanAngeloff/php.vim'
+
+" 多点编辑, 也可以使用 *cw<要替换的内容><ESC>, n.n.n.
+" 参见：http://federicoramirez.name/why-vim-is-awesome/
+"Plugin 'terryma/vim-multiple-cursors'
 
 " 中文文档
 Plugin 'vimchina/vimcdoc'
@@ -95,15 +90,14 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-R>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-    " For no inserting <CR> key. 回车插入补全但是不换行
-    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+    " 有补全菜单进行补全，否则插入回车
+    return (pumvisible() ? "\<C-Y>" : "" ) . "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-N>" : "\<TAB>"
+inoremap <expr><TAB> pumvisible() ? "\<C-N>" : "\<TAB>"
 
-" AutoComplPop like behavior.
 " 自动选中第一个
-"let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_auto_select = 1
 " 使用 CTRL+X+O 提示参数时只显示下拉提示，不显示 preview
 " 为 1 且配合set completeopt+=preview 则永久显示
 " https://github.com/Shougo/neocomplete.vim/issues/95
@@ -148,7 +142,7 @@ if !hasmapto( '<Plug>ShowmarksClearAll'        ) | map <silent> <unique> <leader
 if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader>mm :ShowMarksPlaceMark<cr>| endif
 
 " }}}
-" ==================== explore ==================== {{{
+" ==================== nerdtree ==================== {{{
 
 " 禁止载入 netrw
 let g:loaded_netrw       = 1
@@ -174,35 +168,6 @@ endfunction
 
 " For toggling
 noremap <leader>n :<C-U>call g:NerdTreeFindToggle()<cr>
-
-" }}}
-" ==================== ctrlp ==================== {{{
-
-" 如果删除了文件或新建了文件, 使用 :CtrlPClearCache 或按 <F5> 刷新当前工作目录的缓存
-" C-F, C-B 切换 buffer, files, mru
-" Enter 打开当前光标下的文件
-let g:ctrlp_use_caching         = 1
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_max_files           = 10000
-" 使用 C-O 在 buffer 中打开 C-Z 标记的多个文件
-let g:ctrlp_open_multiple_files = 'i' " open in h[i]dden buffer
-
-" 在已打开的文件列表中，进行快速搜索切换
-"nnoremap <leader>l :CtrlPBuffer<CR>
-
-" }}}
-" ==================== sneak ==================== {{{
-
-" s{char}{char} 支持两个字符搜索
-"let g:sneak#streak = 1
-"nmap s <Plug>(SneakStreak)
-"nmap S <Plug>(SneakStreakBackward)
-
-" }}}
-" ==================== align ==================== {{{
-
-"vmap <leader>a <Plug>(EasyAlign)
-"nmap <leader>a <Plug>(EasyAlign)
 
 " }}}
 " ==================== buffer tabline ==================== {{{
