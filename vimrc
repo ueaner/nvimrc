@@ -213,9 +213,6 @@ command! W w !sudo tee % > /dev/null
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " 去除尾部 ^M
 nnoremap <leader>M :%s/\r/<CR>
-" 快速插入日期
-nnoremap <leader>d "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
-inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 
 " Window navigation
 nnoremap <C-J> <C-W>j
@@ -226,6 +223,9 @@ nnoremap <C-H> <C-W>h
 " 快速编辑当前加载的 vimrc 配置文件
 nnoremap <leader>x :e $MYVIMRC<CR>
 
+" 切换粘贴模式
+set pastetoggle=<leader>z
+
 " }}}
 " ==================== buffer 操作 ==================== {{{
 
@@ -234,10 +234,18 @@ set hidden
 " 重用已打开的 buffer
 set switchbuf=useopen
 
+" :help <TAB>, :help keycodes 发现 <TAB> 和 CTRL-I 用了一样的 keycode
+" 如果重新定义了 <TAB>, CTRL-I 也会跟着被重新定义. 为了解放 <TAB>
+" 并且保证跳转表的操作是完整的，于是我们：
+" 使用 C-P/C-N 接收跳转表的操作
+nnoremap <C-P> <C-O>
+nnoremap <C-N> <C-I>
+
 " 切换 buffer, 也可以映射为 gb/gB 类似 tab 的 gt/gT 操作
 nnoremap <expr> <TAB> &buftype == "" ? ":bn\<CR>" : ''
 nnoremap <expr> <S-TAB> &buftype == "" ? ":bp\<CR>" : ''
 " 切换到上一个打开的 buffer, 同 CTRL-^
+" 对于 help 文件跳转点较多，C-P / C-N / K 组合应该更适合
 nnoremap <expr> <leader><leader> &buftype == "" ? ":e#\<CR>" : ''
 
 " http://stackoverflow.com/questions/4298910/vim-close-buffer-but-not-split-window
@@ -256,35 +264,8 @@ function! CloseSplitOrDeleteBuffer()
     endif
 endfunction
 
-" 关闭除当前 buffer 以外的其他 buffers, nerdtree 不会被关闭,
-" 未保存的文件不会被关闭
-function! CloseOtherBuffers(...)
-    let range = a:0 > 0 ? a:1 : 'others'
-    " 获取 buffer number 列表，不包含未保存的 buffer
-    let bufNums = filter(range(1,bufnr('$')),'buflisted(v:val) && !getbufvar(v:val, "&modified")')
-    let curBufNum = bufnr('%')
-    for bufNum in bufNums
-        if range ==# 'others'    " 关闭其他 buffer
-            if bufNum != curBufNum
-                exe 'bdelete ' . bufNum
-            endif
-        elseif range ==# 'left'  " 关闭左侧 buffer
-            if bufNum < curBufNum
-                exe 'bdelete ' . bufNum
-            endif
-        elseif range ==# 'right' " 关闭右侧 buffer
-            if bufNum > curBufNum
-                exe 'bdelete ' . bufNum
-            endif
-        endif
-    endfor
-endfunction
-
 " 关闭 buffer 或关闭 window
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
-
-" 关闭除当前 buffer 以外的其他 buffers
-nnoremap <leader>Q :call CloseOtherBuffers()<CR>
 
 " 快速保存文件
 nnoremap <leader>w :w!<CR>
@@ -380,8 +361,11 @@ if !mapcheck("<TAB>", "i")
         let col = col('.') - 1
         if !col || getline('.')[col-1] !~ '\k'
             return "\<TAB>"
-        else
+        elseif pumvisible()
             return "\<C-N>"
+        else
+            " 首次弹出补全菜单时 + <Down>, 为自动选中效果
+            return "\<C-N>\<Down>"
         endif
     endfunction
 
