@@ -60,16 +60,45 @@ inoremap <C-V> <Esc>lv
 nnoremap gV `[v`]
 
 " 输入模式下键入jj映射到<ESC>
-imap jj <ESC>
+imap jk <ESC>
 " <C-C> = <ESC>
 
 " 选中一个表格格式区域 ,t 将其格式化
 map <leader>t :'<'>! column -t<CR>
 
+" 快速插入日期
+nnoremap <leader>d "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
+inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
+" 关闭除当前 buffer 以外的其他 buffers, nerdtree 不会被关闭,
+" 未保存的文件不会被关闭
+function! CloseOtherBuffers(...)
+    let range = a:0 > 0 ? a:1 : 'others'
+    " 获取 buffer number 列表，不包含未保存的 buffer
+    let bufNums = filter(range(1, bufnr('$')), 'buflisted(v:val) && !getbufvar(v:val, "&modified")')
+    let curBufNum = bufnr('%')
+    for bufNum in bufNums
+        if range ==# 'others'    " 关闭其他 buffer
+            if bufNum != curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        elseif range ==# 'left'  " 关闭左侧 buffer
+            if bufNum < curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        elseif range ==# 'right' " 关闭右侧 buffer
+            if bufNum > curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        endif
+    endfor
+endfunction
+
+" 关闭除当前 buffer 以外的其他 buffers
+nnoremap <leader>Q :call CloseOtherBuffers()<CR>
+
 " 最大化, 另一个调整窗口大小的命令 :resize
 nnoremap + :on<CR>
-" 关闭, 最小化 ,g 唤出刚关闭的 buffer
-nnoremap - :call CloseSplitOrDeleteBuffer()<CR>
 
 " 针对 class 文件的函数折叠 ,f 只显示函数名, 再次 ,f 显示函数全部内容
 function! FoldToggle()
