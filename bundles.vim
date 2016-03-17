@@ -21,6 +21,7 @@ endif
 
 " 主题
 Plugin 'ueaner/molokai'
+"Plugin 'endel/vim-github-colorscheme'
 
 " marks, 快捷键帮助:help showmarks-mappings
 Plugin 'juanpabloaj/ShowMarks'
@@ -161,14 +162,5 @@ endfunction
 
 " For toggling
 noremap <leader>n :<C-U>call g:NerdTreeFindToggle()<cr>
-
-" }}}
-" ==================== buffer tabline ==================== {{{
-
-let g:buftabline_indicators = get(g:, 'buftabline_indicators', 1)
-hi default link BufTabLineCurrent TabLineSel
-hi default link BufTabLineActive  Pmenu
-hi default link BufTabLineHidden  TabLine
-hi default link BufTabLineFill    TabLineFill
 
 " }}}
