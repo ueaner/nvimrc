@@ -7,7 +7,6 @@
 " .vim
 " ├── bundle/       第三方插件存储目录
 " ├── bundles.vim   第三方插件配置文件
-" ├── extend.vim    扩展功能
 " ├── support/      一些支持性的脚本及文件
 " ├── dict          用户函数的自动完成
 " │   └── php.dict
@@ -58,7 +57,6 @@ endif
 " 引入插件管理配置文件
 if &loadplugins
     silent! source $VIMHOME/bundles.vim
-    silent! source $VIMHOME/extend.vim
 endif
 
 " 为特定的文件类型载入相应的插件
@@ -179,6 +177,9 @@ set viewoptions=cursor,folds
 " 合并注释行时自动删除注释标志
 silent! set formatoptions+=j
 
+" 切换粘贴模式
+set pastetoggle=<leader>z
+
 " https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim#L295
 " Make sure pasting in visual mode doesn't replace paste buffer
 function! RestoreRegister()
@@ -222,9 +223,6 @@ nnoremap <C-H> <C-W>h
 
 " 快速编辑当前加载的 vimrc 配置文件
 nnoremap <leader>x :e $MYVIMRC<CR>
-
-" 切换粘贴模式
-set pastetoggle=<leader>z
 
 " }}}
 " ==================== buffer 操作 ==================== {{{
@@ -326,7 +324,6 @@ augroup END
 
 " .tags 在 Vim 工作目录下, <C-]> 跳转，<C-T> 跳回
 set tags+=.tags
-set tags+=$HOME/Sites/ide-helper/.tags
 " 有新的 tags 生成时，执行 :NeoCompleteBufferMakeCache 刷新自动补全缓存
 command! CTags !ctags -f .tags --languages=PHP --PHP-kinds=+cf -R
 
@@ -364,8 +361,7 @@ if !mapcheck("<TAB>", "i")
         elseif pumvisible()
             return "\<C-N>"
         else
-            " 首次弹出补全菜单时 + <Down>, 为自动选中效果
-            return "\<C-N>\<Down>"
+            return "\<C-N>\<Down>" " 首次弹出补全菜单自动选中
         endif
     endfunction
 
@@ -374,8 +370,8 @@ if !mapcheck("<TAB>", "i")
 endif
 
 " }}}
-" ==================== 加载 buftabline ==================== {{{
+" ==================== 加载本地配置 ==================== {{{
 
-silent! source $VIMHOME/bundle/vim-buftabline/plugin/buftabline.vim
+silent! source $VIMHOME/local/vimrc.local
 
 " }}}

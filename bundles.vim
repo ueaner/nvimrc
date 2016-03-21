@@ -2,15 +2,8 @@
 
 filetype off                  " required
 
-if has('win32') || has('win64')
-    " @link https://github.com/gmarik/Vundle.vim/wiki/Vundle-for-Windows
-    set rtp+=~/vimfiles/bundle/Vundle.vim
-    let path='~/vimfiles/bundle'
-    call vundle#begin(path)
-else
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-endif
+set rtp+=$VIMHOME/bundle/Vundle.vim
+call vundle#begin($VIMHOME . "/bundle")
 
 Plugin 'gmarik/Vundle.vim'
 
@@ -21,42 +14,12 @@ endif
 
 " 主题
 Plugin 'ueaner/molokai'
-"Plugin 'endel/vim-github-colorscheme'
-
-" marks, 快捷键帮助:help showmarks-mappings
-Plugin 'juanpabloaj/ShowMarks'
 
 " 文件浏览
 Plugin 'scrooloose/nerdtree'
 
-" buffer tabs
-Plugin 'ap/vim-buftabline'
-
-"
-" and more ...
-"
-" 自动关闭括号
-Plugin 'fatih/vim-go'
-"Plugin 'keith/swift.vim'
-"Plugin 'mattn/emmet-vim'
-"Plugin 'xwsoul/vim-zephir'
-"Plugin 'cohama/lexima.vim'
-"Plugin 'junegunn/vim-easy-align'
-"Plugin 'justinmk/vim-sneak'
-"Plugin 't9md/vim-choosewin'
-"Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'StanAngeloff/php.vim'
-
-" 多点编辑, 也可以使用 *cw<要替换的内容><ESC>, n.n.n.
-" 参见：http://federicoramirez.name/why-vim-is-awesome/
-"Plugin 'terryma/vim-multiple-cursors'
-
-" 中文文档
-Plugin 'vimchina/vimcdoc'
-
-if has('python')
-    " dbgp debugger, 默认端口 9000.
-    "Plugin 'joonty/vdebug'
+if filereadable(expand($VIMHOME . "/local/bundles.vim.local"))
+    source $VIMHOME/local/bundles.vim.local
 endif
 
 call vundle#end()            " required
@@ -114,26 +77,6 @@ function! Multiple_cursors_after()
     exe 'NeoCompleteUnlock'
     echo 'Enabled autocomplete'
 endfunction
-
-" }}}
-" ==================== showmarks ==================== {{{
-
-" Enable ShowMarks
-let showmarks_enable = 1
-" Show which marks
-let showmarks_include = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-" Ignore help, quickfix, non-modifiable buffers
-let showmarks_ignore_type = 'hqm'
-" Hilight lower & upper marks
-let showmarks_hlline_lower = 1
-let showmarks_hlline_upper = 1
-
-" mappings from showmarks.vim
-if !hasmapto( '<Plug>ShowmarksShowMarksToggle' ) | map <silent> <unique> <leader>mt :ShowMarksToggle<cr>|    endif
-if !hasmapto( '<Plug>ShowmarksShowMarksOn'     ) | map <silent> <unique> <leader>mo :ShowMarksOn<cr>|        endif
-if !hasmapto( '<Plug>ShowmarksClearMark'       ) | map <silent> <unique> <leader>mh :ShowMarksClearMark<cr>| endif
-if !hasmapto( '<Plug>ShowmarksClearAll'        ) | map <silent> <unique> <leader>ma :ShowMarksClearAll<cr>|  endif
-if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader>mm :ShowMarksPlaceMark<cr>| endif
 
 " }}}
 " ==================== nerdtree ==================== {{{
