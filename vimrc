@@ -322,10 +322,9 @@ augroup PHP
     let php_sql_heredoc = 0
 augroup END
 
-" .tags 在 Vim 工作目录下, <C-]> 跳转，<C-T> 跳回
-set tags+=.tags
+" tags 在 Vim 工作目录下, <C-]> 跳转，<C-T> 跳回
 " 有新的 tags 生成时，执行 :NeoCompleteBufferMakeCache 刷新自动补全缓存
-command! CTags !ctags -f .tags --languages=PHP --PHP-kinds=+cf -R
+command! CTags !ctags -f tags --languages=PHP --PHP-kinds=+cf -R
 
 " }}}
 " ==================== statusline ==================== {{{
