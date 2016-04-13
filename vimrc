@@ -170,10 +170,6 @@ if has('persistent_undo')
     set undolevels=400
 endif
 
-" 记录视图的缓存目录
-set viewdir=$VIMHOME/runtime/viewdir
-set viewoptions=cursor,folds
-
 " 合并注释行时自动删除注释标志
 silent! set formatoptions+=j
 
