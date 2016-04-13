@@ -10,9 +10,8 @@
 " ├── support/      一些支持性的脚本及文件
 " ├── dict          用户函数的自动完成
 " │   └── php.dict
-" ├── runtime
+" ├── local
 " │   ├── undodir
-" │   └── viewdir
 " ├── vimrc         主配置文件, Vim 7.4 之前的版本请做 $HOME/.vimrc 的软链
 " └── gvimrc        gvim/macvim 配置
 "
@@ -165,7 +164,7 @@ set ttimeoutlen=10
 
 " undo
 if has('persistent_undo')
-    set undodir=$VIMHOME/runtime/undodir
+    set undodir=$VIMHOME/local/undodir
     set undofile
     set undolevels=400
 endif
@@ -309,10 +308,6 @@ augroup PHP
     "nnoremap K :help <C-R><C-W><CR>
     " 折叠方式：缩进
     autocmd FileType php setlocal foldmethod=indent
-
-    " 记录折叠视图，及最后一次关闭文件时的光标所在位置。:help :mkview
-    au BufWinLeave *.php silent! mkview
-    au BufWinEnter *.php silent! loadview
 
     let php_html_load = 0
     let php_sql_heredoc = 0
