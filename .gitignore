@@ -1,6 +1,4 @@
 local/*
-!local/.gitkeep
-local/undodir/*
 !local/undodir/.gitkeep
 .netrwhist
 bundle/
