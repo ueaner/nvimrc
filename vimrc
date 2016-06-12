@@ -18,15 +18,12 @@
 " }}}
 " ==================== GLOBAL ==================== {{{
 
-" 关闭兼容模式, 尽量在靠前的位置
-set nocompatible             " be iMproved, required
+" 关闭兼容模式
+set nocompatible
 
-" ttyfast
 set ttyfast
-" lazyredraw
 set lazyredraw
 
-" leader
 let mapleader = ','
 let g:mapleader = ','
 
@@ -59,12 +56,12 @@ if &loadplugins
 endif
 
 " 为特定的文件类型载入相应的插件
-filetype plugin indent on    " required
+filetype plugin indent on
 
 " }}}
 " ==================== 外观 ==================== {{{
 
-"  垂直窗口分割字符, 和折叠填充字符
+" 垂直窗口分割字符, 和折叠填充字符
 set fillchars=vert:\ ,fold:-
 " 光标滚动时始终保持在中间行, 属于非 H M L 和 zz zt zb 的另一种操作习惯
 "let &scrolloff=&lines
@@ -267,21 +264,6 @@ nnoremap <leader>w :w!<CR>
 nnoremap <leader>l :ls<CR>:b<space>
 
 " }}}
-" ==================== Omni-complete ==================== {{{
-
-" Enable omni completion. :help ins-completion, hotkey: <C-X><C-O>, <C-X><C-F>, <C-N>, <C-P>
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-
-" Better Completion, :help completeopt@en
-set complete=.,w,b,u,t
-set completeopt=longest,menuone
-
-" }}}
 " ==================== filetypes ==================== {{{
 
 augroup FTS
@@ -303,7 +285,7 @@ augroup PHP
     set rtp+=$VIMHOME/phpmanual
     "词典文件
     autocmd FileType php setlocal dictionary=$VIMHOME/dict/php.dict
-    " @link http://www.laruence.com/2010/08/18/1718.html
+    " @see http://www.laruence.com/2010/08/18/1718.html
     autocmd FileType php setlocal keywordprg=:help
     "nnoremap K :help <C-R><C-W><CR>
     " 折叠方式：缩进
@@ -332,11 +314,16 @@ if has('statusline')
 endif
 
 " }}}
-" ==================== 自定义tab补全 ==================== {{{
+" ==================== auto-complete ==================== {{{
+
+" Better Completion, :help completeopt@en
+set complete=.,w,b,u,t
+set completeopt=longest,menuone
 
 " 有补全菜单进行补全，否则插入回车
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
+" 在没有使用第三方补全插件的情况下，使用以下自定义的 tab 补全方法
 if !mapcheck("<TAB>", "i")
 
     " 扫描 'dictionary' 选项给出的文件
@@ -351,7 +338,8 @@ if !mapcheck("<TAB>", "i")
         elseif pumvisible()
             return "\<C-N>"
         else
-            return "\<C-N>\<Down>" " 首次弹出补全菜单自动选中
+            " 首次弹出补全菜单自动选中
+            return "\<C-N>\<Down>"
         endif
     endfunction
 
