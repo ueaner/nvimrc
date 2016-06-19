@@ -290,9 +290,6 @@ augroup PHP
     "nnoremap K :help <C-R><C-W><CR>
     " 折叠方式：缩进
     autocmd FileType php setlocal foldmethod=indent
-
-    let php_html_load = 0
-    let php_sql_heredoc = 0
 augroup END
 
 " tags 在 Vim 工作目录下, <C-]> 跳转，<C-T> 跳回
