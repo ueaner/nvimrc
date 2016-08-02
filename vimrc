@@ -260,7 +260,7 @@ nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 " 快速保存文件
 nnoremap <leader>w :w!<CR>
 
-" :b <pattern>
+" :b <pattern> <TAB> 「如果匹配到多个，使用 <C-N>/<C-P> 选择」
 nnoremap <leader>l :ls<CR>:b<space>
 
 " }}}
@@ -347,6 +347,6 @@ endif
 " }}}
 " ==================== 加载本地配置 ==================== {{{
 
-silent! source $VIMHOME/local/vimrc.local
+silent! source $VIMHOME/local/local.vimrc
 
 " }}}

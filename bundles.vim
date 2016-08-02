@@ -18,8 +18,8 @@ Plugin 'ueaner/molokai'
 " 文件浏览
 Plugin 'scrooloose/nerdtree'
 
-if filereadable(expand($VIMHOME . "/local/bundles.vim.local"))
-    source $VIMHOME/local/bundles.vim.local
+if filereadable(expand($VIMHOME . "/local/local.bundles.vim"))
+    source $VIMHOME/local/local.bundles.vim
 endif
 
 call vundle#end()            " required
