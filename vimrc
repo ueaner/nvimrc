@@ -110,7 +110,6 @@ set shiftwidth=4
 " 使用空格代替 tab
 set expandtab
 set smarttab
-" tab 转为空格 :%ret! 4
 " 智能缩进
 set autoindent smartindent
 " 回退
@@ -283,25 +282,28 @@ augroup END
 augroup PHP
     autocmd!
     set rtp+=$VIMHOME/phpmanual
-    "词典文件
-    autocmd FileType php setlocal dictionary=$VIMHOME/dict/php.dict
     " @see http://www.laruence.com/2010/08/18/1718.html
     autocmd FileType php setlocal keywordprg=:help
     "nnoremap K :help <C-R><C-W><CR>
     " 折叠方式：缩进
     autocmd FileType php setlocal foldmethod=indent
+
+    " 词典文件
+    autocmd FileType php setlocal dictionary=$VIMHOME/dict/php.dict
+    " 自动完成扫描 'dictionary' 选项给出的文件
+    autocmd FileType php setlocal complete-=k complete+=k
 augroup END
 
 " tags 在 Vim 工作目录下, <C-]> 跳转，<C-T> 跳回
 " 有新的 tags 生成时，执行 :NeoCompleteBufferMakeCache 刷新自动补全缓存
-command! CTags !ctags -f tags --languages=PHP --PHP-kinds=+cf -R
+command! CTags !ctags -R --languages=PHP --PHP-kinds=+cf -f tags
 
 " }}}
 " ==================== statusline ==================== {{{
 
 function! HasPaste()
     if &paste
-        return 'PASTE'
+        return 'PASTE '
     endif
     return 'BUF #' . bufnr('%')
 endfunction
@@ -322,10 +324,6 @@ inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 " 在没有使用第三方补全插件的情况下，使用以下自定义的 tab 补全方法
 if !mapcheck("<TAB>", "i")
-
-    " 扫描 'dictionary' 选项给出的文件
-    autocmd FileType php setlocal complete-=k complete+=k
-
     " 使用 tab 键自动补全或尝试自动补全: 补全 'complete' 选项的词
     " :help i_CTRL-N and :help 'complete'
     function! s:InsertTabWrapper()
