@@ -4,7 +4,8 @@
 if has('gui_gtk')
     set guifont=Source\ Code\ Pro\ 12
 elseif has('mac')
-    set guifont=Source\ Code\ Pro\:h12
+    "set guifont=Source\ Code\ Pro\:h12
+    set guifont=Monaco:h12
 elseif has('win32') || has('win64')
     set guifont=Source\ Code\ Pro:h12:cANSI
 endif
