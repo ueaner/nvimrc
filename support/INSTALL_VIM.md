@@ -56,12 +56,37 @@
 
 如果有新版本可以直接覆盖编译。
 
+#### GNU GLOBAL
+
+解决 CTRL-] 多处定义的跳转问题，提升 symbol 的查询质量。
+
+配置参考：[Vim using GLOBAL]。
+
+    $ brew install global
+
+    $ vim ~/.vim/local/local.vimrc
+    " 加入以下内容
+
+    " 解决同一名称函数多处定义，使用 CTRL-] 的跳转问题
+    set cscopetag                 " 使用 cscope 作为 tags 命令
+    set cscopeprg=gtags-cscope    " 使用 gtags-cscope 代替 cscope
+
+    " 让 gtags-cscope 自动连接到当前项目的 GTAGS 库
+    " gtags-cscope 同时会自动找环境变量 $GTAGSLIBPATH 所指定的 GTAGS 库
+    let GtagsCscope_Auto_Load = 1
+    silent! source /usr/local/share/gtags/gtags-cscope.vim
+
+    " 提供 :Gtags 查询命令，类似 global 的命令格式
+    silent! source /usr/local/share/gtags/gtags.vim
+
 #### 参考
 
     https://github.com/mikecanann/vim_config
     https://github.com/larrupingpig/vimgdb-for-vim7.4
+    https://www.gnu.org/software/global/manual/global.html#Vim-editor
 
 
 [gundo]: https://github.com/sjl/gundo.vim
 [YouCompleteMe]: https://github.com/Valloric/YouCompleteMe
 [neocomplete]: https://github.com/Shougo/neocomplete.vim
+[Vim using GLOBAL]: https://www.gnu.org/software/global/manual/global.html#Vim-editor

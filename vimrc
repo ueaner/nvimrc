@@ -294,10 +294,6 @@ augroup PHP
     autocmd FileType php setlocal complete-=k complete+=k
 augroup END
 
-" tags 在 Vim 工作目录下, <C-]> 跳转，<C-T> 跳回
-" 有新的 tags 生成时，执行 :NeoCompleteBufferMakeCache 刷新自动补全缓存
-command! CTags !ctags -R --languages=PHP --PHP-kinds=+cf -f tags
-
 " }}}
 " ==================== statusline ==================== {{{
 
