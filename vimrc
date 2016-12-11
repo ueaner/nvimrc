@@ -277,24 +277,6 @@ augroup FTS
 augroup END
 
 " }}}
-" ==================== PHP ==================== {{{
-
-augroup PHP
-    autocmd!
-    set rtp+=$VIMHOME/phpmanual
-    " @see http://www.laruence.com/2010/08/18/1718.html
-    autocmd FileType php setlocal keywordprg=:help
-    "nnoremap K :help <C-R><C-W><CR>
-    " 折叠方式：缩进
-    autocmd FileType php setlocal foldmethod=indent
-
-    " 词典文件
-    autocmd FileType php setlocal dictionary=$VIMHOME/dict/php.dict
-    " 自动完成扫描 'dictionary' 选项给出的文件
-    autocmd FileType php setlocal complete-=k complete+=k
-augroup END
-
-" }}}
 " ==================== statusline ==================== {{{
 
 function! HasPaste()
