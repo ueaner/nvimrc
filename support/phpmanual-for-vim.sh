@@ -11,7 +11,7 @@ tmp_workspace=/tmp/tmp_workspace            # 临时工作区目录
 lang=${1:-"en"}                             # PHP 手册语言, zh 中文暂不支持，K 查看时会出现乱码
 php_manual_tar=php_manual_${lang}.tar.gz    # PHP 手册 tar 包名称
 handler_manual_file=${script_path}/doc.php  # PHP 手册转 Vim 手册程序名称
-php_manual_dir=~/.vim/phpmanual/            # PHP 手册存放于 Vim runtimepath 的目录
+php_manual_dir=~/.vim/local/phpmanual/            # PHP 手册存放于 Vim runtimepath 的目录
 
 # 依赖检查
 # @link http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
