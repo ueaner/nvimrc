@@ -12,8 +12,8 @@ if has('lua')
     Plugin 'shougo/neocomplete.vim'
 endif
 
-" 主题
-Plugin 'ueaner/molokai'
+" buffer tabs
+Plugin 'ap/vim-buftabline'
 
 " 文件浏览
 Plugin 'scrooloose/nerdtree'
