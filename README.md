@@ -4,8 +4,8 @@
 
 #### 使用
 
-    git clone https://github.com/ueaner/vim.git ~/.vim
-    git clone https://github.com/ueaner/vim.git "C:\Documents and Settings\<your_username>\vimfiles"
+    git clone https://github.com/ueaner/vimrc.git ~/.vim
+    git clone https://github.com/ueaner/vimrc.git "C:\Documents and Settings\<your_username>\vimfiles"
 
 `7.4 之前的版本`需要做个软链:
 
@@ -14,10 +14,10 @@
 
 #### 安装插件
 
-安装 [Vundle](https://github.com/gmarik/Vundle.vim) 插件管理工具:
+安装 [Vundle](https://github.com/VundleVim/Vundle.vim) 插件管理工具:
 
-    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    git clone https://github.com/gmarik/Vundle.vim.git "C:\Documents and Settings\<your_username>\vimfiles\bundle\Vundle.vim"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    git clone https://github.com/VundleVim/Vundle.vim.git "C:\Documents and Settings\<your_username>\vimfiles\bundle\Vundle.vim"
 
 命令行执行, 开始安装插件:
 
