@@ -235,6 +235,24 @@ nnoremap <C-H> <C-W>h
 nnoremap <leader>x :e $MYVIMRC<CR>
 
 " }}}
+" ==================== 插入模式下 readline 命令行风格键映射 ==================== {{{
+
+" 移动: 行首/行尾
+inoremap <C-A> <Home>
+inoremap <C-E> <ESC><S-A>
+" 移动: 向左/右一个字符
+inoremap <C-B> <Left>
+inoremap <C-F> <Right>
+" 删除光标前/后一个字符
+" <C-H>  :h i_CTRL-H
+inoremap <C-D> <Del>
+" 删除光标前一个单词
+" <C-W>  :h i_CTRL-W
+" 删除光标前/后所有字符
+" <C-U>  :h i_CTRL-U
+inoremap <C-K> <C-O>D
+
+" }}}
 " ==================== buffer 操作 ==================== {{{
 
 " 隐藏缓冲区, 无需保存即可切换 buffer
