@@ -221,6 +221,10 @@ nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 " 去除尾部 ^M
 nnoremap <leader>M :%s/\r/<CR>
 
+" 快速插入日期
+nnoremap <leader>d "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
+inoremap <leader>d <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
 " Window navigation
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
