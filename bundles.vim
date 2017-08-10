@@ -2,8 +2,8 @@
 
 filetype off                  " required
 
-set rtp+=$VIMHOME/bundle/Vundle.vim
-call vundle#begin($VIMHOME . "/bundle")
+set rtp+=$VIMHOME/bundles/Vundle.vim
+call vundle#begin($VIMHOME . "/bundles")
 
 Plugin 'gmarik/Vundle.vim'
 

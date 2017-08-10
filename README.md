@@ -16,8 +16,8 @@
 
 安装 [Vundle](https://github.com/VundleVim/Vundle.vim) 插件管理工具:
 
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    git clone https://github.com/VundleVim/Vundle.vim.git "C:\Documents and Settings\<your_username>\vimfiles\bundle\Vundle.vim"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundles/Vundle.vim
+    git clone https://github.com/VundleVim/Vundle.vim.git "C:\Documents and Settings\<your_username>\vimfiles\bundles\Vundle.vim"
 
 命令行执行, 开始安装插件:
 

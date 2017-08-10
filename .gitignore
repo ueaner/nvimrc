@@ -1,5 +1,5 @@
+!.gitkeep
 local/*
-!local/undodir/.gitkeep
 .netrwhist
-bundle/
+bundles/
 doc/
