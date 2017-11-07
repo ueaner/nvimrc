@@ -213,6 +213,9 @@ map k gk
 " 复制到行尾，类似大写的 C 和 D 操作
 nnoremap Y y$
 
+" Remap VIM 0 to first non-blank character
+nnoremap 0 ^
+
 " 保存无权限文件, :h E174
 command! W w !sudo tee % > /dev/null
 
