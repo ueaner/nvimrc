@@ -95,7 +95,7 @@ let NERDTreeDirArrows  = 0 " 目录箭头:1显示箭头 0传统+-|号
 let NERDTreeMouseMode  = 2 " 单击打开目录，双击打开文件
 "let NERDTreeWinSize = 25 " 窗口大小
 
-let NERDTreeIgnore     = ['\.idea$', '\.tags$']
+let NERDTreeIgnore     += ['\.idea$', '\.tags$']
 
 " Open nerdtree in current dir, write our own custom function because
 " NerdTreeToggle just sucks and doesn't work for buffers
