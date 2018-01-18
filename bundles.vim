@@ -5,11 +5,11 @@ filetype off                  " required
 set rtp+=$VIMHOME/bundles/Vundle.vim
 call vundle#begin($VIMHOME . "/bundles")
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 if has('lua')
     " 自动完成
-    Plugin 'shougo/neocomplete.vim'
+    Plugin 'Shougo/neocomplete.vim'
 endif
 
 " buffer tabs
