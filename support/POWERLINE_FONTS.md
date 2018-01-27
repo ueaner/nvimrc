@@ -10,12 +10,12 @@
 
 下载字体:
 
-    curl -L "https://github.com/powerline/fonts/raw/master/SourceCodePro/Sauce%20Code%20Powerline%20Regular.otf" -o "Source Code Pro for Powerline.otf"
+    curl -L "https://github.com/powerline/fonts/raw/master/SourceCodePro/Source%20Code%20Pro%20for%20Powerline.otf" -o "Source Code Pro for Powerline.otf"
 
 *Linux* 下安装字体：
 
-    # mkdir -p ~/.fonts
-    # cp Source\ Code\ Pro\ for\ Powerline.otf ~/.fonts/
+    # mkdir -p ~/.fonts/PowerlineFonts
+    # cp Source\ Code\ Pro\ for\ Powerline.otf ~/.fonts/PowerlineFonts
     # fc-cache -f -v ~/.fonts/
 
 如果让所有用户可用, 则放在 `/usr/share/fonts/<somedir>/` 目录下, 执行 `fc-cache -f /usr/share/fonts/<somedir>/` 即可.
