@@ -303,20 +303,6 @@ nnoremap <leader>w :w!<CR>
 nnoremap <leader>l :ls<CR>:b<space>
 
 " }}}
-" ==================== filetypes ==================== {{{
-
-augroup FTS
-    autocmd!
-    "autocmd! bufwritepost $VIMHOME/vimrc source %
-
-    autocmd FileType vim,help setlocal keywordprg=:help
-    " 折叠方式：foldmarker 标记
-    autocmd FileType vim setlocal foldmethod=marker
-
-    autocmd FileType text,markdown setlocal textwidth=78
-augroup END
-
-" }}}
 " ==================== statusline ==================== {{{
 
 function! HasPaste()
