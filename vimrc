@@ -262,6 +262,8 @@ inoremap <C-K> <C-O>D
 set hidden
 " 重用已打开的 buffer
 set switchbuf=useopen
+" 新窗口在下右方打开
+set splitbelow splitright
 
 " :help <TAB>, :help keycodes 发现 <TAB> 和 CTRL-I 用了一样的 keycode
 " 如果重新定义了 <TAB>, CTRL-I 也会跟着被重新定义. 为了解放 <TAB>
