@@ -29,3 +29,5 @@ au GuiEnter * set t_vb=
 
 " 行距
 set linespace=3
+" 窗口大小
+set lines=35 columns=120
