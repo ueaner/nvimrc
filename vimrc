@@ -321,6 +321,9 @@ endif
 " }}}
 " ==================== auto-complete ==================== {{{
 
+" 自动完成的最大条数
+set pumheight=10
+
 " Better Completion, :help completeopt@en
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
