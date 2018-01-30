@@ -135,6 +135,8 @@ set fileformats=unix,dos,mac
 set nobackup
 set nowritebackup
 set noswapfile
+" 文件改变自动读入
+set autoread
 
 " }}}
 " ==================== 搜索 ==================== {{{
@@ -315,7 +317,7 @@ function! HasPaste()
 endfunction
 
 if has('statusline')
-    let &statusline=" %{HasPaste()} %<%F%m %= %( %{&filetype} %) %{&fileformat} | %(%{(&fenc!=''?&fenc:&enc)} %) LN %4l/%-4.L %03p%% COL %-3.c "
+    let &statusline=" %{HasPaste()} %<%F%m %= %( %{&filetype} %) %{&fileformat} | %(%{(&fenc!=''?&fenc:&enc)} %) LN %4l/%-4.L COL %-3.c "
 endif
 
 " }}}
