@@ -291,11 +291,38 @@ function! CloseSplitOrDeleteBuffer()
     endif
 endfunction
 
-" 关闭 buffer 或关闭 window
+" 关闭除当前 buffer 以外的其他 buffers
+" nerdtree 和未保存的文件不会被关闭
+function! CloseOtherBuffers(...)
+    let range = a:0 > 0 ? a:1 : 'others'
+    " 获取 buffer number 列表，不包含未保存的 buffer
+    let bufNums = filter(range(1, bufnr('$')), 'buflisted(v:val) && !getbufvar(v:val, "&modified")')
+    let curBufNum = bufnr('%')
+    for bufNum in bufNums
+        if range ==# 'others'    " 关闭其他 buffer
+            if bufNum != curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        elseif range ==# 'left'  " 关闭左侧 buffer
+            if bufNum < curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        elseif range ==# 'right' " 关闭右侧 buffer
+            if bufNum > curBufNum
+                exe 'bdelete ' . bufNum
+            endif
+        endif
+    endfor
+endfunction
+
+" 关闭当前 buffer 或关闭 window
 nnoremap <leader>q :call CloseSplitOrDeleteBuffer()<CR>
 
-" 快速保存文件
-nnoremap <leader>w :w!<CR>
+" 关闭除当前 buffer 以外的其他 buffers
+nnoremap <leader>Q :call CloseOtherBuffers()<CR>
+
+" 最大化, 另一个调整窗口大小的命令 :resize
+nnoremap + :only<CR>
 
 " :b <pattern> <TAB> 「如果匹配到多个，使用 <C-N>/<C-P> 选择」
 nnoremap <leader>l :ls<CR>:b<space>
