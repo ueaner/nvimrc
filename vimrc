@@ -5,15 +5,17 @@
 " 目录结构:
 "
 " .vim
-" ├── bundles/      第三方插件存储目录
-" ├── bundles.vim   第三方插件配置文件
-" ├── support/      一些支持性的脚本及文件
-" ├── dict          用户函数的自动完成
+" ├── after
+" │   └── ftplugin           针对文件类型的配置
+" ├── dict                   用户函数的自动完成
 " │   └── php.dict
 " ├── local
 " │   ├── undodir
-" ├── vimrc         主配置文件, Vim 7.4 之前的版本请做 $HOME/.vimrc 的软链
-" └── gvimrc        gvim/macvim 配置
+" │   ├── local.bundles.vim  本地插件配置，会自动加载
+" │   └── local.vimrc        本地 vimrc 配置，会自动加载
+" ├── support                一些支持性的脚本及文件
+" ├── vimrc                  主配置文件
+" └── gvimrc                 gvim/macvim 配置
 "
 " }}}
 " ==================== GLOBAL ==================== {{{
@@ -48,11 +50,11 @@ else
 endif
 
 " }}}
-" ==================== 引入插件管理配置文件 ==================== {{{
+" ==================== 加载本地插件管理配置文件 ==================== {{{
 
 " 引入插件管理配置文件
 if &loadplugins
-    silent! source $VIMHOME/bundles.vim
+    silent! source $VIMHOME/local/local.bundles.vim
 endif
 
 " 为特定的文件类型载入相应的插件
