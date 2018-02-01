@@ -269,18 +269,10 @@ set switchbuf=useopen
 " 新窗口在下右方打开
 set splitbelow splitright
 
-" :help <TAB>, :help keycodes 发现 <TAB> 和 CTRL-I 用了一样的 keycode
-" 如果重新定义了 <TAB>, CTRL-I 也会跟着被重新定义. 为了解放 <TAB>
-" 并且保证跳转表的操作是完整的，于是我们：
-" 使用 C-P/C-N 接收跳转表的操作
-nnoremap <C-P> <C-O>
-nnoremap <C-N> <C-I>
-
 " 切换 buffer, 也可以映射为 gb/gB 类似 tab 的 gt/gT 操作
 nnoremap <expr> <TAB> &buftype == "" ? ":bn\<CR>" : ''
 nnoremap <expr> <S-TAB> &buftype == "" ? ":bp\<CR>" : ''
 " 切换到上一个打开的 buffer, 同 CTRL-^
-" 对于 help 文件跳转点较多，C-P / C-N / K 组合应该更适合
 nnoremap <expr> <leader><leader> &buftype == "" ? ":e#\<CR>" : ''
 
 " http://stackoverflow.com/questions/4298910/vim-close-buffer-but-not-split-window
