@@ -10,7 +10,7 @@ macOS/Linux:
 
 windows cmd.exe:
 
-
+    git clone https://github.com/ueaner/vimrc.git %USERPROFILE%\vimfiles
 
 `7.4 之前的版本`需要做个软链:
 
