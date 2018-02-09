@@ -241,6 +241,9 @@ nnoremap <C-H> <C-W>h
 " 快速编辑当前加载的 vimrc 配置文件
 nnoremap <leader>x :e $MYVIMRC<CR>
 
+" 标签跳转：一个匹配，直接跳转；多个匹配，选择跳转。 :h g_CTRL-]
+nnoremap <C-]> g<C-]>
+
 " }}}
 " ==================== 插入模式下 readline 命令行风格键映射 ==================== {{{
 
