@@ -25,11 +25,9 @@ TAGS_FILE=gtags.files
 # 2. 排除不需要生成 tags 的目录
 # 3. 使用 sed 将软链目录后的双斜杆替换为单斜杆
 find $DIR -type f -name "*.php" \
-    ! -path "./cache/*" ! -path "./vendor/*" \
+    ! -path "*/cache/*" \
+    ! -path "*/vendor/*" \
+    ! -path "*/tests/*" \
     | sed 's@//@/@' > $TAGS_FILE
 
 gtags
-
-#cscope -bkq -i $TAGS_FILE
-#ctags -L $TAGS_FILE -f tags
-#rm -f $TAGS_FILE
