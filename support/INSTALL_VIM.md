@@ -56,28 +56,56 @@
 
 如果有新版本可以直接覆盖编译。
 
+#### ctags
+
+    $ brew install ctags
+
+生成 tags 文件，如：
+
+    $ ctags -R --languages=PHP
+
+如果需要忽略一些目录，可以使用 `--exclude` 参数，或者将忽略信息配置在
+`$HOME/.ctags` 文件中，如：
+
+    --exclude=.git
+    --exclude=cache
+    --exclude=vendor
+    --exclude=tests
+
+使用 ctags 需要注意：当使用 `<C-]>`
+跳转时，如果有多个匹配默认进入匹配到的第一个，没有选择的机会，经常会跳错，
+我们可以使用 `g<C-]>` 代替，当匹配到多个，选择后才跳转；
+也可以直接映射 `g<C-]>` 到 `<C-]>`：
+
+    nnoremap <C-]> g<C-]>
+
 #### GNU GLOBAL
-
-解决 CTRL-] 多处定义的跳转问题，提升 symbol 的查询质量。
-
-配置参考：[Vim using GLOBAL]。
 
     $ brew install global
 
-    $ vim ~/.vim/local/local.vimrc
-    " 加入以下内容
+配置参考：[Vim using GLOBAL]。
 
-    " 解决同一名称函数多处定义，使用 CTRL-] 的跳转问题
-    set cscopetag                 " 使用 cscope 作为 tags 命令
-    set cscopeprg=gtags-cscope    " 使用 gtags-cscope 代替 cscope
+    $ vim ~/.vim/local/local.vimrc
+
+    " 同时搜索 cscope 数据库和标签文件
+    set cscopetag
+
+    " 使用 gtags-cscope 代替 cscope
+    " gtags-cscope 会自动找环境变量 $GTAGSLIBPATH 所指定的 GTAGS 库
+    set cscopeprg=gtags-cscope
 
     " 让 gtags-cscope 自动连接到当前项目的 GTAGS 库
-    " gtags-cscope 同时会自动找环境变量 $GTAGSLIBPATH 所指定的 GTAGS 库
     let GtagsCscope_Auto_Load = 1
-    silent! source /usr/local/share/gtags/gtags-cscope.vim
+    " 只有一个匹配时，不弹出 quickfix 选择窗口
+    let g:Gtags_Close_When_Single = 1
 
-    " 提供 :Gtags 查询命令，类似 global 的命令格式
+    silent! source /usr/local/share/gtags/gtags-cscope.vim
     silent! source /usr/local/share/gtags/gtags.vim
+
+    " 跳转到定义
+    "nnoremap <C-]> :Gtags<CR><CR>
+    " 跳转到被调用（查看被调用）
+    "nnoremap <C-[> :Gtags -r<CR><CR>
 
 #### 参考
 
