@@ -1,6 +1,4 @@
-个人 Vim 配置.
-
-![截图](preview.png)
+![截图](https://i.imgur.com/R6rnKhO.png)
 
 #### 使用
 
