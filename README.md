@@ -18,12 +18,12 @@ windows cmd.exe:
 
 #### 自定义本地配置
 
-通过编辑 `local/local.vimrc` 文件自定义本地配置，编辑之后重新打开
-vim，或者在 vim 命令行中执行 `:source local/local.vimrc` 使配置生效。
+通过编辑 `~/.vim/local/local.vimrc` 文件自定义本地配置，编辑之后在 vim 命令行中执行
+`:source ~/.vim/local/local.vimrc` ，或者重新打开 vim使配置生效。
 
 #### 插件管理
 
-通过编辑 `local/local.bundles.vim` 文件自定义插件配置。
+通过编辑 `~/.vim/local/local.bundles.vim` 文件自定义插件配置。
 
 这里以 [Vundle](https://github.com/VundleVim/Vundle.vim) 插件管理器为例:
 
@@ -31,7 +31,7 @@ vim，或者在 vim 命令行中执行 `:source local/local.vimrc` 使配置生�
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-编辑 `local/local.bundles.vim` 文件内容为：
+编辑 `~/.vim/local/local.bundles.vim` 文件内容为：
 
     filetype off                  " required
 
@@ -46,7 +46,11 @@ vim，或者在 vim 命令行中执行 `:source local/local.vimrc` 使配置生�
     Plugin 'ap/vim-buftabline'
     Plugin 'scrooloose/nerdtree'
 
-    " Plugin 'Shougo/neocomplete.vim'
+    " if has('nvim')
+    "     Plugin 'Shougo/deoplete.nvim'
+    " elseif has('lua')
+    "     Plugin 'Shougo/neocomplete.vim'
+    " endif
     " Plugin 'kshenoy/vim-signature'
     " Plugin 'majutsushi/tagbar'
     " ...
