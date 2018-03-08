@@ -92,6 +92,11 @@ set matchtime=3
 " 突出显示当前行
 "set cursorline
 
+" truecolor
+if has('termguicolors')
+    set termguicolors
+endif
+
 " }}}
 " ==================== 命令行 ==================== {{{
 
