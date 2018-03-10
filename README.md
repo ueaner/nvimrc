@@ -64,3 +64,20 @@ Vim 命令行执行安装:
     :PluginInstall
 
 等待少许时间, 配置的插件就安装完成了。
+
+#### Vim 与 Tmux 共享剪切板
+
+编辑 `~/.vim/local/local.bundles.vim` 文件，添加以下插件：
+
+    Plugin 'tmux-plugins/vim-tmux-focus-events'
+    Plugin 'roxma/vim-tmux-clipboard'
+
+Vim 命令行执行安装:
+
+    :PluginInstall
+
+编辑 `~/.tmux.conf` 添加对应的配置：
+
+    set -g focus-events on
+
+重新打开 tmux 和 vim 即可。
