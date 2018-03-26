@@ -18,20 +18,18 @@ windows cmd.exe:
 
 #### 自定义本地配置
 
-通过编辑 `~/.vim/local/local.vimrc` 文件自定义本地配置，编辑之后在 vim 命令行中执行
-`:source ~/.vim/local/local.vimrc` ，或者重新打开 vim使配置生效。
+通过编辑 `~/.vim/local/vimrc` 文件自定义本地配置，编辑之后在 vim 命令行中执行
+`:source ~/.vim/local/vimrc` ，或者重新打开 vim使配置生效。
 
 #### 插件管理
 
-通过编辑 `~/.vim/local/local.bundles.vim` 文件自定义插件配置。
-
-这里以 [Vundle](https://github.com/VundleVim/Vundle.vim) 插件管理器为例:
+这里以 [Vundle] 插件管理器为例:
 
 首先下载 Vundle 插件管理器：
 
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-编辑 `~/.vim/local/local.bundles.vim` 文件内容为：
+编辑 `~/.vim/local/vimrc` 文件，添加以下内容：
 
     filetype off                  " required
 
@@ -67,7 +65,9 @@ Vim 命令行执行安装:
 
 #### Vim 与 Tmux 共享剪切板
 
-编辑 `~/.vim/local/local.bundles.vim` 文件，添加以下插件：
+以 [Vundle] 插件管理器为例。
+
+编辑 `~/.vim/local/vimrc` 文件，添加以下插件：
 
     Plugin 'tmux-plugins/vim-tmux-focus-events'
     Plugin 'roxma/vim-tmux-clipboard'
@@ -81,3 +81,6 @@ Vim 命令行执行安装:
     set -g focus-events on
 
 重新打开 tmux 和 vim 即可。
+
+
+[Vundle]: https://github.com/VundleVim/Vundle.vim

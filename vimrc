@@ -11,8 +11,7 @@
 " │   └── php.dict
 " ├── local
 " │   ├── undodir
-" │   ├── local.bundles.vim  本地插件配置，会自动加载
-" │   └── local.vimrc        本地 vimrc 配置，会自动加载
+" │   └── vimrc              自定义本地配置，会自动加载
 " ├── support                一些支持性的脚本及文件
 " ├── vimrc                  主配置文件
 " └── gvimrc                 gvim/macvim 配置
@@ -64,17 +63,6 @@ set nowritebackup
 set noswapfile
 " 文件改变自动读入
 set autoread
-
-" }}}
-" ==================== 加载本地插件管理配置文件 ==================== {{{
-
-" 引入插件管理配置文件
-if &loadplugins
-    silent! source $VIMHOME/local/local.bundles.vim
-endif
-
-" 为特定的文件类型载入相应的插件
-filetype plugin indent on
 
 " }}}
 " ==================== 外观 ==================== {{{
@@ -385,6 +373,9 @@ endif
 " }}}
 " ==================== 加载本地配置 ==================== {{{
 
-silent! source $VIMHOME/local/local.vimrc
+silent! source $VIMHOME/local/vimrc
+
+" 为特定的文件类型载入相应的插件
+filetype plugin indent on
 
 " }}}
