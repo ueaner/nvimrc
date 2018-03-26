@@ -1,4 +1,4 @@
-![截图](https://i.imgur.com/R6rnKhO.png)
+![截图](https://i.imgur.com/ScFMDYe.png)
 
 #### 使用
 
