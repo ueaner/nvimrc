@@ -50,6 +50,22 @@ else
 endif
 
 " }}}
+" ==================== 文件编码与备份 ==================== {{{
+
+" vim 内部编码(buffer,菜单文本[gvim],消息文本等), :help ++enc
+set encoding=utf-8
+" utf-8 编码, 去除 BOM
+set fileencoding=utf-8 nobomb
+" 换行符格式, Line Endings, :help ++ff
+set fileformats=unix,dos,mac
+" 不生成备份文件, 和 .swp 文件
+set nobackup
+set nowritebackup
+set noswapfile
+" 文件改变自动读入
+set autoread
+
+" }}}
 " ==================== 加载本地插件管理配置文件 ==================== {{{
 
 " 引入插件管理配置文件
@@ -128,22 +144,6 @@ silent! set foldlevel=10
 
 " 使用空格关闭／打开折叠
 nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<space>")<CR>
-
-" }}}
-" ==================== 文件编码与备份 ==================== {{{
-
-" vim 内部编码(buffer,菜单文本[gvim],消息文本等), :help ++enc
-set encoding=utf-8
-" utf-8 编码, 去除 BOM
-set fileencoding=utf-8 nobomb
-" 换行符格式, Line Endings, :help ++ff
-set fileformats=unix,dos,mac
-" 不生成备份文件, 和 .swp 文件
-set nobackup
-set nowritebackup
-set noswapfile
-" 文件改变自动读入
-set autoread
 
 " }}}
 " ==================== 搜索 ==================== {{{
