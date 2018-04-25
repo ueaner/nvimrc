@@ -104,8 +104,13 @@ endif
 " }}}
 " ==================== 命令行 ==================== {{{
 
+" nvim 下命令行补全忽略文件名大小写
+set wildignorecase
+
 " 命令行列出所有的补全可能性, 配合 <C-N>, <C-P> 使用
-set wildmode=longest,list
+if !has('nvim')
+    set wildmode=longest,list
+endif
 cnoremap <C-A> <Home>
 cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
