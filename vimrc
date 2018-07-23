@@ -86,9 +86,9 @@ set number
 " 打开语法高亮
 syntax on
 " 准确的语法高亮和屏幕刷新速度的折衷
-syntax sync minlines=256
+"syntax sync minlines=256
 " 文件高亮的最大列数, 超出此列数后续行不一定能正确高亮
-set synmaxcol=200
+"set synmaxcol=200
 " 括号匹配，依赖 $VIMRUNTIME/plugin/matchparen.vim
 set showmatch
 " 跳转到匹配括号的停留时间 0.3s
