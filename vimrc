@@ -97,7 +97,7 @@ set matchtime=3
 "set cursorline
 
 " truecolor
-if has('termguicolors')
+if has('termguicolors') && $COLORTERM == 'truecolor'
     set termguicolors
 endif
 
