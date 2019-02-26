@@ -191,7 +191,7 @@ vnoremap <silent> # :<C-u>call VisualSelection()<CR>?<C-R>=@/<CR><CR>
 
 function! VisualSelection() range
     let l:saved_reg = @"
-    execute "normal! vgvy"
+    exec "normal! vgvy"
 
     let l:pattern = escape(@", "\\/.*'$^~[]")
     let l:pattern = substitute(l:pattern, "\n$", "", "")
@@ -282,10 +282,10 @@ function! CloseSplitOrDeleteBuffer()
     let curBuf = bufnr('%')
     wincmd w                    " try to move on next split
     if winnr() == curNr         " there is no split
-        exe 'bdelete'
+        exec 'bdelete'
     elseif curBuf != bufnr('%') " there is split with another buffer
         wincmd W                " move back
-        exe 'bdelete'
+        exec 'bdelete'
     else                        " there is split with same buffer"
         wincmd W
         wincmd c
@@ -302,15 +302,15 @@ function! CloseOtherBuffers(...)
     for bufNum in bufNums
         if range ==# 'others'    " 关闭其他 buffer
             if bufNum != curBufNum
-                exe 'bdelete ' . bufNum
+                exec 'bdelete ' . bufNum
             endif
         elseif range ==# 'left'  " 关闭左侧 buffer
             if bufNum < curBufNum
-                exe 'bdelete ' . bufNum
+                exec 'bdelete ' . bufNum
             endif
         elseif range ==# 'right' " 关闭右侧 buffer
             if bufNum > curBufNum
-                exe 'bdelete ' . bufNum
+                exec 'bdelete ' . bufNum
             endif
         endif
     endfor
