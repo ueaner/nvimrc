@@ -108,4 +108,7 @@ Vim 命令行执行安装:
 
 重新打开 tmux 和 vim 即可。
 
+点击查看详细 [.tmux.conf] 配置。
+
 [Vundle]: https://github.com/VundleVim/Vundle.vim
+[.tmux.conf]: https://github.com/ueaner/dotfiles/blob/master/.tmux.conf
