@@ -209,8 +209,8 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <leader>k wb/\<<C-R><C-W>\>/e<CR>
 
 " 对较长行自动换行时，可以作为多行上下移动
-map j gj
-map k gk
+noremap j gj
+noremap k gk
 
 " 复制到行尾，类似大写的 C 和 D 操作
 nnoremap Y y$
@@ -243,7 +243,7 @@ nnoremap <leader>x :e $MYVIMRC<CR>
 nnoremap <C-]> g<C-]>
 
 " }}}
-" ==================== 插入模式下 readline 命令行风格键映射 ==================== {{{
+" ==================== 插入模式下 Emacs 风格键映射 ==================== {{{
 
 " 移动: 行首/行尾
 inoremap <C-A> <Home>
@@ -270,9 +270,12 @@ set switchbuf=useopen
 " 新窗口在下右方打开
 set splitbelow splitright
 
-" 切换 buffer, 也可以映射为 gb/gB 类似 tab 的 gt/gT 操作
-nnoremap <expr> <TAB> &buftype == "" ? ":bn\<CR>" : ''
-nnoremap <expr> <S-TAB> &buftype == "" ? ":bp\<CR>" : ''
+" 释放 <TAB> 键，保留 CTRL-I/CTRL-O 的跳转表动作
+"nnoremap <expr> <TAB> &buftype == "" ? ":bn\<CR>" : ''
+"nnoremap <expr> <S-TAB> &buftype == "" ? ":bp\<CR>" : ''
+" 切换 buffer，类似 tab 的 gT/gt 操作
+nnoremap <expr> gB &buftype == "" ? ":bp\<CR>" : ''
+nnoremap <expr> gb &buftype == "" ? ":bn\<CR>" : ''
 " 切换到上一个打开的 buffer, 同 CTRL-^
 nnoremap <expr> <leader><leader> &buftype == "" ? ":e#\<CR>" : ''
 
