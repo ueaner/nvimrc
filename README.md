@@ -82,5 +82,30 @@ Vim 命令行执行安装:
 
 重新打开 tmux 和 vim 即可。
 
+#### Vim 与 Tmux 使用系统剪切板
+
+以下版本 macOS 下亲测可用，其他版本和桌面系统未测试，推荐使用最新版本：
+
+1. vim 8.1.2100
+2. tmux 2.9a (即便是远程运行的 tmux 复制的内容也可以到本地系统剪切板)
+
+编辑 `~/.vim/local/vimrc` 文件，添加以下配置：
+
+    set clipboard^=unnamed
+    set clipboard^=unnamedplus
+
+编辑 `~/.tmux.conf` 添加以下配置：
+
+    # vim keybindings
+    setw -g mode-keys vi
+
+    bind Escape copy-mode
+
+    # vim copy selection
+    bind -T copy-mode-vi v send-keys -X begin-selection
+    bind -T copy-mode-vi C-v send-keys -X rectangle-toggle \; send-keys -X begin-selection
+    bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+重新打开 tmux 和 vim 即可。
 
 [Vundle]: https://github.com/VundleVim/Vundle.vim
