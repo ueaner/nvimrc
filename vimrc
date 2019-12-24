@@ -329,7 +329,7 @@ nnoremap <leader>Q :call CloseOtherBuffers()<CR>
 nnoremap + :only<CR>
 
 " :b <pattern> <TAB> 「如果匹配到多个，使用 <C-N>/<C-P> 选择」
-nnoremap <leader>l :ls<CR>:b<space>
+nnoremap <leader>b :ls<CR>:b<space>
 
 " }}}
 " ==================== statusline ==================== {{{
@@ -353,7 +353,7 @@ set pumheight=10
 
 " Better Completion, :help completeopt@en
 set complete=.,w,b,u,t
-set completeopt=longest,menuone
+set completeopt=longest,menuone,noinsert
 
 " 有补全菜单进行补全，否则插入回车
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
