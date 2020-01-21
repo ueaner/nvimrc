@@ -17,13 +17,7 @@
 " └── gvimrc                 gvim/macvim 配置
 "
 " }}}
-" ==================== GLOBAL ==================== {{{
-
-" 关闭兼容模式
-set nocompatible
-
-set ttyfast
-set lazyredraw
+" ==================== leader ==================== {{{
 
 let mapleader = ','
 let g:mapleader = ','
@@ -73,11 +67,9 @@ set fillchars=vert:\ ,fold:-
 "let &scrolloff=&lines
 " 光标滚动时屏幕上下保留 3 行
 set scrolloff=3
-" 显示状态栏
+" 显示状态栏，配合 statusline 使用
 set laststatus=2
-" 状态栏/右下角显示行号和列号
-set ruler
-" 显示命令字符
+" 在屏幕右下角显示未完成的指令输入
 set showcmd
 " 显示当前模式
 set showmode
@@ -97,6 +89,7 @@ set matchtime=3
 "set cursorline
 
 " truecolor
+" echo $TERM_PROGRAM  Apple_Terminal  iTerm.app
 if has('termguicolors') && $COLORTERM == 'truecolor'
     set termguicolors
 endif
@@ -289,7 +282,7 @@ function! CloseSplitOrDeleteBuffer()
     elseif curBuf != bufnr('%') " there is split with another buffer
         wincmd W                " move back
         exec 'bdelete'
-    else                        " there is split with same buffer"
+    else                        " there is split with same buffer
         wincmd W
         wincmd c
     endif
