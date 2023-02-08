@@ -1,0 +1,116 @@
+lua <<EOF
+--local dap = require('dap');
+--dap.set_log_level('TRACE');
+
+-- require('dbg.rust')
+-- require('dbg.go')
+
+-- require('lua.dap').post()
+  --require("dapui").setup({
+  --  floating = {
+  --    max_width = 0.5,
+  --    max_height = 0.5,
+  --  }
+  --})
+
+--  dap.defaults.fallback.external_terminal = {
+--    command = '/usr/local/bin/alacritty';
+--    args = {'-e'};
+--  }
+--
+--
+--  dap.adapters.go = {
+--    type = "executable",
+--    command = "node",
+--    args = {os.getenv("HOME") .. "/.vscode/extensions/golang.go-0.24.1/dist/debugAdapter.js"}
+--  }
+--  -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+--  dap.configurations.go = {
+--    {
+--      type = "go",
+--      name = "Debug",
+--      request = "launch",
+--      program = "${file}",
+--      dlvToolPath = vim.fn.exepath("dlv")
+--    }
+--  }
+
+ -- dap.adapters.go = function(callback, config)
+  --   local handle
+  --   local pid_or_err
+  --   local port = 38697
+  --   handle, pid_or_err =
+  --     vim.loop.spawn(
+  --     "dlv",
+  --     {
+  --       args = {"dap", "-l", "127.0.0.1:" .. port},
+  --       detached = true
+  --     },
+  --     function(code)
+  --       handle:close()
+  --       print("Delve exited with exit code: " .. code)
+  --     end
+  --   )
+  --   -- Wait 100ms for delve to start
+  --   vim.defer_fn(
+  --     function()
+  --       --dap.repl.open()
+  --       callback({type = "server", host = "127.0.0.1", port = port})
+  --     end,
+  --     100)
+
+
+  --   --callback({type = "server", host = "127.0.0.1", port = port})
+  -- end
+  -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+  -- dap.configurations.go = {
+  --   {
+  --     type = "go",
+  --     name = "Debug",
+  --     request = "launch",
+  --     program = "${file}"
+  --   }
+  -- }
+
+  -- -- dapui
+  -- require("dapui").setup({
+  -- icons = {
+  --   expanded = "⯆",
+  --   collapsed = "⯈",
+  --   circular = "↺"
+  -- },
+  -- mappings = {
+  --   expand = "<CR>",
+  --   open = "o",
+  --   remove = "d"
+  -- },
+  -- sidebar = {
+  --   elements = {
+  --     -- You can change the order of elements in the sidebar
+  --     "scopes",
+  --     "stacks",
+  --     "watches"
+  --   },
+  --   width = 40,
+  --   position = "left" -- Can be "left" or "right"
+  -- },
+  -- tray = {
+  --   elements = {
+  --     "repl"
+  --   },
+  --   height = 10,
+  --   position = "bottom" -- Can be "bottom" or "top"
+  -- }
+--})
+
+EOF
+
+"if has('nvim-0.5')
+"    if match(&runtimepath, 'nvim-lsp') != -1
+"        "runtime lsp.vim
+"        lua require'nvim_lsp'.gopls.setup{}
+"        " Use LSP omni-completion in go files
+"        " vim-go 在配置了 g:go_code_completion_enabled = 1 则会设置 omnifunc 补全
+"        autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
+"    endif
+"endif

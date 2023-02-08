@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # vim-phptags.sh
 # 当前脚本用来生成 GTAGS 库，请按具体需求修改以下 find 命令中的参数
 #

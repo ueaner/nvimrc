@@ -1,0 +1,17 @@
+set nocompatible
+set encoding=utf-8
+set fileencoding=utf-8 nobomb
+set nobackup
+set nowritebackup
+set noswapfile
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+set autoindent smartindent
+set backspace=indent,eol,start
+
+set noerrorbells
+set visualbell t_vb=

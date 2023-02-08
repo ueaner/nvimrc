@@ -1,0 +1,192 @@
+
+vim.cmd("set foldmethod=expr foldexpr=nvim_treesitter#foldexpr()")
+-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+
+-- :TSUpdate  更新相关依赖
+-- :TSInstall go
+-- :TSInstall tsx
+-- :TSInstall typescript
+-- :TSInstall lua
+-- :TSConfigInfo 可以看到配置信息
+require "nvim-treesitter.configs".setup({
+    highlight = {
+        enable = true, -- false will disable the whole extension
+        -- disable = {"go", "markdown"} -- list of language that will be disabled
+        additional_vim_regex_highlighting = false,
+    },
+    indent = {
+        enable = true
+    }
+})
+
+-- require "nvim-treesitter.configs".setup(
+--     {
+--       highlight = {
+--         enable = true, -- false will disable the whole extension
+--         disable = {} -- list of language that will be disabled
+--       },
+--       query_linter = {
+--         enable = true,
+--         lint_events = {"BufWrite"}
+--       },
+--       tree_docs = {
+--         enable = true,
+--         keymaps = {
+--           doc_node_at_cursor = "<leader>GDD",
+--           doc_all_in_range = "<leader>GDD"
+--         }
+--       },
+--       playground = {
+--         enable = true
+--       },
+--       incremental_selection = {
+--         -- this enables incremental selection
+--         enable = true,
+--         disable = {}
+--         --keymaps = {
+--         --init_selection = "<enter>", -- maps in normal mode to init the node/scope selection
+--         --node_incremental = "<enter>", -- increment to the upper named parent
+--         --scope_incremental = "Ts", -- increment to the upper scope (as defined in locals.scm)
+--         --node_decremental = "<bs>"
+--         --}
+--       },
+--       node_movement = {
+--         enable = true,
+--         highlight_current_node = true,
+--         keymaps = {
+--           move_up = "<a-k>",
+--           move_down = "<a-j>",
+--           move_left = "<a-h>",
+--           move_right = "<a-l>",
+--           swap_up = "<s-a-k>",
+--           swap_left = "<s-a-h>",
+--           swap_right = "<s-a-l>",
+--           select_current_node = "<cr>"
+--         },
+--         allow_switch_parents = true,
+--         allow_next_parent = true
+--       },
+--       rainbow = {
+--         enable = false,
+--         extended_mode = {
+--           latex = true
+--         }
+--       },
+--       autotag = {
+--         enable = true
+--       },
+--       pairs = {
+--         enable = true,
+--         highlight_pair_events = {},
+--         highlight_self = false,
+--         goto_right_end = false,
+--         fallback_cmd_normal = "call matchit#Match_wrapper('',1,'n')",
+--         keymaps = {
+--           goto_partner = "%"
+--           --delete_balanced = "x"
+--         },
+--         delete_balanced = {
+--           only_on_first_char = true,
+--           fallback_cmd_normal = "normal! x",
+--           longest_partner = true
+--         }
+--       },
+--       textobjects = {
+--         select = {
+--           enable = true,
+--           disable = {},
+--           keymaps = {
+--             ["af"] = "@function.outer",
+--             ["if"] = "@function.inner",
+--             ["aC"] = "@class.outer",
+--             ["iC"] = "@class.inner",
+--             ["ac"] = "@conditional.outer",
+--             ["ic"] = "@conditional.inner",
+--             ["ae"] = "@block.outer",
+--             ["ie"] = "@block.inner",
+--             ["al"] = "@loop.outer",
+--             ["il"] = "@loop.inner",
+--             ["is"] = "@statement.inner",
+--             ["as"] = "@statement.outer",
+--             ["ad"] = "@lhs.inner",
+--             ["id"] = "@rhs.inner",
+--             ["am"] = "@call.outer",
+--             ["im"] = "@call.inner",
+--             ["iM"] = "@frame.inner",
+--             ["aM"] = "@frame.outer",
+--             ["aS"] = {"@scope", "locals"} -- selects `@scope` from locals.scm
+--           }
+--         },
+--         swap = {
+--           enable = true,
+--           super_repeat = {["<c-ü>"] = "h"},
+--           swap_next = {
+--             ["<leader>ä"] = "@parameter.inner",
+--             ["<a-f>"] = "@function.outer",
+--             ["<a-s>"] = {"@scope", "locals"}
+--           },
+--           swap_previous = {
+--             ["<leader>Ä"] = "@parameter.inner",
+--             ["<a-F>"] = "@function.outer",
+--             ["<a-S>"] = {"@scope", "locals"}
+--           }
+--         },
+--         lsp_interop = {
+--           enable = true,
+--           peek_definition_code = {
+--             ["<leader>df"] = "@function.outer",
+--             ["<leader>dF"] = "@class.outer"
+--           },
+--           peek_type_definition_code = {
+--             ["<leader>TF"] = "@class.outer"
+--           }
+--         },
+--         move = {
+--           enable = true,
+--           set_jumps = false,
+--           goto_next_start = {
+--             ["öö"] = {"@definition.function", "locals"}
+--           },
+--           goto_previous_start = {
+--             ["ÖÖ"] = {"@definition.function", "locals"}
+--           }
+--         }
+--       },
+--       fold = {
+--         enable = true
+--       },
+--       refactor = {
+--         highlight_current_scope = {
+--           enable = false,
+--           inverse_highlighting = true,
+--           disable = {"python"}
+--         },
+--         highlight_definitions = {
+--           enable = false,
+--           disable = {"cpp", "c", "javascript", "typescript"}
+--         },
+--         smart_rename = {
+--           enable = true,
+--           disable = {},
+--           keymaps = {
+--             smart_rename = "grr"
+--           }
+--         },
+--         navigation = {
+--           enable = true,
+--           disable = {},
+--           keymaps = {
+--             goto_definition = "gnd",
+--             list_definitions = "gnD",
+--             goto_next_usage = "<a-*>",
+--             goto_previous_usage = "<a-#>"
+--           }
+--         }
+--       },
+--       indent = {
+--         enable = true
+--       }
+--       --ensure_installed = "all",
+--       --update_strategy = "do not use lockfile, please!"
+--     }
+--   )

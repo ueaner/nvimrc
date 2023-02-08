@@ -1,0 +1,125 @@
+
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:711 ]	"request"	{
+  arguments = {
+    adapterID = "nvim-dap",
+    clientId = "neovim",
+    clientname = "neovim",
+    columnsStartAt1 = true,
+    linesStartAt1 = true,
+    locale = "zh_CN.UTF-8",
+    pathFormat = "path",
+    supportsRunInTerminalRequest = true,
+    supportsVariableType = true
+  },
+  command = "initialize",
+  seq = 0,
+  type = "request"
+}
+[ ERROR ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:618 ]	"stderr"	{
+  args = { "/Users/ueaner/.config/nvim/vscode-extensions/vscode-go-0.24.2/dist/debugAdapter.js" },
+  command = "node",
+  type = "executable"
+}	"(node:43213) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.\n(Use `node --trace-deprecation ...` to show where the warning was created)\n"
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:485 ]	{
+  body = {
+    supportsConditionalBreakpoints = true,
+    supportsConfigurationDoneRequest = true,
+    supportsSetVariable = true
+  },
+  command = "initialize",
+  request_seq = 0,
+  seq = 1,
+  success = true,
+  type = "response"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:711 ]	"request"	{
+  arguments = {
+    dlvToolPath = "/Users/ueaner/go/bin/dlv",
+    name = "Local File Debugger",
+    program = "a.go",
+    request = "launch",
+    type = "go"
+  },
+  command = "launch",
+  seq = 1,
+  type = "request"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:485 ]	{
+  body = {
+    category = "stdout",
+    output = "API server listening at: 127.0.0.1:42584\n"
+  },
+  event = "output",
+  seq = 2,
+  type = "event"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:485 ]	{
+  event = "initialized",
+  seq = 3,
+  type = "event"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:711 ]	"request"	{
+  arguments = {
+    breakpoints = { {
+        line = 28
+      } },
+    lines = { 28 },
+    source = {
+      name = "a.go",
+      path = "/private/tmp/go/a.go"
+    }
+  },
+  command = "setBreakpoints",
+  seq = 2,
+  type = "request"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:485 ]	{
+  command = "launch",
+  request_seq = 1,
+  seq = 4,
+  success = true,
+  type = "response"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:485 ]	{
+  body = {
+    breakpoints = { {
+        line = 28,
+        verified = false
+      } }
+  },
+  command = "setBreakpoints",
+  request_seq = 2,
+  seq = 5,
+  success = true,
+  type = "response"
+}
+[ INFO ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:411 ]	"Server rejected breakpoint"	{
+  line = 28,
+  verified = false
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:711 ]	"request"	{
+  command = "configurationDone",
+  seq = 3,
+  type = "request"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:485 ]	{
+  command = "configurationDone",
+  request_seq = 3,
+  seq = 6,
+  success = true,
+  type = "response"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:485 ]	{
+  body = {
+    category = "stdout",
+    output = "30 08/15/1990 09/09/2020\n30 08/15/1990 08/15/2020\n29 08/15/1990 08/14/2020\n1 08/15/1990 08/15/1991\n0 08/15/1990 08/14/1991\n"
+  },
+  event = "output",
+  seq = 7,
+  type = "event"
+}
+[ DEBUG ] 2021-05-08T03:01:11Z+0800 ] ...rs/ueaner/.cache/vim-bundle/nvim-dap/lua/dap/session.lua:485 ]	{
+  event = "terminated",
+  seq = 8,
+  type = "event"
+}
