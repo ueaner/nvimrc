@@ -18,8 +18,9 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.scrolloff = 3
 
+-- dont show mode since we have a statusline
+vim.opt.showmode = false
 vim.opt.laststatus = 3
-vim.opt.showmode = false -- dont show mode since we have a statusline
 
 -- :help spell-cjk  exclude CJK characters form spell checking
 vim.opt.spelllang = "en_us,cjk"
