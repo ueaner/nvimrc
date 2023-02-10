@@ -6,8 +6,9 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     ft = "http",
     keys = {
-      { "<leader>th", "<Plug>RestNvim", desc = "run request" }, -- 最好可以和 neotest 兼容使用 ,tt 发起请求
-      { "<leader>tl", "<Plug>RestNvimLast", desc = "run last request" },
+      -- 最好可以和 neotest 兼容使用 ,tt 发起请求
+      { "<leader>th", "<Plug>RestNvim", desc = "run http request" },
+      { "<leader>tl", "<Plug>RestNvimLast", desc = "run last http request" },
       { "<leader>tc", "<Plug>RestNvimPreview", desc = "preview cURL command" },
     },
     opts = {
@@ -33,6 +34,18 @@ return {
       env_file = ".env",
       custom_dynamic_variables = {},
       yank_dry_run = true,
+    },
+  },
+
+  -- grpc client
+  {
+    "hudclark/grpc-nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    ft = "grpc",
+    cmd = { "Grpc" },
+    keys = {
+      { "<leader>tg", "<cmd>Grpc<cr>", desc = "run grpc request" },
     },
   },
 
