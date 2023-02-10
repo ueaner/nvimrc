@@ -1,6 +1,7 @@
 return {
   {
     "iberianpig/tig-explorer.vim",
+    event = "VeryLazy",
     cmd = {
       "Tig",
       "TigOpenCurrentFile",
@@ -19,6 +20,7 @@ return {
   -- git diff view
   {
     "sindrets/diffview.nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     cmd = {
       "DiffviewOpen",
@@ -26,7 +28,7 @@ return {
       "DiffviewFileHistory",
       "DiffviewRefresh",
       "DiffviewToggleFiles",
-      "DiffviewFocusFiles"
+      "DiffviewFocusFiles",
     },
     keys = {
       { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview (all modified files)" },

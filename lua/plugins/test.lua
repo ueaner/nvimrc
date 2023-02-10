@@ -2,6 +2,7 @@ return {
   -- http client, treesitter: http, json
   {
     "rest-nvim/rest.nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     ft = "http",
     keys = {
@@ -38,6 +39,7 @@ return {
   -- neotest
   {
     "nvim-neotest/neotest",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",

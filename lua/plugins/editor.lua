@@ -160,6 +160,7 @@ return {
   -- folke/twilight.nvim: dims inactive portions of the code
   {
     "folke/zen-mode.nvim",
+    event = "VeryLazy",
     cmd = "ZenMode",
     opts = {
       window = {
