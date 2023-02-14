@@ -36,7 +36,7 @@ return {
       view = {
         adaptive_size = false,
         side = "left",
-        width = 35,
+        width = 36,
         hide_root_folder = true,
         mappings = {
           list = {
