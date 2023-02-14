@@ -8,7 +8,7 @@ return {
   -- file explorer
   {
     "kyazdani42/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
     keys = {
       { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer NvimTree (root dir)" },
     },

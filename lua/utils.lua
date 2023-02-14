@@ -59,7 +59,6 @@ M.toggle.clipboard = function()
   end
 end
 
--- winbar 更新频繁做数组合并操作
 M.toggle.all_to_winbar = function()
   local colors = require("tokyonight.colors").setup()
   local wb = {}
@@ -72,6 +71,79 @@ M.toggle.all_to_winbar = function()
   end
 
   return wb
+end
+
+-- database explorer toggle / restore file explorer state
+--
+--  Actual test conclusion: first close and then open, less side effects
+--  DE(database explorer) FE(file explorer)
+--    DE   FE     doings
+--    on   on     close DE
+--    on   off    close DE, open? FE (stored state is open then reopen file explorer)
+--    off  off    open DE
+--    off  on     open DE, close FE
+--
+M.toggle.db_explorer = function()
+  -- current state
+  local deOpened = M.toggle.dbui_is_visible()
+  local feOpened = require("nvim-tree.view").is_visible()
+  local tabnr = vim.api.nvim_get_current_tabpage()
+  local feOpenedName = "feOpened"
+
+  if deOpened then -- close DE, check FE state
+    local ok, feOpenedOld = pcall(vim.api.nvim_tabpage_get_var, tabnr, feOpenedName)
+    if ok then
+      vim.api.nvim_tabpage_del_var(tabnr, feOpenedName)
+    else
+      feOpenedOld = nil
+    end
+
+    vim.cmd.DBUIClose()
+    if not feOpened and feOpenedOld then -- reopen FE
+      vim.cmd.NvimTreeOpen()
+    end
+  else -- open DE, set FE state
+    vim.api.nvim_tabpage_set_var(tabnr, feOpenedName, feOpened)
+
+    if feOpened then
+      vim.cmd.NvimTreeClose()
+    end
+    vim.cmd.DBUI()
+  end
+
+  -- When `DE(off) FE(on)`, executing `open DE, close fe` page switching is not smooth
+  -- vim.cmd.DBUIToggle()
+  -- if deOpened ~= feOpened then
+  --   vim.cmd.NvimTreeToggle()
+  -- end
+end
+
+-- Checks if dbui is visible.
+--
+-- Return: ~
+--     dbui is visible
+--- @return boolean
+M.toggle.dbui_is_visible = function()
+  return M.winnr_by_filetype("dbui") > -1
+end
+
+-- Gets the winnr by filetype..
+--
+-- Return: ~
+--     window number
+--- @return integer
+M.winnr_by_filetype = function(ft)
+  if not ft or ft == "" or type(ft) ~= "string" then
+    return -1
+  end
+
+  local wins = vim.api.nvim_list_wins()
+  for _, nr in ipairs(wins) do
+    if ft == vim.fn.getwinvar(nr, "&filetype") then
+      return nr
+    end
+  end
+  return -1
 end
 
 M.dump = function(...)

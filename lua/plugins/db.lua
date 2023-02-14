@@ -13,8 +13,9 @@ return {
     },
     cmd = { "DB" },
     keys = {
-      -- TODO: restore nvimtree state
-      { "<leader>Du", "<cmd>NvimTreeClose | DBUIToggle<cr>", desc = "Toggle UI" },
+      -- stylua: ignore
+      { "<leader>E", function() require("utils").toggle.db_explorer() end, desc = "Toggle UI", },
+      { "<leader>Du", "<cmd>DBUIToggle<cr>", desc = "Toggle UI" },
       { "<leader>Da", "<cmd>DBUIAddConnection<cr>", desc = "Add Connection" },
       { "<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc = "Find buffer" },
       { "<leader>Dr", "<cmd>DBUIRenameBuffer<cr>", desc = "Rename buffer" },
