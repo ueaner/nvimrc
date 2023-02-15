@@ -29,31 +29,24 @@ return {
       vim.g.db_ui_notification_width = 32
     end,
     config = function()
-      local function db_completion()
-        print("cmp source db_completion")
-        require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
-      end
       local function autocmd()
-        vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "sql" },
-          command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
-        })
+        local utils = require("utils")
+        utils.on_ft("sql", function()
+          vim.opt_local["omnifunc"] = "vim_dadbod_completion#omni"
+        end)
+        utils.on_ft({ "sql", "mysql" }, function()
+          vim.schedule(function()
+            print("cmp source db_completion")
+            require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
+          end)
+        end)
 
-        vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "sql", "mysql" },
-          callback = function()
-            vim.schedule(db_completion)
-          end,
-        })
-        vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "dbui" },
-          callback = function()
-            -- 提示信息展示：只改变前景色和边框（如果支持边框的话，线条）
-            vim.api.nvim_set_hl(0, "NotificationInfo", { link = "Normal" })
-            vim.api.nvim_set_hl(0, "NotificationError", { link = "ErrorMsg" })
-            vim.api.nvim_set_hl(0, "WarningMsg", { link = "WarningMsg" })
-          end,
-        })
+        utils.on_ft("dbui", function()
+          -- 提示信息展示：只改变前景色和边框（如果支持边框的话，线条）
+          vim.api.nvim_set_hl(0, "NotificationInfo", { link = "Normal" })
+          vim.api.nvim_set_hl(0, "NotificationError", { link = "ErrorMsg" })
+          vim.api.nvim_set_hl(0, "WarningMsg", { link = "WarningMsg" })
+        end)
       end
       autocmd()
     end,

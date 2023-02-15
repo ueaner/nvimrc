@@ -3,10 +3,6 @@
 
 -- NOTE: :help CTRL-W_o  close other windows
 
-local daptest_augroup = "daptest"
--- lua library is only required once
-vim.api.nvim_create_augroup(daptest_augroup, { clear = true })
-
 local M = {
   buf = {},
   daptest = {},
@@ -30,14 +26,6 @@ M.buf.close_others = function()
       vim.cmd("bd " .. buf)
     end
   end
-end
-
-M.daptest.on_ft = function(ft, cb)
-  vim.api.nvim_create_autocmd("FileType", {
-    group = daptest_augroup,
-    pattern = ft,
-    callback = cb,
-  })
 end
 
 M.toggle.all = function()
@@ -133,7 +121,7 @@ end
 --     window number
 --- @return integer
 M.winnr_by_filetype = function(ft)
-  if not ft or ft == "" or type(ft) ~= "string" then
+  if M.is_empty(ft) or type(ft) ~= "string" then
     return -1
   end
 
@@ -144,6 +132,31 @@ M.winnr_by_filetype = function(ft)
     end
   end
   return -1
+end
+
+-- Create a FileType autocommand event handler.
+-- Examples:
+-- ```lua
+--    require("utils").on_ft("go", function(event)
+--    	vim.keymap.set("n", "<leader>dt", function()
+--    		require("dap-go").debug_test()
+--    	end, { desc = "debug test", buffer = event.buf })
+--    end, "daptest")
+-- ```
+--- @param ft string|array
+--- @param cb function|string
+--- @param group? string
+M.on_ft = function(ft, cb, group)
+  local opts = { pattern = ft, callback = cb }
+  if not M.is_empty(group) then
+    opts["group"] = group
+    vim.api.nvim_create_augroup(opts["group"], { clear = false })
+  end
+  vim.api.nvim_create_autocmd("FileType", opts)
+end
+
+M.is_empty = function(s)
+  return s == nil or s == ""
 end
 
 M.dump = function(...)

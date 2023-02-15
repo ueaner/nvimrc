@@ -66,7 +66,7 @@ return {
     },
     init = function()
       -- stylua: ignore
-      require("utils").daptest.on_ft("go", function(event)
+      require("utils").on_ft("go", function(event)
         vim.keymap.set("n", "<leader>dt", function() require("dap-go").debug_test() end, { desc = "debug test", buffer = event.buf })
         vim.keymap.set("n", "<leader>dT", function() require("dap-go").debug_last_test() end, { desc = "debug last test", buffer = event.buf })
       end)
