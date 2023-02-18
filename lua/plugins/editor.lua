@@ -1,7 +1,6 @@
 return {
   -- disable
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
-  { "ggandor/leap.nvim", enabled = false },
   { "echasnovski/mini.bufremove", enabled = false },
   { "echasnovski/mini.pairs", enabled = false },
 
