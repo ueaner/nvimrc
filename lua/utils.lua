@@ -143,7 +143,7 @@ end
 --    	end, { desc = "debug test", buffer = event.buf })
 --    end, "daptest")
 -- ```
---- @param ft string|array
+--- @param ft string|string[]
 --- @param cb function|string
 --- @param group? string
 M.on_ft = function(ft, cb, group)
