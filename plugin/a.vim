@@ -31,41 +31,43 @@ command! Stripspace call s:Stripspace()
 func CloseSplitOrDeleteBuffer()
   let currBuf = bufnr('%')
   " non normal buffer
-  " 通常使用中，主编辑区为 normal buffer, 而 nvimtree aerial.nvim 为 nofile buffer
+  " 通常使用中，主编辑区为 normal buffer (modifiable), 而 nvimtree aerial.nvim 为 nofile buffer
   " 非主编辑区的 buffer 可以直接关闭
   if &buftype != ""
     exec "confirm bd" . currBuf
     return
   endif
 
-  " normal buffer
-  " 如果选择了取消不需要切换 buf, 这里做一个简版的实现替换 confirm bd bufnumber
-  if &modified  " 文件更改未保存
-    let choice = confirm(printf("Save changes to \"%s\"?", bufname(currBuf)),
-          \ "&Yes\n&No\n&Cancel", 1)
-    if choice == 1          " Yes: 保存 切换 关闭
-      exec "update"
-      exec "bp"
-      exec "bd" . currBuf
-    elseif choice == 2      " No: 切换 强制关闭
-      exec "bp"
-      exec "bd!" . currBuf
-    else                    " Cancel: 取消不切换
-      echohl WarningMsg
-      echo "E516"
-      echohl None
-      echon ": No buffers were deleted: CloseSplitOrDeleteBuffer()"
-    endif
-  else          " 文件未更改或已保存, 切换 关闭
+  " normal buffer - File not modified or saved
+  if !&modified          " 切换 关闭
     exec "bp"
     exec "bd" . currBuf
+    return
+  endif
+
+  " normal buffer - File modified not saved
+  " 如果选择了取消不需要切换 buf, 这里做一个简版的实现替换 confirm bd bufnumber
+  let choice = confirm(printf("Save changes to \"%s\"?", bufname(currBuf)),
+        \ "&Yes\n&No\n&Cancel", 1)
+  if choice == 1          " Yes: 保存 切换 关闭
+    exec "update"
+    exec "bp"
+    exec "bd" . currBuf
+  elseif choice == 2      " No: 切换 强制关闭
+    exec "bp"
+    exec "bd!" . currBuf
+  else                    " Cancel: 取消不切换
+    echohl WarningMsg
+    echo "E516"
+    echohl None
+    echon ": No buffers were deleted: CloseSplitOrDeleteBuffer()"
   endif
 endfunc
 
 " Zoom / Restore window.
 func! s:ZoomToggle() abort
     if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
+        exec t:zoom_winrestcmd
         let t:zoomed = v:false
     else
         let t:zoom_winrestcmd = winrestcmd()
@@ -90,7 +92,7 @@ func! s:Exec(command)
     silent exec a:command
     redir END
     let @o = output
-    execute "put o"
+    exec "put o"
     return ''
 endfunc
 " :Exec verbose au BufRead
