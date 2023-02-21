@@ -11,6 +11,21 @@ func s:Repl()
 endfunc
 vmap <silent> <expr> p <sid>Repl()
 
+" Visual mode pressing * or # searches for the current selection
+" https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+func s:VisualSelection() range
+    let l:saved_reg = @"
+    exec "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunc
+vnoremap <silent> * :call <sid>VisualSelection()<cr>
+vnoremap <silent> # :call <sid>VisualSelection()<cr>
+
 " Remove Trailing Whitespace / ^M
 function! s:Stripspace()
     " Remove Trailing Whitespace
