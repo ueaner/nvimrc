@@ -25,8 +25,8 @@ return {
       vim.g.db_ui_save_location = vim.fn.stdpath("data") .. "/dbui"
       vim.g.db_ui_show_help = 0
       vim.g.db_ui_use_nerd_fonts = 1
-      vim.g.db_ui_winwidth = 36
-      vim.g.db_ui_notification_width = 32
+      vim.g.db_ui_winwidth = 40
+      vim.g.db_ui_notification_width = 36
     end,
     config = function()
       local function autocmd()

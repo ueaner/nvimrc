@@ -35,7 +35,7 @@ return {
       view = {
         adaptive_size = false,
         side = "left",
-        width = 36,
+        width = 40,
         hide_root_folder = true,
         mappings = {
           list = {
@@ -74,7 +74,7 @@ return {
     opts = {
       attach_mode = "global",
       backends = { "lsp", "treesitter", "markdown", "man" },
-      layout = { min_width = 35 },
+      layout = { min_width = 40 },
       show_guides = true,
       filter_kind = false,
       guides = {
