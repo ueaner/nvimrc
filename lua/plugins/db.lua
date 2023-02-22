@@ -9,7 +9,6 @@ return {
         "kristijanhusak/vim-dadbod-ui",
         cmd = { "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
       },
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql" } },
     },
     cmd = { "DB" },
     keys = {
@@ -29,26 +28,12 @@ return {
       vim.g.db_ui_notification_width = 36
     end,
     config = function()
-      local function autocmd()
-        local utils = require("utils")
-        utils.on_ft("sql", function()
-          vim.opt_local["omnifunc"] = "vim_dadbod_completion#omni"
-        end)
-        utils.on_ft({ "sql", "mysql" }, function()
-          vim.schedule(function()
-            print("cmp source db_completion")
-            require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
-          end)
-        end)
-
-        utils.on_ft("dbui", function()
-          -- 提示信息展示：只改变前景色和边框（如果支持边框的话，线条）
-          vim.api.nvim_set_hl(0, "NotificationInfo", { link = "Normal" })
-          vim.api.nvim_set_hl(0, "NotificationError", { link = "ErrorMsg" })
-          vim.api.nvim_set_hl(0, "WarningMsg", { link = "WarningMsg" })
-        end)
-      end
-      autocmd()
+      require("utils").on_ft("dbui", function()
+        -- 提示信息展示：只改变前景色和边框（如果支持边框的话，线条）
+        vim.api.nvim_set_hl(0, "NotificationInfo", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "NotificationError", { link = "ErrorMsg" })
+        vim.api.nvim_set_hl(0, "WarningMsg", { link = "WarningMsg" })
+      end)
     end,
   },
 }
