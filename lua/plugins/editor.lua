@@ -9,7 +9,7 @@ return {
     "kyazdani42/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
     keys = {
-      { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer NvimTree (root dir)" },
+      { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer NvimTree (root dir)", mode = { "n", "t" } },
     },
     -- :help nvim-tree-setup  view default options
     opts = {
