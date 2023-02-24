@@ -54,9 +54,9 @@ vim.keymap.set("n", "gw", "wb/<C-R><C-W>/e<cr>", { desc = "Highlighting word und
 vim.keymap.set("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
-vim.keymap.set("n", "<leader>bd", "<cmd>call CloseSplitOrDeleteBuffer()<cr>", { desc = "Delete Buffer" })
+vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Tab Close" })
 vim.keymap.set("n", "<leader>bD", function() require("utils").buf.close_others() end, { desc = "Delete Other Buffers" })
-vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Delete Other Buffers" })
+vim.keymap.set("n", "<leader>bd", "<cmd>call CloseSplitOrDeleteBuffer()<cr>", { desc = "Delete Buffer" })
 
 if vim.fn.executable("btop") == 1 then
   vim.keymap.set("n", "<leader>vb", function() require("lazyvim.util").float_term({ "btop" }) end, { desc = "btop" })
