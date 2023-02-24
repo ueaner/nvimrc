@@ -56,7 +56,7 @@ vim.keymap.set("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
 vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Tab Close" })
 vim.keymap.set("n", "<leader>bD", function() require("utils").buf.close_others() end, { desc = "Delete Other Buffers" })
-vim.keymap.set("n", "<leader>bd", "<cmd>call CloseSplitOrDeleteBuffer()<cr>", { desc = "Delete Buffer" })
+vim.keymap.set({"n", "t"}, "<leader>bd", "<cmd>call CloseSplitOrDeleteBuffer()<cr>", { desc = "Delete Buffer" })
 
 if vim.fn.executable("btm") then
   vim.keymap.set("n", "<leader>vb", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })

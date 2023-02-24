@@ -43,24 +43,32 @@ endfunc
 command! Stripspace call s:Stripspace()
 
 " 关闭当前 buffer, 避免影响编辑器布局
+"
+"  :echo &buftype &buflisted &modified &modifiable
+"
+"             buflisted  modified    buftype
+"   editor     1          0 | 1      <empty>
+"   terminal   0 | 1      0          terminal
+"   explorer   0          0          nofile
+"   outliner   0          0          nofile
+"   others     0          0          help | quickfix | prompt | acwrite | nowrite
+"
 func CloseSplitOrDeleteBuffer()
   let currBuf = bufnr('%')
-  " non normal buffer
-  " 通常使用中，主编辑区为 normal buffer (modifiable), 而 nvimtree aerial.nvim 为 nofile buffer
-  " 非主编辑区的 buffer 可以直接关闭
-  if &buftype != ""
-    exec "confirm bd" . currBuf
+  " no bufffer listed 可直接关闭
+  if !&buflisted
+    exec "bd!" . currBuf
     return
   endif
 
-  " normal buffer - File not modified or saved
+  " buffer listed - File not modified or saved
   if !&modified          " 切换 关闭
     exec "bp"
-    exec "bd" . currBuf
+    exec "bd!" . currBuf
     return
   endif
 
-  " normal buffer - File modified not saved
+  " buffer listed - File modified not saved
   " 如果选择了取消不需要切换 buf, 这里做一个简版的实现替换 confirm bd bufnumber
   let choice = confirm(printf("Save changes to \"%s\"?", bufname(currBuf)),
         \ "&Yes\n&No\n&Cancel", 1)
@@ -97,7 +105,7 @@ command! ZoomToggle call s:ZoomToggle()
 " Examples:
 " :call Exec('buffers')
 " This will include the output of :buffers into the current buffer.
-" 
+"
 " Also try:
 " :call Exec('ls')
 " :call Exec('autocmd')
