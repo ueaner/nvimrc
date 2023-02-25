@@ -17,13 +17,55 @@ M.buf.modified = function(bufnr)
   return vim.bo[bufnr].modified
 end
 
+-- Close the current buffer without affecting the editor layout
+--
+--  :echo &buftype &buflisted &modified &modifiable
+--
+--             buflisted  modified    buftype
+--   editor     1          0 | 1      <empty>
+--   terminal   0 | 1      0          terminal
+--   explorer   0          0          nofile
+--   outliner   0          0          nofile
+--   others     0          0          help | quickfix | prompt | acwrite | nowrite
+--
+M.buf.close = function(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  -- non-buflisted can be closed directly
+  if not vim.bo[bufnr].buflisted then
+    vim.cmd("bd!" .. bufnr)
+    return
+  end
+
+  -- buffer listed - File not modified or saved
+  if not vim.bo[bufnr].modified then -- switch, close
+    vim.cmd("bp | bd!" .. bufnr)
+    return
+  end
+
+  -- buffer listed - File modified not saved
+  -- If choose to `cancel`, not need to switch buffer, here is a simplified version of `:confirm bd bufnr`
+  local msg = string.format('Save changes to "%s"?', vim.api.nvim_buf_get_name(bufnr))
+  local choice = vim.fn.confirm(msg, "&Yes\n&No\n&Cancel", 1)
+  if choice == 1 then -- Yes: save, switch, close
+    vim.cmd("update | bp | bd" .. bufnr)
+  elseif choice == 2 then -- No: switch, force close
+    vim.cmd("bp | bd!" .. bufnr)
+  elseif choice == 3 then -- Cancel: do nothing
+    vim.api.nvim_echo(
+      { { "E516", "WarningMsg" }, { ": No buffers were deleted: utils.buf.close()", "None" } },
+      false,
+      {}
+    )
+  end
+end
+
 -- close other buffers under current window
 M.buf.close_others = function()
-  local bufs = vim.api.nvim_list_bufs()
-  local currBuf = vim.api.nvim_get_current_buf()
-  for _, buf in ipairs(bufs) do
-    if buf ~= currBuf and M.buf.valid(buf) and not M.buf.modified(buf) then
-      vim.cmd("bd " .. buf)
+  local bufnrs = vim.api.nvim_list_bufs()
+  local currBufnr = vim.api.nvim_get_current_buf()
+  for _, bufnr in ipairs(bufnrs) do
+    if bufnr ~= currBufnr and M.buf.valid(bufnr) and not M.buf.modified(bufnr) then
+      vim.cmd("bd " .. bufnr)
     end
   end
 end
