@@ -146,7 +146,7 @@ return {
       { "anuvyklack/middleclass" },
       { "anuvyklack/animation.nvim", enabled = false },
     },
-    keys = { { "<leader>z", "<cmd>WindowsMaximize<cr>", desc = "Zoom" } },
+    keys = { { "<leader>z", "<cmd>WindowsMaximize<cr>", desc = "Zoom", mode = { "n", "t" } } },
     config = function()
       vim.o.winwidth = 5
       vim.o.equalalways = false
