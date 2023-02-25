@@ -77,18 +77,25 @@ return {
         },
         window = { margin = { vertical = 0, horizontal = 1 } },
         render = function(props)
-          -- local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+          local bufnr = props.buf
+          local items = {}
+          local item = {}
+
+          item = { { "#" .. bufnr } }
+          vim.list_extend(items, item, 1, #item)
+
+          -- local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
           -- local icon, color = require("nvim-web-devicons").get_icon_color(filename)
-          -- stylua: ignore
-          return require("utils").toggle.all_to_winbar()
-          -- return {
-          --   -- { icon, guifg = color }, { " " }, { filename }, { "  " },
-          --   -- fscp
-          --   { "", guifg = (vim.opt.foldenable:get() and colors.orange or colors.blue) }, { "  " },
-          --   { "", guifg = (vim.opt.spell:get() and colors.orange or colors.blue) }, { "  " },
-          --   { "", guifg = (vim.tbl_contains(vim.opt.clipboard:get(), "unnamedplus") and colors.orange or colors.blue) }, { "  " },
-          --   { "", guifg = (vim.opt.paste:get() and colors.orange or colors.blue) },
-          -- }
+          -- item = { { " " }, { icon, guifg = color }, { " " }, { filename, guifg = colors.fg } }
+          -- vim.list_extend(contents, item, 1, #item)
+
+          local toggles = require("utils").toggle.all()
+          for _, t in ipairs(toggles) do
+            item = { { "  " }, { t[2], guifg = (t[3] and colors.orange or colors.blue) } }
+            vim.list_extend(items, item, 1, #item)
+          end
+
+          return items
         end,
       })
     end,

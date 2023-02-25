@@ -97,20 +97,6 @@ M.toggle.clipboard = function()
   end
 end
 
-M.toggle.all_to_winbar = function()
-  local colors = require("tokyonight.colors").setup()
-  local wb = {}
-  local tmp = {}
-
-  local toggles = M.toggle.all()
-  for _, item in ipairs(toggles) do
-    tmp = { { "  " }, { item[2], guifg = (item[3] and colors.orange or colors.blue) } }
-    vim.list_extend(wb, tmp, 1, #tmp)
-  end
-
-  return wb
-end
-
 -- database explorer toggle / restore file explorer state
 --
 --  Actual test conclusion: first close and then open, less side effects
