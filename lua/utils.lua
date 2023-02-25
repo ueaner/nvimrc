@@ -43,14 +43,22 @@ M.buf.close = function(bufnr)
   end
 
   -- buffer listed - File modified not saved
-  -- If choose to `cancel`, not need to switch buffer, here is a simplified version of `:confirm bd bufnr`
+  --
+  --  If choose to `cancel`, not need to switch buffer
+  --
+  --   #    choice    doings
+  --   1    Yes       save, switch, close
+  --   2    No        switch, force close
+  --   3    Cancel    do nothing
+  --
+  -- So here is a simplified version of `:confirm bd bufnr`
   local msg = string.format('Save changes to "%s"?', vim.api.nvim_buf_get_name(bufnr))
   local choice = vim.fn.confirm(msg, "&Yes\n&No\n&Cancel", 1)
-  if choice == 1 then -- Yes: save, switch, close
+  if choice == 1 then
     vim.cmd("update | bp | bd" .. bufnr)
-  elseif choice == 2 then -- No: switch, force close
+  elseif choice == 2 then
     vim.cmd("bp | bd!" .. bufnr)
-  elseif choice == 3 then -- Cancel: do nothing
+  elseif choice == 3 then
     vim.api.nvim_echo(
       { { "E516", "WarningMsg" }, { ": No buffers were deleted: utils.buf.close()", "None" } },
       false,
