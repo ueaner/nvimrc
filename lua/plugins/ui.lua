@@ -81,7 +81,7 @@ return {
           local items = {}
           local item = {}
 
-          item = { { "#" .. bufnr } }
+          item = { { "#" .. bufnr, guibg = colors.bg } }
           vim.list_extend(items, item, 1, #item)
 
           -- local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
