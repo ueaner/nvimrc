@@ -47,6 +47,7 @@ return {
         highlight_git = true,
         -- https://en.wikipedia.org/wiki/List_of_Unicode_characters
         -- https://www.nerdfonts.com/cheat-sheet
+        -- https://raw.githubusercontent.com/microsoft/vscode-codicons/main/dist/codicon.csv
         icons = {
           git_placement = "signcolumn", -- after, before or signcolumn
           glyphs = {
