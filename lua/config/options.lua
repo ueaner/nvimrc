@@ -12,6 +12,9 @@ vim.opt.linebreak = true
 vim.opt.fillchars = { fold = " ", eob = " " }
 vim.opt.whichwrap:append("<>[]")
 
+-- Text is shown normally
+vim.opt.conceallevel = 0
+
 vim.opt.numberwidth = 2
 vim.opt.relativenumber = false
 vim.opt.cursorline = true
