@@ -21,6 +21,8 @@ return {
         "golangci-lint-langserver", -- Wraps golangci-lint as a language server
         --"staticcheck",
         "delve",
+        -- typescript/javascript
+        "prettierd",
       },
     },
   },
@@ -41,6 +43,8 @@ return {
           nls.builtins.formatting.shfmt,
           -- golang
           nls.builtins.formatting.goimports,
+          -- typescript/javascript
+          nls.builtins.formatting.prettierd,
         },
       }
     end,
