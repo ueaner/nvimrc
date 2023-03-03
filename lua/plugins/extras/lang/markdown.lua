@@ -16,4 +16,17 @@ return {
       { "<leader>ut", "<cmd>TableModeToggle<cr>", desc = "Toggle Table Mode" },
     },
   },
+
+  -- markdown preview
+  {
+    "ellisonleao/glow.nvim",
+    --event = "VeryLazy",
+    cmd = { "Glow" },
+    -- keys = {
+    --   { "<leader>um", "<cmd>Glow!<cr>", desc = "Toggle Markdown Previewer" },
+    -- },
+    config = function()
+      require("glow").setup()
+    end,
+  },
 }
