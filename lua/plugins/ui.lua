@@ -1,8 +1,4 @@
 return {
-  -- disable
-  { "catppuccin/nvim", name = "catppuccin", enabled = false },
-  { "goolord/alpha-nvim", enabled = false },
-
   -- statusline
   {
     "nvim-lualine/lualine.nvim",

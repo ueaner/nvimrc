@@ -1,9 +1,4 @@
 return {
-  -- disable
-  { "nvim-neo-tree/neo-tree.nvim", enabled = false },
-  { "echasnovski/mini.bufremove", enabled = false },
-  { "echasnovski/mini.pairs", enabled = false },
-
   -- file explorer
   {
     "kyazdani42/nvim-tree.lua",
