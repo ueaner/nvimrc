@@ -21,7 +21,7 @@ return {
         "golangci-lint-langserver", -- Wraps golangci-lint as a language server
         --"staticcheck",
         "delve",
-        -- typescript/javascript
+        -- Use `prettierd` formatting markdown files
         "prettierd",
       },
     },
@@ -43,8 +43,10 @@ return {
           nls.builtins.formatting.shfmt,
           -- golang
           nls.builtins.formatting.goimports,
-          -- typescript/javascript
-          nls.builtins.formatting.prettierd,
+          -- markdown
+          nls.builtins.formatting.prettierd.with({
+            filetypes = { "markdown" },
+          }),
         },
       }
     end,
