@@ -64,6 +64,9 @@ return {
               workspace = {
                 library = {
                   "~/.config/luameta",
+                  -- Make the server aware of Neovim runtime files
+                  vim.fn.expand("$VIMRUNTIME/lua"),
+                  vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
                 },
                 checkThirdParty = false,
               },
@@ -76,6 +79,7 @@ return {
               diagnostics = {
                 globals = {
                   "vim",
+                  "require",
                 },
               },
             }, -- end Lua
