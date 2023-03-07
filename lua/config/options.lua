@@ -25,6 +25,10 @@ vim.opt.scrolloff = 3
 vim.opt.showmode = false
 vim.opt.laststatus = 3
 
+-- s: don't give "search hit BOTTOM, continuing at TOP" ...
+-- c: Pattern not found
+vim.opt.shortmess:append({ s = true, c = true })
+
 -- :help spell-cjk  exclude CJK characters form spell checking
 vim.opt.spelllang = "en_us,cjk"
 vim.opt.mouse = "nvi"
