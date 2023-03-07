@@ -14,31 +14,31 @@ vmap <silent> <expr> p <sid>Repl()
 " Visual mode pressing * or # searches for the current selection
 " https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 func s:VisualSelection() range
-    let l:saved_reg = @"
-    exec "normal! vgvy"
+  let l:saved_reg = @"
+  exec "normal! vgvy"
 
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
+  let l:pattern = escape(@", "\\/.*'$^~[]")
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    let @/ = l:pattern
-    let @" = l:saved_reg
+  let @/ = l:pattern
+  let @" = l:saved_reg
 endfunc
 vnoremap <silent> * :call <sid>VisualSelection()<cr>
 vnoremap <silent> # :call <sid>VisualSelection()<cr>
 
 " Remove Trailing Whitespace / ^M
 function! s:Stripspace()
-    " Remove Trailing Whitespace
-    " save last search & cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
+  " Remove Trailing Whitespace
+  " save last search & cursor position
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  let @/=_s
+  call cursor(l, c)
 
-    " Remove Trailing ^M
-    exec ":%s/\r//e"
+  " Remove Trailing ^M
+  exec ":%s/\r//e"
 endfunc
 command! Stripspace call s:Stripspace()
 
@@ -89,15 +89,15 @@ endfunc
 
 " Zoom / Restore window.
 func! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        exec t:zoom_winrestcmd
-        let t:zoomed = v:false
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = v:true
-    endif
+  if exists('t:zoomed') && t:zoomed
+    exec t:zoom_winrestcmd
+    let t:zoomed = v:false
+  else
+    let t:zoom_winrestcmd = winrestcmd()
+    resize
+    vertical resize
+    let t:zoomed = v:true
+  endif
 endfunc
 command! ZoomToggle call s:ZoomToggle()
 
@@ -111,12 +111,12 @@ command! ZoomToggle call s:ZoomToggle()
 " :call Exec('autocmd')
 " :call Exec('scriptnames')
 func! s:Exec(command)
-    redir =>output
-    silent exec a:command
-    redir END
-    let @o = output
-    exec "put o"
-    return ''
+  redir =>output
+  silent exec a:command
+  redir END
+  let @o = output
+  exec "put o"
+  return ''
 endfunc
 " :Exec verbose au BufRead
 command! -nargs=+ Exec call s:Exec(<q-args>)
