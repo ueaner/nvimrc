@@ -1,3 +1,5 @@
+local list_extend = require("utils").list_extend
+
 -- auto completion, refactoring, rename, etc.
 return {
   -- extend auto completion
@@ -19,7 +21,7 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
-      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+      opts.sources = cmp.config.sources(list_extend(opts.sources, {
         { name = "rg" },
       }))
 
@@ -35,4 +37,13 @@ return {
       })
     end,
   },
+
+  -- language specific extension modules
+  { import = "lazyvim.plugins.extras.lang.typescript" },
+  { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "plugins.extras.lang.plantuml" },
+  { import = "plugins.extras.lang.markdown" },
+  -- { import = "plugins.extras.lang.go" },
+  -- { import = "plugins.extras.lang.lua" },
+  -- { import = "plugins.extras.lang.bash" },
 }

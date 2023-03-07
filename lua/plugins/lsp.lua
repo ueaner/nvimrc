@@ -96,13 +96,4 @@ return {
       },
     },
   },
-
-  -- language specific extension modules
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "plugins.extras.lang.plantuml" },
-  { import = "plugins.extras.lang.markdown" },
-  -- { import = "plugins.extras.lang.go" },
-  -- { import = "plugins.extras.lang.lua" },
-  -- { import = "plugins.extras.lang.bash" },
 }
