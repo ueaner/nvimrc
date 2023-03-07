@@ -89,13 +89,11 @@ return {
     dependencies = {
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-project.nvim" },
+      { "tsakirist/telescope-lazy.nvim" },
     },
     keys = {
-      {
-        "<leader>fp",
-        "<CMD>Telescope project display_type=full<CR>",
-        desc = "Find project",
-      },
+      { "<leader>fp", "<cmd>Telescope project display_type=full<cr>", desc = "Find project" },
+      { "<leader>fl", "<cmd>Telescope lazy<cr>", desc = "Find installed plugins" },
     },
 
     opts = function(_, opts)
@@ -115,6 +113,7 @@ return {
       telescope.setup(opts)
       telescope.load_extension("dap")
       telescope.load_extension("project")
+      telescope.load_extension("lazy")
     end,
   },
 
