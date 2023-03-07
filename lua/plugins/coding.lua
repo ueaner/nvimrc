@@ -46,6 +46,8 @@ return {
     end,
   },
 
+  { "editorconfig/editorconfig-vim", event = { "BufReadPost", "BufWinEnter", "BufNewFile" } },
+
   -- language specific extension modules
   { import = "lazyvim.plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.lang.json" },
