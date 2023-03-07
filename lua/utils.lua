@@ -195,6 +195,41 @@ M.is_empty = function(s)
   return s == nil or s == ""
 end
 
+--- Extends a list-like table with the values of another list-like table.
+---
+---@see vim.tbl_extend()
+---
+---@param dst table List which will be modified and appended to
+---@param src table List from which values will be inserted
+---@param start? number Start index on src. Defaults to 1
+---@param finish? number Final index on src. Defaults to `#src`
+---@return table dst
+M.list_extend = function(dst, src, start, finish)
+  if type(dst) ~= "table" or type(src) ~= "table" then
+    return dst
+  end
+
+  for i = start or 1, finish or #src do
+    table.insert(dst, src[i])
+  end
+  return dst
+end
+
+--- Removes `item` from `list` by value, returning the removed `list`.
+---@generic T
+---@param list T[]
+---@param item T
+---@return T
+M.list_remove = function(list, item)
+  for i, v in ipairs(list) do
+    if v == item then
+      table.remove(list, i)
+      return list
+    end
+  end
+  return list
+end
+
 M.dump = function(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
   print(unpack(objects))

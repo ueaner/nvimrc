@@ -1,13 +1,14 @@
+local list_extend = require("utils").list_extend
+
 -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/lua/nvim-treesitter/parsers.lua
+-- List of installed treesitter parsers `:checkhealth nvim-treesitter`
+-- installation directory: ~/.local/share/nvim/lazy/nvim-treesitter/parser
 return {
-  -- List of installed treesitter parsers
-  -- :checkhealth nvim-treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      -- installation directory: ~/.local/share/nvim/lazy/nvim-treesitter/parser
-      ensure_installed = {
+    opts = function(_, opts)
+      list_extend(opts.ensure_installed, {
         "query",
         "regex",
         "lua",
@@ -34,8 +35,8 @@ return {
         "go",
         "gomod",
         "gowork",
-      },
-    },
+      })
+    end,
   },
 
   {
