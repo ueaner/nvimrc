@@ -43,7 +43,7 @@ return {
     dependencies = { "mason.nvim" },
     opts = function(_, opts)
       local nls = require("null-ls")
-      list_extend(opts.ensure_installed, {
+      list_extend(opts.sources, {
         nls.builtins.formatting.phpcsfixer,
       })
     end,
