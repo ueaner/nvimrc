@@ -64,20 +64,22 @@ return {
     event = "BufReadPre",
     config = function()
       local colors = require("tokyonight.colors").setup()
+      local darken = require("tokyonight.util").darken
       require("incline").setup({
         highlight = {
           groups = {
-            InclineNormal = { guifg = colors.blue },
+            -- floating winbar default background color same as `TreesitterContext`
+            InclineNormal = { guifg = colors.blue, guibg = darken(colors.fg_gutter, 0.8) },
             InclineNormalNC = { guifg = colors.blue },
           },
         },
-        window = { margin = { vertical = 0, horizontal = 1 } },
+        window = { margin = { vertical = 0, horizontal = 0 } },
         render = function(props)
           local bufnr = props.buf
           local items = {}
           local item = {}
 
-          item = { { "#" .. bufnr, guibg = colors.bg } }
+          item = { { "#" .. bufnr } }
           vim.list_extend(items, item, 1, #item)
 
           -- local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
