@@ -1,54 +1,23 @@
-local list_extend = require("utils").list_extend
+local generate = require("plugins.extras.lang.spec").generate
+local nls = require("null-ls")
 
-return {
-
-  -- add php to treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      list_extend(opts.ensure_installed, {
-        "php",
-      })
-    end,
+---@type LangConfig
+local conf = {
+  parsers = { -- nvim-treesitter: language parsers
+    "php",
   },
-
-  -- cmdline tools and lsp servers
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      list_extend(opts.ensure_installed, {
-        "phpactor",
-        "php-cs-fixer",
-      })
-    end,
+  cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
+    "phpactor",
+    "php-cs-fixer",
   },
-
-  -- correctly setup lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      -- phpactor will be automatically installed with mason and loaded with lspconfig
-      ---@type lspconfig.options
-      servers = {
-        phpactor = {},
-      },
+  lsp = {
+    servers = { -- nvim-lspconfig: setup lspconfig servers
+      phpactor = {},
+    },
+    formatters = { -- null-ls.nvim: builtins formatters
+      nls.builtins.formatting.phpcsfixer,
     },
   },
-
-  -- formatters & linter
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    dependencies = { "mason.nvim" },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      list_extend(opts.sources, {
-        nls.builtins.formatting.phpcsfixer,
-      })
-    end,
-  },
-
-  -- DAP
-  -- test
 }
+
+return generate(conf)
