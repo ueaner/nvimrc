@@ -4,6 +4,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function(_, opts)
+      local colors = require("tokyonight.colors").setup()
       local function langserver_names()
         return {
           --   stylua, sumneko_lua
@@ -23,7 +24,7 @@ return {
             return table.concat(ls, ", ")
           end,
           icon = " ",
-          color = { fg = "cyan" },
+          color = { fg = colors.cyan },
         }
       end
 
@@ -36,13 +37,27 @@ return {
             return package.loaded["nvim-treesitter"] and require("nvim-treesitter.parsers").has_parser()
           end,
           icon = "⦿",
-          color = { fg = "lightgreen" },
+          color = { fg = colors.green },
+        }
+      end
+
+      local function dap_has_adapter()
+        return {
+          function()
+            return "DAP"
+          end,
+          cond = function()
+            return require("dap").configurations[vim.bo.filetype] ~= nil
+          end,
+          icon = "",
+          color = { fg = colors.blue },
         }
       end
 
       --   stylua, sumneko_lua  綠TS
       table.insert(opts.sections.lualine_x, langserver_names())
       table.insert(opts.sections.lualine_x, treesitter_has_parser())
+      table.insert(opts.sections.lualine_x, dap_has_adapter())
 
       opts.sections.lualine_y = {
         { "progress", padding = { left = 1, right = 0 }, separator = "" },
