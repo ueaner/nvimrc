@@ -1,82 +1,86 @@
-return {
+local generate = require("plugins.extras.lang.spec").generate
+local nls = require("null-ls")
 
-  -- add lua to treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        local packages = { "lua" }
-        vim.list_extend(opts.ensure_installed, packages, 1, #packages)
-      end
-    end,
+---@type LangConfig
+local conf = {
+  parsers = { -- nvim-treesitter: language parsers
+    "lua",
   },
-
-  -- cmdline tools and lsp servers
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      -- :lua =require("mason-lspconfig").get_installed_servers()
-      local packages = {
-        "lua-language-server",
-        "stylua",
-        "selene", -- linter: enhance lua diagnostics
-      }
-      vim.list_extend(opts.ensure_installed, packages, 1, #packages)
-    end,
+  cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
+    "lua-language-server",
+    "stylua",
+    -- "selene", -- linter
   },
-
-  -- correctly setup lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      -- make sure mason installs the server
-      ---@type lspconfig.options
-      servers = {
-        lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          settings = {
-            Lua = {
-              workspace = {
-                library = {
-                  "~/.config/luameta",
-                },
-                checkThirdParty = false,
+  lsp = {
+    ---@type lspconfig.options
+    servers = { -- nvim-lspconfig: setup lspconfig servers
+      lua_ls = {
+        -- mason = false, -- set to false if you don't want this server to be installed with mason
+        settings = {
+          Lua = {
+            workspace = {
+              library = {
+                "~/.config/luameta",
+                -- Make the server aware of Neovim runtime files
+                vim.fn.expand("$VIMRUNTIME/lua"),
+                vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
               },
-              completion = {
-                callSnippet = "Replace",
+              checkThirdParty = false,
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+            runtime = {
+              version = "LuaJIT",
+            },
+            diagnostics = {
+              globals = {
+                "vim",
+                "require",
               },
-              runtime = {
-                version = "LuaJIT",
-              },
-              diagnostics = {
-                globals = {
-                  "vim",
-                },
-              },
-            }, -- end Lua
-          },
+            },
+          }, -- end Lua
         },
       },
     },
+    formatters = { -- null-ls.nvim: builtins formatters
+      nls.builtins.formatting.stylua,
+    },
   },
-
-  -- formatters & linter
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    dependencies = { "mason.nvim" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        sources = {
-          nls.builtins.formatting.stylua,
-          nls.builtins.diagnostics.selene.with({
-            condition = function(utils)
-              return utils.root_has_file({ "selene.toml" })
-            end,
-          }),
-        },
-      }
+  test_adapters = { -- neotest: language specific adapter functions
+    function()
+      return require("neotest-plenary")
     end,
   },
 }
+
+local specs = generate(conf)
+
+table.insert(specs, {
+  "nvim-neotest/neotest-plenary",
+})
+
+table.insert(specs, {
+  "jbyuki/one-small-step-for-vimkind",
+  init = function()
+    -- stylua: ignore start
+    vim.keymap.set("n", "<leader>ds", function() require("osv").launch({ port = 8086 }) end, { desc = "Launch Lua Debugger Server" })
+    vim.keymap.set("n", "<leader>dd", function() require("osv").run_this() end, { desc = "Launch Lua Debugger" })
+    -- stylua: ignore end
+  end,
+  config = function()
+    local dap = require("dap")
+    dap.configurations.lua = {
+      {
+        type = "nlua",
+        request = "attach",
+        name = "Attach to running Neovim instance",
+      },
+    }
+    dap.adapters.nlua = function(callback, config)
+      callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+    end
+  end,
+})
+
+return specs

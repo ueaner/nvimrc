@@ -63,25 +63,6 @@ return {
       { "<A-e>", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
       { "<leader>dk", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
       { "<leader>dK", function() require("dap.ui.widgets").preview() end, desc = "preview expression"},
-
     },
-  },
-
-  {
-    "leoluz/nvim-dap-go",
-    event = "VeryLazy",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-    },
-    init = function()
-      -- stylua: ignore
-      require("utils").on_ft("go", function(event)
-        vim.keymap.set("n", "<leader>dt", function() require("dap-go").debug_test() end, { desc = "debug test", buffer = event.buf })
-        vim.keymap.set("n", "<leader>dT", function() require("dap-go").debug_last_test() end, { desc = "debug last test", buffer = event.buf })
-      end)
-    end,
-    config = function()
-      require("dap-go").setup()
-    end,
   },
 }

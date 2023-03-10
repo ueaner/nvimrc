@@ -57,14 +57,19 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
-      "nvim-neotest/neotest-plenary",
-      "nvim-neotest/neotest-go",
+      {
+        "andythigpen/nvim-coverage",
+        config = function()
+          require("coverage").setup()
+        end,
+      },
       {
         "stevearc/overseer.nvim",
         config = function()
           require("overseer").setup()
         end,
       },
+      -- "nvim-neotest/neotest-go",
     },
     -- stylua: ignore
     keys = {
@@ -97,12 +102,13 @@ return {
           virtual_text = true,
           signs = true,
         },
-        adapters = {
-          require("neotest-plenary"),
-          require("neotest-go")({
-            args = { "-count=1", "-timeout=60s", "-race", "-cover" },
-          }),
-        },
+        -- adapters = {
+        --   require("neotest-go")({
+        --     args = { "-count=1", "-timeout=60s", "-race", "-cover" },
+        --   }),
+        -- },
+        -- Should require `plugins.extras.lang.ZZZ` to be loaded before `neotest`
+        adapters = require("plugins.extras.lang.spec").test_adapters(),
         consumers = {
           overseer = require("neotest.consumers.overseer"),
         },

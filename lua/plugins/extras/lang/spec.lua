@@ -2,6 +2,7 @@ local list_extend = require("utils").list_extend
 
 -- https://stackoverflow.com/a/21062734
 local M = {
+  ---@type LangConfig
   defaults = {
     parsers = {}, -- nvim-treesitter: language parsers
     cmdtools = {}, -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
@@ -11,16 +12,21 @@ local M = {
       linters = {}, -- null-ls.nvim: builtins diagnostics
     },
     dap = {}, -- nvim-dap: language specific extension
-    test = {}, -- neotest: language specific adapter
+    test_adapters = {}, -- neotest: language specific adapter functions
   },
+  ---@type TestAdapterFn[]
+  ---@private
+  _all_test_adapters = {}, -- All configured neotest adapter functions
 }
+
+---@alias TestAdapterFn fun(): neotest.Adapter
 
 ---@class LangConfig
 ---@field parsers string[]
 ---@field cmdtools string[]
 ---@field lsp LangConfig.lsp
 ---@field dap table
----@field test table
+---@field test_adapters TestAdapterFn[]
 
 ---@class LangConfig.lsp
 ---@field servers table
@@ -65,7 +71,7 @@ M.generate = function(conf)
     })
   end
 
-  -- formatters & linters
+  -- setup formatters & linters
   local sources = list_extend(conf.lsp.formatters, conf.lsp.linters)
   if not vim.tbl_isempty(sources) then
     table.insert(specs, {
@@ -78,10 +84,23 @@ M.generate = function(conf)
     })
   end
 
-  -- DAP
-  -- test
+  -- setup DAP
+
+  -- setup neotest adapter
+  if not vim.tbl_isempty(conf.test_adapters) then
+    list_extend(M._all_test_adapters, conf.test_adapters)
+  end
 
   return specs
+end
+
+M.test_adapters = function()
+  ---@type neotest.Adapter[]
+  local adapters = {}
+  for _, fn in ipairs(M._all_test_adapters) do
+    table.insert(adapters, fn())
+  end
+  return adapters
 end
 
 return M

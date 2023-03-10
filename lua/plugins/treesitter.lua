@@ -16,7 +16,6 @@ return {
         "help",
         "markdown",
         "markdown_inline",
-        "bash",
         "html",
         "javascript",
         "tsx",
@@ -32,9 +31,6 @@ return {
         "gitcommit",
         "gitignore",
         "sql",
-        "go",
-        "gomod",
-        "gowork",
       })
     end,
   },
