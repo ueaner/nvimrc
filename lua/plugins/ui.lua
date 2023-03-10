@@ -114,17 +114,15 @@ return {
     end,
   },
 
-  -- terminal
+  -- scrollbar
   {
-    "NvChad/nvterm",
-    keys = {
-      -- stylua: ignore
-      -- `<Esc><Esc>` enter normal mode, then switch windows
-      { "<leader>tt", function() require("nvterm.terminal").toggle("horizontal") end, desc = "toggle term", mode = { "n", "t" } },
+    "dstein64/nvim-scrollview",
+    event = "BufReadPre",
+    opts = {
+      excluded_filetypes = { "alpha", "NvimTree", "Outline", "aerial" },
+      current_only = true,
+      winblend = 75,
     },
-    config = function()
-      require("nvterm").setup()
-    end,
   },
 
   -- colorizer
@@ -148,17 +146,6 @@ return {
         tailwind = true,  -- Enable tailwind colors
         mode     = "background", -- Set the display mode.
       },
-    },
-  },
-
-  -- scrollbar
-  {
-    "dstein64/nvim-scrollview",
-    event = "BufReadPre",
-    opts = {
-      excluded_filetypes = { "alpha", "NvimTree", "Outline", "aerial" },
-      current_only = true,
-      winblend = 75,
     },
   },
 }
