@@ -22,11 +22,14 @@ return {
     "ellisonleao/glow.nvim",
     --event = "VeryLazy",
     cmd = { "Glow" },
-    -- keys = {
-    --   { "<leader>um", "<cmd>Glow!<cr>", desc = "Toggle Markdown Previewer" },
-    -- },
+    keys = {
+      { "<leader>um", "<cmd>Glow!<cr>", desc = "Toggle Markdown Previewer" },
+    },
     config = function()
-      require("glow").setup()
+      require("glow").setup({
+        style = "dark",
+        width = 120,
+      })
     end,
   },
 }
