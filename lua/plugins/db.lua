@@ -13,7 +13,7 @@ return {
     cmd = { "DB" },
     keys = {
       -- stylua: ignore
-      { "<leader>E", function() require("utils").toggle.db_explorer() end, desc = "Toggle UI", },
+      { "<leader>E", function() require("utils").toggle.db_explorer() end, desc = "Toggle Database Explorer", },
       { "<leader>Du", "<cmd>DBUIToggle<cr>", desc = "Toggle UI" },
       { "<leader>Da", "<cmd>DBUIAddConnection<cr>", desc = "Add Connection" },
       { "<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc = "Find buffer" },

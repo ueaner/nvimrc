@@ -4,7 +4,7 @@ return {
     "kyazdani42/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
     keys = {
-      { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer NvimTree (root dir)", mode = { "n", "t" } },
+      { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Explorer", mode = { "n", "t" } },
     },
     -- :help nvim-tree-setup  view default options
     opts = {
@@ -129,6 +129,7 @@ return {
       require("which-key").register({
         ["<leader>d"] = { name = "+debug", mode = { "n", "v" } },
         ["<leader>t"] = { name = "+test" },
+        ["<leader>D"] = { name = "+db" },
       })
     end,
   },
