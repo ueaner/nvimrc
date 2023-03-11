@@ -21,7 +21,7 @@ local conf = {
       gopls = {},
       golangci_lint_ls = {}, -- linter
     },
-    formatters = { -- null-ls.nvim: builtins formatters
+    nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
       nls.builtins.formatting.goimports,
     },
   },

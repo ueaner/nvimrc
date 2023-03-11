@@ -8,8 +8,7 @@ local M = {
     cmdtools = {}, -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     lsp = {
       servers = {}, -- nvim-lspconfig: setup lspconfig servers
-      formatters = {}, -- null-ls.nvim: builtins formatters
-      linters = {}, -- null-ls.nvim: builtins diagnostics
+      nls_sources = {}, -- null-ls.nvim: builtins formatters, diagnostics, code_actions
     },
     dap = {}, -- nvim-dap: language specific extension
     test_adapters = {}, -- neotest: language specific adapter functions
@@ -29,9 +28,8 @@ local M = {
 ---@field test_adapters TestAdapterFn[]
 
 ---@class LangConfig.lsp
----@field servers table
----@field formatters table<string, table>
----@field linters table<string, table>
+---@field servers lspconfig.options
+---@field null_ls table
 
 ---Generate language specific specs
 ---@param conf LangConfig
@@ -71,15 +69,14 @@ M.generate = function(conf)
     })
   end
 
-  -- setup formatters & linters
-  local sources = list_extend(conf.lsp.formatters, conf.lsp.linters)
-  if not vim.tbl_isempty(sources) then
+  -- setup formatters, linters and code_actions
+  if not vim.tbl_isempty(conf.lsp.nls_sources) then
     table.insert(specs, {
       "jose-elias-alvarez/null-ls.nvim",
       event = "BufReadPre",
       dependencies = { "mason.nvim" },
       opts = function(_, opts)
-        list_extend(opts.sources, sources)
+        list_extend(opts.sources, conf.lsp.nls_sources)
       end,
     })
   end

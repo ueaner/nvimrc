@@ -43,7 +43,7 @@ local conf = {
         },
       },
     },
-    formatters = { -- null-ls.nvim: builtins formatters
+    nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
       nls.builtins.formatting.stylua,
     },
   },

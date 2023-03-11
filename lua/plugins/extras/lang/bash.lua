@@ -15,7 +15,7 @@ local conf = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
       bashls = {},
     },
-    formatters = { -- null-ls.nvim: builtins formatters
+    nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
       nls.builtins.formatting.shfmt,
     },
   },
