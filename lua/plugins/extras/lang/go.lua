@@ -15,6 +15,7 @@ local conf = {
     "golangci-lint-langserver", -- Wraps golangci-lint as a language server
     "delve",
     --"staticcheck",
+    "gomodifytags",
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
@@ -23,6 +24,7 @@ local conf = {
     },
     nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
       nls.builtins.formatting.goimports,
+      nls.builtins.code_actions.gomodifytags,
     },
   },
   test_adapters = { -- neotest: language specific adapter functions
