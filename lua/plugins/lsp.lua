@@ -29,6 +29,7 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       list_extend(opts.sources, {
+        nls.builtins.code_actions.refactoring,
         -- markdown
         nls.builtins.formatting.prettierd.with({
           filetypes = { "markdown" },

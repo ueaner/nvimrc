@@ -48,6 +48,9 @@ return {
 
   { "editorconfig/editorconfig-vim", event = { "BufReadPost", "BufWinEnter", "BufNewFile" } },
 
+  -- keymap `<leader>ca` for LSP Code Action
+  { "ThePrimeagen/refactoring.nvim" },
+
   -- language specific extension modules
   { import = "lazyvim.plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.lang.json" },
