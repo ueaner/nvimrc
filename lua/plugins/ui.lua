@@ -132,7 +132,7 @@ return {
     event = "BufReadPre",
     opts = {
       filetypes = { "*", "!lazy" },
-      buftype = { "*", "!prompt", "!nofile" },
+      buftypes = { "*", "!prompt", "!nofile" },
       -- stylua: ignore
       user_default_options = {
         RGB      = true,  -- #RGB hex codes
