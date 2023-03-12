@@ -148,4 +148,16 @@ return {
       },
     },
   },
+
+  -- auto detect indent
+  {
+    "timakro/vim-yadi",
+    init = function()
+      vim.api.nvim_create_autocmd({ "BufRead" }, {
+        callback = function()
+          vim.cmd("DetectIndent")
+        end,
+      })
+    end,
+  },
 }
