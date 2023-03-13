@@ -39,7 +39,6 @@ vim.keymap.set("c", "<C-K>", "<C-\\>e getcmdpos() == 1 ? '' : getcmdline()[:getc
 
 -- set pastetoggle=<leader>p
 vim.keymap.set("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
-vim.keymap.set("n", "<leader>u<space>", "zi", { desc = "Toggle Fold" })
 vim.keymap.set("n", "<leader>ub", function() require("utils").toggle.clipboard() end, { desc = "Toggle ClipBoard" })
 --vim.keymap.set("n", "<leader>z", "<cmd>ZoomToggle<cr>", { desc = "Toggle Zoom" })
 

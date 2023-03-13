@@ -23,7 +23,7 @@ return {
     --event = "VeryLazy",
     cmd = { "Glow" },
     keys = {
-      { "<leader>um", "<cmd>Glow!<cr>", desc = "Toggle Markdown Previewer" },
+      { "<leader>um", "<cmd>Glow!<cr>", desc = "Toggle Markdown Preview" },
     },
     config = function()
       require("glow").setup({

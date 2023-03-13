@@ -30,7 +30,7 @@ return {
       vim.g["plantuml_previewer#plantuml_jar_path"] = vim.env.XDG_LIB_HOME .. "/java/plantuml.jar"
     end,
     keys = {
-      { "<leader>uu", "<cmd>PlantumlToggle<cr>", desc = "Toggle Plantuml Previewer" },
+      { "<leader>uu", "<cmd>PlantumlToggle<cr>", desc = "Toggle Plantuml Preview" },
     },
   },
 }
