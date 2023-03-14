@@ -4,6 +4,7 @@
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
+vim.g.markdown_folding = 1
 
 vim.opt.writebackup = false
 vim.opt.swapfile = false

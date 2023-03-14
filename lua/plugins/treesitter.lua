@@ -42,7 +42,7 @@ return {
   },
 
   -- Motions based on syntax trees
-  -- Use v, d, c, y to visually select/delete/change/yank, then press m
+  -- Use `v, c, d, y` to enter Operator-pending mode, and then press `m` to visually select/change/delete/yank
   {
     "mfussenegger/nvim-treehopper",
     keys = { { "m", mode = { "o", "x" } } },
