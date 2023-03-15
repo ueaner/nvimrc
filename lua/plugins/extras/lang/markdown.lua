@@ -11,20 +11,24 @@ return {
     init = function()
       vim.g.table_mode_disable_mappings = 1
       vim.g.table_mode_disable_tableize_mappings = 1
+      -- stylua: ignore
+      require("utils").on_ft("markdown", function(event)
+        vim.keymap.set("n", "<leader>ut", "<cmd>TableModeToggle<cr>", { desc = "Toggle Table Mode", buffer = event.buf })
+      end)
     end,
-    keys = {
-      { "<leader>ut", "<cmd>TableModeToggle<cr>", desc = "Toggle Table Mode" },
-    },
   },
 
   -- markdown preview
   {
     "ellisonleao/glow.nvim",
-    --event = "VeryLazy",
+    event = "VeryLazy",
     cmd = { "Glow" },
-    keys = {
-      { "<leader>um", "<cmd>Glow!<cr>", desc = "Toggle Markdown Preview" },
-    },
+    init = function()
+      -- stylua: ignore
+      require("utils").on_ft("markdown", function(event)
+        vim.keymap.set("n", "<leader>fv", "<cmd>Glow!<cr>", { desc = "Live Preview (Markdown)", buffer = event.buf })
+      end)
+    end,
     config = function()
       require("glow").setup({
         style = "dark",

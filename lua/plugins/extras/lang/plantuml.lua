@@ -28,9 +28,10 @@ return {
     },
     init = function()
       vim.g["plantuml_previewer#plantuml_jar_path"] = vim.env.XDG_LIB_HOME .. "/java/plantuml.jar"
+      -- stylua: ignore
+      require("utils").on_ft("markdown", function(event)
+        vim.keymap.set("n", "<leader>fv", "<cmd>PlantumlToggle<cr>", { desc = "Live Preview (Plantuml)", buffer = event.buf })
+      end)
     end,
-    keys = {
-      { "<leader>uu", "<cmd>PlantumlToggle<cr>", desc = "Toggle Plantuml Preview" },
-    },
   },
 }
