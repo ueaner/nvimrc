@@ -29,6 +29,10 @@ rm -rf ~/.config/nvim/.git
 nvim
 ```
 
+## Keymaps
+
+See [keymaps.md](docs/keymaps.md).
+
 ## What's in the stack
 
 - [LazyVim] for Neovim setup powered by [💤 lazy.nvim]
@@ -76,10 +80,6 @@ Contents of ui, editor and coding:
 - `UI Appearance`: statusline, tabline, winbar, scrollbar, indent, icons, colorizer, notify, messages, cmdline, popupmenu, etc.
 - `Editor Features`: which-key, fuzzy finder, file explorer, outline, jump, git signs, todo comments, auto-resize windows, better xxx, etc.
 - `Coding Features`: auto completion, snippets, text-objects, refactoring, rename, surround, auto pairs, etc.
-
-## Keymaps
-
-[keymaps.md](docs/keymaps.md)
 
 [LazyVim]: https://github.com/LazyVim/LazyVim
 [💤 lazy.nvim]: https://github.com/folke/lazy.nvim
