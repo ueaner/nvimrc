@@ -23,7 +23,7 @@ vim.keymap.set({ "i", "v", "n", "s" }, "<A-s>", "<NOP>")
 -- prints the current file name with `full path` and the current `buffer number`
 vim.keymap.set("n", "<C-g>", "2<C-g>")
 
--- Readline-style keymap for command mode
+-- Readline-style keymap for command-line mode
 vim.keymap.set("c", "<C-A>", "<Home>")
 -- :help c_CTRL-E
 vim.keymap.set("c", "<C-B>", "<Left>")
@@ -46,14 +46,12 @@ vim.keymap.set("n", "<leader>ub", function() require("utils").toggle.clipboard()
 vim.keymap.set("n", "<leader>cc", "<cmd>Stripspace<cr>", { desc = "Code Clean" })
 
 -- nnoremap <silent> <leader>k wb/\<<C-R><C-W>\>/e<cr>
-vim.keymap.set("n", "<leader>k", "wb/<C-R><C-W>/e<cr>", { desc = "Highlighting word under cursor" })
 vim.keymap.set("n", "gw", "wb/<C-R><C-W>/e<cr>", { desc = "Highlighting word under cursor" })
 
 -- Switch buffers with <c-p> <c-n>
 vim.keymap.set("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
-vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Tab Close" })
 vim.keymap.set("n", "<leader>bD", function() require("utils").buf.close_others() end, { desc = "Delete Other Buffers" })
 vim.keymap.set({"n", "t"}, "<leader>bd", function() require("utils").buf.close() end, { desc = "Delete Buffer" })
 
