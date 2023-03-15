@@ -130,6 +130,7 @@ return {
         ["<leader>d"] = { name = "+debug", mode = { "n", "v" } },
         ["<leader>t"] = { name = "+test" },
         ["<leader>D"] = { name = "+db" },
+        ["<leader>a"] = { name = "+a tool" },
       })
     end,
   },

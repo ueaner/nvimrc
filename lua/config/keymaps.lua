@@ -56,9 +56,9 @@ vim.keymap.set("n", "<leader>bD", function() require("utils").buf.close_others()
 vim.keymap.set({"n", "t"}, "<leader>bd", function() require("utils").buf.close() end, { desc = "Delete Buffer" })
 
 if vim.fn.executable("btm") then
-  vim.keymap.set("n", "<leader>vb", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })
+  vim.keymap.set("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })
 elseif vim.fn.executable("btop") then
-  vim.keymap.set("n", "<leader>vb", function() require("lazyvim.util").float_term({ "btop" }) end, { desc = "btop" })
+  vim.keymap.set("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btop" }) end, { desc = "btop" })
 end
 
 -- stylua: ignore end
