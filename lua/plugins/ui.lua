@@ -125,6 +125,14 @@ return {
     },
   },
 
+  -- smooth scroll
+  {
+    "karb94/neoscroll.nvim",
+    config = function(_, opts)
+      require("neoscroll").setup(opts)
+    end,
+  },
+
   -- colorizer
   {
     "NvChad/nvim-colorizer.lua",
