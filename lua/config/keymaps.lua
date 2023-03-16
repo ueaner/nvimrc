@@ -39,6 +39,10 @@ map("c", "<C-D>", "<Del>")
 map("c", "<C-K>", "<C-\\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>")
 -- :help c_CTRL-Y
 
+-- Don't copy the replaced text after pasting in visual mode
+-- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
+map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "dont copy replaced text", silent = true })
+
 -- set pastetoggle=<leader>p
 map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
 map("n", "<leader>ub", function() require("utils").toggle.clipboard() end, { desc = "Toggle ClipBoard" })

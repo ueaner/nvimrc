@@ -9,7 +9,7 @@ func s:Repl()
   let s:restore_reg = @"
   return "p@=RestoreRegister()\<cr>"
 endfunc
-vmap <silent> <expr> p <sid>Repl()
+"vmap <silent> <expr> p <sid>Repl()
 
 " Visual mode pressing * or # searches for the current selection
 " https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
