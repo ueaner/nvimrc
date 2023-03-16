@@ -24,8 +24,6 @@ return {
   -- :lua =require("null-ls").get_sources()
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    dependencies = { "mason.nvim" },
     opts = function(_, opts)
       local nls = require("null-ls")
       list_extend(opts.sources, {
