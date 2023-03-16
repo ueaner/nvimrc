@@ -92,6 +92,7 @@ return {
       { "tsakirist/telescope-lazy.nvim" },
     },
     keys = {
+      { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope" },
       { "<leader>fp", "<cmd>Telescope project display_type=full<cr>", desc = "Find project" },
       { "<leader>fl", "<cmd>Telescope lazy<cr>", desc = "Find installed plugins" },
     },
