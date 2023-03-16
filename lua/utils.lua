@@ -30,9 +30,15 @@ end
 --
 M.buf.close = function(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  -- non-buflisted can be closed directly
+  -- non-buflisted
   if not vim.bo[bufnr].buflisted then
-    vim.cmd("bd!" .. bufnr)
+    if vim.bo[bufnr].buftype == "terminal" then
+      -- hide terminal buffer
+      vim.cmd("hide")
+    else
+      -- delete normal buffer
+      vim.cmd("bd!" .. bufnr)
+    end
     return
   end
 
