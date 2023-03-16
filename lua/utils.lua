@@ -17,6 +17,50 @@ M.buf.modified = function(bufnr)
   return vim.bo[bufnr].modified
 end
 
+M.buf.info = function(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  local fmt = string.format
+
+  -- buffer options or window options
+  local options = { "buftype", "buflisted", "modified", "modifiable", "conceallevel" }
+  local toggles = M.toggle.all()
+
+  local lines = {}
+  local l = ""
+
+  -- Options
+  table.insert(lines, "Options")
+  for _, o in ipairs(options) do
+    local v = vim.opt_local[o]:get()
+    local s = ""
+    if type(v) == "string" then
+      s = v ~= "" and v or "<empty>"
+    elseif type(v) == "boolean" then
+      s = tostring(v)
+    else
+      s = vim.inspect(v)
+    end
+    l = fmt("- %s: %s", o, s)
+    table.insert(lines, l)
+  end
+
+  -- Toggles
+  table.insert(lines, "")
+  table.insert(lines, "Toggles")
+  for _, t in ipairs(toggles) do
+    l = fmt(" %s %s: %s", t[2], t[1], tostring(t[3]))
+    table.insert(lines, l)
+  end
+
+  -- LSP servers
+  -- DAP adapters
+  -- TS parsers
+
+  -- MORE
+
+  M.make_window(lines)
+end
+
 -- Close the current buffer without affecting the editor layout
 --
 --  :echo &buftype &buflisted &modified &modifiable
@@ -88,10 +132,10 @@ M.toggle.all = function()
   -- stylua: ignore
   return {
     -- fscp
-    { "fold",      "", vim.opt.foldenable:get() },
-    { "spell",     "", vim.opt.spell:get() },
-    { "clipboard", "", vim.tbl_contains(vim.opt.clipboard:get(), "unnamedplus") },
-    { "paste",     "", vim.opt.paste:get() },
+    { "fold",      "", vim.opt_local.foldenable:get() },
+    { "spell",     "", vim.opt_local.spell:get() },
+    { "clipboard", "", vim.tbl_contains(vim.opt_local.clipboard:get(), "unnamedplus") },
+    { "paste",     "", vim.opt_local.paste:get() },
   }
 end
 

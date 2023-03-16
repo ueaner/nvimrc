@@ -55,6 +55,7 @@ map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
 map("n", "<leader>bD", function() require("utils").buf.close_others() end, { desc = "Delete Other Buffers" })
 map({"n", "t"}, "<leader>bd", function() require("utils").buf.close() end, { desc = "Delete Buffer" })
+map({"n", "t"}, "<leader>bi", function() require("utils").buf.info() end, { desc = "Buffer Info" })
 
 if vim.fn.executable("btm") then
   map("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })
