@@ -83,38 +83,45 @@ return {
   },
 
   -- fuzzy finder
-  -- MORE: https://github.com/appelgriebsch/Nv/blob/main/lua/plugins/editor.lua#L56
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-project.nvim" },
-      { "tsakirist/telescope-lazy.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     keys = {
       { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope" },
       { "<leader>fp", "<cmd>Telescope project display_type=full<cr>", desc = "Find project" },
-      { "<leader>fl", "<cmd>Telescope lazy<cr>", desc = "Find installed plugins" },
+      {
+        "<leader>fl",
+        function()
+          require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
+        end,
+        desc = "Find Plugin File",
+      },
     },
-
-    opts = function(_, opts)
-      -- remove <C-h> mapping
-      opts.defaults.mappings.i["<C-h>"] = nil
-
-      -- override
-      opts.extensions = {
+    opts = {
+      defaults = {
+        layout_strategy = "horizontal",
+        layout_config = { prompt_position = "top" },
+        sorting_strategy = "ascending",
+        winblend = 0,
+      },
+      extensions = {
         project = {
           base_dirs = {
             "~/projects",
           },
         },
-      }
-
+      },
+    },
+    config = function(_, opts)
       local telescope = require("telescope")
       telescope.setup(opts)
       telescope.load_extension("dap")
       telescope.load_extension("project")
-      telescope.load_extension("lazy")
+      telescope.load_extension("fzf")
     end,
   },
 
