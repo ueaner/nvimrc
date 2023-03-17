@@ -1,6 +1,8 @@
 -- ~/.config/nvim/lua/utils.lua
 -- require("utils").buf.close_others()
 
+local fmt = string.format
+
 -- NOTE: :help CTRL-W_o  close other windows
 
 local M = {
@@ -17,12 +19,15 @@ M.buf.modified = function(bufnr)
   return vim.bo[bufnr].modified
 end
 
-M.buf.info = function(bufnr)
-  bufnr = bufnr or vim.api.nvim_get_current_buf()
-  local fmt = string.format
+M.buf.info = function()
+  local vtype = "info42"
+  if vim.bo.filetype == vtype then
+    print("This buffer is an info window")
+    return
+  end
 
   -- buffer options or window options
-  local options = { "buftype", "buflisted", "modified", "modifiable", "conceallevel" }
+  local options = { "filetype", "buftype", "buflisted", "modified", "modifiable", "conceallevel" }
   local toggles = M.toggle.all()
 
   local lines = {}
@@ -58,7 +63,8 @@ M.buf.info = function(bufnr)
 
   -- MORE
 
-  M.make_window(lines)
+  local win_bufnr, _ = M.make_window(lines)
+  vim.api.nvim_buf_set_option(win_bufnr, "filetype", vtype)
 end
 
 -- Close the current buffer without affecting the editor layout
@@ -336,7 +342,7 @@ M.make_window = function(lines, height_percentage, width_percentage)
   vim.api.nvim_buf_set_option(bufnr, "buflisted", false)
   vim.api.nvim_buf_set_option(bufnr, "bufhidden", "hide")
   vim.api.nvim_buf_set_option(bufnr, "buftype", "nofile")
-  vim.api.nvim_buf_set_option(bufnr, "filetype", "buf42")
+  -- vim.api.nvim_buf_set_option(bufnr, "filetype", "buf42")
 
   -- close buffer
   local close = function()
