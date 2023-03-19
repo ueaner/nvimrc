@@ -1,16 +1,3 @@
-" https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim#L302
-" Make sure pasting in visual mode doesn't replace paste buffer
-" vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
-func RestoreRegister()
-  let @" = s:restore_reg
-  return ''
-endfunc
-func s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
-endfunc
-"vmap <silent> <expr> p <sid>Repl()
-
 " Visual mode pressing * or # searches for the current selection
 " https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 func s:VisualSelection() range
@@ -23,8 +10,9 @@ func s:VisualSelection() range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunc
-vnoremap <silent> * :call <sid>VisualSelection()<cr>
-vnoremap <silent> # :call <sid>VisualSelection()<cr>
+command! VisualSelection call s:VisualSelection()
+"vnoremap <silent> * :call <sid>VisualSelection()<cr>
+"vnoremap <silent> # :call <sid>VisualSelection()<cr>
 
 " Remove Trailing Whitespace / ^M
 function! s:Stripspace()
@@ -41,6 +29,7 @@ function! s:Stripspace()
   exec ":%s/\r//e"
 endfunc
 command! Stripspace call s:Stripspace()
+"nnoremap <silent> <leader>cc :call <sid>Stripspace()<cr>
 
 " 关闭当前 buffer, 避免影响编辑器布局
 "
@@ -55,9 +44,15 @@ command! Stripspace call s:Stripspace()
 "
 func CloseSplitOrDeleteBuffer()
   let currBuf = bufnr('%')
-  " no bufffer listed 可直接关闭
+  " no bufffer listed
   if !&buflisted
-    exec "bd!" . currBuf
+    if &buftype == "terminal"
+      " hide terminal buffer
+      exec "hide"
+    else
+      " delete normal buffer
+      exec "bd!" . currBuf
+    endif
     return
   endif
 
