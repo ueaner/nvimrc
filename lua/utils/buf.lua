@@ -1,4 +1,4 @@
--- require("utils.buf").close_others()
+-- require("utils.buf").close()
 local M = {}
 
 M.valid = function(bufnr)

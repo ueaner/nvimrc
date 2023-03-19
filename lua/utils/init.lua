@@ -179,6 +179,16 @@ M.clipboard_toggle = function()
   end
 end
 
+-- database explorer toggle / restore file explorer state
+--
+--  Actual test conclusion: first close and then open, less side effects
+--  DE(database explorer) FE(file explorer)
+--    DE   FE     doings
+--    on   on     close DE
+--    on   off    close DE, open? FE (stored state is open then reopen file explorer)
+--    off  off    open DE
+--    off  on     open DE, close FE
+--
 M.db_explorer_toggle = function()
   -- current state
   local deOpened = M.dbui_is_visible()
