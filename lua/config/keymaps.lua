@@ -45,7 +45,7 @@ map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "dont copy replaced text
 
 -- set pastetoggle=<leader>p
 map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
-map("n", "<leader>ub", function() require("utils").toggle.clipboard() end, { desc = "Toggle ClipBoard" })
+map("n", "<leader>ub", function() require("utils").clipboard_toggle() end, { desc = "Toggle ClipBoard" })
 
 -- Remove Trailing Whitespace / ^M
 map("n", "<leader>cc", "<cmd>Stripspace<cr>", { desc = "Code Clean" })
@@ -57,9 +57,9 @@ map("n", "gw", "wb/<C-R><C-W>/e<cr>", { desc = "Highlighting word under cursor" 
 map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
-map("n", "<leader>bD", function() require("utils").buf.close_others() end, { desc = "Delete Other Buffers" })
-map({"n", "t"}, "<leader>bd", function() require("utils").buf.close() end, { desc = "Delete Buffer" })
-map({"n", "t"}, "<leader>bi", function() require("utils").buf.info() end, { desc = "Buffer Info" })
+map("n", "<leader>bD", function() require("utils.buf").close_others() end, { desc = "Delete Other Buffers" })
+map({"n", "t"}, "<leader>bd", function() require("utils.buf").close() end, { desc = "Delete Buffer" })
+map({"n", "t"}, "<leader>bi", function() require("utils.buf").info() end, { desc = "Buffer Info" })
 
 if vim.fn.executable("btm") then
   map("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })

@@ -18,7 +18,7 @@ return {
     end,
   },
 
-  -- markdown preview
+  -- markdown preview, toppair/peek.nvim
   {
     "ellisonleao/glow.nvim",
     event = "VeryLazy",
