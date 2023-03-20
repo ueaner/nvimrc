@@ -29,23 +29,35 @@ rm -rf ~/.config/nvim/.git
 nvim
 ```
 
-## Keymaps
+## ⌨️ Keymaps
 
 See [keymaps.md](docs/keymaps.md).
 
-## What's in the stack
+## ✨ Features
 
-- [LazyVim] for Neovim setup powered by [💤 lazy.nvim]
-- [mason.nvim] for manage external editor tools, such as LSP servers, DAP servers, linters, and formatters
-- [nvim-treesitter] for `Nvim Treesitter` configuration
-- [nvim-lspconfig] for `Nvim LSP client` configuration
-- [null-ls.nvim] for `formatters` and `linters` configuration
-- [nvim-dap] for `DAP client` setup, supports adapters
-- [neotest] for `tests` setup, supports adapters
-- which-key, fuzzy finder, file explorer, outline, auto completion, snippets, etc.
-- terminal, git, database explorer, http client, grpc client, etc.
+- [LazyVim] for Neovim setup powered by [💤 lazy.nvim] plugin management
+- Package management with [mason.nvim]
+- Syntax Highlighting with [Treesitter]
+- Language Server Protocol with [Native LSP]
+- Formatting and Linting with [null-ls.nvim]
+- Debug Adapter Protocol with [nvim-dap]
+- Tests with [neotest]
+- Auto Completion with [nvim-cmp]
+- Snippets with [LuaSnip] and [friendly-snippets]
+- Fuzzy Finding with [telescope.nvim]
+- File Explorer with [nvim-tree.lua]
+- Code Outline with [aerial.nvim]
+- Live prompt for keymaps with [which-key.nvim]
+- Statusline with [lualine.nvim]
+- Tabline with [bufferline.nvim]
+- Floating Winbar with [incline.nvim]
+- Git integration with [gitsigns.nvim]
+- Terminal with [nvterm]
+- Database Explorer with [vim-dadbod]
+- Http Client with [rest.nvim]
+- gRPC Client with [grpc-nvim]
 
-## File Structure
+##  File Structure
 
 <!-- prettier-ignore -->
 ```
@@ -84,8 +96,23 @@ Contents of ui, editor and coding:
 [LazyVim]: https://github.com/LazyVim/LazyVim
 [💤 lazy.nvim]: https://github.com/folke/lazy.nvim
 [mason.nvim]: https://github.com/williamboman/mason.nvim
-[nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
-[nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
-[nvim-dap]: https://github.com/mfussenegger/nvim-dap
+[Treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
+[Native LSP]: https://github.com/neovim/nvim-lspconfig
 [null-ls.nvim]: https://github.com/jose-elias-alvarez/null-ls.nvim
+[nvim-dap]: https://github.com/mfussenegger/nvim-dap
 [neotest]: https://github.com/nvim-neotest/neotest
+[nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
+[LuaSnip]: https://github.com/L3MON4D3/LuaSnip
+[friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
+[telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
+[nvim-tree.lua]: https://github.com/nvim-tree/nvim-tree.lua
+[aerial.nvim]: https://github.com/stevearc/aerial.nvim
+[gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
+[nvterm]: https://github.com/NvChad/nvterm
+[which-key.nvim]: https://github.com/folke/which-key.nvim
+[lualine.nvim]: https://github.com/nvim-lualine/lualine.nvim
+[bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
+[incline.nvim]: https://github.com/b0o/incline.nvim
+[vim-dadbod]: https://github.com/tpope/vim-dadbod
+[rest.nvim]: https://github.com/rest-nvim/rest.nvim
+[grpc-nvim]: https://github.com/hudclark/grpc-nvim
