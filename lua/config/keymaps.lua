@@ -44,8 +44,8 @@ map("c", "<C-K>", "<C-\\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<
 map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "dont copy replaced text", silent = true })
 
 -- Visual mode pressing * or # searches for the current selection
-map("x", "*", "<cmd>SearchSelection<cr>", { desc = "Search current selection", silent = true })
-map("x", "#", "<cmd>SearchSelection<cr>", { desc = "Search current selection", silent = true })
+map("x", "*", "<cmd>VisualSelection<cr>", { desc = "Search current selection", silent = true })
+map("x", "#", "<cmd>VisualSelection<cr>", { desc = "Search current selection", silent = true })
 
 -- set pastetoggle=<leader>p
 map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
