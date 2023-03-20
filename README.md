@@ -57,7 +57,7 @@ See [keymaps.md](docs/keymaps.md).
 - Http Client with [rest.nvim]
 - gRPC Client with [grpc-nvim]
 
-##  File Structure
+## 📁 File Structure
 
 <!-- prettier-ignore -->
 ```
