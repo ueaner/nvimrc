@@ -21,7 +21,7 @@ return {
   -- markdown preview, toppair/peek.nvim
   {
     "ellisonleao/glow.nvim",
-    event = "VeryLazy",
+    ft = "markdown",
     cmd = { "Glow" },
     init = function()
       -- stylua: ignore

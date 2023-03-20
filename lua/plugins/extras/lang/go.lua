@@ -40,10 +40,12 @@ local specs = generate(conf)
 
 table.insert(specs, {
   "nvim-neotest/neotest-go",
+  ft = "go",
 })
 
 table.insert(specs, {
   "leoluz/nvim-dap-go",
+  ft = "go",
   init = function()
     -- stylua: ignore
     require("utils").on_ft("go", function(event)

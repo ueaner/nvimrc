@@ -1,6 +1,7 @@
 return {
   {
     "NvChad/nvterm",
+    event = "VeryLazy",
     keys = {
       -- stylua: ignore
       -- `<Esc><Esc>` enter normal mode, then switch windows

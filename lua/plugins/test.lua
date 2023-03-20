@@ -2,9 +2,8 @@ return {
   -- http client, treesitter: http, json
   {
     "rest-nvim/rest.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
     ft = "http",
+    dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       -- 最好可以和 neotest 兼容使用 ,tt 发起请求
       { "<leader>th", "<Plug>RestNvim", desc = "run http request" },
@@ -40,9 +39,8 @@ return {
   -- grpc client
   {
     "hudclark/grpc-nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
     ft = "grpc",
+    dependencies = { "nvim-lua/plenary.nvim" },
     cmd = { "Grpc" },
     keys = {
       { "<leader>tg", "<cmd>Grpc<cr>", desc = "run grpc request" },

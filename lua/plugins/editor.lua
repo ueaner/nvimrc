@@ -2,6 +2,7 @@ return {
   -- file explorer
   {
     "nvim-tree/nvim-tree.lua",
+    event = "VeryLazy",
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
     keys = {
       { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Explorer", mode = { "n", "t" } },
@@ -65,6 +66,7 @@ return {
   -- outline
   {
     "stevearc/aerial.nvim",
+    event = "VeryLazy",
     cmd = "AerialToggle",
     keys = { { "<leader>co", "<cmd>AerialToggle<cr>", desc = "Aerial Outline" } },
     opts = {
@@ -85,6 +87,7 @@ return {
   -- fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
+    event = "VeryLazy",
     dependencies = {
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-project.nvim" },
@@ -127,6 +130,7 @@ return {
 
   {
     "folke/trouble.nvim",
+    event = "VeryLazy",
     opts = { use_diagnostic_signs = true },
   },
 

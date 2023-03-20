@@ -2,14 +2,11 @@
 return {
   {
     "aklt/plantuml-syntax",
-    event = "VeryLazy",
     ft = "plantuml",
   },
 
   {
     "tyru/open-browser.vim",
-    event = "VeryLazy",
-    ft = "plantuml",
     cmd = {
       "OpenBrowser",
     },
@@ -17,7 +14,6 @@ return {
 
   {
     "weirongxu/plantuml-previewer.vim",
-    event = "VeryLazy",
     ft = "plantuml",
     cmd = {
       "PlantumlToggle",

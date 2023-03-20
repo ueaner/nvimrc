@@ -62,6 +62,7 @@ table.insert(specs, {
 
 table.insert(specs, {
   "jbyuki/one-small-step-for-vimkind",
+  ft = "lua",
   init = function()
     -- stylua: ignore start
     vim.keymap.set("n", "<leader>ds", function() require("osv").launch({ port = 8086 }) end, { desc = "Launch Lua Debugger Server" })
