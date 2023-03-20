@@ -333,7 +333,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [mini.comment]: https://github.com/echasnovski/mini.comment
 [windows.nvim]: https://github.com/anuvyklack/windows.nvim
 [zen-mode.nvim]: https://github.com/folke/zen-mode.nvim
-[nvim-tree.lua]: https://github.com/kyazdani42/nvim-tree.lua
+[nvim-tree.lua]: https://github.com/nvim-tree/nvim-tree.lua
 [vim-dadbod]: https://github.com/tpope/vim-dadbod
 [aerial.nvim]: https://github.com/stevearc/aerial.nvim
 [nvterm]: https://github.com/NvChad/nvterm
