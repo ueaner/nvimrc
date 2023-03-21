@@ -3,6 +3,7 @@ local nls = require("null-ls")
 
 ---@type LangConfig
 local conf = {
+  ft = "bash",
   parsers = { -- nvim-treesitter: language parsers
     "bash",
   },

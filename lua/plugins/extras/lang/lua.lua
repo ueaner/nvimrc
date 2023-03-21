@@ -3,6 +3,7 @@ local nls = require("null-ls")
 
 ---@type LangConfig
 local conf = {
+  ft = "lua",
   parsers = { -- nvim-treesitter: language parsers
     "lua",
   },
@@ -47,41 +48,37 @@ local conf = {
       nls.builtins.formatting.stylua,
     },
   },
-  test_adapters = { -- neotest: language specific adapter functions
-    function()
-      return require("neotest-plenary")
-    end,
+  dap = { -- nvim-dap: language specific extensions
+    {
+      "jbyuki/one-small-step-for-vimkind",
+      -- stylua: ignore
+      on_ft = function(event)
+        vim.keymap.set("n", "<leader>ds", function() require("osv").launch({ port = 8086 }) end, { desc = "Launch Lua Debugger Server", buffer = event.buf })
+        vim.keymap.set("n", "<leader>dd", function() require("osv").run_this() end, { desc = "Launch Lua Debugger", buffer = event.buf })
+      end,
+      config = function()
+        local dap = require("dap")
+        dap.configurations.lua = {
+          {
+            type = "nlua",
+            request = "attach",
+            name = "Attach to running Neovim instance",
+          },
+        }
+        dap.adapters.nlua = function(callback, config)
+          callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+        end
+      end,
+    },
+  },
+  test = { -- neotest: language specific adapters
+    {
+      "nvim-neotest/neotest-plenary",
+      adapter_fn = function()
+        return require("neotest-plenary")
+      end,
+    },
   },
 }
 
-local specs = generate(conf)
-
-table.insert(specs, {
-  "nvim-neotest/neotest-plenary",
-})
-
-table.insert(specs, {
-  "jbyuki/one-small-step-for-vimkind",
-  ft = "lua",
-  init = function()
-    -- stylua: ignore start
-    vim.keymap.set("n", "<leader>ds", function() require("osv").launch({ port = 8086 }) end, { desc = "Launch Lua Debugger Server" })
-    vim.keymap.set("n", "<leader>dd", function() require("osv").run_this() end, { desc = "Launch Lua Debugger" })
-    -- stylua: ignore end
-  end,
-  config = function()
-    local dap = require("dap")
-    dap.configurations.lua = {
-      {
-        type = "nlua",
-        request = "attach",
-        name = "Attach to running Neovim instance",
-      },
-    }
-    dap.adapters.nlua = function(callback, config)
-      callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
-    end
-  end,
-})
-
-return specs
+return generate(conf)
