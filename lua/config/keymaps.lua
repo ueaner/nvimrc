@@ -25,6 +25,19 @@ map({ "i", "v", "n", "s" }, "<A-s>", "<NOP>")
 -- prints the current file name with `full path` and the current `buffer number`
 map("n", "<C-g>", "2<C-g>")
 
+-- Readline-style keymap for normal mode
+map("i", "<C-A>", "<Home>")
+map("i", "<C-E>", "<ESC><S-A>")
+-- <C-B> <C-F> also configured in ui/noise.nvim
+map("i", "<C-B>", "<Left>")
+map("i", "<C-F>", "<Right>")
+-- :h i_CTRL-H
+map("i", "<C-D>", "<Del>")
+-- :help i_CTRL-W
+-- :help i_CTRL-U
+map("i", "<C-K>", "<C-O>D")
+-- " :help i_CTRL-Y Insert the character which is above the cursor
+
 -- Readline-style keymap for command-line mode
 map("c", "<C-A>", "<Home>")
 -- :help c_CTRL-E
