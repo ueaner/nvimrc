@@ -71,13 +71,11 @@ lua
 │   ├── ui.lua           -- UI Appearance
 │   ├── editor.lua       -- Editor Features
 │   ├── coding.lua       -- Coding Features
-│   ├── terminal.lua
-│   ├── git.lua
-│   ├── db.lua
 │   ├── lsp.lua
 │   ├── dap.lua
 │   ├── test.lua
 │   ├── treesitter.lua
+│   ├── tools.lua
 │   └── extras
 │       └── lang         -- language specific extension modules
 │           ├── markdown.lua
