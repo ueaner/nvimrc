@@ -52,6 +52,7 @@ local M = {
 ---Generate language specific specs
 ---@param conf LangConfig
 M.generate = function(conf)
+  ---@type LangConfig
   conf = vim.tbl_deep_extend("force", M.defaults, conf or {})
   local specs = {}
 
@@ -105,21 +106,17 @@ M.generate = function(conf)
       -- install dap adapter plugin
       if not str_isempty(item[1]) then
         -- Automatically run `require(MAIN).setup(opts)` with `config = true`
-        -- @type boolean|function
-        local config = true
+        local spec = { item[1], config = true }
         if type(item.config) == "function" then
-          config = item.config
+          spec.config = item.config
         end
-        local spec = { item[1], config = config }
         if not str_isempty(conf.ft) then
-          spec = {
-            item[1],
-            ft = conf.ft,
-            init = function()
+          spec.ft = conf.ft
+          if type(item.on_ft) == "function" then
+            spec.init = function()
               require("utils").on_ft(conf.ft, item.on_ft)
-            end,
-            config = config,
-          }
+            end
+          end
         end
         table.insert(specs, spec)
       end
@@ -133,7 +130,7 @@ M.generate = function(conf)
       if not str_isempty(item[1]) then
         local spec = { item[1] }
         if not str_isempty(conf.ft) then
-          spec = { item[1], ft = conf.ft }
+          spec.ft = conf.ft
         end
         table.insert(specs, spec)
       end
