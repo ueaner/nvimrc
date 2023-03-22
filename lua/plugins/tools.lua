@@ -168,7 +168,7 @@ return {
     end,
   },
 
-  -- markdown preview, toppair/peek.nvim
+  -- markdown preview in terminal
   {
     "ellisonleao/glow.nvim",
     ft = "markdown",
@@ -176,7 +176,7 @@ return {
     init = function()
       -- stylua: ignore
       require("utils").on_ft("markdown", function(event)
-        vim.keymap.set("n", "<leader>fv", "<cmd>Glow!<cr>", { desc = "Live Preview (Markdown)", buffer = event.buf })
+        vim.keymap.set("n", "<leader>fv", "<cmd>Glow!<cr>", { desc = "Glow Preview (Markdown)", buffer = event.buf })
       end)
     end,
     config = function()
@@ -187,13 +187,42 @@ return {
     end,
   },
 
+  -- markdown preview in browser
+  {
+    "toppair/peek.nvim",
+    build = "deno task --quiet build:fast",
+    ft = { "markdown" },
+    init = function()
+      require("utils").on_ft("markdown", function(event)
+        vim.keymap.set("n", "<leader>fo", function()
+          local peek = require("peek")
+          if peek.is_open() then
+            peek.close()
+          else
+            peek.open()
+          end
+        end, { desc = "Live Preview (Markdown)", buffer = event.buf })
+      end)
+    end,
+    opts = {
+      theme = "light",
+      app = "browser",
+    },
+  },
+
+  -- mermaid syntax
+  {
+    "mracos/mermaid.vim",
+    ft = { "mermaid", "markdown" },
+  },
+
   -- plantuml syntax
   {
     "aklt/plantuml-syntax",
-    ft = "plantuml",
+    ft = { "plantuml", "markdown" },
   },
 
-  -- plantuml preview
+  -- plantuml preview in browser
   {
     "weirongxu/plantuml-previewer.vim",
     ft = "plantuml",
@@ -207,8 +236,8 @@ return {
     init = function()
       vim.g["plantuml_previewer#plantuml_jar_path"] = vim.env.XDG_LIB_HOME .. "/java/plantuml.jar"
       -- stylua: ignore
-      require("utils").on_ft("markdown", function(event)
-        vim.keymap.set("n", "<leader>fv", "<cmd>PlantumlToggle<cr>", { desc = "Live Preview (Plantuml)", buffer = event.buf })
+      require("utils").on_ft("plantuml", function(event)
+        vim.keymap.set("n", "<leader>fo", "<cmd>PlantumlToggle<cr>", { desc = "Live Preview (Plantuml)", buffer = event.buf })
       end)
     end,
   },
