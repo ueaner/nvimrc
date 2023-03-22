@@ -344,4 +344,5 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [plantuml-previewer.vim]: https://github.com/weirongxu/plantuml-previewer.vim
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
 [utils.lua]: lua/utils.lua
-[which-key]: https://user-images.githubusercontent.com/318253/225215039-eb8f1e9a-42bd-4897-8eaf-5f883d31b532.png "which key"
+[which-key]: https://user-images.githubusercontent.com/318253/227003845-281f8a67-59c0-47b8-976a-a98ef61ae7de.png "which key"
+
