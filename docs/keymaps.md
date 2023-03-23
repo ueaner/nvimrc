@@ -14,7 +14,7 @@ References:
 - `:help vim-modes`
 - `:help mode-switching`
 
-Switch from normal mode to another mode, and then switch back to normal node:
+Switch from normal mode to another mode, and then switch back to normal mode:
 
 ```help
            TO mode                Command                   Operator
@@ -345,4 +345,3 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
 [utils.lua]: lua/utils.lua
 [which-key]: https://user-images.githubusercontent.com/318253/227003845-281f8a67-59c0-47b8-976a-a98ef61ae7de.png "which key"
-
