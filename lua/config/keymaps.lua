@@ -12,6 +12,8 @@ vim.keymap.del("n", "<S-h>")
 vim.keymap.del("n", "<S-l>")
 vim.keymap.del("v", "<")
 vim.keymap.del("v", ">")
+vim.keymap.del("n", "<leader>ft")
+vim.keymap.del("n", "<leader>fT")
 
 local map = vim.keymap.set
 
