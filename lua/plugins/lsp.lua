@@ -1,5 +1,4 @@
 local list_extend = require("utils").list_extend
-local list_remove = require("utils").list_remove
 
 return {
   -- cmdline tools and lsp servers
@@ -13,9 +12,6 @@ return {
         -- Use `prettierd` formatting markdown files
         "prettierd",
       })
-
-      -- filter flake8
-      list_remove(opts.ensure_installed, "flake8")
     end,
   },
 
