@@ -81,8 +81,8 @@ map({"n", "t"}, "<leader>bd", function() require("utils.buf").close() end, { des
 map({"n", "t"}, "<leader>bi", function() require("utils.buf").info() end, { desc = "Buffer Info" })
 
 -- translation
-map("x", "<leader>tz", "<cmd>Translate ZH<cr>", { desc = "Translate from English to Chinese", silent = true })
-map("x", "<leader>te", "<cmd>Translate EN<cr>", { desc = "Translate from Chinese to English", silent = true })
+map("x", "<leader>tz", "<cmd>Translate ZH<cr><esc>", { desc = "Translate from English to Chinese", silent = true })
+map("x", "<leader>te", "<cmd>Translate EN<cr><esc>", { desc = "Translate from Chinese to English", silent = true })
 
 if vim.fn.executable("btm") then
   map("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })
