@@ -14,6 +14,8 @@ vim.keymap.del("v", "<")
 vim.keymap.del("v", ">")
 vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>fT")
+vim.keymap.del("n", "<leader>w|")
+vim.keymap.del("n", "<leader>|")
 
 local map = vim.keymap.set
 
@@ -83,6 +85,11 @@ map({"n", "t"}, "<leader>bi", function() require("utils.buf").info() end, { desc
 -- translation
 map("x", "<leader>tz", "<cmd>Translate ZH<cr><esc>", { desc = "Translate from English to Chinese", silent = true })
 map("x", "<leader>te", "<cmd>Translate EN<cr><esc>", { desc = "Translate from Chinese to English", silent = true })
+
+map("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
+map("n", "<leader>w\\", "<C-W>v", { desc = "Split window right" })
+map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
+map("n", '<leader>\\', "<C-W>v", { desc = "Split window right" })
 
 if vim.fn.executable("btm") then
   map("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })
