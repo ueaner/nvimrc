@@ -6,4 +6,6 @@ return {
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   { "echasnovski/mini.bufremove", enabled = false },
   { "echasnovski/mini.pairs", enabled = false },
+  -- coding
+  { "echasnovski/mini.ai", enabled = false },
 }
