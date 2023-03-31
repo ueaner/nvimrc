@@ -155,13 +155,6 @@ return {
     ft = { "json", "yaml" },
   },
 
-  {
-    "tyru/open-browser.vim",
-    cmd = {
-      "OpenBrowser",
-    },
-  },
-
   -- table mode for markdown
   {
     "dhruvasagar/vim-table-mode",
@@ -239,6 +232,7 @@ return {
   {
     "weirongxu/plantuml-previewer.vim",
     ft = "plantuml",
+    dependencies = { "tyru/open-browser.vim" },
     cmd = {
       "PlantumlToggle",
       "PlantumlOpen",
