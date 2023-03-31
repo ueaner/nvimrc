@@ -78,7 +78,7 @@ return {
       opts.sections.lualine_z = { "" }
       -- https://github.com/nvim-lualine/lualine.nvim#available-extensions
       -- https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/extensions
-      opts.extensions = { "nvim-tree", "quickfix", "man" }
+      opts.extensions = { "nvim-tree", "quickfix", "man", "trouble", "nvim-dap-ui" }
 
       -- tabline also displays diagnostics information
     end,
