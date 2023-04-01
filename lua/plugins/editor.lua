@@ -92,6 +92,17 @@ return {
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-project.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      {
+        "nvim-telescope/telescope-cheat.nvim",
+        dependencies = "kkharji/sqlite.lua",
+        config = function()
+          -- fix: https://github.com/nvim-telescope/telescope-cheat.nvim/issues/7
+          local dbdir = vim.fn.stdpath("data") .. "/databases"
+          if not vim.loop.fs_stat(dbdir) then
+            vim.loop.fs_mkdir(dbdir, 493)
+          end
+        end,
+      },
     },
     keys = {
       { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope" },
@@ -103,6 +114,7 @@ return {
         end,
         desc = "Find Plugin File",
       },
+      { "<leader>si", "<cmd>Telescope cheat fd<cr>", desc = "Cheatsheets" },
     },
     opts = {
       defaults = {
@@ -125,6 +137,7 @@ return {
       telescope.load_extension("dap")
       telescope.load_extension("project")
       telescope.load_extension("fzf")
+      telescope.load_extension("cheat")
     end,
   },
 
