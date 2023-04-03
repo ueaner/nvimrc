@@ -9,6 +9,7 @@ M.modified = function(bufnr)
   return vim.bo[bufnr].modified
 end
 
+-- Display buffer information in a floating window
 M.info = function()
   local vtype = "info42"
   if vim.bo.filetype == vtype then
