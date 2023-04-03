@@ -53,7 +53,7 @@ M.info = function()
 
   -- MORE
 
-  local win_bufnr, _ = require("utils").make_window(lines)
+  local win_bufnr, _ = require("utils.floatwin").make(lines)
   vim.api.nvim_buf_set_option(win_bufnr, "filetype", vtype)
 end
 
