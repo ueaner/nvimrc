@@ -154,6 +154,7 @@ return {
       require("which-key").register({
         ["<leader>d"] = { name = "+debug", mode = { "n", "v" } },
         ["<leader>t"] = { name = "+test" },
+        ["<leader>r"] = { name = "+run" },
         ["<leader>D"] = { name = "+db" },
         ["<leader>a"] = { name = "+a tool" },
       })
