@@ -26,7 +26,14 @@ return {
         nls.builtins.code_actions.refactoring,
         -- format tables in markdown
         nls.builtins.formatting.prettierd.with({
-          filetypes = { "markdown" },
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "markdown",
+            "markdown.mdx",
+          },
         }),
       })
     end,
