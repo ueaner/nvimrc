@@ -53,7 +53,7 @@ function M.setup()
 
   _G.dd = _G.d
   _G.dump = _G.d
-  vim.pretty_print = _G.d
+  vim.print = _G.d
 end
 
 return M
