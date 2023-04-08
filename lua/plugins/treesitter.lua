@@ -13,7 +13,7 @@ return {
         "regex",
         "lua",
         "vim",
-        "help",
+        "vimdoc",
         "markdown",
         "markdown_inline",
         "html",
