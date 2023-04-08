@@ -64,7 +64,6 @@ map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "dont copy replaced text
 map("x", "*", "<cmd>VisualSelection<cr>", { desc = "Search current selection", silent = true })
 map("x", "#", "<cmd>VisualSelection<cr>", { desc = "Search current selection", silent = true })
 
--- set pastetoggle=<leader>p
 map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
 map("n", "<leader>ub", function() require("utils").clipboard_toggle() end, { desc = "Toggle ClipBoard" })
 
