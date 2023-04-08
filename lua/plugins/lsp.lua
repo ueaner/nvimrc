@@ -1,4 +1,5 @@
 local list_extend = require("utils").list_extend
+local list_remove = require("utils").list_remove
 
 return {
   -- cmdline tools and lsp servers
@@ -36,6 +37,9 @@ return {
           },
         }),
       })
+
+      list_remove(opts.sources, nls.builtins.formatting.fish_indent)
+      list_remove(opts.sources, nls.builtins.diagnostics.fish)
     end,
   },
 }
