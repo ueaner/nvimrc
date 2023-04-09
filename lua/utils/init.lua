@@ -81,12 +81,13 @@ M.list_remove = function(list, item)
   return list
 end
 
---- Gets the highlight `foreground` or `background` color by name.
+--- Gets the highlight `fg` or `bg` color by name.
 ---@param group string Highlight group name
----@param attr "foreground"|"background"
+---@param attr "fg"|"bg"
 M.hl_color = function(group, attr)
-  local ok, hl = pcall(vim.api.nvim_get_hl_by_name, group, true)
-  if not ok or not hl[attr] then
+  -- neovim 0.9.0+: vim.api.nvim_get_hl()
+  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group })
+  if not ok or not hl or not hl[attr] then
     return
   end
   return string.format("#%06x", hl[attr])
