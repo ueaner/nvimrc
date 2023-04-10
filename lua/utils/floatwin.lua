@@ -6,18 +6,21 @@ local M = {}
 --
 -- Examples:
 -- ```lua
---    local win_bufnr, win_id = make_window(lines)
---    local win_bufnr, win_id = make_window(lines, 0.5, 0.6)
---    local win_bufnr, win_id = make_window(lines, 0.5, 0.6, "q")
+--    local bufnr, winid = make_window(lines)
+--    local bufnr, winid = make_window(lines, 0.5, 0.6)
+--    local bufnr, winid = make_window(lines, 0.5, 0.6, "q")
 --    -- Custom filetype
---    vim.api.nvim_buf_set_option(win_id, "filetype", "buf42")
+--    vim.api.nvim_buf_set_option(winid, "filetype", "buf42")
 --    -- Custom border highlight style
---    vim.api.nvim_win_set_option(win_id, "winhl", "FloatBorder:XxxInfoBorder")
+--    vim.api.nvim_win_set_option(winid, "winhl", "FloatBorder:XxxInfoBorder")
 -- ```
+--
 --- @param lines string[] floating window contents
 --- @param height_percentage? number centered window as a percentage of screen height, default is 0.5
 --- @param width_percentage? number centered window as a percentage of screen width, default is 0.6
 --- @param close_keys string[]? close floating window keymap, default is { "<ESC>", "q" }
+--- @return integer bufnr bufnr for floating window
+--- @return integer winid winid for floating window
 M.make = function(lines, height_percentage, width_percentage, close_keys)
   height_percentage = height_percentage or 0.5
   width_percentage = width_percentage or 0.6
@@ -40,8 +43,8 @@ M.make = function(lines, height_percentage, width_percentage, close_keys)
   }
 
   local bufnr = vim.api.nvim_create_buf(false, true)
-  local win_id = vim.api.nvim_open_win(bufnr, true, opts)
-  vim.api.nvim_win_set_buf(win_id, bufnr)
+  local winid = vim.api.nvim_open_win(bufnr, true, opts)
+  vim.api.nvim_win_set_buf(winid, bufnr)
 
   -- define the buffer properties
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, lines)
@@ -52,25 +55,25 @@ M.make = function(lines, height_percentage, width_percentage, close_keys)
   -- vim.api.nvim_buf_set_option(bufnr, "filetype", "buf42")
 
   -- close floating window keymap
-  M.close_keymap_set(bufnr, win_id, close_keys)
+  M.close_keymap_set(bufnr, winid, close_keys)
 
-  return bufnr, win_id
+  return bufnr, winid
 end
 
 --- Set the keymap to close the floating window, default is: "<ESC>" and "q"
 --
 --- @param bufnr integer bufnr for floating window
---- @param win_id integer win_id for floating window
+--- @param winid integer winid for floating window
 --- @param keys? string[] close floating window keymap, default is { "<ESC>", "q" }
-M.close_keymap_set = function(bufnr, win_id, keys)
+M.close_keymap_set = function(bufnr, winid, keys)
   keys = keys or { "<ESC>", "q" }
 
   local close = function()
     if vim.api.nvim_buf_is_valid(bufnr) then
       vim.api.nvim_buf_delete(bufnr, { force = true })
     end
-    if vim.api.nvim_win_is_valid(win_id) then
-      vim.api.nvim_win_close(win_id, true)
+    if vim.api.nvim_win_is_valid(winid) then
+      vim.api.nvim_win_close(winid, true)
     end
   end
 
