@@ -37,8 +37,6 @@ return {
     end,
   },
 
-  { "editorconfig/editorconfig-vim", event = { "BufReadPost", "BufWinEnter", "BufNewFile" } },
-
   -- keymap `<leader>ca` for LSP Code Action
   { "ThePrimeagen/refactoring.nvim", event = { "VeryLazy" } },
 
