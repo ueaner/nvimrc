@@ -216,12 +216,6 @@ return {
     },
   },
 
-  -- mermaid syntax
-  {
-    "mracos/mermaid.vim",
-    ft = { "mermaid", "markdown" },
-  },
-
   -- plantuml syntax
   {
     "aklt/plantuml-syntax",

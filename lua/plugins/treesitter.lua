@@ -32,6 +32,7 @@ return {
         "gitcommit",
         "gitignore",
         "sql",
+        "mermaid",
       })
     end,
   },
