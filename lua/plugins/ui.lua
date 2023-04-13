@@ -5,8 +5,10 @@ return {
     event = "VeryLazy",
     -- stylua: ignore
     keys = {
-      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<Right>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
-      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<Left>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
+      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<Right>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i"}},
+      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<Left>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i"}},
+      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"n", "s"}},
+      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"n", "s"}},
     },
   },
 
