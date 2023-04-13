@@ -32,7 +32,6 @@ return {
         adaptive_size = false,
         side = "left",
         width = 40,
-        hide_root_folder = true,
         mappings = {
           list = {
             { key = "?", action = "toggle_help" },
@@ -40,6 +39,7 @@ return {
         },
       },
       renderer = {
+        root_folder_label = false,
         highlight_git = true,
         -- https://en.wikipedia.org/wiki/List_of_Unicode_characters
         -- https://www.nerdfonts.com/cheat-sheet
