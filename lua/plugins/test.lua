@@ -31,7 +31,7 @@ return {
       { "<leader>tq", function() require('neotest').run.stop() end, desc = "Stop" },
       { "<leader>ts", function() require('neotest').summary.toggle() end, desc = "Summary" },
     },
-    -- 使用 config 自定义 setup
+    -- use config to customize setup options
     config = function()
       -- get neotest namespace (api call creates or returns namespace)
       local neotest_ns = vim.api.nvim_create_namespace("neotest")
