@@ -9,55 +9,6 @@ M.modified = function(bufnr)
   return vim.bo[bufnr].modified
 end
 
--- Display buffer information in a floating window
-M.info = function()
-  local vtype = "info42"
-  if vim.bo.filetype == vtype then
-    print("This buffer is an info window")
-    return
-  end
-
-  -- buffer options or window options
-  local options = { "filetype", "buftype", "buflisted", "modified", "modifiable", "conceallevel" }
-  local toggles = require("utils").toggles()
-
-  local lines = {}
-  local l = ""
-
-  -- Options
-  table.insert(lines, "Options")
-  for _, o in ipairs(options) do
-    local v = vim.opt_local[o]:get()
-    local s = ""
-    if type(v) == "string" then
-      s = v ~= "" and v or "<empty>"
-    elseif type(v) == "boolean" then
-      s = tostring(v)
-    else
-      s = vim.inspect(v)
-    end
-    l = string.format("- %s: %s", o, s)
-    table.insert(lines, l)
-  end
-
-  -- Toggles
-  table.insert(lines, "")
-  table.insert(lines, "Toggles")
-  for _, t in ipairs(toggles) do
-    l = string.format(" %s %s: %s", t[2], t[1], tostring(t[3]))
-    table.insert(lines, l)
-  end
-
-  -- LSP servers
-  -- DAP adapters
-  -- TS parsers
-
-  -- MORE
-
-  local win_bufnr, _ = require("utils.floatwin").make(lines)
-  vim.api.nvim_buf_set_option(win_bufnr, "filetype", vtype)
-end
-
 -- Close the current buffer without affecting the editor layout
 --
 --             buflisted  modified    buftype
@@ -122,6 +73,70 @@ M.close_others = function()
       vim.cmd("bd " .. bufnr)
     end
   end
+end
+
+-- Display buffer information in a floating window
+M.info = function()
+  local vtype = "info42"
+  if vim.bo.filetype == vtype then
+    print("This buffer is an info window")
+    return
+  end
+
+  -- buffer options or window options
+  local options = {
+    "filetype",
+    "buftype",
+    "buflisted",
+    "modified",
+    "modifiable",
+    "conceallevel",
+    "tabstop",
+    "softtabstop",
+    "shiftwidth",
+    "expandtab",
+    "smarttab",
+    "autoindent",
+    "smartindent",
+  }
+
+  local toggles = require("utils").toggles()
+
+  local lines = {}
+  local l = ""
+
+  -- Options
+  table.insert(lines, "Options")
+  for _, o in ipairs(options) do
+    local v = vim.opt_local[o]:get()
+    local s = ""
+    if type(v) == "string" then
+      s = v ~= "" and v or "<empty>"
+    elseif type(v) == "boolean" then
+      s = tostring(v)
+    else
+      s = vim.inspect(v)
+    end
+    l = string.format("- %s: %s", o, s)
+    table.insert(lines, l)
+  end
+
+  -- Toggles
+  table.insert(lines, "")
+  table.insert(lines, "Toggles")
+  for _, t in ipairs(toggles) do
+    l = string.format(" %s %s: %s", t[2], t[1], tostring(t[3]))
+    table.insert(lines, l)
+  end
+
+  -- LSP servers
+  -- DAP adapters
+  -- TS parsers
+
+  -- MORE
+
+  local win_bufnr, _ = require("utils.floatwin").make(lines)
+  vim.api.nvim_buf_set_option(win_bufnr, "filetype", vtype)
 end
 
 return M
