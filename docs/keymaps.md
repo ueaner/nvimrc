@@ -96,7 +96,7 @@ Command-line mode uses readline-style keymaps.
 | `gr`         | References             | n    | LSP        |
 | `gD`         | Goto Declaration       | n    | LSP        |
 | `gI`         | Goto Implementation    | n    | LSP        |
-| `gt`         | Goto Type Definition   | n    | LSP        |
+| `gT`         | Goto Type Definition   | n    | LSP        |
 | `<leader>cr` | Rename                 | n    | LSP        |
 | `<leader>ca` | Code Action            | n, v | LSP        |
 | `<leader>cc` | Code Clean             | n    | LSP        |
