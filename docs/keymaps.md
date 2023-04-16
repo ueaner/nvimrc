@@ -313,6 +313,18 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>tc` | preview cURL command  | n    | [rest.nvim] |
 | `<leader>tg` | run gRPC request      | n    | [grpc-nvim] |
 
+## Run
+
+- prefix: `<leader>r` for run
+
+| Key          | Description                    | Mode | Provider  |
+| ------------ | ------------------------------ | ---- | --------- |
+| `<leader>ra` | Run All                        | n    | [sniprun] |
+| `<leader>rr` | Run Current                    | n, v | [sniprun] |
+| `<leader>rR` | Reset & (Close UI, Clear REPL) | n    | [sniprun] |
+| `<leader>ri` | Run Info                       | n    | [sniprun] |
+| `<leader>rI` | Find Interpreters              | n    | [sniprun] |
+
 [which-key.nvim]: https://github.com/folke/which-key.nvim
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
 [nvim-spectre]: https://github.com/windwp/nvim-spectre
@@ -327,6 +339,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [nvim-dap-ui]: https://github.com/rcarriga/nvim-dap-ui
 [nvim-dap-go]: https://github.com/leoluz/nvim-dap-go
 [neotest]: https://github.com/nvim-neotest/neotest
+[sniprun]: https://github.com/michaelb/sniprun
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
 [grpc-nvim]: https://github.com/hudclark/grpc-nvim
 [lazygit]: https://github.com/jesseduffield/lazygit
@@ -344,4 +357,4 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [plantuml-previewer.vim]: https://github.com/weirongxu/plantuml-previewer.vim
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
 [utils.lua]: lua/utils.lua
-[which-key]: https://user-images.githubusercontent.com/318253/227003845-281f8a67-59c0-47b8-976a-a98ef61ae7de.png "which key"
+[which-key]: https://user-images.githubusercontent.com/318253/232319921-57f1dbf4-a755-459f-8e52-66a410e96151.png "which key"
