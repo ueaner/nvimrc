@@ -42,4 +42,19 @@ return {
       list_remove(opts.sources, nls.builtins.diagnostics.fish)
     end,
   },
+
+  -- LSP keymaps
+  {
+    "neovim/nvim-lspconfig",
+    init = function()
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      -- NOTE: method textDocument/declaration is not supported by any of the servers registered for the current buffer
+      keys[#keys + 1] = { "ge", vim.lsp.buf.declaration, desc = "Goto D[e]claration" }
+      keys[#keys + 1] = { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition", has = "definition" }
+      keys[#keys + 1] = { "gD", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto Type Definition" }
+      keys[#keys + 1] = { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" }
+      keys[#keys + 1] = { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Find References" }
+      keys[#keys + 1] = { "gy", false }
+    end,
+  },
 }

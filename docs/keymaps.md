@@ -92,11 +92,11 @@ Command-line mode uses readline-style keymaps.
 | `<c-k>`      | Trigger Signature Help | i    | LSP        |
 | `<leader>cf` | Format Document        | n    | LSP        |
 | `<leader>cf` | Format Range           | v    | LSP        |
+| `ge`         | Goto D[e]claration     | n    | LSP        |
 | `gd`         | Goto Definition        | n    | LSP        |
-| `gr`         | References             | n    | LSP        |
-| `gD`         | Goto Declaration       | n    | LSP        |
+| `gD`         | Goto Type Definition   | n    | LSP        |
 | `gI`         | Goto Implementation    | n    | LSP        |
-| `gT`         | Goto Type Definition   | n    | LSP        |
+| `gr`         | Find References        | n    | LSP        |
 | `<leader>cr` | Rename                 | n    | LSP        |
 | `<leader>ca` | Code Action            | n, v | LSP        |
 | `<leader>cc` | Code Clean             | n    | LSP        |
