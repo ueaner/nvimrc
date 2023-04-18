@@ -9,6 +9,16 @@ return {
     },
     -- :help nvim-tree-setup  view default options
     opts = {
+      on_attach = function(bufnr)
+        local api = require("nvim-tree.api")
+        local function opts(desc)
+          return { desc = desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+        -- apply default mappings
+        api.config.mappings.default_on_attach(bufnr)
+        -- alternative default mappings
+        vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+      end,
       filters = {
         -- hotkeys:
         -- I: toggle_git_ignored
@@ -19,7 +29,7 @@ return {
         custom = {
           "node_modules$",
           ".git$",
-          "go.mod$",
+          "vendor$",
         },
       },
       disable_netrw = true,
@@ -32,11 +42,6 @@ return {
         adaptive_size = false,
         side = "left",
         width = 40,
-        mappings = {
-          list = {
-            { key = "?", action = "toggle_help" },
-          },
-        },
       },
       renderer = {
         root_folder_label = false,
