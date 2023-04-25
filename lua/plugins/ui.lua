@@ -12,6 +12,38 @@ return {
     },
   },
 
+  -- bufferline
+  --{
+  --  "akinsho/bufferline.nvim",
+  --  event = "VeryLazy",
+  --  opts = {
+  --    options = {
+  --      -- stylua: ignore
+  --      close_command = function(n) require("utils.buf").close(n) end,
+  --      -- stylua: ignore
+  --      right_mouse_command = function(n) require("utils.buf").close(n) end,
+  --      diagnostics = "nvim_lsp",
+  --      always_show_bufferline = false,
+  --      diagnostics_indicator = function(_, _, diag)
+  --        local icons = require("lazyvim.config").icons.diagnostics
+  --        local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+  --          .. (diag.warning and icons.Warn .. diag.warning or "")
+  --        return vim.trim(ret)
+  --      end,
+  --      offsets = {
+  --        {
+  --          filetype = "NvimTree",
+  --          text = function() -- try empty string
+  --            return vim.fn.getcwd()
+  --          end,
+  --          text_align = "left",
+  --          highlight = "Directory",
+  --        },
+  --      },
+  --    },
+  --  },
+  --},
+
   -- statusline
   {
     "nvim-lualine/lualine.nvim",
