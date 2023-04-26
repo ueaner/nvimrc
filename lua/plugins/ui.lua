@@ -9,6 +9,11 @@ return {
       { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<Left>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i"}},
       { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"n", "s"}},
       { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"n", "s"}},
+
+      { "<c-d>", function() if not require("noice.lsp").scroll(4) then return "<Del>" end end, silent = true, expr = true, desc = "Scroll down", mode = {"i"}},
+      { "<c-u>", function() if not require("noice.lsp").scroll(-4) then return "<C-G>u<C-U>" end end, silent = true, expr = true, desc = "Scroll up", mode = {"i"}},
+      { "<c-d>", function() if not require("noice.lsp").scroll(4) then return "<c-d>" end end, silent = true, expr = true, desc = "Scroll down", mode = {"n", "s"}},
+      { "<c-u>", function() if not require("noice.lsp").scroll(-4) then return "<c-u>" end end, silent = true, expr = true, desc = "Scroll up", mode = {"n", "s"}},
     },
   },
 

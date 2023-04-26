@@ -69,6 +69,8 @@ FROM Terminal TO Normal mode keyset: `tmap <Esc><Esc> <C-\><C-n>`
 | `L`             | To Last (bottom) line of window    | n, v    | motion         |
 | `<C-f>`         | Scroll page down                   | n, v    | scrolling      |
 | `<C-b>`         | Scroll page up                     | n, v    | scrolling      |
+| `<C-d>`         | Scroll page down (half a screen)   | n, v    | scrolling      |
+| `<C-u>`         | Scroll page up (half a screen)     | n, v    | scrolling      |
 | `zz`            | Scroll cursor to center screen     | n, v    | scrolling      |
 | `za`            | Toggle fold under cursor           | n       | fold           |
 | `zA`            | Toggle all folds under cursor      | n       | fold           |
