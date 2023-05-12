@@ -47,4 +47,5 @@ return {
   { import = "plugins.extras.lang.lua" },
   { import = "plugins.extras.lang.php" },
   { import = "plugins.extras.lang.bash" },
+  { import = "plugins.extras.lang.ansible" },
 }
