@@ -13,3 +13,5 @@ au BufRead,BufNewFile */roles/*/handlers/*.yml        setlocal ft=yaml.ansible
 au BufRead,BufNewFile */roles/*/handlers/*.yaml       setlocal ft=yaml.ansible
 au BufRead,BufNewFile */roles/*/meta/*.yml            setlocal ft=yaml.ansible
 au BufRead,BufNewFile */roles/*/meta/*.yaml           setlocal ft=yaml.ansible
+au BufRead,BufNewFile */ansible/hosts                 setlocal ft=cfg
+au BufRead,BufNewFile */playbooks/hosts               setlocal ft=cfg
