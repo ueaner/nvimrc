@@ -49,8 +49,8 @@ FROM Terminal TO Normal mode keyset: `tmap <Esc><Esc> <C-\><C-n>`
 | `C`             | Delete to end of line              | n -> i  | register       |
 | `D`             | Delete to end of line              | n, v    | register       |
 | `Y`             | Yank to end of line                | n, v    | register       |
-| `<A-j>`         | Move line/block down               | n, i, v | move           |
-| `<A-k>`         | Move line/block up                 | n, i, v | move           |
+| `<D-j>`         | Move line/block down               | n, i, v | move           |
+| `<D-k>`         | Move line/block up                 | n, i, v | move           |
 | `u`             | Undo                               | n       | undo           |
 | `<C-r>`         | Redo                               | n       | redo           |
 | `o`             | Insert line below                  | n       | Insert-mode    |

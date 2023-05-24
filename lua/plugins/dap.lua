@@ -60,8 +60,8 @@ return {
       -- dapui
       { "<leader>du", function() require("dapui").toggle() end, desc = "toggle dapui" },
       -- watch expressions
-      { "<A-e>", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
-      { "<leader>dk", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
+      { "<D-e>", function() require("dapui").eval() end, desc = "eval (<D-e>)", mode = { "n", "v" } },
+      { "<leader>dk", function() require("dapui").eval() end, desc = "eval (<D-e>)", mode = { "n", "v" } },
       { "<leader>dK", function() require("dap.ui.widgets").preview() end, desc = "preview expression"},
     },
   },

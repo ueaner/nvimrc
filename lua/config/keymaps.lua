@@ -90,6 +90,16 @@ map("n", "<leader>w\\", "<C-W>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
 map("n", '<leader>\\', "<C-W>v", { desc = "Split window right" })
 
+if vim.g.neovide then
+  vim.g.neovide_input_use_logo = true
+  -- system clipboard
+  map("n", "<D-c>", '"+y')
+  map("v", "<D-c>", '"+y')
+  map("n", "<D-v>", '"+p')
+  map("i", "<D-v>", "<C-r>+")
+  map("c", "<D-v>", "<C-r>+")
+end
+
 if vim.fn.executable("btm") then
   map("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })
 elseif vim.fn.executable("btop") then
