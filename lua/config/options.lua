@@ -54,6 +54,10 @@ vim.opt.foldmethod = "indent"
 -- Search for a filename and open the selected file :find somefile<TAB>
 vim.opt.path:append("**")
 
+if vim.g.neovide then
+  vim.opt.guifont = "SauceCodePro Nerd Font:h9"
+end
+
 -- Append the completion dictionary
 if vim.fn.filereadable("/usr/share/dict/words") then
   vim.opt.dictionary:append("/usr/share/dict/words")
