@@ -32,6 +32,13 @@ return {
           "vendor$",
         },
       },
+      filesystem_watchers = {
+        enable = false,
+      },
+      git = {
+        enable = false,
+        ignore = true,
+      },
       disable_netrw = true,
       hijack_cursor = true,
       update_focused_file = {
