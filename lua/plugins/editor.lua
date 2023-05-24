@@ -52,7 +52,7 @@ return {
         icons = {
           git_placement = "signcolumn", -- after, before or signcolumn
           glyphs = {
-            bookmark = "炙", -- 
+            bookmark = "", -- 炙
             git = {
               unstaged = "✗", -- ✘
               staged = "✓", -- ✔

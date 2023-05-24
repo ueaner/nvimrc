@@ -15,6 +15,11 @@ return {
           end)
         end,
       },
+      {
+        "Saecki/crates.nvim",
+        event = { "BufRead Cargo.toml" },
+        config = true,
+      },
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -34,6 +39,12 @@ return {
           { name = "vim-dadbod-completion" },
         },
       })
+
+      cmp.setup.filetype({ "toml" }, {
+        sources = {
+          { name = "crates" },
+        },
+      })
     end,
   },
 
@@ -47,6 +58,7 @@ return {
   { import = "plugins.extras.lang.go" },
   { import = "plugins.extras.lang.lua" },
   { import = "plugins.extras.lang.php" },
+  { import = "plugins.extras.lang.rust" },
   { import = "plugins.extras.lang.bash" },
   { import = "plugins.extras.lang.ansible" },
 }

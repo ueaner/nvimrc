@@ -46,6 +46,9 @@ return {
   -- LSP keymaps
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      { "simrat39/rust-tools.nvim", ft = "rust" },
+    },
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- NOTE: method textDocument/declaration is not supported by any of the servers registered for the current buffer

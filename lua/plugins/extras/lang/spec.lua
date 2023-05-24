@@ -9,7 +9,8 @@ local M = {
     parsers = {}, -- nvim-treesitter: language parsers
     cmdtools = {}, -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     lsp = {
-      servers = {}, -- nvim-lspconfig: setup lspconfig servers
+      servers = {}, -- nvim-lspconfig: lspconfig servers settings with filetype
+      setup = {}, -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
       nls_sources = {}, -- null-ls.nvim: builtins formatters, diagnostics, code_actions
     },
     dap = { -- nvim-dap: language specific extensions
@@ -34,6 +35,7 @@ local M = {
 
 ---@class LangConfig.lsp
 ---@field servers lspconfig.options
+---@field setup table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
 ---@field nls_sources table
 
 ---@alias LangConfig.dap LangDapAdapter[]
@@ -78,13 +80,17 @@ M.generate = function(conf)
 
   -- setup lspconfig servers
   if not vim.tbl_isempty(conf.lsp.servers) then
+    local opts = {
+      ---@type lspconfig.options
+      servers = conf.lsp.servers,
+    }
+    if not vim.tbl_isempty(conf.lsp.setup) then
+      opts.setup = conf.lsp.setup
+    end
     table.insert(specs, {
       "neovim/nvim-lspconfig",
       ---@class PluginLspOpts
-      opts = {
-        ---@type lspconfig.options
-        servers = conf.lsp.servers,
-      },
+      opts = opts,
     })
   end
 
