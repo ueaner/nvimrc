@@ -59,15 +59,14 @@ return {
         return {
           --   stylua, sumneko_lua
           function()
-            local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
             local clients = vim.lsp.get_active_clients()
             if next(clients) == nil then
               return ""
             end
             local ls = {}
+            local bufnr = vim.api.nvim_get_current_buf()
             for _, client in ipairs(clients) do
-              local filetypes = client.config.filetypes
-              if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+              if client.attached_buffers[bufnr] then
                 table.insert(ls, client.name)
               end
             end
