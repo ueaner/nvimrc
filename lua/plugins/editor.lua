@@ -117,7 +117,7 @@ return {
       },
     },
     keys = {
-      { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope" },
+      { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope Builtin" },
       { "<leader>fp", "<cmd>Telescope project display_type=full<cr>", desc = "Find project" },
       {
         "<leader>fl",

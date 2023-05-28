@@ -1,5 +1,7 @@
 # ⌨️ Keymaps
 
+TODO: 添加推荐，根据使用频率
+
 Uses [which-key.nvim] to live prompt for keymaps.
 Just press any key like `,` will displays a popup with all possible keymaps starting with `,`.
 
@@ -248,13 +250,14 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>,`       | Switch Buffer            | n    | [telescope.nvim] |
 | `<leader>/`       | Find in Files (Grep)     | n    | [telescope.nvim] |
 | `<leader>:`       | Command History          | n    | [telescope.nvim] |
-| `<leader><space>` | Find Files (root dir)    | n    | [telescope.nvim] |
+| `<leader><space>` | Telescope Builtin        | n    | [telescope.nvim] |
 | `<leader>fb`      | Buffers                  | n    | [telescope.nvim] |
 | `<leader>ff`      | Find Files (root dir)    | n    | [telescope.nvim] |
 | `<leader>fF`      | Find Files (cwd)         | n    | [telescope.nvim] |
 | `<leader>fr`      | Recent                   | n    | [telescope.nvim] |
-| `<leader>gc`      | commits                  | n    | [telescope.nvim] |
-| `<leader>gs`      | status                   | n    | [telescope.nvim] |
+| `<leader>fR`      | Recent (cwd)             | n    | [telescope.nvim] |
+| `<leader>gc`      | git commits              | n    | [telescope.nvim] |
+| `<leader>gs`      | git status               | n    | [telescope.nvim] |
 | `<leader>sa`      | Auto Commands            | n    | [telescope.nvim] |
 | `<leader>sb`      | Buffer                   | n    | [telescope.nvim] |
 | `<leader>sc`      | Command History          | n    | [telescope.nvim] |
