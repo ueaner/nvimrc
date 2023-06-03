@@ -1,5 +1,5 @@
 return {
-
+  -- dap
   {
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
@@ -21,12 +21,16 @@ return {
       },
     },
     config = function()
-      -- https://microsoft.github.io/vscode-codicons/dist/codicon.html
-      vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "", linehl = "", numhl = "" }) -- debug-breakpoint-conditional
-      vim.fn.sign_define("DapLogPoint", { text = "", texthl = "", linehl = "", numhl = "" })
-      vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "", numhl = "" })
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+
+      for name, sign in pairs(require("config").icons.dap) do
+        sign = type(sign) == "table" and sign or { sign }
+        vim.fn.sign_define(
+          "Dap" .. name,
+          { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+        )
+      end
+
       -- Open automatically when a new debug session is created
       require("dap").listeners.after.event_initialized["dapui_config"] = function()
         require("dapui").open()
@@ -59,9 +63,9 @@ return {
       { "<leader>dL", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "[B] logpoint" },
       -- dapui
       { "<leader>du", function() require("dapui").toggle() end, desc = "toggle dapui" },
-      -- watch expressions
-      { "<D-e>", function() require("dapui").eval() end, desc = "eval (<D-e>)", mode = { "n", "v" } },
-      { "<leader>dk", function() require("dapui").eval() end, desc = "eval (<D-e>)", mode = { "n", "v" } },
+      -- watch expressions, show hover
+      { "<A-e>", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
+      { "<leader>dk", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
       { "<leader>dK", function() require("dap.ui.widgets").preview() end, desc = "preview expression"},
     },
   },

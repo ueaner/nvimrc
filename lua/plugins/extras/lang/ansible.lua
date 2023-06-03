@@ -17,11 +17,6 @@ local conf = {
 local specs = generate(conf)
 
 -- table.insert(specs, {
---   "pearofducks/ansible-vim",
---   event = "VeryLazy",
--- })
-
--- table.insert(specs, {
 --   "mfussenegger/nvim-ansible",
 --   event = "VeryLazy",
 -- })

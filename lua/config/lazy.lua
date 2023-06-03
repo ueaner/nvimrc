@@ -1,22 +1,39 @@
+-- https://github.com/LazyVim/starter/blob/main/lua/config/lazy.lua
+
+-- Install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  -- bootstrap lazy.nvim
-  -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.opt.rtp:prepend(lazypath)
 
+-- Configure lazy.nvim
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
-    -- { dir = "~/projects/neovim/LazyVim", import = "lazyvim.plugins" },
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
     { import = "plugins" },
+    { import = "plugins.ui" },
+    { import = "plugins.editor" },
+    { import = "plugins.coding" },
+
+    -- language specific extension modules
+    -- { import = "plugins.extras.lang.example" },
+    { import = "plugins.extras.lang.typescript" },
+    { import = "plugins.extras.lang.json" },
+    { import = "plugins.extras.lang.yaml" },
+    { import = "plugins.extras.lang.go" },
+    { import = "plugins.extras.lang.python" },
+    { import = "plugins.extras.lang.lua" },
+    { import = "plugins.extras.lang.php" },
+    { import = "plugins.extras.lang.rust" },
+    { import = "plugins.extras.lang.bash" },
+    { import = "plugins.extras.lang.ansible" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

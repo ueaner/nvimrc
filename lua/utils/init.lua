@@ -2,6 +2,8 @@
 
 local M = {}
 
+M.root_patterns = { ".git", "lua" }
+
 -- Gets the winnr by filetype..
 --
 -- Return: ~
@@ -86,30 +88,28 @@ end
 ---@param attr "fg"|"bg"
 M.hl_color = function(group, attr)
   -- neovim 0.9.0+: vim.api.nvim_get_hl()
-  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group })
-  if not ok or not hl or not hl[attr] then
+  local hl = vim.api.nvim_get_hl(0, { name = group })
+  if not hl or not hl[attr] then
     return
   end
   return string.format("#%06x", hl[attr])
 end
 
-M.toggles = function()
-  -- stylua: ignore
-  return {
-    -- fscp
-    { "fold",      "", vim.opt_local.foldenable:get() },
-    { "spell",     "", vim.opt_local.spell:get() },
-    { "clipboard", "", vim.tbl_contains(vim.opt_local.clipboard:get(), "unnamedplus") },
-    { "paste",     "", vim.opt_local.paste:get() },
-  }
+-- function M.fg(name)
+--   ---@type {foreground?:number}?
+--   local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name }) or vim.api.nvim_get_hl_by_name(name, true)
+--   local fg = hl and hl.fg or hl.foreground
+--   return fg and { fg = string.format("#%06x", fg) }
+-- end
+
+function M.fg(name)
+  local fg = M.hl_color(name, "fg")
+  -- return fg and { fg = fg }
+  return M.hl_color(name, "fg")
 end
 
-M.clipboard_toggle = function()
-  if vim.tbl_contains(vim.opt.clipboard:get(), "unnamedplus") then
-    vim.opt.clipboard = ""
-  else
-    vim.opt.clipboard = "unnamedplus"
-  end
+function M.bg(name)
+  return M.hl_color(name, "bg")
 end
 
 -- database explorer toggle / restore file explorer state
@@ -164,6 +164,152 @@ end
 --- @return boolean
 M.dbui_is_visible = function()
   return M.winnr_by_ft("dbui") > -1
+end
+
+-- Opens a floating terminal (interactive by default)
+---@param cmd? string[]|string
+---@param opts? LazyCmdOptions|{interactive?:boolean, esc_esc?:false}
+function M.float_term(cmd, opts)
+  opts = vim.tbl_deep_extend("force", {
+    size = { width = 0.9, height = 0.9 },
+  }, opts or {})
+  local float = require("lazy.util").float_term(cmd, opts)
+  if opts.esc_esc == false then
+    vim.keymap.set("t", "<esc>", "<esc>", { buffer = float.buf, nowait = true })
+  end
+end
+
+-- returns the root directory based on:
+-- * lsp workspace folders
+-- * lsp root_dir
+-- * root pattern of filename of the current buffer
+-- * root pattern of cwd
+---@return string
+function M.get_root()
+  ---@type string?
+  local path = vim.api.nvim_buf_get_name(0)
+  path = path ~= "" and vim.loop.fs_realpath(path) or nil
+  ---@type string[]
+  local roots = {}
+  if path then
+    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+      local workspace = client.config.workspace_folders
+      local paths = workspace and vim.tbl_map(function(ws)
+        return vim.uri_to_fname(ws.uri)
+      end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
+      for _, p in ipairs(paths) do
+        local r = vim.loop.fs_realpath(p)
+        if path:find(r, 1, true) then
+          roots[#roots + 1] = r
+        end
+      end
+    end
+  end
+  table.sort(roots, function(a, b)
+    return #a > #b
+  end)
+  ---@type string?
+  local root = roots[1]
+  if not root then
+    path = path and vim.fs.dirname(path) or vim.loop.cwd()
+    ---@type string?
+    root = vim.fs.find(M.root_patterns, { path = path, upward = true })[1]
+    root = root and vim.fs.dirname(root) or vim.loop.cwd()
+  end
+  ---@cast root string
+  return root
+end
+
+------------------------------------------------------------------
+-- LSP
+------------------------------------------------------------------
+
+---@param on_attach fun(client, buffer)
+function M.on_attach(on_attach)
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+      local buffer = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      on_attach(client, buffer)
+    end,
+  })
+end
+
+function M.lsp_get_config(server)
+  local configs = require("lspconfig.configs")
+  return rawget(configs, server)
+end
+
+---@param server string
+---@param cond fun( root_dir, config): boolean
+function M.lsp_disable(server, cond)
+  local util = require("lspconfig.util")
+  local def = M.lsp_get_config(server)
+  def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config, function(config, root_dir)
+    if cond(root_dir, config) then
+      config.enabled = false
+    end
+  end)
+end
+
+---@param plugin string
+function M.has(plugin)
+  return require("lazy.core.config").plugins[plugin] ~= nil
+end
+
+---@param fn fun()
+function M.on_very_lazy(fn)
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "VeryLazy",
+    callback = function()
+      fn()
+    end,
+  })
+end
+
+---@param name string
+function M.opts(name)
+  local plugin = require("lazy.core.config").plugins[name]
+  if not plugin then
+    return {}
+  end
+  local Plugin = require("lazy.core.plugin")
+  return Plugin.values(plugin, "opts", false)
+end
+
+-- this will return a function that calls telescope.
+-- cwd will default to utils.get_root
+-- for `files`, git_files or find_files will be chosen depending on .git
+function M.telescope(builtin, opts)
+  local params = { builtin = builtin, opts = opts }
+  return function()
+    builtin = params.builtin
+    opts = params.opts
+    opts = vim.tbl_deep_extend("force", { cwd = M.get_root() }, opts or {})
+    if builtin == "files" then
+      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
+        opts.show_untracked = true
+        builtin = "git_files"
+      else
+        builtin = "find_files"
+      end
+    end
+    if opts.cwd and opts.cwd ~= vim.loop.cwd() then
+      opts.attach_mappings = function(_, map)
+        map("i", "<a-c>", function()
+          local action_state = require("telescope.actions.state")
+          local line = action_state.get_current_line()
+          M.telescope(
+            params.builtin,
+            vim.tbl_deep_extend("force", {}, params.opts or {}, { cwd = false, default_text = line })
+          )()
+        end)
+        return true
+      end
+    end
+
+    require("telescope.builtin")[builtin](opts)
+  end
 end
 
 -- M.dump = function(...)

@@ -1,67 +1,85 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 vim.g.markdown_folding = 1
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
 
-vim.opt.writebackup = false
-vim.opt.swapfile = false
-vim.opt.undofile = true
-vim.opt.linebreak = true
-vim.opt.fillchars = { fold = " ", eob = " " }
-vim.opt.whichwrap:append("<>[]")
+local opt = vim.opt
 
--- Text is shown normally
-vim.opt.conceallevel = 0
+opt.termguicolors = true -- True color support
+opt.clipboard = "unnamedplus" -- Sync with system clipboard
+opt.grepformat = "%f:%l:%c:%m"
+opt.grepprg = "rg --vimgrep"
+opt.splitbelow = true -- Put new windows below current
+opt.splitright = true -- Put new windows right of current
+opt.splitkeep = "screen"
+opt.spelllang = "en_us,cjk" -- :help spell-cjk  exclude CJK characters form spell checking
+opt.mouse = "nvi" -- Enable mouse mode
+opt.shortmess:append({ W = true, I = true, c = true, C = true, s = true })
 
-vim.opt.numberwidth = 2
-vim.opt.relativenumber = false
-vim.opt.cursorline = true
-vim.opt.cursorlineopt = "number"
-vim.opt.scrolloff = 3
+opt.autowrite = true -- Enable auto write
+opt.writebackup = false
+opt.swapfile = false
+opt.undofile = true
+opt.undolevels = 1000
+opt.timeoutlen = 300
+opt.updatetime = 200
+opt.confirm = true -- Confirm to save changes before exiting modified buffer
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
+opt.hidden = true
 
--- dont show mode since we have a statusline
-vim.opt.showmode = false
-vim.opt.laststatus = 3
+opt.completeopt = "menu,menuone,noselect"
+opt.wildmode = "longest:full,full" -- Command-line completion mode
+opt.winminwidth = 5 -- Minimum window width
+opt.formatoptions = "jcroqlnt" -- tcqj
+opt.pumblend = 10 -- Popup blend
+opt.pumheight = 10 -- Maximum number of entries in a popup
 
--- s: don't give "search hit BOTTOM, continuing at TOP" ...
--- c: Pattern not found
-vim.opt.shortmess:append({ s = true, c = true })
+opt.conceallevel = 0 -- Text is shown normally
+opt.ignorecase = true -- Ignore case
+opt.smartcase = true -- Don't ignore case with capitals
+opt.inccommand = "nosplit" -- preview incremental substitute
 
--- :help spell-cjk  exclude CJK characters form spell checking
-vim.opt.spelllang = "en_us,cjk"
-vim.opt.mouse = "nvi"
+opt.wrap = false -- Disable line wrap
+opt.linebreak = true
+opt.whichwrap:append("<>[]")
+opt.fillchars = { fold = " ", eob = " " }
+opt.list = true -- Show some invisible characters (tabs...
+opt.number = true -- Print line number
+opt.numberwidth = 2
+opt.relativenumber = false
+opt.cursorline = true
+opt.cursorlineopt = "number"
+opt.scrolloff = 3 -- Lines of context
+opt.showmode = false -- dont show mode since we have a statusline
+opt.sidescrolloff = 8 -- Columns of context
+opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+opt.laststatus = 3
 
--- Indenting
-vim.opt.expandtab = true
-vim.opt.smartindent = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+opt.breakindent = true
+opt.autoindent = true
+opt.smartindent = true -- Insert indents automatically
+opt.expandtab = true -- Use spaces instead of tabs
+opt.tabstop = 2 -- Number of spaces tabs count for
+opt.softtabstop = 2
+opt.shiftround = true -- Round indent
+opt.shiftwidth = 2 -- Size of an indent
 
--- vim.opt.timeoutlen = 300
--- vim.opt.updatetime = 300
+opt.foldenable = false
+opt.foldmethod = "indent"
 
 -- highlighting matching pairs, $VIMRUNTIME/plugin/matchparen.vim
-vim.opt.showmatch = true
-vim.opt.matchtime = 3
-
-vim.opt.foldenable = false
-vim.opt.foldmethod = "indent"
+opt.showmatch = true
+opt.matchtime = 3
 
 -- Search for a filename and open the selected file :find somefile<TAB>
-vim.opt.path:append("**")
-
-if vim.g.neovide then
-  vim.opt.guifont = "SauceCodePro Nerd Font:h9"
-  vim.env.TERM = "xterm-256color"
-end
+opt.path:append("**")
 
 -- Append the completion dictionary
 if vim.fn.filereadable("/usr/share/dict/words") then
-  vim.opt.dictionary:append("/usr/share/dict/words")
+  opt.dictionary:append("/usr/share/dict/words")
 end
 
 -- disable some extension providers
@@ -69,3 +87,8 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
+
+if vim.g.neovide then
+  opt.guifont = "SauceCodePro Nerd Font:h9"
+  vim.env.TERM = "xterm-256color"
+end

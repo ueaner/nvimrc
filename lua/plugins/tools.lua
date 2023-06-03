@@ -82,25 +82,6 @@ return {
     },
   },
 
-  -- git diff view
-  {
-    "sindrets/diffview.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = {
-      "DiffviewOpen",
-      "DiffviewClose", -- also can use :tabclose
-      "DiffviewFileHistory",
-      "DiffviewRefresh",
-      "DiffviewToggleFiles",
-      "DiffviewFocusFiles",
-    },
-    keys = {
-      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview (all modified files)" },
-      { "<leader>gD", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
-    },
-  },
-
   -- http client, treesitter: http, json
   {
     "rest-nvim/rest.nvim",
@@ -108,9 +89,9 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       -- 最好可以和 neotest 兼容使用 ,tt 发起请求
-      { "<leader>th", "<Plug>RestNvim", desc = "run http request" },
-      { "<leader>tl", "<Plug>RestNvimLast", desc = "run last http request" },
-      { "<leader>tc", "<Plug>RestNvimPreview", desc = "preview cURL command" },
+      { "<leader>rh", "<Plug>RestNvim", desc = "Http request" },
+      { "<leader>rl", "<Plug>RestNvimLast", desc = "Last http request" },
+      { "<leader>rc", "<Plug>RestNvimPreview", desc = "Preview cURL command" },
     },
     opts = {
       -- Open request results in a horizontal split
@@ -145,7 +126,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     cmd = { "Grpc" },
     keys = {
-      { "<leader>tg", "<cmd>Grpc<cr>", desc = "run grpc request" },
+      { "<leader>rg", "<cmd>Grpc<cr>", desc = "gRPC request" },
     },
   },
 
@@ -167,10 +148,6 @@ return {
     init = function()
       vim.g.table_mode_disable_mappings = 1
       vim.g.table_mode_disable_tableize_mappings = 1
-      -- stylua: ignore
-      require("utils").on_ft("markdown", function(event)
-        vim.keymap.set("n", "<leader>ut", "<cmd>TableModeToggle<cr>", { desc = "Toggle Table Mode", buffer = event.buf })
-      end)
     end,
   },
 
@@ -322,4 +299,19 @@ return {
       },
     },
   },
+
+  -- measure startuptime
+  {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    config = function()
+      vim.g.startuptime_tries = 10
+    end,
+  },
+
+  -- library used by other plugins
+  { "nvim-lua/plenary.nvim", lazy = true },
+
+  -- makes some plugins dot-repeatable like leap
+  { "tpope/vim-repeat", event = "VeryLazy" },
 }

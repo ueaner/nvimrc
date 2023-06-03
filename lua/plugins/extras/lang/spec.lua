@@ -1,4 +1,3 @@
-local list_extend = require("utils").list_extend
 local str_isempty = require("utils").str_isempty
 
 -- https://stackoverflow.com/a/21062734
@@ -51,19 +50,34 @@ local M = {
 ---@field [1] string? package name
 ---@field adapter_fn (fun(): neotest.Adapter) neotest language specific adapter function
 
+---@class LangSpecs: LazyPlugin[]
+---@field append (fun(spec:LazyPlugin): LangSpecs)
+---@field prepend (fun(spec:LazyPlugin): LangSpecs)
+
 ---Generate language specific specs
 ---@param conf LangConfig
+---@return LangSpecs
 M.generate = function(conf)
   ---@type LangConfig
   conf = vim.tbl_deep_extend("force", M.defaults, conf or {})
+
+  ---@type LangSpecs
   local specs = {}
+  specs.append = function(spec)
+    table.insert(specs, spec)
+    return specs
+  end
+  specs.prepend = function(spec)
+    table.insert(specs, 1, spec)
+    return specs
+  end
 
   -- add language parsers to treesitter
   if not vim.tbl_isempty(conf.parsers) then
     table.insert(specs, {
       "nvim-treesitter/nvim-treesitter",
       opts = function(_, opts)
-        list_extend(opts.ensure_installed, conf.parsers)
+        vim.list_extend(opts.ensure_installed, conf.parsers)
       end,
     })
   end
@@ -73,7 +87,7 @@ M.generate = function(conf)
     table.insert(specs, {
       "williamboman/mason.nvim",
       opts = function(_, opts)
-        list_extend(opts.ensure_installed, conf.cmdtools)
+        vim.list_extend(opts.ensure_installed, conf.cmdtools)
       end,
     })
   end
@@ -101,7 +115,7 @@ M.generate = function(conf)
       event = "BufReadPre",
       dependencies = { "mason.nvim" },
       opts = function(_, opts)
-        list_extend(opts.sources, conf.lsp.nls_sources)
+        vim.list_extend(opts.sources, conf.lsp.nls_sources)
       end,
     })
   end
@@ -134,28 +148,20 @@ M.generate = function(conf)
     for _, item in ipairs(conf.test) do
       -- install neotest adapter plugin
       if not str_isempty(item[1]) then
-        local spec = { item[1] }
-        if not str_isempty(conf.ft) then
-          spec.ft = conf.ft
-        end
+        local spec = {
+          "nvim-neotest/neotest",
+          optional = true,
+          dependencies = { item[1] },
+          opts = function(_, opts)
+            opts.adapters[#opts.adapters + 1] = item.adapter_fn
+          end,
+        }
         table.insert(specs, spec)
       end
-
-      -- append neotest adapter instance
-      table.insert(M._all_test_adapters, item.adapter_fn)
     end
   end
 
   return specs
-end
-
-M.test_adapters = function()
-  ---@type neotest.Adapter[]
-  local adapters = {}
-  for _, fn in ipairs(M._all_test_adapters) do
-    table.insert(adapters, fn())
-  end
-  return adapters
 end
 
 return M

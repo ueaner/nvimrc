@@ -1,25 +1,62 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
 -- :help vim_diff     Differences between Nvim and Vim
 -- :help map-listing  Listing mappings
 
 -- stylua: ignore start
 
--- keymaps delete
-vim.keymap.del("n", "<S-h>")
-vim.keymap.del("n", "<S-l>")
-vim.keymap.del("v", "<")
-vim.keymap.del("v", ">")
-vim.keymap.del("n", "<leader>ft")
-vim.keymap.del("n", "<leader>fT")
-vim.keymap.del("n", "<leader>w|")
-vim.keymap.del("n", "<leader>|")
-
 local map = vim.keymap.set
 
--- default mappings enhanced
+-- better up/down
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Move to window using the <ctrl> hjkl keys
+map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
+
+-- windows
+map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
+map("n", "<leader>w\\", "<C-W>s", { desc = "Split window below" })
+map("n", "<leader>w|", "<C-W>v", { desc = "Split window right" })
+map("n", "<leader>\\", "<C-W>s", { desc = "Split window below" })
+map("n", '<leader>|', "<C-W>v", { desc = "Split window right" })
+
+-- Move Lines
+map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+map({"n", "x", "o"}, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map({"n", "x", "o"}, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+
+-- Add undo break-points
+map("i", ",", ",<c-g>u")
+map("i", ".", ".<c-g>u")
+map("i", ";", ";<c-g>u")
+
+map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
+map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+
+-- toggle options
+map("n", "<leader>uf", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
+map("n", "<leader>us", function() require("utils.toggler").toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>ud", require("utils.toggler").toggle_diagnostics, { desc = "Toggle Diagnostics" })
+map("n", "<leader>uc", require("utils.toggler").toggle_conceallevel, { desc = "Toggle Conceal" })
+map("n", "<leader>ub", require("utils.toggler").toggle_clipboard, { desc = "Toggle ClipBoard" })
+map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
+
+-- lazy
+map("n", "<leader>z", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+
+-- default mappings improved
 map("n", "0", "^")
 -- Disable Ex-Mode
 map("n", "Q", "<NOP>")
@@ -56,6 +93,9 @@ map("c", "<C-D>", "<Del>")
 map("c", "<C-K>", "<C-\\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>")
 -- :help c_CTRL-Y
 
+-- Remove Trailing Whitespace / ^M
+map("n", "<leader>cc", "<cmd>Stripspace<cr>", { desc = "Code Clean" })
+
 -- Don't copy the replaced text after pasting in visual mode
 -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
 map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "dont copy replaced text", silent = true })
@@ -64,19 +104,36 @@ map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "dont copy replaced text
 map("x", "*", "<cmd>VisualSelection<cr>", { desc = "Search current selection", silent = true })
 map("x", "#", "<cmd>VisualSelection<cr>", { desc = "Search current selection", silent = true })
 
-map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
-map("n", "<leader>ub", function() require("utils").clipboard_toggle() end, { desc = "Toggle ClipBoard" })
-
--- Remove Trailing Whitespace / ^M
-map("n", "<leader>cc", "<cmd>Stripspace<cr>", { desc = "Code Clean" })
-
 -- nnoremap <silent> <leader>k wb/\<<C-R><C-W>\>/e<cr>
 map("n", "gw", "wb/<C-R><C-W>/e<cr>", { desc = "Highlighting word under cursor" })
+
+-- highlights under cursor
+map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+
+-- Clear search with <esc>
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+map( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
+
+-- save file
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+-- new file
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 -- Switch buffers with <c-p> <c-n>
 map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
+-- buffers
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bl", "<cmd>blast<cr>", { desc = "Last Tab" })
+map("n", "<leader>bf", "<cmd>bfirst<cr>", { desc = "First Tab" })
+map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next Tab" })
+map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Tab" })
 map("n", "<leader>bD", function() require("utils.buf").close_others() end, { desc = "Delete Other Buffers" })
 map({"n", "t"}, "<leader>bd", function() require("utils.buf").close() end, { desc = "Delete Buffer" })
 map({"n", "t"}, "<leader>bi", function() require("utils.buf").info() end, { desc = "Buffer Info" })
@@ -85,10 +142,18 @@ map({"n", "t"}, "<leader>bi", function() require("utils.buf").info() end, { desc
 map("x", "<leader>tz", "<cmd>Translate ZH<cr><esc>", { desc = "Translate from English to Chinese", silent = true })
 map("x", "<leader>te", "<cmd>Translate EN<cr><esc>", { desc = "Translate from Chinese to English", silent = true })
 
-map("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
-map("n", "<leader>w\\", "<C-W>v", { desc = "Split window right" })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
-map("n", '<leader>\\', "<C-W>v", { desc = "Split window right" })
+-- floating terminal
+map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+
+-- lazygit
+map("n", "<leader>gg", function() require("utils").float_term({ "lazygit" }, { cwd = require("utils").get_root(), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>gG", function() require("utils").float_term({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
+
+if vim.fn.executable("btm") then
+  map("n", "<leader>ab", function() require("utils").float_term({ "btm" }) end, { desc = "bottom" })
+elseif vim.fn.executable("btop") then
+  map("n", "<leader>ab", function() require("utils").float_term({ "btop" }) end, { desc = "btop" })
+end
 
 if vim.g.neovide then
   vim.g.neovide_input_use_logo = true
@@ -98,12 +163,6 @@ if vim.g.neovide then
   map("n", "<D-v>", '"+p')
   map("i", "<D-v>", "<C-r>+")
   map("c", "<D-v>", "<C-r>+")
-end
-
-if vim.fn.executable("btm") then
-  map("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btm" }) end, { desc = "bottom" })
-elseif vim.fn.executable("btop") then
-  map("n", "<leader>ab", function() require("lazyvim.util").float_term({ "btop" }) end, { desc = "btop" })
 end
 
 -- stylua: ignore end
