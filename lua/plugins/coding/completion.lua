@@ -55,11 +55,16 @@ return {
         event = { "BufRead Cargo.toml" },
         config = true,
       },
-      -- { "jcdickinson/codeium.nvim", config = true },
-      -- {
-      --   "jcdickinson/http.nvim",
-      --   build = "cargo build --workspace --release",
-      -- },
+      {
+        "jcdickinson/codeium.nvim",
+        config = function()
+          require("codeium").setup({})
+        end,
+      },
+      {
+        "jcdickinson/http.nvim",
+        build = "cargo build --workspace --release",
+      },
     },
     opts = function()
       local cmp = require("cmp")
@@ -112,6 +117,7 @@ return {
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
+          { name = "codeium", group_index = 1 },
         }),
 
         formatting = {
@@ -131,4 +137,18 @@ return {
       }
     end,
   },
+
+  -- {
+  --   "Exafunction/codeium.vim",
+  --   event = "InsertEnter",
+  --   -- stylua: ignore
+  --   config = function ()
+  --     vim.g.codeium_disable_bindings = 1
+  --     vim.keymap.set("i", "<A-m>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
+  --     vim.keymap.set("i", "<A-f>", function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true })
+  --     vim.keymap.set("i", "<A-b>", function() return vim.fn["codeium#CycleCompletions"](-1) end, { expr = true })
+  --     vim.keymap.set("i", "<A-x>", function() return vim.fn["codeium#Clear"]() end, { expr = true })
+  --     vim.keymap.set("i", "<A-s>", function() return vim.fn["codeium#Complete"]() end, { expr = true })
+  --   end,
+  -- },
 }
