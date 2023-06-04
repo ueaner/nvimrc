@@ -109,7 +109,7 @@ M.info = function()
     "smartindent",
   }
 
-  local toggles = require("utils").toggles()
+  local toggles = require("utils.toggler").toggles()
 
   local lines = {}
   local l = ""

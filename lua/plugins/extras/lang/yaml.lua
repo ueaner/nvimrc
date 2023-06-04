@@ -22,12 +22,7 @@ local conf = {
       },
     },
     nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
-      nls.builtins.diagnostics.yamllint.with({
-        filetypes = {
-          "yaml",
-          "yaml.ansible", -- show null-ls in statusline
-        },
-      }),
+      nls.builtins.diagnostics.yamllint,
     },
   },
 }

@@ -1,12 +1,10 @@
-local list_extend = require("utils").list_extend
-
 return {
 
   -- add language parsers to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      list_extend(opts.ensure_installed, {
+      vim.list_extend(opts.ensure_installed, {
         "go",
         "gomod",
         "gowork",
@@ -18,7 +16,7 @@ return {
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      list_extend(opts.ensure_installed, {
+      vim.list_extend(opts.ensure_installed, {
         "gopls",
         "goimports",
         "golangci-lint",
@@ -49,7 +47,7 @@ return {
     dependencies = { "mason.nvim" },
     opts = function(_, opts)
       local nls = require("null-ls")
-      list_extend(opts.sources, {
+      vim.list_extend(opts.sources, {
         nls.builtins.formatting.goimports,
       })
     end,
@@ -71,5 +69,19 @@ return {
     end,
   },
 
-  -- setup neotest adapter in test.lua
+  -- setup neotest adapter
+  {
+    "nvim-neotest/neotest",
+    optional = true,
+    dependencies = {
+      "nvim-neotest/neotest-go",
+    },
+    opts = function(_, opts)
+      table.insert(opts.adapters, function()
+        return require("neotest-go")({
+          args = { "-count=1", "-timeout=60s", "-race", "-cover" },
+        })
+      end)
+    end,
+  },
 }

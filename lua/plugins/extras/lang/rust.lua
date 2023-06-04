@@ -51,7 +51,7 @@ local conf = {
       rust_analyzer = function(_, opts)
         local rt = require("rust-tools")
         local codelldb_path, liblldb_path = get_codelldb()
-        require("lazyvim.util").on_attach(function(client, bufnr)
+        require("utils").on_attach(function(client, bufnr)
           -- stylua: ignore
           if client.name == "rust_analyzer" then
             vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr }) -- open hover action window
@@ -132,7 +132,8 @@ local conf = {
         -- }
         -- ```
         -- a nil path defaults to .vscode/launch.json
-        require("dap.ext.vscode").load_launchjs(nil, { rt_lldb = { "rust" } })
+        -- require("dap.ext.vscode").load_launchjs(nil, { rt_lldb = { "rust" } })
+        require("dap.ext.vscode").load_launchjs(nil, { codelldb = { "rust" } })
 
         return true
       end,
@@ -146,7 +147,7 @@ local conf = {
             vim.lsp.buf.hover()
           end
         end
-        require("lazyvim.util").on_attach(function(client, bufnr)
+        require("utils").on_attach(function(client, bufnr)
             -- stylua: ignore
             if client.name == "taplo" then
               vim.keymap.set("n", "K", show_documentation, { buffer = bufnr, desc = "Show Crate Documentation" })
@@ -162,6 +163,7 @@ local conf = {
   dap = { -- nvim-dap: language specific extensions
   },
   test = { -- neotest: language specific adapters
+    -- cargo install cargo-nextest --locked
     {
       "rouge8/neotest-rust",
       adapter_fn = function()
@@ -174,4 +176,4 @@ local conf = {
   },
 }
 
-return generate(conf)
+return generate(conf).prepend({ "simrat39/rust-tools.nvim", ft = { "rust" } })

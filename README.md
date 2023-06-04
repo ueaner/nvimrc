@@ -87,11 +87,11 @@ lua
 
 Contents of ui, editor and coding:
 
-- `UI Appearance`: statusline, tabline, winbar, scrollbar, indent, icons, colorizer, notify, messages, cmdline, popupmenu, etc.
-- `Editor Features`: which-key, fuzzy finder, file explorer, outline, jump, git signs, todo comments, auto-resize windows, better xxx, etc.
-- `Coding Features`: auto completion, snippets, text-objects, refactoring, rename, surround, auto pairs, etc.
+- `UI Appearance`: statusline, tabline, winbar, scrollbar, indent, icons, notify, messages, cmdline, popupmenu, etc.
+- `Editor Features`: which-key, fuzzy finder, file explorer, outline, jump, git signs, todo comments, auto-resize windows, etc.
+- `Coding Features`: auto completion, snippets, comments, refactoring, auto pairs, etc.
 
-[LazyVim]: https://github.com/LazyVim/LazyVim
+[LazyVim]: https://github.com/LazyVim/LazyVim/tree/7a36e2989c3d62e8dbaf4036f5c4551929c565a5
 [💤 lazy.nvim]: https://github.com/folke/lazy.nvim
 [mason.nvim]: https://github.com/williamboman/mason.nvim
 [Treesitter]: https://github.com/nvim-treesitter/nvim-treesitter

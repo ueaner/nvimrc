@@ -136,15 +136,15 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 | Key          | Description              | Mode | Provider                 |
 | ------------ | ------------------------ | ---- | ------------------------ |
-| `<leader>z`  | Zoom                     | n, t | [windows.nvim]           |
-| `<leader>Z`  | Zen Mode                 | n, t | [zen-mode.nvim]          |
+| `gz`         | Zoom                     | n, t | [windows.nvim]           |
+| `gZ`         | Zen Mode                 | n, t | [zen-mode.nvim]          |
 | `<C-=>`      | Zoom in                  | n, t | system                   |
 | `<C-->`      | Zoom out                 | n, t | system                   |
 | `<leader>e`  | Toggle File Explorer     | n, t | [nvim-tree.lua]          |
 | `<leader>E`  | Toggle Database Explorer | n    | [vim-dadbod]             |
 | `<leader>co` | Toggle Outline           | n    | [aerial.nvim]            |
 | `<leader>tt` | Toggle Terminal          | n, t | [nvterm]                 |
-| `<leader>l`  | Lazy                     | n    | [lazy.nvim]              |
+| `<leader>z`  | Lazy                     | n    | [lazy.nvim]              |
 | `<leader>cm` | Mason                    | n    | [mason.nvim]             |
 | `<leader>cl` | Lsp Info                 | n    | [nvim-lspconfig]         |
 | `<leader>gg` | Lazygit                  | n    | [lazygit]                |
@@ -280,55 +280,56 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 - prefix: `<leader>d` for debug
 
-| Key          | Description            | Mode | Provider      |
-| ------------ | ---------------------- | ---- | ------------- |
-| `<leader>db` | Toggle breakpoint      | n    | [nvim-dap]    |
-| `<leader>dc` | Start / Continue       | n    | [nvim-dap]    |
-| `<leader>di` | Step into              | n    | [nvim-dap]    |
-| `<leader>do` | Step out               | n    | [nvim-dap]    |
-| `<leader>dn` | Step over              | n    | [nvim-dap]    |
-| `<leader>dh` | step to here(cursor)   | n    | [nvim-dap]    |
-| `<leader>dq` | Stop                   | n    | [nvim-dap]    |
-| `<leader>dk` | Show hover             | n, v | [nvim-dap]    |
-| `<leader>dl` | Run last               | n    | [nvim-dap]    |
-| `<leader>dR` | Restart                | n    | [nvim-dap]    |
-| `<leader>da` | Show all breakpoints   | n    | [nvim-dap]    |
-| `<leader>dx` | Remove all breakpoints | n    | [nvim-dap]    |
-| `<leader>dB` | Conditional breakpoint | n    | [nvim-dap]    |
-| `<leader>dL` | Logpoint               | n    | [nvim-dap]    |
-| `<leader>du` | Toggle dapui           | n    | [nvim-dap-ui] |
-| `<leader>dt` | Debug test             | n    | [nvim-dap-go] |
-| `<leader>dT` | Debug last test        | n    | [nvim-dap-go] |
+| Key          | Description             | Mode | Provider      |
+| ------------ | ----------------------- | ---- | ------------- |
+| `<leader>db` | Toggle breakpoint       | n    | [nvim-dap]    |
+| `<leader>dc` | Start / Continue        | n    | [nvim-dap]    |
+| `<leader>di` | Step into               | n    | [nvim-dap]    |
+| `<leader>do` | Step out                | n    | [nvim-dap]    |
+| `<leader>dn` | Step over               | n    | [nvim-dap]    |
+| `<leader>dh` | step to here(cursor)    | n    | [nvim-dap]    |
+| `<leader>dq` | Stop                    | n    | [nvim-dap]    |
+| `<leader>dk` | Show hover              | n, v | [nvim-dap]    |
+| `<leader>dl` | Run last                | n    | [nvim-dap]    |
+| `<leader>dr` | Show DAP configurations | n    | [nvim-dap]    |
+| `<leader>dR` | Restart                 | n    | [nvim-dap]    |
+| `<leader>da` | Show all breakpoints    | n    | [nvim-dap]    |
+| `<leader>dx` | Remove all breakpoints  | n    | [nvim-dap]    |
+| `<leader>dB` | Conditional breakpoint  | n    | [nvim-dap]    |
+| `<leader>dL` | Logpoint                | n    | [nvim-dap]    |
+| `<leader>du` | Toggle dapui            | n    | [nvim-dap-ui] |
+| `<leader>dt` | Debug test              | n    | [nvim-dap-go] |
+| `<leader>dT` | Debug last test         | n    | [nvim-dap-go] |
 
 ## Tests
 
 - prefix: `<leader>t` for tests
 
-| Key          | Description           | Mode | Provider    |
-| ------------ | --------------------- | ---- | ----------- |
-| `<leader>ta` | Attach                | n    | [neotest]   |
-| `<leader>tr` | Run Nearest           | n    | [neotest]   |
-| `<leader>tl` | Run Last              | n    | [neotest]   |
-| `<leader>tf` | Run File              | n    | [neotest]   |
-| `<leader>to` | Output                | n    | [neotest]   |
-| `<leader>tq` | Stop                  | n    | [neotest]   |
-| `<leader>ts` | Summary               | n    | [neotest]   |
-| `<leader>th` | run http request      | n    | [rest.nvim] |
-| `<leader>tl` | run last http request | n    | [rest.nvim] |
-| `<leader>tc` | preview cURL command  | n    | [rest.nvim] |
-| `<leader>tg` | run gRPC request      | n    | [grpc-nvim] |
+| Key          | Description    | Mode | Provider  |
+| ------------ | -------------- | ---- | --------- |
+| `<leader>ta` | Attach         | n    | [neotest] |
+| `<leader>tr` | Run Nearest    | n    | [neotest] |
+| `<leader>tl` | Run Last       | n    | [neotest] |
+| `<leader>tf` | Run File       | n    | [neotest] |
+| `<leader>to` | Output         | n    | [neotest] |
+| `<leader>tq` | Stop           | n    | [neotest] |
+| `<leader>ts` | Summary Toggle | n    | [neotest] |
 
 ## Run
 
 - prefix: `<leader>r` for run
 
-| Key          | Description                    | Mode | Provider  |
-| ------------ | ------------------------------ | ---- | --------- |
-| `<leader>ra` | Run All                        | n    | [sniprun] |
-| `<leader>rr` | Run Current                    | n, v | [sniprun] |
-| `<leader>rR` | Reset & (Close UI, Clear REPL) | n    | [sniprun] |
-| `<leader>ri` | Run Info                       | n    | [sniprun] |
-| `<leader>rI` | Find Interpreters              | n    | [sniprun] |
+| Key          | Description                    | Mode | Provider    |
+| ------------ | ------------------------------ | ---- | ----------- |
+| `<leader>ra` | Run All                        | n    | [sniprun]   |
+| `<leader>rr` | Run Current                    | n, v | [sniprun]   |
+| `<leader>rR` | Reset & (Close UI, Clear REPL) | n    | [sniprun]   |
+| `<leader>ri` | Run Info                       | n    | [sniprun]   |
+| `<leader>rI` | Find Interpreters              | n    | [sniprun]   |
+| `<leader>rh` | Run Http request               | n    | [rest.nvim] |
+| `<leader>rl` | Run Last http request          | n    | [rest.nvim] |
+| `<leader>rc` | Run preview cURL command       | n    | [rest.nvim] |
+| `<leader>rg` | Run gRPC request               | n    | [grpc-nvim] |
 
 [which-key.nvim]: https://github.com/folke/which-key.nvim
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
