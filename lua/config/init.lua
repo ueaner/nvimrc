@@ -1,7 +1,19 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/init.lua
 
 local M = {
-  excluded_filetypes = { "help", "alpha", "dashboard", "NvimTree", "aerial", "Trouble", "lazy", "mason", "notify" },
+  excluded_filetypes = {
+    "help",
+    "alpha",
+    "dashboard",
+    "NvimTree",
+    "neo-tree",
+    "aerial",
+    "Outline",
+    "Trouble",
+    "lazy",
+    "mason",
+    "notify",
+  },
 
   -- icons used by other plugins
   icons = {

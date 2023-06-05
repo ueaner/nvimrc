@@ -103,6 +103,42 @@ function M.bg(name)
   return M.hl_color(name, "bg")
 end
 
+M.fe = function()
+  if M.has("neo-tree.nvim") then
+    return {
+      is_visible = function()
+        local state = require("neo-tree.sources.manager").get_state("filesystem")
+        return require("neo-tree.ui.renderer").tree_is_visible(state)
+      end,
+      open = function()
+        -- Opening is slower than NvimTree
+        require("neo-tree.command").execute({ action = "show", dir = require("utils").get_root() })
+      end,
+      close = function()
+        require("neo-tree.command").execute({ action = "close", dir = require("utils").get_root() })
+      end,
+      toggle = function()
+        require("neo-tree.command").execute({ toggle = true, dir = require("utils").get_root() })
+      end,
+    }
+  end
+  -- Default is NvimTree
+  return {
+    is_visible = function()
+      return require("nvim-tree.view").is_visible()
+    end,
+    open = function()
+      vim.cmd.NvimTreeOpen()
+    end,
+    close = function()
+      vim.cmd.NvimTreeClose()
+    end,
+    toggle = function()
+      vim.cmd.NvimTreeToggle()
+    end,
+  }
+end
+
 -- database explorer toggle / restore file explorer state
 --
 --  Actual test conclusion: first close and then open, less side effects
@@ -114,9 +150,10 @@ end
 --    off  on     open DE, close FE
 --
 M.db_explorer_toggle = function()
+  local fe = require("utils").fe()
   -- current state
   local deOpened = M.dbui_is_visible()
-  local feOpened = require("nvim-tree.view").is_visible()
+  local feOpened = fe.is_visible()
   local tabnr = vim.api.nvim_get_current_tabpage()
   local feOpenedName = "feOpened"
 
@@ -130,21 +167,21 @@ M.db_explorer_toggle = function()
 
     vim.cmd.DBUIClose()
     if not feOpened and feOpenedOld then -- reopen FE
-      vim.cmd.NvimTreeOpen()
+      fe.open()
     end
   else -- open DE, set FE state
     vim.api.nvim_tabpage_set_var(tabnr, feOpenedName, feOpened)
 
     if feOpened then
-      vim.cmd.NvimTreeClose()
+      fe.close()
     end
     vim.cmd.DBUI()
   end
 
-  -- When `DE(off) FE(on)`, executing `open DE, close fe` page switching is not smooth
+  -- When `DE(off) FE(on)`, executing `open DE, close FE` page switching is not smooth
   -- vim.cmd.DBUIToggle()
   -- if deOpened ~= feOpened then
-  --   vim.cmd.NvimTreeToggle()
+  --   fe.toggle()
   -- end
 end
 
