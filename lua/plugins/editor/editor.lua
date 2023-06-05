@@ -20,9 +20,11 @@ return {
     },
     keys = { { "gz", "<cmd>WindowsMaximize<cr>", desc = "Zoom", mode = { "n", "t" } } },
     config = function()
-      vim.o.winwidth = 5
-      vim.o.equalalways = false
-      require("windows").setup()
+      require("windows").setup({
+        autowidth = {
+          enable = false,
+        },
+      })
     end,
   },
 
