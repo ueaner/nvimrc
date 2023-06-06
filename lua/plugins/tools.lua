@@ -300,6 +300,15 @@ return {
     },
   },
 
+  -- vidir: edit your filesystem like a buffer
+  -- `:edit <path>` or `:Oil --float <path>`
+  {
+    "stevearc/oil.nvim",
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
   -- measure startuptime
   {
     "dstein64/vim-startuptime",

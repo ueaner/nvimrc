@@ -56,6 +56,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "neotest-summary",
     "neotest-output-panel",
     "hierarchy-tree-go",
+    "oil",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
