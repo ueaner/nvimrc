@@ -1,16 +1,4 @@
--- Editor Features: which-key, fuzzy finder, file explorer, outline, jump, git signs, todo comments, auto-resize windows, etc.
 return {
-  -- search/replace in multiple files
-  {
-    "nvim-pack/nvim-spectre",
-    cmd = "Spectre",
-    opts = { open_cmd = "noswapfile vnew" },
-    -- stylua: ignore
-    keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
-    },
-  },
-
   -- auto-resize windows
   {
     "anuvyklack/windows.nvim",
