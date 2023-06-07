@@ -17,12 +17,7 @@ local M = {
     test = { -- neotest: language specific adapters
     },
   },
-  ---@type TestAdapterFn[]
-  ---@private
-  _all_test_adapters = {}, -- All configured neotest adapter functions
 }
-
----@alias TestAdapterFn fun(): neotest.Adapter
 
 ---@class LangConfig
 ---@field ft string
