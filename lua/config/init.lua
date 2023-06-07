@@ -15,6 +15,26 @@ local M = {
     "notify",
   },
 
+  -- close some filetypes with <q>
+  close_with_q = {
+    "PlenaryTestPopup",
+    "help",
+    "lspinfo",
+    "man",
+    "notify",
+    "qf",
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+    "neotest-output",
+    "checkhealth",
+    "neotest-summary",
+    "neotest-output-panel",
+    "hierarchy-tree-go",
+    "oil",
+    "httpResult",
+  },
+
   -- icons used by other plugins
   icons = {
     -- https://microsoft.github.io/vscode-codicons/dist/codicon.html
