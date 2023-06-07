@@ -148,6 +148,9 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 -- lazygit
 map("n", "<leader>gg", function() require("utils").float_term({ "lazygit" }, { cwd = require("utils").get_root(), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
 map("n", "<leader>gG", function() require("utils").float_term({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
+-- tig
+map("n", "<leader>gt", function() require("utils").float_term({ "tig" }, { cwd = require("utils").get_root(), esc_esc = false, border = "rounded" }) end, { desc = "Tig (root dir)" })
+map("n", "<leader>gT", function() require("utils").float_term({ "tig" }, { esc_esc = false, border = "rounded" }) end, { desc = "Tig (cwd)" })
 
 if vim.fn.executable("btm") then
   map("n", "<leader>ab", function() require("utils").float_term({ "btm" }) end, { desc = "bottom" })
