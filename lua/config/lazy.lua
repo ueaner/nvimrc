@@ -22,6 +22,8 @@ require("lazy").setup({
     { import = "plugins.editor" },
     { import = "plugins.coding" },
 
+    { import = "plugins.extras.tools" },
+
     -- language specific extension modules
     -- { import = "plugins.extras.lang.example" },
     { import = "plugins.extras.lang.typescript" },
