@@ -1,6 +1,6 @@
 # Nvim configuration
 
-![nvim-preview](https://github.com/ueaner/nvimrc/assets/318253/a9cf6300-6680-476b-8eb5-9c1902470495)
+![nvim-preview](https://github.com/ueaner/nvimrc/assets/318253/df1004d3-8419-4c9f-9bea-5e2bf10c83f5)
 
 ## 🚀 Getting Started
 
