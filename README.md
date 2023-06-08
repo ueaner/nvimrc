@@ -63,7 +63,8 @@ See [keymaps.md](docs/keymaps.md).
 ```
 lua
 ├── config
-│   ├── lazy.lua         -- import LazyVim
+│   ├── init.lua         -- configure of icons, close_with_q list, etc.
+│   ├── lazy.lua         -- configure lazy.nvim
 │   ├── autocmds.lua
 │   ├── keymaps.lua
 │   └── options.lua
@@ -75,12 +76,17 @@ lua
 │   ├── dap.lua
 │   ├── test.lua
 │   ├── treesitter.lua
-│   ├── tools.lua
 │   └── extras
+│       ├── tools
+│       │   ├── database.lua
+│       │   ├── plantuml.lua
+│       │   ├── rest.lua
+│       │   └── ...
 │       └── lang         -- language specific extension modules
-│           ├── markdown.lua
-│           ├── plantuml.lua
+│           ├── yaml.lua
+│           ├── python.lua
 │           ├── go.lua
+│           ├── ...
 │           +-- spec.lua
 └── utils.lua
 ```
