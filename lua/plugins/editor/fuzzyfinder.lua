@@ -21,7 +21,6 @@ return {
       },
     },
     cmd = "Telescope",
-    version = false, -- telescope did only one release, so use HEAD for now
     keys = {
       { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
       { "<leader>/", "<cmd>Telescope live_grep_args<CR>", desc = "Grep (root dir)" },
