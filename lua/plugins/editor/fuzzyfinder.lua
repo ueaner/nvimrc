@@ -7,6 +7,7 @@ return {
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-project.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
       {
         "nvim-telescope/telescope-cheat.nvim",
         dependencies = "kkharji/sqlite.lua",
@@ -23,7 +24,7 @@ return {
     version = false, -- telescope did only one release, so use HEAD for now
     keys = {
       { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-      { "<leader>/", U.telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>/", "<cmd>Telescope live_grep_args<CR>", desc = "Grep (root dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
       { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope Builtin" },
       -- find
@@ -110,32 +111,22 @@ return {
         selection_caret = " ",
         mappings = {
           i = {
-            ["<c-t>"] = function(...)
+            ["<C-x>"] = function(...)
               return require("trouble.providers.telescope").open_with_trouble(...)
             end,
-            ["<a-t>"] = function(...)
+            ["<A-x>"] = function(...)
               return require("trouble.providers.telescope").open_selected_with_trouble(...)
-            end,
-            ["<a-i>"] = function()
-              local action_state = require("telescope.actions.state")
-              local line = action_state.get_current_line()
-              U.telescope("find_files", { no_ignore = true, default_text = line })()
-            end,
-            ["<a-h>"] = function()
-              local action_state = require("telescope.actions.state")
-              local line = action_state.get_current_line()
-              U.telescope("find_files", { hidden = true, default_text = line })()
-            end,
-            ["<C-Down>"] = function(...)
-              return require("telescope.actions").cycle_history_next(...)
-            end,
-            ["<C-Up>"] = function(...)
-              return require("telescope.actions").cycle_history_prev(...)
             end,
             ["<C-f>"] = function(...)
               return require("telescope.actions").preview_scrolling_down(...)
             end,
             ["<C-b>"] = function(...)
+              return require("telescope.actions").preview_scrolling_up(...)
+            end,
+            ["<C-d>"] = function(...)
+              return require("telescope.actions").preview_scrolling_down(...)
+            end,
+            ["<C-u>"] = function(...)
               return require("telescope.actions").preview_scrolling_up(...)
             end,
           },
@@ -152,6 +143,9 @@ return {
             "~/projects",
           },
         },
+        live_grep_args = {
+          auto_quoting = true,
+        },
       },
     },
     config = function(_, opts)
@@ -160,6 +154,7 @@ return {
       telescope.load_extension("dap")
       telescope.load_extension("project")
       telescope.load_extension("fzf")
+      telescope.load_extension("live_grep_args")
       telescope.load_extension("cheat")
     end,
   },
