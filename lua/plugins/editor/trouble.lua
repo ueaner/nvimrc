@@ -3,14 +3,21 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
-    opts = { use_diagnostic_signs = true },
+    opts = {
+      use_diagnostic_signs = true,
+      action_keys = {
+        jump = { "<cr>", "o" }, -- jump to the diagnostic or open / close folds
+        jump_close = { "<S-Enter>" }, -- jump to the diagnostic and close the list
+      },
+    },
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
-      { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
       { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Trouble Toggle" },
       {
-        "[q",
+        "[x",
         function()
           if require("trouble").is_open() then
             require("trouble").previous({ skip_groups = true, jump = true })
@@ -24,7 +31,7 @@ return {
         desc = "Previous trouble/quickfix item",
       },
       {
-        "]q",
+        "]x",
         function()
           if require("trouble").is_open() then
             require("trouble").next({ skip_groups = true, jump = true })
