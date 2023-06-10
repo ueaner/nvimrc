@@ -127,7 +127,7 @@ return {
         },
         -- https://github.com/nvim-lualine/lualine.nvim#available-extensions
         -- https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/extensions
-        extensions = { "lazy", "nvim-tree", "quickfix", "man", "trouble", "nvim-dap-ui" },
+        extensions = { "lazy", "nvim-tree", "neo-tree", "quickfix", "man", "trouble", "nvim-dap-ui" },
       }
     end,
   },
