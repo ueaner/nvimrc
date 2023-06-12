@@ -9,10 +9,10 @@ M.fe = function()
       end,
       open = function()
         -- Opening is slower than NvimTree
-        require("neo-tree.command").execute({ action = "show", dir = require("utils").get_root() })
+        require("neo-tree.command").execute({ action = "show" })
       end,
       close = function()
-        require("neo-tree.command").execute({ action = "close", dir = require("utils").get_root() })
+        require("neo-tree.command").execute({ action = "close" })
       end,
       toggle = function()
         require("neo-tree.command").execute({ toggle = true, dir = require("utils").get_root() })
