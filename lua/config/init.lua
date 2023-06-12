@@ -37,6 +37,11 @@ local M = {
 
   -- icons used by other plugins
   icons = {
+    general = {
+      lsp = "",
+      dap = "",
+      treesitter = "",
+    },
     -- https://microsoft.github.io/vscode-codicons/dist/codicon.html
     dap = {
       Stopped = { "", "DiagnosticWarn", "DapStoppedLine" },

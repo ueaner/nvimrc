@@ -7,10 +7,8 @@ return {
       local icons = require("config").icons
       local U = require("utils")
 
-      local colors = require("tokyonight.colors").setup()
       local function langserver_names()
         return {
-          --   stylua, sumneko_lua
           function()
             local clients = vim.lsp.get_active_clients()
             if next(clients) == nil then
@@ -25,8 +23,8 @@ return {
             end
             return table.concat(ls, ", ")
           end,
-          icon = " ",
-          color = { fg = colors.cyan },
+          icon = icons.general.lsp,
+          color = { fg = U.fg("Operator") },
         }
       end
 
@@ -38,8 +36,8 @@ return {
           cond = function()
             return package.loaded["nvim-treesitter"] and require("nvim-treesitter.parsers").has_parser()
           end,
-          icon = "",
-          color = { fg = colors.green },
+          icon = icons.general.treesitter,
+          color = { fg = U.fg("String") },
         }
       end
 
@@ -51,8 +49,8 @@ return {
           cond = function()
             return require("dap").configurations[vim.bo.filetype] ~= nil
           end,
-          icon = "",
-          color = { fg = colors.blue },
+          icon = icons.general.dap,
+          color = { fg = U.fg("Special") },
         }
       end
 
@@ -76,7 +74,7 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+            { "filename", path = 1 },
             -- stylua: ignore
             {
               function() return require("nvim-navic").get_location() end,
