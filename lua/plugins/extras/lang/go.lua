@@ -51,7 +51,7 @@ local conf = {
 }
 
 return generate(conf).append({
-  "edolphin-ydf/hierarchy-tree-go.nvim",
+  "ueaner/hierarchy-tree-go.nvim",
   ft = { "go" },
   config = function()
     require("hierarchy-tree-go").setup({
@@ -64,13 +64,13 @@ return generate(conf).append({
         -- focus: if hierarchy win is valid but is not current win, set to current win
         -- focus: if hierarchy win is valid and is current win, close
         -- focus  if hierarchy win not existing,open and focus
-        focus = "<leader>fu",
-        tograph = "<leader>fs",
+        focus = "<leader>hu", -- toggle hierarchy win
+        tograph = "<leader>hs", -- to svg
 
-        -- bufkeymap
+        -- buffer keymap
         expand = "o", -- expand or collapse hierarchy
         jump = "<CR>", -- jump
-        move = "<leader>hm", -- switch the hierarchy window position, must be current win
+        move = "<space><space>", -- switch the hierarchy window position, must be current win
       },
     })
   end,
