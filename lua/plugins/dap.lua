@@ -45,7 +45,7 @@ return {
     keys = {
       -- Running the program
       { "<leader>dr", "<cmd>Telescope dap configurations<cr>", desc = "run" },
-      { "<leader>dl", function() require("dap").run_last() end, desc = "run last" },
+      { "<leader>d.", function() require("dap").run_last() end, desc = "run repeat last" },
       { "<leader>dR", function() require("dap").restart() end, desc = "restart" },
       { "<leader>dq", function() require("dap").terminate() end, desc = "terminate" },
       -- steps

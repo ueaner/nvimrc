@@ -2,6 +2,7 @@ return {
   -- code runner
   {
     "michaelb/sniprun",
+    enabled = false,
     event = "VeryLazy",
     build = "bash ./install.sh",
     opts = {

@@ -4,12 +4,13 @@ return {
     "rest-nvim/rest.nvim",
     ft = "http",
     dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-      -- TODO: 最好可以和 sniprun 兼容使用 ,rr 发起请求
-      { "<leader>rh", "<Plug>RestNvim", desc = "Http request" },
-      { "<leader>rl", "<Plug>RestNvimLast", desc = "Last http request" },
-      { "<leader>rc", "<Plug>RestNvimPreview", desc = "Preview cURL command" },
-    },
+    init = function()
+      -- stylua: ignore
+      require("utils").on_ft("http", function(event)
+        vim.keymap.set("n", "<leader>rr", "<Plug>RestNvim", { desc = "Run Http request", buffer = event.buf })
+        vim.keymap.set("n", "<leader>r.", "<Plug>RestNvimLast", { desc = "Run Last Http request", buffer = event.buf })
+      end)
+    end,
     opts = {
       -- Open request results in a horizontal split
       result_split_horizontal = false,

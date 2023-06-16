@@ -1,0 +1,8 @@
+GET https://httpbin.org/get
+
+# POST data
+POST https://httpbin.org/post
+
+{
+    "name": "httpbin"
+}

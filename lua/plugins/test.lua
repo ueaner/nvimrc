@@ -24,7 +24,7 @@ return {
     keys = {
       { "<leader>ta", function() require('neotest').run.attach() end, desc = "Attach" },
       { "<leader>tr", function() require('neotest').run.run() end, desc = "Run Nearest" },
-      { "<leader>tl", function() require('neotest').run.run_last() end, desc = "Run Last" },
+      { "<leader>t.", function() require('neotest').run.run_last() end, desc = "Run repeat last" },
       { "<leader>tf", function() require('neotest').run.run(vim.fn.expand('%')) end, desc = "Run File" },
       { "<leader>to", function() require('neotest').output.open() end, desc = "Output" },
       { "<leader>tq", function() require('neotest').run.stop() end, desc = "Stop" },

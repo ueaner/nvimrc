@@ -1,0 +1,11 @@
+// Describe the server via reflection (without TLS)
+grpc --plaintext grpcbin.test.k6.io:9000 list
+
+// Describe the server via reflection (with TLS)
+grpc grpcbin.test.k6.io:9001 list
+
+// Send a request
+grpc grpcbin.test.k6.io:9001 hello.HelloService/SayHello
+{
+  "greeting": "grpcbin"
+}

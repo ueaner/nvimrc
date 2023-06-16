@@ -290,7 +290,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>dh` | step to here(cursor)    | n    | [nvim-dap]    |
 | `<leader>dq` | Stop                    | n    | [nvim-dap]    |
 | `<leader>dk` | Show hover              | n, v | [nvim-dap]    |
-| `<leader>dl` | Run last                | n    | [nvim-dap]    |
+| `<leader>d.` | Run repeat last         | n    | [nvim-dap]    |
 | `<leader>dr` | Show DAP configurations | n    | [nvim-dap]    |
 | `<leader>dR` | Restart                 | n    | [nvim-dap]    |
 | `<leader>da` | Show all breakpoints    | n    | [nvim-dap]    |
@@ -315,21 +315,27 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>tq` | Stop           | n    | [neotest] |
 | `<leader>ts` | Summary Toggle | n    | [neotest] |
 
-## Run
+## Run/REPL
 
-- prefix: `<leader>r` for run
+- prefix: `<leader>r` for run/REPL
 
-| Key          | Description                    | Mode | Provider    |
-| ------------ | ------------------------------ | ---- | ----------- |
-| `<leader>ra` | Run All                        | n    | [sniprun]   |
-| `<leader>rr` | Run Current                    | n, v | [sniprun]   |
-| `<leader>rR` | Reset & (Close UI, Clear REPL) | n    | [sniprun]   |
-| `<leader>ri` | Run Info                       | n    | [sniprun]   |
-| `<leader>rI` | Find Interpreters              | n    | [sniprun]   |
-| `<leader>rh` | Run Http request               | n    | [rest.nvim] |
-| `<leader>rl` | Run Last http request          | n    | [rest.nvim] |
-| `<leader>rc` | Run preview cURL command       | n    | [rest.nvim] |
-| `<leader>rg` | Run gRPC request               | n    | [grpc-nvim] |
+| Key             | Description           | Mode | Provider    |
+| --------------- | --------------------- | ---- | ----------- |
+| **REPL**        |                       |      | REPL        |
+| `<leader>rr`    | Run code block        | n, v | [iron.nvim] |
+| `<leader>rl`    | Run cursor line       | n    | [iron.nvim] |
+| `<leader>rf`    | Run file              | n    | [iron.nvim] |
+| `<leader>r<cr>` | Send `return` to repl | n    | [iron.nvim] |
+| `<leader>rc`    | Interrupt (`<C-c>`)   | n    | [iron.nvim] |
+| `<leader>rq`    | Quit                  | n    | [iron.nvim] |
+| `<leader>rx`    | Clear                 | n    | [iron.nvim] |
+| `<leader>ru`    | Repl UI Toggle        | n    | [iron.nvim] |
+| `<leader>rR`    | Repl Restart          | n    | [iron.nvim] |
+| `<leader>rF`    | Repl Focus            | n    | [iron.nvim] |
+| **Others**      |                       |      | Clients     |
+| `<leader>r.`    | Run repeat last       | n    | [rest.nvim] |
+| `<leader>rr`    | Run http request      | n    | [rest.nvim] |
+| `<leader>rr`    | Run gRPC request      | n    | [grpc-nvim] |
 
 [which-key.nvim]: https://github.com/folke/which-key.nvim
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
@@ -346,6 +352,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [nvim-dap-go]: https://github.com/leoluz/nvim-dap-go
 [neotest]: https://github.com/nvim-neotest/neotest
 [sniprun]: https://github.com/michaelb/sniprun
+[iron.nvim]: https://github.com/ueaner/iron.nvim
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
 [grpc-nvim]: https://github.com/hudclark/grpc-nvim
 [lazygit]: https://github.com/jesseduffield/lazygit
