@@ -66,6 +66,8 @@ return {
       },
     },
     opts = function()
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
       local cmp = require("cmp")
 
       -- opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
@@ -128,7 +130,7 @@ return {
         },
         experimental = {
           ghost_text = {
-            hl_group = "LspCodeLens",
+            hl_group = "CmpGhostText",
           },
         },
       }
