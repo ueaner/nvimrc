@@ -48,9 +48,9 @@ local conf = {
       end,
       -- stylua: ignore
       on_ft = function(event)
-        vim.keymap.set("n", "<leader>tC", function() require("dap-python").test_class() end, { buffer = event.buf, desc = "Debug Class" })
-        vim.keymap.set("n", "<leader>tM", function() require("dap-python").test_method() end, { buffer = event.buf, desc = "Debug Method" })
-        vim.keymap.set("v", "<leader>tS", function() require("dap-python").debug_selection() end, { buffer = event.buf, desc = "Debug Selection" })
+        vim.keymap.set("n", "<leader>dC", function() require("dap-python").test_class() end, { buffer = event.buf, desc = "Debug Class" })
+        vim.keymap.set("n", "<leader>dM", function() require("dap-python").test_method() end, { buffer = event.buf, desc = "Debug Method" })
+        vim.keymap.set("v", "<leader>dS", function() require("dap-python").debug_selection() end, { buffer = event.buf, desc = "Debug Selection" })
       end,
     },
   },
