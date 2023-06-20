@@ -1,4 +1,4 @@
-local generate = require("plugins.extras.lang.spec").generate
+local generate = require("plugins.extras.langspecs").generate
 local nls = require("null-ls")
 
 local function get_codelldb()
