@@ -40,6 +40,9 @@ local conf = {
                 "require",
               },
             },
+            hint = {
+              enable = true,
+            },
           }, -- end Lua
         },
       },

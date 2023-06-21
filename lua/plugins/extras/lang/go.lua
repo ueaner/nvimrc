@@ -20,7 +20,16 @@ local conf = {
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
-      gopls = {},
+      gopls = {
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
+      },
       golangci_lint_ls = {}, -- linter
     },
     nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions

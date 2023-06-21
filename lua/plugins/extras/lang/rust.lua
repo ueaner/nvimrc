@@ -74,6 +74,9 @@ local conf = {
                 end,
               })
             end,
+            inlay_hints = {
+              auto = false,
+            },
           },
           server = opts,
           dap = {
