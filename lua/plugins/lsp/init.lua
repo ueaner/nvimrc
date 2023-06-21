@@ -33,6 +33,9 @@ return {
         },
         severity_sort = true,
       },
+      inlay_hints = {
+        enabled = vim.fn.has("nvim-0.10.0"),
+      },
       -- add any global capabilities here
       capabilities = {},
       -- Automatically format on save
@@ -106,6 +109,14 @@ return {
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+
+      if opts.inlay_hints.enabled and vim.lsp.buf.inlay_hint then
+        U.on_attach(function(client, buffer)
+          if client.server_capabilities.inlayHintProvider then
+            vim.lsp.buf.inlay_hint(buffer, true)
+          end
+        end)
+      end
 
       local servers = opts.servers
       local capabilities = vim.tbl_deep_extend(
