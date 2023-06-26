@@ -58,7 +58,7 @@ if vim.lsp.buf.inlay_hint then
 end
 
 -- lazy
-map("n", "<leader>z", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>z", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- default mappings improved
 map("n", "0", "^")
