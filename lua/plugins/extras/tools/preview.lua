@@ -30,6 +30,9 @@ return {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
     ft = { "markdown" },
+    cond = function()
+      return vim.fn.executable("deno") == 1
+    end,
     init = function()
       require("utils").on_ft("markdown", function(event)
         vim.keymap.set("n", "<leader>fo", function()
