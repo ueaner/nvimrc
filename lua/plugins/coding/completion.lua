@@ -63,6 +63,7 @@ return {
       {
         "jcdickinson/http.nvim",
         build = "cargo build --workspace --release",
+        enabled = false,
       },
     },
     opts = function()
