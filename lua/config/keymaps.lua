@@ -156,9 +156,9 @@ map("n", "<leader>gG", function() require("utils").float_term({ "lazygit" }, { e
 map("n", "<leader>gt", function() require("utils").float_term({ "tig" }, { cwd = require("utils").get_root(), esc_esc = false, border = "rounded" }) end, { desc = "Tig (root dir)" })
 map("n", "<leader>gT", function() require("utils").float_term({ "tig" }, { esc_esc = false, border = "rounded" }) end, { desc = "Tig (cwd)" })
 
-if vim.fn.executable("btm") then
+if vim.fn.executable("btm") == 1 then
   map("n", "<leader>ab", function() require("utils").float_term({ "btm" }) end, { desc = "bottom" })
-elseif vim.fn.executable("btop") then
+elseif vim.fn.executable("btop") == 1 then
   map("n", "<leader>ab", function() require("utils").float_term({ "btop" }) end, { desc = "btop" })
 end
 
