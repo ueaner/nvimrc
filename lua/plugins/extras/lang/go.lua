@@ -1,4 +1,4 @@
-local generate = require("plugins.extras.langspecs").generate
+local generator = require("plugins.extras.langspecs"):new()
 local nls = require("null-ls")
 
 ---@type LangConfig
@@ -59,28 +59,30 @@ local conf = {
   },
 }
 
-return generate(conf).append({
-  "ueaner/hierarchy-tree-go.nvim",
-  ft = { "go" },
-  config = function()
-    require("hierarchy-tree-go").setup({
-      keymap = {
-        -- global keymap
-        incoming = "<leader>ci", -- call incoming under cursorword
-        outgoing = "<leader>co", -- call outgoing under cursorword
-        open = "<leader>ho", -- open hierarchy win
-        close = "<leader>hc", -- close hierarchy win
-        -- focus: if hierarchy win is valid but is not current win, set to current win
-        -- focus: if hierarchy win is valid and is current win, close
-        -- focus  if hierarchy win not existing,open and focus
-        focus = "<leader>hu", -- toggle hierarchy win
-        tograph = "<leader>hs", -- to svg
+return generator
+  :append({
+    "ueaner/hierarchy-tree-go.nvim",
+    ft = { "go" },
+    config = function()
+      require("hierarchy-tree-go").setup({
+        keymap = {
+          -- global keymap
+          incoming = "<leader>ci", -- call incoming under cursorword
+          outgoing = "<leader>co", -- call outgoing under cursorword
+          open = "<leader>ho", -- open hierarchy win
+          close = "<leader>hc", -- close hierarchy win
+          -- focus: if hierarchy win is valid but is not current win, set to current win
+          -- focus: if hierarchy win is valid and is current win, close
+          -- focus  if hierarchy win not existing,open and focus
+          focus = "<leader>hu", -- toggle hierarchy win
+          tograph = "<leader>hs", -- to svg
 
-        -- buffer keymap
-        expand = "o", -- expand or collapse hierarchy
-        jump = "<CR>", -- jump
-        move = "<space><space>", -- switch the hierarchy window position, must be current win
-      },
-    })
-  end,
-})
+          -- buffer keymap
+          expand = "o", -- expand or collapse hierarchy
+          jump = "<CR>", -- jump
+          move = "<space><space>", -- switch the hierarchy window position, must be current win
+        },
+      })
+    end,
+  })
+  :generate(conf)

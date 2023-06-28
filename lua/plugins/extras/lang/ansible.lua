@@ -1,4 +1,4 @@
-local generate = require("plugins.extras.langspecs").generate
+local generator = require("plugins.extras.langspecs"):new()
 
 ---@type LangConfig
 local conf = {
@@ -14,7 +14,7 @@ local conf = {
     },
   },
 }
-local specs = generate(conf)
+local specs = generator:generate(conf)
 
 -- table.insert(specs, {
 --   "mfussenegger/nvim-ansible",

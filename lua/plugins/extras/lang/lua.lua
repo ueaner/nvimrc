@@ -1,4 +1,4 @@
-local generate = require("plugins.extras.langspecs").generate
+local generator = require("plugins.extras.langspecs"):new()
 local nls = require("null-ls")
 
 ---@type LangConfig
@@ -84,4 +84,4 @@ local conf = {
   },
 }
 
-return generate(conf)
+return generator:generate(conf)

@@ -1,24 +1,3 @@
-local str_isempty = require("utils").str_isempty
-
--- https://stackoverflow.com/a/21062734
-local M = {
-  ---@type LangConfig
-  defaults = {
-    ft = "", -- filetype
-    parsers = {}, -- nvim-treesitter: language parsers
-    cmdtools = {}, -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
-    lsp = {
-      servers = {}, -- nvim-lspconfig: lspconfig servers settings with filetype
-      setup = {}, -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
-      nls_sources = {}, -- null-ls.nvim: builtins formatters, diagnostics, code_actions
-    },
-    dap = { -- nvim-dap: language specific extensions
-    },
-    test = { -- neotest: language specific adapters
-    },
-  },
-}
-
 ---@class LangConfig
 ---@field ft string
 ---@field parsers string[]
@@ -45,27 +24,67 @@ local M = {
 ---@field [1] string? package name
 ---@field adapter_fn (fun(): neotest.Adapter) neotest language specific adapter function
 
----@class LangSpecs: LazyPlugin[]
----@field append (fun(spec:LazyPlugin): LangSpecs)
----@field prepend (fun(spec:LazyPlugin): LangSpecs)
+---@class LangSpecs
+---@field defaults LangConfig
+---@field specs LazyPlugin[]
+---@field append fun(self: LangSpecs, spec: LazyPlugin): LangSpecs
+---@field prepend fun(self: LangSpecs, spec: LazyPlugin): LangSpecs
+---@field generate fun(self: LangSpecs, conf: LangConfig): LazyPlugin[]
+
+local str_isempty = require("utils").str_isempty
+
+---@type LangConfig
+local defaults = {
+  ft = "", -- filetype
+  parsers = {}, -- nvim-treesitter: language parsers
+  cmdtools = {}, -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
+  lsp = {
+    servers = {}, -- nvim-lspconfig: lspconfig servers settings with filetype
+    setup = {}, -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
+    nls_sources = {}, -- null-ls.nvim: builtins formatters, diagnostics, code_actions
+  },
+  dap = { -- nvim-dap: language specific extensions
+  },
+  test = { -- neotest: language specific adapters
+  },
+}
+
+---@type LangSpecs
+local M = {
+  defaults = defaults,
+  specs = {},
+}
+
+---@param o table?
+---@return LangSpecs
+function M:new(o)
+  o = o or {}
+  setmetatable(o, self)
+  self.__index = self
+  self.defaults = defaults
+  self.specs = {}
+  return o
+end
+
+function M:append(spec)
+  table.insert(self.specs, spec)
+  return M
+end
+
+function M:prepend(spec)
+  table.insert(self.specs, spec)
+  return M
+end
 
 ---Generate language specific specs
 ---@param conf LangConfig
----@return LangSpecs
-M.generate = function(conf)
+---@return LazyPlugin[]
+function M:generate(conf)
   ---@type LangConfig
   conf = vim.tbl_deep_extend("force", M.defaults, conf or {})
 
   ---@type LangSpecs
-  local specs = {}
-  specs.append = function(spec)
-    table.insert(specs, spec)
-    return specs
-  end
-  specs.prepend = function(spec)
-    table.insert(specs, 1, spec)
-    return specs
-  end
+  local specs = self.specs
 
   -- add language parsers to treesitter
   if not vim.tbl_isempty(conf.parsers) then
@@ -155,6 +174,8 @@ M.generate = function(conf)
       end
     end
   end
+
+  self.specs = specs
 
   return specs
 end

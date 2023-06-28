@@ -1,4 +1,4 @@
-local generate = require("plugins.extras.langspecs").generate
+local generator = require("plugins.extras.langspecs"):new()
 local nls = require("null-ls")
 
 local function get_codelldb()
@@ -179,4 +179,4 @@ local conf = {
   },
 }
 
-return generate(conf).prepend({ "simrat39/rust-tools.nvim", ft = { "rust" } })
+return generator:prepend({ "simrat39/rust-tools.nvim", ft = { "rust" } }):generate(conf)
