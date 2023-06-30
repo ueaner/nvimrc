@@ -1,3 +1,16 @@
+local neotree_get_node = function(state)
+  local tree = state.tree
+  local success, node = pcall(tree.get_node, tree)
+  if not (success and node) then
+    require("lazy.core.util").warn("Could not get node.")
+    return
+  end
+  if node.type == "message" then
+    return
+  end
+  return node
+end
+
 return {
   -- file explorer
   {
@@ -26,22 +39,25 @@ return {
         follow_current_file = true,
         use_libuv_file_watcher = true,
       },
-      window = {
-        mappings = {
-          ["gy"] = function(state)
-            local notify = require("lazy.core.util")
-            local tree = state.tree
-            local success, node = pcall(tree.get_node, tree)
-            if node.type == "message" then
-              return
-            end
-            if not (success and node) then
-              notify.warn("Could not get node.")
-              return
-            end
+      commands = {
+        copy_filename = function(state)
+          local node = neotree_get_node(state)
+          if node then
+            vim.fn.setreg("+", node.name)
+          end
+        end,
+        copy_filepath = function(state) -- file abs path
+          local node = neotree_get_node(state)
+          if node then
             local path = node.path or node:get_id()
             vim.fn.setreg("+", path)
-          end,
+          end
+        end,
+      },
+      window = {
+        mappings = {
+          ["Y"] = "copy_filename",
+          ["gy"] = "copy_filepath",
 
           ["<cr>"] = "open",
           ["o"] = "open",
