@@ -19,10 +19,8 @@ return {
         end,
         -- offsets = {
         --   {
-        --     filetype = "NvimTree",
-        --     text = function() -- try empty string
-        --       return vim.fn.getcwd()
-        --     end,
+        --     filetype = "neo-tree",
+        --     text = "File Explorer",
         --     text_align = "left",
         --     highlight = "Directory",
         --   },

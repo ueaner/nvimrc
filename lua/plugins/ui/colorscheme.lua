@@ -47,7 +47,7 @@ return {
         neotest = true,
         noice = true,
         notify = true,
-        nvimtree = true,
+        neotree = true,
         semantic_tokens = true,
         telescope = true,
         treesitter = true,
