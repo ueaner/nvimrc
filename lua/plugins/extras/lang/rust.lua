@@ -7,6 +7,9 @@ local function get_codelldb()
   local extension_path = codelldb:get_install_path() .. "/extension/"
   local codelldb_path = extension_path .. "adapter/codelldb"
   local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+  if vim.fn.has("mac") == 1 then
+    liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+  end
   return codelldb_path, liblldb_path
 end
 
@@ -67,12 +70,13 @@ local conf = {
           tools = {
             hover_actions = { border = "solid" },
             on_initialized = function()
-              vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-                pattern = { "*.rs" },
-                callback = function()
-                  vim.lsp.codelens.refresh()
-                end,
-              })
+              vim.cmd([[
+                augroup RustLSP
+                  autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
+                  autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
+                  autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
+                augroup END
+              ]])
             end,
             inlay_hints = {
               auto = false,
