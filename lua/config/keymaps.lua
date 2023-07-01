@@ -53,8 +53,8 @@ map("n", "<leader>uc", require("utils.toggler").toggle_conceallevel, { desc = "T
 map("n", "<leader>ub", require("utils.toggler").toggle_clipboard, { desc = "Toggle ClipBoard" })
 map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
 
-if vim.lsp.buf.inlay_hint then
-  map("n", "<leader>uh", function() vim.lsp.buf.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
+if vim.lsp.inlay_hint then
+  map("n", "<leader>uh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
 end
 
 -- lazy

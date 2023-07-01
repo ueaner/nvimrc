@@ -110,10 +110,10 @@ return {
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-      if opts.inlay_hints.enabled and vim.lsp.buf.inlay_hint then
+      if opts.inlay_hints.enabled and vim.lsp.inlay_hint then
         U.on_attach(function(client, buffer)
           if client.server_capabilities.inlayHintProvider then
-            vim.lsp.buf.inlay_hint(buffer, true)
+            vim.lsp.inlay_hint(buffer, true)
           end
         end)
       end
