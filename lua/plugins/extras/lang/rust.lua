@@ -41,7 +41,6 @@ local conf = {
             check = {
               command = "cargo clippy",
               features = "all",
-              -- features = "gnome",
             },
             procMacro = {
               enable = true,
@@ -52,15 +51,16 @@ local conf = {
     },
     setup = { -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
       rust_analyzer = function(_, opts)
-        local rt = require("rust-tools")
         local codelldb_path, liblldb_path = get_codelldb()
+
         require("utils").on_attach(function(client, bufnr)
           -- stylua: ignore
           if client.name == "rust_analyzer" then
-            vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr }) -- open hover action window
+            -- open hover action window
+            vim.keymap.set("n", "K", "<cmd>RustHoverActions<cr>", { buffer = bufnr, desc = "Hover Actions" })
             -- Use `cargo init --name xxx` to create a separate project for debugging
-            vim.keymap.set("n", "<leader>dr", rt.debuggables.debuggables, { buffer = bufnr, desc = "Run Debug (Debuggables)" })
-            vim.keymap.set("n", "<leader>rA", rt.runnables.runnables, { buffer = bufnr, desc = "Runnables" })
+            vim.keymap.set("n", "<leader>dr", "<cmd>RustDebuggables<cr>", { buffer = bufnr, desc = "Run Debuggables" })
+            vim.keymap.set("n", "<leader>rA", "<cmd>RustRunnables<cr>", { buffer = bufnr, desc = "Run Runnables" })
             vim.keymap.set("n", "<leader>cR", function() vim.lsp.codelens.refresh() end, { buffer = bufnr, desc = "Refresh Code Lens" })
             vim.keymap.set("n", "<leader>cl", function() vim.lsp.codelens.run() end, { buffer = bufnr, desc = "Code Lens" })
           end
@@ -88,7 +88,6 @@ local conf = {
           },
         })
 
-        -- local codelldb_path, _ = get_codelldb()
         local dap = require("dap")
         dap.adapters.codelldb = {
           type = "server",
