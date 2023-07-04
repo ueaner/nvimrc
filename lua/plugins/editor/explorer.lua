@@ -33,11 +33,17 @@ return {
       end
     end,
     opts = {
-      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+      sources = { "filesystem", "buffers", "git_status" },
       filesystem = {
         bind_to_cwd = false,
         follow_current_file = true,
         use_libuv_file_watcher = true,
+        window = {
+          mappings = {
+            ["u"] = "navigate_up", -- <bs>
+            ["."] = "set_root",
+          },
+        },
       },
       commands = {
         copy_filename = function(state)
