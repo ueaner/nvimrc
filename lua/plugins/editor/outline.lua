@@ -7,7 +7,7 @@ return {
     keys = { { "<leader>o", "<cmd>AerialToggle<cr>", desc = "Outline" } },
     opts = {
       attach_mode = "global",
-      backends = { "lsp", "treesitter", "markdown", "man" },
+      backends = { "treesitter", "lsp", "markdown", "man" },
       layout = { min_width = 40 },
       show_guides = true,
       filter_kind = {
