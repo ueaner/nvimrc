@@ -1,12 +1,11 @@
 return {
   -- scrollbar
   {
-    "dstein64/nvim-scrollview",
+    "lewis6991/satellite.nvim",
     event = "BufReadPre",
     opts = {
       excluded_filetypes = require("config").excluded_filetypes,
       current_only = true,
-      winblend = 75,
     },
   },
 }
