@@ -5,13 +5,25 @@ return {
     event = "VeryLazy",
     vscode = true,
     ---@type Flash.Config
-    opts = {},
+    opts = {
+      modes = {
+        char = {
+          keys = { "f", "F", "t", "T" },
+          char_actions = function(motion)
+            return {
+              -- clever-f style
+              [motion:lower()] = "next",
+              [motion:upper()] = "prev",
+            }
+          end,
+        },
+      },
+    },
     -- stylua: ignore
     keys = {
       { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      -- use treesitter incremental_selection
+      -- { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
