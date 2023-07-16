@@ -24,7 +24,6 @@ return {
       vim.cmd([[Neotree close]])
     end,
     init = function()
-      vim.g.neo_tree_remove_legacy_commands = 1
       if vim.fn.argc() == 1 then
         local stat = vim.loop.fs_stat(vim.fn.argv(0))
         if stat and stat.type == "directory" then
@@ -34,9 +33,10 @@ return {
     end,
     opts = {
       sources = { "filesystem", "buffers", "git_status" },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "aerial", "Outline", "notify" },
       filesystem = {
         bind_to_cwd = false,
-        follow_current_file = true,
+        follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
         window = {
           mappings = {
