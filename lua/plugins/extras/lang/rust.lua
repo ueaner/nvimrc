@@ -23,7 +23,6 @@ local conf = {
   },
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     "rust-analyzer",
-    "rustfmt", -- bashls is integrated, so no need to configure `null-ls` diagnostics
     "codelldb",
     "taplo",
   },
