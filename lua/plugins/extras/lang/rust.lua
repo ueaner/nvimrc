@@ -32,8 +32,8 @@ local conf = {
         settings = {
           ["rust-analyzer"] = {
             cargo = {
-              -- allFeatures = true,
-              features = { "gnome" },
+              -- features = { "gnome" },
+              features = "all",
             },
             -- Add clippy lints for Rust.
             checkOnSave = true,
