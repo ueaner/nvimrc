@@ -12,11 +12,13 @@ local conf = {
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     "gopls",
     "goimports",
+    "gofumpt",
     "golangci-lint",
     "golangci-lint-langserver", -- Wraps golangci-lint as a language server
     "delve",
     --"staticcheck",
     "gomodifytags",
+    "impl",
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
@@ -33,8 +35,10 @@ local conf = {
       golangci_lint_ls = {}, -- linter
     },
     nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
-      nls.builtins.formatting.goimports,
+      -- nls.builtins.formatting.goimports, -- goimports_reviser
+      nls.builtins.formatting.gofumpt,
       nls.builtins.code_actions.gomodifytags,
+      nls.builtins.code_actions.impl,
     },
   },
   dap = { -- nvim-dap: language specific extensions
