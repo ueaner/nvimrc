@@ -18,6 +18,7 @@ local conf = {
       lua_ls = {
         -- mason = false, -- set to false if you don't want this server to be installed with mason
         settings = {
+          -- https://github.com/LuaLS/lua-language-server/blob/master/doc/zh-cn/config.md
           Lua = {
             workspace = {
               library = {
@@ -38,6 +39,9 @@ local conf = {
               globals = {
                 "vim",
                 "require",
+              },
+              disable = {
+                "missing-fields",
               },
             },
             hint = {
