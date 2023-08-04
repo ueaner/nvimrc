@@ -48,6 +48,7 @@ return {
         "markdown_inline",
         "html",
         "javascript",
+        "jsdoc",
         "tsx",
         "typescript",
         "http", -- rest.nvim
