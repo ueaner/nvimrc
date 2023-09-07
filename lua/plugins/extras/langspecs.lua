@@ -35,17 +35,17 @@ local str_isempty = require("utils").str_isempty
 
 ---@type LangConfig
 local defaults = {
-  ft = "", -- filetype
-  parsers = {}, -- nvim-treesitter: language parsers
-  cmdtools = {}, -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
+  ft = "",            -- filetype
+  parsers = {},       -- nvim-treesitter: language parsers
+  cmdtools = {},      -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
   lsp = {
-    servers = {}, -- nvim-lspconfig: lspconfig servers settings with filetype
-    setup = {}, -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
+    servers = {},     -- nvim-lspconfig: lspconfig servers settings with filetype
+    setup = {},       -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
     nls_sources = {}, -- null-ls.nvim: builtins formatters, diagnostics, code_actions
   },
-  dap = { -- nvim-dap: language specific extensions
+  dap = {             -- nvim-dap: language specific extensions
   },
-  test = { -- neotest: language specific adapters
+  test = {            -- neotest: language specific adapters
   },
 }
 
@@ -123,7 +123,7 @@ function M:generate(conf)
   end
 
   -- setup formatters, linters and code_actions
-  if not vim.tbl_isempty(conf.lsp.nls_sources) then
+  if not vim.tbl_isempty(conf.lsp.nls_sources) and require("utils").has("null-ls.nvim") then
     table.insert(specs, {
       "jose-elias-alvarez/null-ls.nvim",
       event = "BufReadPre",

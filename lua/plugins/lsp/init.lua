@@ -7,9 +7,11 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "folke/neodev.nvim", opts = {} },
-      "mason.nvim",
+      { "folke/neodev.nvim",  opts = {} },
+      "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      -- "mattn/efm-langserver",
+      "creativenull/efmls-configs-nvim",
       {
         "hrsh7th/cmp-nvim-lsp",
         cond = function()
@@ -70,6 +72,19 @@ return {
             },
           },
         },
+        efm = {
+          init_options = {
+            documentFormatting = true,
+            documentRangeFormatting = true,
+            hover = true,
+            documentSymbol = true,
+            codeAction = true,
+            completion = true
+          },
+          settings = {
+            rootMarkers = { ".git/" },
+          },
+        },
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -113,14 +128,14 @@ return {
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            local icons = require("config").icons.diagnostics
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
+            or function(diagnostic)
+              local icons = require("config").icons.diagnostics
+              for d, icon in pairs(icons) do
+                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                  return icon
+                end
               end
             end
-          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -159,7 +174,7 @@ return {
         require("lspconfig")[server].setup(server_opts)
       end
 
-      -- get all the servers that are available thourgh mason-lspconfig
+      -- get all the servers that are available through mason-lspconfig
       local have_mason, mlsp = pcall(require, "mason-lspconfig")
       local all_mslp_servers = {}
       if have_mason then
@@ -193,9 +208,10 @@ return {
     end,
   },
 
-  -- formatters
+  -- code actions
   {
     "jose-elias-alvarez/null-ls.nvim",
+    enabled = false,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "mason.nvim" },
     opts = function()
@@ -217,7 +233,8 @@ return {
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {
-        "stylua",
+        "lua-language-server",
+        "efm",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

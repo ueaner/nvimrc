@@ -32,7 +32,7 @@ return {
     },
     keys = {
       { "<Space>", desc = "Increment selection" },
-      { "<BS>", desc = "Decrement selection", mode = "x" },
+      { "<BS>",    desc = "Decrement selection", mode = "x" },
     },
     ---@type TSConfig
     opts = {
@@ -49,7 +49,7 @@ return {
         "html",
         "javascript",
         "jsdoc",
-        "tsx",
+        "tsx",  -- typescriptreact
         "typescript",
         "http", -- rest.nvim
         "json",

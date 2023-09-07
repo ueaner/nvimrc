@@ -44,6 +44,9 @@ local conf = {
                 "missing-fields",
               },
             },
+            format = {   -- EmmyLuaCodeStyle
+              enable = true,
+            },
             hint = {
               enable = true,
             },
@@ -60,8 +63,10 @@ local conf = {
       "jbyuki/one-small-step-for-vimkind",
       -- stylua: ignore
       on_ft = function(event)
-        vim.keymap.set("n", "<leader>ds", function() require("osv").launch({ port = 8086 }) end, { desc = "Launch Lua Debugger Server", buffer = event.buf })
-        vim.keymap.set("n", "<leader>dd", function() require("osv").run_this() end, { desc = "Launch Lua Debugger", buffer = event.buf })
+        vim.keymap.set("n", "<leader>ds", function() require("osv").launch({ port = 8086 }) end,
+          { desc = "Launch Lua Debugger Server", buffer = event.buf })
+        vim.keymap.set("n", "<leader>dd", function() require("osv").run_this() end,
+          { desc = "Launch Lua Debugger", buffer = event.buf })
       end,
       config = function()
         local dap = require("dap")
