@@ -34,6 +34,7 @@ local conf = {
             cargo = {
               -- features = { "gnome" },
               features = "all",
+              runBuildScripts = false,
             },
             -- Add clippy lints for Rust.
             checkOnSave = true,
@@ -60,8 +61,10 @@ local conf = {
             -- Use `cargo init --name xxx` to create a separate project for debugging
             vim.keymap.set("n", "<leader>dr", "<cmd>RustDebuggables<cr>", { buffer = bufnr, desc = "Run Debuggables" })
             vim.keymap.set("n", "<leader>rA", "<cmd>RustRunnables<cr>", { buffer = bufnr, desc = "Run Runnables" })
-            vim.keymap.set("n", "<leader>cR", function() vim.lsp.codelens.refresh() end, { buffer = bufnr, desc = "Refresh Code Lens" })
-            vim.keymap.set("n", "<leader>cl", function() vim.lsp.codelens.run() end, { buffer = bufnr, desc = "Code Lens" })
+            vim.keymap.set("n", "<leader>cR", function() vim.lsp.codelens.refresh() end,
+              { buffer = bufnr, desc = "Refresh Code Lens" })
+            vim.keymap.set("n", "<leader>cl", function() vim.lsp.codelens.run() end,
+              { buffer = bufnr, desc = "Code Lens" })
           end
         end)
 
@@ -153,10 +156,10 @@ local conf = {
           end
         end
         require("utils").on_attach(function(client, bufnr)
-            -- stylua: ignore
-            if client.name == "taplo" then
-              vim.keymap.set("n", "K", show_documentation, { buffer = bufnr, desc = "Show Crate Documentation" })
-            end
+          -- stylua: ignore
+          if client.name == "taplo" then
+            vim.keymap.set("n", "K", show_documentation, { buffer = bufnr, desc = "Show Crate Documentation" })
+          end
         end)
         return false -- make sure the base implementation calls taplo.setup
       end,
@@ -165,7 +168,7 @@ local conf = {
       nls.builtins.formatting.rustfmt,
     },
   },
-  dap = { -- nvim-dap: language specific extensions
+  dap = {  -- nvim-dap: language specific extensions
   },
   test = { -- neotest: language specific adapters
     -- cargo install cargo-nextest --locked
