@@ -44,8 +44,8 @@ local conf = {
                 "missing-fields",
               },
             },
-            format = {   -- EmmyLuaCodeStyle
-              enable = true,
+            format = { -- EmmyLuaCodeStyle
+              enable = false,
             },
             hint = {
               enable = true,

@@ -105,8 +105,8 @@ Command-line mode uses readline-style keymaps.
 | `<leader>ca` | Code Action                       | n, v | LSP        |
 | `<leader>cc` | Code Clean                        | n    | LSP        |
 | `gf`         | Goto File                         | n, v | editing    |
-| `gi`         | Move to last insertion and INSERT | n    | insert    |
-| `gw`         | Highlighting word under cursor    | n    | keymaps   |
+| `gi`         | Move to last insertion and INSERT | n    | insert     |
+| `gw`         | Highlighting word under cursor    | n    | keymaps    |
 
 ## Multi-cursor and selection
 
@@ -374,4 +374,3 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
 [utils.lua]: lua/utils.lua
 [which-key]: https://github.com/ueaner/nvimrc/assets/318253/ae311950-0104-4d72-a368-a1234b5ba6ab "which key"
-

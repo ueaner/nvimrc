@@ -1,3 +1,7 @@
+if not require("utils").has("creativenull/efmls-configs-nvim") then
+  return {}
+end
+
 local generator = require("plugins.extras.langspecs"):new()
 
 ---@type LangConfig
@@ -17,12 +21,27 @@ local conf = {
           completion = true,
         },
         filetypes = {
-          "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "css",
-          "markdown", "markdown.mdx", "sh", "bash", "yaml", "php", "python", "rust",
+          "lua",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "html",
+          "css",
+          "markdown",
+          "markdown.mdx",
+          "sh",
+          "bash",
+          "yaml",
+          "php",
+          "python",
+          "rust",
         },
         settings = {
           rootMarkers = { ".git/" },
+          -- stylua: ignore
           languages = {
+            lua = { require("efmls-configs.formatters.stylua") },
             javascript = { require("efmls-configs.linters.eslint_d"), require("efmls-configs.formatters.prettier_d") },
             javascriptreact = { require("efmls-configs.linters.eslint_d"), require("efmls-configs.formatters.prettier_d") },
             typescript = { require("efmls-configs.linters.eslint_d"), require("efmls-configs.formatters.prettier_d") },

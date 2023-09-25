@@ -7,17 +7,17 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "folke/neodev.nvim",  opts = {} },
+      { "folke/neodev.nvim", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      -- "mattn/efm-langserver",
-      "creativenull/efmls-configs-nvim",
       {
         "hrsh7th/cmp-nvim-lsp",
         cond = function()
           return require("utils").has("nvim-cmp")
         end,
       },
+      -- "mattn/efm-langserver",
+      -- "creativenull/efmls-configs-nvim", -- Just uncomment this line
     },
     ---@class PluginLspOpts
     opts = {
@@ -72,19 +72,6 @@ return {
             },
           },
         },
-        efm = {
-          init_options = {
-            documentFormatting = true,
-            documentRangeFormatting = true,
-            hover = true,
-            documentSymbol = true,
-            codeAction = true,
-            completion = true
-          },
-          settings = {
-            rootMarkers = { ".git/" },
-          },
-        },
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -128,14 +115,14 @@ return {
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-            or function(diagnostic)
-              local icons = require("config").icons.diagnostics
-              for d, icon in pairs(icons) do
-                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                  return icon
-                end
+          or function(diagnostic)
+            local icons = require("config").icons.diagnostics
+            for d, icon in pairs(icons) do
+              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                return icon
               end
             end
+          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -211,8 +198,10 @@ return {
   -- code actions
   {
     "jose-elias-alvarez/null-ls.nvim",
-    enabled = false,
     event = { "BufReadPre", "BufNewFile" },
+    enabled = function()
+      return not require("utils").has("creativenull/efmls-configs-nvim")
+    end,
     dependencies = { "mason.nvim" },
     opts = function()
       local nls = require("null-ls")
@@ -234,7 +223,7 @@ return {
     opts = {
       ensure_installed = {
         "lua-language-server",
-        "efm",
+        "stylua",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
