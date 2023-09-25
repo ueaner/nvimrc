@@ -37,7 +37,7 @@ return {
       end
 
       require("utils").on_ft("dap-repl", function(event)
-        vim.api.nvim_buf_set_option(event.buf, "buflisted", false)
+        vim.bo[event.buf]["buflisted"] = false
         require("dap.ext.autocompl").attach()
       end)
     end,

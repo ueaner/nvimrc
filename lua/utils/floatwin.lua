@@ -10,9 +10,9 @@ local M = {}
 --    local bufnr, winid = make_window(lines, 0.5, 0.6)
 --    local bufnr, winid = make_window(lines, 0.5, 0.6, "q")
 --    -- Custom filetype
---    vim.api.nvim_buf_set_option(winid, "filetype", "buf42")
+--    vim.bo[bufnr]["filetype"] = "buf42"
 --    -- Custom border highlight style
---    vim.api.nvim_win_set_option(winid, "winhl", "FloatBorder:XxxInfoBorder")
+--    vim.wo[winid]["winhl"] = "FloatBorder:XxxInfoBorder"
 -- ```
 --
 --- @param lines string[] floating window contents
@@ -48,11 +48,11 @@ M.make = function(lines, height_percentage, width_percentage, close_keys)
 
   -- define the buffer properties
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, lines)
-  vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
-  vim.api.nvim_buf_set_option(bufnr, "buflisted", false)
-  vim.api.nvim_buf_set_option(bufnr, "bufhidden", "hide")
-  vim.api.nvim_buf_set_option(bufnr, "buftype", "nofile")
-  -- vim.api.nvim_buf_set_option(bufnr, "filetype", "buf42")
+  vim.bo[bufnr]["modifiable"] = false
+  vim.bo[bufnr]["buflisted"] = false
+  vim.bo[bufnr]["bufhidden"] = "hide"
+  vim.bo[bufnr]["buftype"] = "nofile"
+  -- vim.bo[bufnr]["filetype"] = "buf42"
 
   -- close floating window keymap
   M.close_keymap_set(bufnr, winid, close_keys)
