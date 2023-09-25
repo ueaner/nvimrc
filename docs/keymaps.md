@@ -1,7 +1,5 @@
 # ⌨️ Keymaps
 
-TODO: 添加推荐，根据使用频率
-
 Uses [which-key.nvim] to live prompt for keymaps.
 Just press any key like `,` will displays a popup with all possible keymaps starting with `,`.
 
@@ -64,6 +62,8 @@ FROM Terminal TO Normal mode keyset: `tmap <Esc><Esc> <C-\><C-n>`
 | `<`             | Outdent line                       | v       | motion         |
 | `^`             | Go to beginning of line            | n, v    | motion         |
 | `$`             | Go to end of line                  | n, v    | motion         |
+| `gg`            | Go to first line                   | n, v    | motion         |
+| `G`             | Go to last line                    | n, v    | motion         |
 | `j`             | Move cursor down                   | n, v    | motion         |
 | `k`             | Move cursor up                     | n, v    | motion         |
 | `H`             | To Header (top) line of window     | n, v    | motion         |
@@ -88,22 +88,25 @@ Command-line mode uses readline-style keymaps.
 
 - prefix: `<leader>c` for code
 
-| Key          | Description            | Mode | Provider   |
-| ------------ | ---------------------- | ---- | ---------- |
-|              | auto completion        | i    | [nvim-cmp] |
-| `K`          | Hover                  | n    | LSP        |
-| `gK`         | Trigger Signature Help | n    | LSP        |
-| `<c-k>`      | Trigger Signature Help | i    | LSP        |
-| `<leader>cf` | Format Document        | n    | LSP        |
-| `<leader>cf` | Format Range           | v    | LSP        |
-| `ge`         | Goto D[e]claration     | n    | LSP        |
-| `gd`         | Goto Definition        | n    | LSP        |
-| `gD`         | Goto Type Definition   | n    | LSP        |
-| `gI`         | Goto Implementation    | n    | LSP        |
-| `gr`         | Find References        | n    | LSP        |
-| `<leader>cr` | Rename                 | n    | LSP        |
-| `<leader>ca` | Code Action            | n, v | LSP        |
-| `<leader>cc` | Code Clean             | n    | LSP        |
+| Key          | Description                       | Mode | Provider   |
+| ------------ | --------------------------------- | ---- | ---------- |
+|              | auto completion                   | i    | [nvim-cmp] |
+| `K`          | Hover                             | n    | LSP        |
+| `gK`         | Trigger Signature Help            | n    | LSP        |
+| `<c-k>`      | Trigger Signature Help            | i    | LSP        |
+| `<leader>cf` | Format Document                   | n    | LSP        |
+| `<leader>cf` | Format Range                      | v    | LSP        |
+| `ge`         | Goto D[e]claration                | n    | LSP        |
+| `gd`         | Goto Definition                   | n    | LSP        |
+| `gD`         | Goto Type Definition              | n    | LSP        |
+| `gI`         | Goto Implementation               | n    | LSP        |
+| `gr`         | Find References                   | n    | LSP        |
+| `<leader>cr` | Rename                            | n    | LSP        |
+| `<leader>ca` | Code Action                       | n, v | LSP        |
+| `<leader>cc` | Code Clean                        | n    | LSP        |
+| `gf`         | Goto File                         | n, v | editing    |
+| `gi`         | Move to last insertion and INSERT | n    | insert    |
+| `gw`         | Highlighting word under cursor    | n    | keymaps   |
 
 ## Multi-cursor and selection
 
@@ -370,4 +373,5 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [plantuml-previewer.vim]: https://github.com/weirongxu/plantuml-previewer.vim
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
 [utils.lua]: lua/utils.lua
-[which-key]: https://user-images.githubusercontent.com/318253/232319921-57f1dbf4-a755-459f-8e52-66a410e96151.png "which key"
+[which-key]: https://github.com/ueaner/nvimrc/assets/318253/ae311950-0104-4d72-a368-a1234b5ba6ab "which key"
+
