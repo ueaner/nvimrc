@@ -31,7 +31,7 @@ nvim
 
 ## ⚡️ Requirements
 
-- Neovim **nightly**. See [here](https://github.com/neovim/neovim/releases/tag/nightly)
+- Neovim **nightly** or **latest** version. See [here](https://github.com/neovim/neovim/releases/tag/nightly) and [here](https://github.com/neovim/neovim/releases/tag/stable)
 - a [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**. See [here](https://github.com/ueaner/dotfiles/blob/main/ansible/roles/fonts/tasks/main.yml)
 - a **C** compiler for `nvim-treesitter`. See [here](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
 
