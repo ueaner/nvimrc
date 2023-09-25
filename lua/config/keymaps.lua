@@ -95,7 +95,7 @@ map("c", "<C-D>", "<Del>")
 -- cnoremap <C-K> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
 -- :help c_CTRL-\_e Evaluate {expr} and replace the whole command line with the result.
 map("c", "<C-K>", "<C-\\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>")
--- :help c_CTRL-Y
+map("c", "<C-Y>", '<C-R>"')
 
 -- Remove Trailing Whitespace / ^M
 map("n", "<leader>cc", "<cmd>Stripspace<cr>", { desc = "Code Clean" })
