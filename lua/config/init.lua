@@ -23,6 +23,7 @@ local M = {
     "man",
     "notify",
     "qf",
+    "query", -- :InspectTree
     "spectre_panel",
     "startuptime",
     "tsplayground",
