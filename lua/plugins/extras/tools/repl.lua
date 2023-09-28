@@ -14,6 +14,7 @@ return {
           python = require("iron.fts.python").ipython,
           -- go install github.com/traefik/yaegi/cmd/yaegi@latest
           go = { command = { "yaegi" } },
+          typescript = { command = { "tsx" } },
         },
         repl_open_cmd = require("iron.view").right(60),
       },
