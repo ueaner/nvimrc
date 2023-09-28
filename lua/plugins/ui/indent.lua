@@ -3,13 +3,14 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      -- char = "▏",
-      char = "│",
-      filetype_exclude = require("config").excluded_filetypes,
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
-    },
+    config = function()
+      require("ibl").setup({
+        indent = { char = "│" },
+        exclude = {
+          filetypes = require("config").excluded_filetypes,
+        },
+      })
+    end,
   },
 
   -- active indent guide and indent text objects
