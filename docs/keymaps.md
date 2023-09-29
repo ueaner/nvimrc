@@ -79,8 +79,8 @@ FROM Terminal TO Normal mode keyset: `tmap <Esc><Esc> <C-\><C-n>`
 | `<leader>uw`    | Toggle word wrap                   | n       | options        |
 | `gcc`           | Toggle line comment                | n       | [mini.comment] |
 | `gc`            | Toggle selected comment            | v       | [mini.comment] |
-| `f{char}`       | Enhanced f/t motions               | n       | [flit.nvim]    |
-| `s{char}{char}` | Jump by 2-character search pattern | n       | [leap.nvim]    |
+| `f{char}`       | Enhanced f/t motions               | n       | [flash.nvim]   |
+| `s{char}{char}` | Jump by 2-character search pattern | n       | [flash.nvim]   |
 
 Command-line mode uses readline-style keymaps.
 
@@ -347,8 +347,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [todo-comments.nvim]: https://github.com/folke/todo-comments.nvim
 [trouble.nvim]: https://github.com/folke/trouble.nvim
 [nvim-treehopper]: https://github.com/mfussenegger/nvim-treehopper
-[flit.nvim]: https://github.com/ggandor/flit.nvim
-[leap.nvim]: https://github.com/ggandor/leap.nvim
+[flash.nvim]: https://github.com/folke/flash.nvim
 [vim-illuminate]: https://github.com/RRethy/vim-illuminate
 [nvim-dap]: https://github.com/mfussenegger/nvim-dap
 [nvim-dap-ui]: https://github.com/rcarriga/nvim-dap-ui
