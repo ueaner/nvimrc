@@ -45,7 +45,7 @@ return {
 
   -- setup formatters & linters
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = "BufReadPre",
     dependencies = { "mason.nvim" },
     opts = function(_, opts)

@@ -108,7 +108,7 @@ Contents of ui, editor and coding:
 [mason.nvim]: https://github.com/williamboman/mason.nvim
 [Treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [Native LSP]: https://github.com/neovim/nvim-lspconfig
-[null-ls.nvim]: https://github.com/jose-elias-alvarez/null-ls.nvim
+[null-ls.nvim]: https://github.com/nvimtools/none-ls.nvim
 [nvim-dap]: https://github.com/mfussenegger/nvim-dap
 [neotest]: https://github.com/nvim-neotest/neotest
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp

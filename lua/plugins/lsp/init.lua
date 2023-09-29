@@ -97,6 +97,7 @@ return {
       end)
 
       local register_capability = vim.lsp.handlers["client/registerCapability"]
+      --- @diagnostic disable-next-line: duplicate-set-field
       vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
         local ret = register_capability(err, res, ctx)
         local client_id = ctx.client_id
@@ -197,7 +198,7 @@ return {
 
   -- code actions
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     enabled = function()
       return not require("utils").has("creativenull/efmls-configs-nvim")

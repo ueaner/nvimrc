@@ -125,7 +125,7 @@ function M:generate(conf)
   -- setup formatters, linters and code_actions
   if not vim.tbl_isempty(conf.lsp.nls_sources) and require("utils").has("null-ls.nvim") then
     table.insert(specs, {
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
       event = "BufReadPre",
       dependencies = { "mason.nvim" },
       opts = function(_, opts)
