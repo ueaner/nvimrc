@@ -145,7 +145,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<C-->`      | Zoom out                 | n, t | system                   |
 | `<leader>e`  | Toggle File Explorer     | n, t | [nvim-tree.lua]          |
 | `<leader>E`  | Toggle Database Explorer | n    | [vim-dadbod]             |
-| `<leader>co` | Toggle Outline           | n    | [aerial.nvim]            |
+| `<leader>o`  | Toggle Outline           | n    | [aerial.nvim]            |
 | `<leader>tt` | Toggle Terminal          | n, t | [nvterm]                 |
 | `<leader>z`  | Lazy                     | n    | [lazy.nvim]              |
 | `<leader>cm` | Mason                    | n    | [mason.nvim]             |
