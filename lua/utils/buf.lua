@@ -138,6 +138,12 @@ M.info = function()
     table.insert(lines, l)
   end
 
+  -- Window
+  table.insert(lines, "")
+  table.insert(lines, "Window")
+  l = string.format("- %s: %s", "winwidth", vim.fn.winwidth(0))
+  table.insert(lines, l)
+
   -- LSP servers
   -- DAP adapters
   -- TS parsers
