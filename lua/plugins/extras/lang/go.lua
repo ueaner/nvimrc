@@ -31,11 +31,11 @@ local conf = {
           parameterNames = true,
           rangeVariableTypes = true,
         },
-        gofumpt = true,      -- formatter, default "goimports"
+        gofumpt = true, -- formatter, default "goimports"
       },
       golangci_lint_ls = {}, -- linter
     },
-    nls_sources = {          -- null-ls.nvim: builtins formatters, diagnostics, code_actions
+    nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
       nls.builtins.code_actions.gomodifytags,
       nls.builtins.code_actions.impl,
     },
@@ -64,30 +64,4 @@ local conf = {
   },
 }
 
-return generator
-    :append({
-      "ueaner/hierarchy-tree-go.nvim",
-      ft = { "go" },
-      config = function()
-        require("hierarchy-tree-go").setup({
-          keymap = {
-            -- global keymap
-            incoming = "<leader>ci", -- call incoming under cursorword
-            outgoing = "<leader>co", -- call outgoing under cursorword
-            open = "<leader>ho",     -- open hierarchy win
-            close = "<leader>hc",    -- close hierarchy win
-            -- focus: if hierarchy win is valid but is not current win, set to current win
-            -- focus: if hierarchy win is valid and is current win, close
-            -- focus  if hierarchy win not existing,open and focus
-            focus = "<leader>hu",   -- toggle hierarchy win
-            tograph = "<leader>hs", -- to svg
-
-            -- buffer keymap
-            expand = "o",            -- expand or collapse hierarchy
-            jump = "<CR>",           -- jump
-            move = "<space><space>", -- switch the hierarchy window position, must be current win
-          },
-        })
-      end,
-    })
-    :generate(conf)
+return generator:generate(conf)

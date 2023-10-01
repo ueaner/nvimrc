@@ -34,6 +34,8 @@ function M.get()
       { "<leader>cf", format, desc = "Format Document", has = "formatting" },
       { "<leader>cf", format, desc = "Format Range", mode = "v", has = "rangeFormatting" },
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+      { "<leader>ci", vim.lsp.buf.incoming_calls, desc = "Call Hierarchy Incoming Calls", mode = { "n", "v" }, has = "callHierarchy/incomingCalls" },
+      { "<leader>co", vim.lsp.buf.outgoing_calls, desc = "Call Hierarchy Outgoing Calls", mode = { "n", "v" }, has = "callHierarchy/outgoingCalls" },
       {
         "<leader>cA",
         function()
