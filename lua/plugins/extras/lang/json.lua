@@ -1,40 +1,33 @@
-return {
+local generator = require("plugins.extras.langspecs"):new()
 
-  -- add json to treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "json", "json5", "jsonc" })
-      end
-    end,
+---@type LangConfig
+local conf = {
+  ft = "json",
+  parsers = { -- nvim-treesitter: language parsers
+    "json",
+    "json5",
+    "jsonc",
   },
-
-  -- correctly setup lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "b0o/SchemaStore.nvim",
-    },
-    opts = {
-      -- make sure mason installs the server
-      servers = {
-        jsonls = {
-          -- lazy-load schemastore when needed
-          on_new_config = function(new_config)
-            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
-          end,
-          settings = {
-            json = {
-              format = {
-                enable = true,
-              },
-              validate = { enable = true },
+  lsp = {
+    servers = { -- nvim-lspconfig: setup lspconfig servers
+      ---@type lspconfig.options.jsonls
+      jsonls = {
+        -- lazy-load schemastore when needed
+        on_new_config = function(new_config)
+          new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+          vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+        end,
+        settings = {
+          json = {
+            format = {
+              enable = true,
             },
+            validate = { enable = true },
           },
         },
       },
     },
   },
 }
+
+return generator:generate(conf)
