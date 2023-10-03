@@ -5,7 +5,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("ibl").setup({
-        indent = { char = "│" },
+        indent = { char = "│", tab_char = "│" },
         exclude = {
           filetypes = require("config").excluded_filetypes,
         },
