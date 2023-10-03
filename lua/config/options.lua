@@ -42,6 +42,10 @@ opt.ignorecase = true -- Ignore case
 opt.smartcase = true -- Don't ignore case with capitals
 opt.inccommand = "nosplit" -- preview incremental substitute
 
+if vim.fn.has("nvim-0.10") == 1 then
+  opt.smoothscroll = true
+end
+
 opt.wrap = false -- Disable line wrap
 opt.linebreak = true
 opt.whichwrap:append("<>[]")
