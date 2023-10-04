@@ -51,7 +51,7 @@ See [keymaps.md](docs/keymaps.md).
 - Auto Completion with [nvim-cmp]
 - Snippets with [LuaSnip] and [friendly-snippets]
 - Fuzzy Finding with [telescope.nvim]
-- File Explorer with [nvim-tree.lua]
+- File Explorer with [neo-tree.nvim]
 - Code Outline with [aerial.nvim]
 - Live prompt for keymaps with [which-key.nvim]
 - Statusline with [lualine.nvim]
@@ -115,7 +115,7 @@ Contents of ui, editor and coding:
 [LuaSnip]: https://github.com/L3MON4D3/LuaSnip
 [friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
 [telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
-[nvim-tree.lua]: https://github.com/nvim-tree/nvim-tree.lua
+[neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [aerial.nvim]: https://github.com/stevearc/aerial.nvim
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [nvterm]: https://github.com/NvChad/nvterm

@@ -144,7 +144,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `gZ`         | Zen Mode                 | n, t | [zen-mode.nvim]          |
 | `<C-=>`      | Zoom in                  | n, t | system                   |
 | `<C-->`      | Zoom out                 | n, t | system                   |
-| `<leader>e`  | Toggle File Explorer     | n, t | [nvim-tree.lua]          |
+| `<leader>e`  | Toggle File Explorer     | n, t | [neo-tree.nvim]          |
 | `<leader>E`  | Toggle Database Explorer | n    | [vim-dadbod]             |
 | `<leader>o`  | Toggle Outline           | n    | [aerial.nvim]            |
 | `<leader>tt` | Toggle Terminal          | n, t | [nvterm]                 |
@@ -362,7 +362,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [mini.comment]: https://github.com/echasnovski/mini.comment
 [windows.nvim]: https://github.com/anuvyklack/windows.nvim
 [zen-mode.nvim]: https://github.com/folke/zen-mode.nvim
-[nvim-tree.lua]: https://github.com/nvim-tree/nvim-tree.lua
+[neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [vim-dadbod]: https://github.com/tpope/vim-dadbod
 [aerial.nvim]: https://github.com/stevearc/aerial.nvim
 [nvterm]: https://github.com/NvChad/nvterm
