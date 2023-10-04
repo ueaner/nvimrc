@@ -107,6 +107,7 @@ Command-line mode uses readline-style keymaps.
 | `gf`         | Goto File                         | n, v | editing    |
 | `gi`         | Move to last insertion and INSERT | n    | insert     |
 | `gw`         | Highlighting word under cursor    | n    | keymaps    |
+| `z=`         | Spelling suggestions              | n    | spell      |
 
 ## Multi-cursor and selection
 
