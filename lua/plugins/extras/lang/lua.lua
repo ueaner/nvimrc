@@ -6,6 +6,8 @@ local conf = {
   ft = "lua",
   parsers = { -- nvim-treesitter: language parsers
     "lua",
+    "luadoc",
+    "luap",
   },
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     "lua-language-server",
