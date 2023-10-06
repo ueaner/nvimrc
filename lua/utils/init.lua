@@ -48,6 +48,11 @@ M.str_isempty = function(s)
   return s == nil or s == ""
 end
 
+-- Checks if a string or table is empty.
+M.isempty = function(s)
+  return s == nil or (type(s) == "string" and s == "") or (type(s) == "table" and next(s) == nil)
+end
+
 --- Extends a list-like table with the values of another list-like table.
 ---
 ---@see vim.tbl_extend()

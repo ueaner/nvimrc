@@ -1,5 +1,5 @@
 ---@class LangConfig
----@field ft string
+---@field ft string|string[]
 ---@field parsers string[]
 ---@field cmdtools string[]
 ---@field lsp LangConfig.lsp
@@ -32,20 +32,21 @@
 ---@field generate fun(self: LangSpecs, conf: LangConfig): LazyPlugin[]
 
 local str_isempty = require("utils").str_isempty
+local isempty = require("utils").isempty
 
 ---@type LangConfig
 local defaults = {
-  ft = "",            -- filetype
-  parsers = {},       -- nvim-treesitter: language parsers
-  cmdtools = {},      -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
+  ft = "", -- filetype
+  parsers = {}, -- nvim-treesitter: language parsers
+  cmdtools = {}, -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
   lsp = {
-    servers = {},     -- nvim-lspconfig: lspconfig servers settings with filetype
-    setup = {},       -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
+    servers = {}, -- nvim-lspconfig: lspconfig servers settings with filetype
+    setup = {}, -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
     nls_sources = {}, -- null-ls.nvim: builtins formatters, diagnostics, code_actions
   },
-  dap = {             -- nvim-dap: language specific extensions
+  dap = { -- nvim-dap: language specific extensions
   },
-  test = {            -- neotest: language specific adapters
+  test = { -- neotest: language specific adapters
   },
 }
 
@@ -140,11 +141,11 @@ function M:generate(conf)
       -- install dap adapter plugin
       if not str_isempty(item[1]) then
         -- Automatically run `require(MAIN).setup(opts)` with `config = true`
-        local spec = { item[1], config = true }
+        local spec = { item[1], event = "VeryLazy", config = true }
         if type(item.config) == "function" then
           spec.config = item.config
         end
-        if not str_isempty(conf.ft) then
+        if not isempty(conf.ft) then
           spec.ft = conf.ft
           if type(item.on_ft) == "function" then
             spec.init = function()
