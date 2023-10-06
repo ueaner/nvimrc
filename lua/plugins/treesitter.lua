@@ -32,7 +32,7 @@ return {
     },
     keys = {
       { "<Space>", desc = "Increment selection" },
-      { "<BS>",    desc = "Decrement selection", mode = "x" },
+      { "<BS>", desc = "Decrement selection", mode = "x" },
     },
     ---@type TSConfig
     opts = {
@@ -42,26 +42,24 @@ return {
         "query",
         "regex",
         "lua",
+        "luadoc",
+        "luap",
         "vim",
         "vimdoc",
         "markdown",
         "markdown_inline",
-        "html",
-        "javascript",
-        "jsdoc",
-        "tsx",  -- typescriptreact
-        "typescript",
-        "http", -- rest.nvim
-        "json",
-        "jsonc",
-        "yaml",
         "comment", -- NOTE TODO FIXME ...
         "diff",
+        "git_config",
         "git_rebase",
         "gitattributes",
         "gitcommit",
         "gitignore",
         "sql",
+        "csv",
+        "ini",
+        "ssh_config",
+        "strace",
         "mermaid",
       },
       incremental_selection = {
