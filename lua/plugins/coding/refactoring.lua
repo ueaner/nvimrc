@@ -1,3 +1,3 @@
 return {
-  { "ThePrimeagen/refactoring.nvim" },
+  { "ThePrimeagen/refactoring.nvim", lazy = true },
 }
