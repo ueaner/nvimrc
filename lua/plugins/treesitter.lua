@@ -3,30 +3,29 @@
 -- List of installed treesitter parsers `:checkhealth nvim-treesitter`
 -- installation directory: ~/.local/share/nvim/lazy/nvim-treesitter/parser
 return {
+  -- Treesitter is a new parser generator tool that we can
+  -- use in Neovim to power faster and more accurate
+  -- syntax highlighting.
   {
     "nvim-treesitter/nvim-treesitter",
+    version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSUpdateSync" },
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        init = function()
-          -- PERF: no need to load the plugin, if we only need its queries for mini.ai
-          local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
-          local opts = require("lazy.core.plugin").values(plugin, "opts", false)
-          local enabled = false
-          if opts.textobjects then
-            for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-              if opts.textobjects[mod] and opts.textobjects[mod].enable then
-                enabled = true
-                break
+        config = function()
+          -- Disable class keymaps in diff mode
+          vim.api.nvim_create_autocmd("BufReadPost", {
+            callback = function(event)
+              if vim.wo.diff then
+                for _, key in ipairs({ "[c", "]c", "[C", "]C" }) do
+                  pcall(vim.keymap.del, "n", key, { buffer = event.buf })
+                end
               end
-            end
-          end
-          if not enabled then
-            require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-          end
+            end,
+          })
         end,
       },
     },
@@ -69,6 +68,15 @@ return {
           node_incremental = "<Space>",
           node_decremental = "<BS>",
           scope_incremental = false,
+        },
+      },
+      textobjects = {
+        move = {
+          enable = true,
+          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
         },
       },
     },
