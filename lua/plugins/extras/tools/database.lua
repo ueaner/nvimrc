@@ -106,7 +106,8 @@ return {
     cmd = { "DB" },
     keys = {
       -- stylua: ignore
-      { "<leader>E", function() M.db_explorer_toggle() end, desc = "Toggle Database Explorer", },
+      -- { "<leader>E", function() M.db_explorer_toggle() end, desc = "Toggle Database Explorer", },
+      { "<leader>E", "<cmd>DBUIToggle<cr>", desc = "Toggle Database Explorer" },
       { "<leader>Du", "<cmd>DBUIToggle<cr>", desc = "Toggle UI" },
       { "<leader>Da", "<cmd>DBUIAddConnection<cr>", desc = "Add Connection" },
       { "<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc = "Find buffer" },
