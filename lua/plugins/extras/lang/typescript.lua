@@ -80,7 +80,7 @@ local conf = {
             },
           }
         end
-        for _, language in ipairs({ "typescript", "javascript" }) do
+        for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
           dap.configurations[language] = {
             {
               type = "pwa-node",
