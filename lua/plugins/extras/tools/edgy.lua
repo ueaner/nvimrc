@@ -55,30 +55,34 @@ return {
             end,
             pinned = true,
             open = function()
-              vim.api.nvim_input("<esc><leader>e")
+              vim.api.nvim_input(vim.g.mapleader .. "e") -- <leader>e
             end,
             size = { height = 0.5 },
           },
           { title = "Neotest Summary", ft = "neotest-summary" },
-          {
-            title = "Git",
-            ft = "neo-tree",
-            filter = function(buf)
-              return vim.b[buf].neo_tree_source == "git_status"
-            end,
-            pinned = true,
-            open = "Neotree position=right git_status",
-          },
-          {
-            title = "Buffers",
-            ft = "neo-tree",
-            filter = function(buf)
-              return vim.b[buf].neo_tree_source == "buffers"
-            end,
-            pinned = true,
-            open = "Neotree position=top buffers",
-          },
-          "neo-tree",
+
+          -- Use `>`/`<` to switch git_status/buffers sources on the neo-tree window
+          -- or use the telescope git_status/buffers command
+
+          -- {
+          --   title = "Git",
+          --   ft = "neo-tree",
+          --   filter = function(buf)
+          --     return vim.b[buf].neo_tree_source == "git_status"
+          --   end,
+          --   -- pinned = true,
+          --   open = "Neotree position=right git_status",
+          -- },
+          -- telescope buffers
+          -- {
+          --   title = "Buffers",
+          --   ft = "neo-tree",
+          --   filter = function(buf)
+          --     return vim.b[buf].neo_tree_source == "buffers"
+          --   end,
+          --   -- pinned = true,
+          --   open = "Neotree position=top buffers",
+          -- },
         },
         keys = {
           -- increase width
@@ -103,8 +107,17 @@ return {
         table.insert(opts.left, {
           title = "Outline",
           ft = "aerial",
-          pinned = true,
+          -- pinned = true,
           open = "AerialToggle",
+        })
+      end
+
+      if require("utils").has("vim-dadbod-ui") then
+        table.insert(opts.left, {
+          title = "Database",
+          ft = "dbui",
+          -- pinned = true,
+          open = "DBUIToggle",
         })
       end
       return opts
