@@ -52,7 +52,11 @@ return {
       {
         "Saecki/crates.nvim",
         event = { "BufRead Cargo.toml" },
-        config = true,
+        opts = {
+          src = {
+            cmp = { enabled = true },
+          },
+        },
       },
       {
         "jcdickinson/codeium.nvim",
