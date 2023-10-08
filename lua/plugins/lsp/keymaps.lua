@@ -2,81 +2,86 @@
 
 local M = {}
 
----@type PluginLspKeys
+---@alias LazyKeysLspSpec LazyKeysSpec|{has?:string}
+---@alias LazyKeysLsp LazyKeys|{has?:string}
+
+---@type LazyKeysLspSpec[]|nil
 M._keys = nil
 
----@return (LazyKeys|{has?:string})[]
+---@return LazyKeysLspSpec[]
 function M.get()
+  if M._keys then
+    return M._keys
+  end
+
   local format = function()
     require("plugins.lsp.format").format({ force = true })
   end
-  if not M._keys then
-  ---@class PluginLspKeys
-    -- stylua: ignore
-    M._keys =  {
-      { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-      { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-      -- NOTE: method textDocument/declaration is not supported by any of the servers registered for the current buffer
-      { "ge", vim.lsp.buf.declaration, desc = "Goto D[e]claration" },
-      { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
-      { "gD", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto Type Definition" },
-      { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
-      { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Find References" },
-      { "K", vim.lsp.buf.hover, desc = "Hover" },
-      { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-      { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-      { "]d", M.diagnostic_goto(true), desc = "Next Diagnostic" },
-      { "[d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
-      { "]e", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
-      { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
-      { "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
-      { "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
-      { "<leader>cf", format, desc = "Format Document", has = "formatting" },
-      { "<leader>cf", format, desc = "Format Range", mode = "v", has = "rangeFormatting" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      { "<leader>ci", vim.lsp.buf.incoming_calls, desc = "Call Hierarchy Incoming Calls", mode = { "n", "v" }, has = "callHierarchy/incomingCalls" },
-      { "<leader>co", vim.lsp.buf.outgoing_calls, desc = "Call Hierarchy Outgoing Calls", mode = { "n", "v" }, has = "callHierarchy/outgoingCalls" },
-      {
-        "<leader>cA",
-        function()
-          vim.lsp.buf.code_action({
-            context = {
-              only = {
-                "source",
-              },
-              diagnostics = {},
-            },
-          })
-        end,
-        desc = "Source Action",
-        has = "codeAction",
-      }
-    }
-    if require("utils").has("inc-rename.nvim") then
-      M._keys[#M._keys + 1] = {
-        "<leader>cr",
-        function()
-          local inc_rename = require("inc_rename")
-          return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
-        end,
-        expr = true,
-        desc = "Rename",
-        has = "rename",
-      }
-    else
-      M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
-    end
 
-    if require("utils").has("refactoring.nvim") then
-      M._keys[#M._keys + 1] = {
-        "<leader>cR",
-        function()
-          require("refactoring").select_refactor()
-        end,
-        desc = "Refactoring",
-        mode = { "n", "x" },
-      }
-    end
+  -- stylua: ignore
+  M._keys =  {
+    { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+    { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+    -- NOTE: method textDocument/declaration is not supported by any of the servers registered for the current buffer
+    { "ge", vim.lsp.buf.declaration, desc = "Goto D[e]claration" },
+    { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
+    { "gD", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto Type Definition" },
+    { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
+    { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Find References" },
+    { "K", vim.lsp.buf.hover, desc = "Hover" },
+    { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+    { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+    { "]d", M.diagnostic_goto(true), desc = "Next Diagnostic" },
+    { "[d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
+    { "]e", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
+    { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
+    { "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
+    { "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
+    { "<leader>cf", format, desc = "Format Document", has = "formatting" },
+    { "<leader>cf", format, desc = "Format Range", mode = "v", has = "rangeFormatting" },
+    { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+    { "<leader>ci", vim.lsp.buf.incoming_calls, desc = "Call Hierarchy Incoming Calls", mode = { "n", "v" }, has = "callHierarchy/incomingCalls" },
+    { "<leader>co", vim.lsp.buf.outgoing_calls, desc = "Call Hierarchy Outgoing Calls", mode = { "n", "v" }, has = "callHierarchy/outgoingCalls" },
+    {
+      "<leader>cA",
+      function()
+        vim.lsp.buf.code_action({
+          context = {
+            only = {
+              "source",
+            },
+            diagnostics = {},
+          },
+        })
+      end,
+      desc = "Source Action",
+      has = "codeAction",
+    }
+  }
+  if require("utils").has("inc-rename.nvim") then
+    M._keys[#M._keys + 1] = {
+      "<leader>cr",
+      function()
+        local inc_rename = require("inc_rename")
+        return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
+      end,
+      expr = true,
+      desc = "Rename",
+      has = "rename",
+    }
+  else
+    M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
+  end
+
+  if require("utils").has("refactoring.nvim") then
+    M._keys[#M._keys + 1] = {
+      "<leader>cR",
+      function()
+        require("refactoring").select_refactor()
+      end,
+      desc = "Refactoring",
+      mode = { "n", "x" },
+    }
   end
   return M._keys
 end
@@ -93,45 +98,33 @@ function M.has(buffer, method)
   return false
 end
 
+---@return (LazyKeys|{has?:string})[]
 function M.resolve(buffer)
   local Keys = require("lazy.core.handler.keys")
-  local keymaps = {} ---@type table<string,LazyKeys|{has?:string}>
-
-  local function add(keymap)
-    local keys = Keys.parse(keymap)
-    if keys[2] == false then
-      keymaps[keys.id] = nil
-    else
-      keymaps[keys.id] = keys
-    end
+  if not Keys.resolve then
+    return {}
   end
-  for _, keymap in ipairs(M.get()) do
-    add(keymap)
-  end
-
+  local spec = M.get()
   local opts = require("utils").opts("nvim-lspconfig")
   local clients = vim.lsp.get_active_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
-    for _, keymap in ipairs(maps) do
-      add(keymap)
-    end
+    vim.list_extend(spec, maps)
   end
-  return keymaps
+  return Keys.resolve(spec)
 end
 
-function M.on_attach(client, buffer)
+function M.on_attach(_, buffer)
   local Keys = require("lazy.core.handler.keys")
   local keymaps = M.resolve(buffer)
 
   for _, keys in pairs(keymaps) do
     if not keys.has or M.has(buffer, keys.has) then
       local opts = Keys.opts(keys)
-      ---@diagnostic disable-next-line: no-unknown
       opts.has = nil
       opts.silent = opts.silent ~= false
       opts.buffer = buffer
-      vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)
+      vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
     end
   end
 end
