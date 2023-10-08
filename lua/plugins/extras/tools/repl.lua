@@ -1,7 +1,7 @@
 -- REPL
 return {
   "ueaner/iron.nvim",
-  config = function(plugins, opts)
+  config = function(plugin, opts)
     local iron = require("iron.core")
 
     iron.setup({
@@ -14,7 +14,11 @@ return {
           python = require("iron.fts.python").ipython,
           -- go install github.com/traefik/yaegi/cmd/yaegi@latest
           go = { command = { "yaegi" } },
+          -- pnpm install -g tsx
           typescript = { command = { "tsx" } },
+          -- cargo install evcxr_repl
+          -- NOTE: switch to the repl window and press Enter
+          rust = { command = { "evcxr" } },
         },
         repl_open_cmd = require("iron.view").right(60),
       },
@@ -33,7 +37,7 @@ return {
 
     -- stylua: ignore
     -- https://github.com/Vigemus/iron.nvim/blob/master/lua/iron/fts/init.lua
-    require("utils").on_ft({ "go", "python", "lua", "typescript", "javascript", "php", "sh", "zsh" }, function(event)
+    require("utils").on_ft({ "go", "python", "lua", "typescript", "javascript", "php", "sh", "zsh", "rust" }, function(event)
       vim.keymap.set("n", "<leader>rr", function() iron.run_motion("send_motion") end, { desc = "Run code block", buffer = event.buf })
       vim.keymap.set("v", "<leader>rr", iron.visual_send, { desc = "Run selected code block", buffer = event.buf })
       vim.keymap.set("n", "<leader>rl", iron.send_line, { desc = "Run cursor line", buffer = event.buf })
