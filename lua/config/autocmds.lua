@@ -76,3 +76,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
+
+-- Try to auto detect the indentation style in the current buffer
+-- and then set the tab or space options
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  callback = function()
+    require("utils.yadi").detect_indent()
+  end,
+})
