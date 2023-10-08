@@ -59,15 +59,12 @@ return {
         },
       },
       {
-        "jcdickinson/codeium.nvim",
+        "Exafunction/codeium.nvim",
+        cmd = "Codeium",
+        build = ":Codeium Auth",
         config = function()
           require("codeium").setup({})
         end,
-      },
-      {
-        "jcdickinson/http.nvim",
-        build = "cargo build --workspace --release",
-        enabled = false,
       },
     },
     opts = function()

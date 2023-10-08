@@ -73,6 +73,7 @@ local M = {
       Array = " ",
       Boolean = " ",
       Class = " ",
+      Codeium = " ",
       Color = " ",
       Constant = " ",
       Constructor = " ",
