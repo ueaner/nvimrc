@@ -60,7 +60,7 @@ return {
   -- highlighted references under cursor
   {
     "RRethy/vim-illuminate",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "LazyFile",
     opts = {
       delay = 200,
       large_file_cutoff = 2000,

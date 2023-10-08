@@ -4,7 +4,7 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "LazyFile",
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
       { "folke/neodev.nvim", opts = {} },
@@ -199,7 +199,7 @@ return {
   -- code actions
   {
     "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "LazyFile",
     enabled = function()
       return not require("utils").has("creativenull/efmls-configs-nvim")
     end,

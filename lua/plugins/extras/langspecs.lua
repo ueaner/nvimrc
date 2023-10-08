@@ -127,7 +127,7 @@ function M:generate(conf)
   if not vim.tbl_isempty(conf.lsp.nls_sources) and require("utils").has("none-ls.nvim") then
     table.insert(specs, {
       "nvimtools/none-ls.nvim",
-      event = "BufReadPre",
+      event = "LazyFile",
       dependencies = { "mason.nvim" },
       opts = function(_, opts)
         vim.list_extend(opts.sources, conf.lsp.nls_sources)

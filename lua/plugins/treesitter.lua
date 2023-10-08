@@ -10,7 +10,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "LazyFile", "VeryLazy" },
     cmd = { "TSUpdateSync" },
     dependencies = {
       {
@@ -109,7 +109,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-context",
-    event = "BufReadPre",
+    event = { "LazyFile", "VeryLazy" },
     config = true,
   },
 
@@ -117,6 +117,7 @@ return {
   -- Use `v, c, d, y` to enter Operator-pending mode, and then press `m` to visually select/change/delete/yank
   {
     "mfussenegger/nvim-treehopper",
+    event = "LazyFile",
     keys = { { "m", mode = { "o", "x" } } },
     config = function()
       vim.cmd([[

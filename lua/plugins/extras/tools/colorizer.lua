@@ -2,8 +2,7 @@ return {
   -- colorizer
   {
     "NvChad/nvim-colorizer.lua",
-    -- event = { "BufRead", "BufWinEnter", "BufNewFile" },
-    event = "BufReadPre",
+    event = "LazyFile",
     opts = {
       filetypes = { "*", "!lazy" },
       buftypes = { "*", "!prompt", "!nofile" },

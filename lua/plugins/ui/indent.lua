@@ -2,7 +2,7 @@ return {
   -- indent guides
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "LazyFile",
     config = function()
       require("ibl").setup({
         indent = { char = "│", tab_char = "│" },
@@ -16,7 +16,7 @@ return {
   -- active indent guide and indent text objects
   {
     "echasnovski/mini.indentscope",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "LazyFile",
     opts = {
       -- symbol = "▏",
       symbol = "│",

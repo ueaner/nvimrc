@@ -2,7 +2,7 @@ return {
   -- floating winbar
   {
     "b0o/incline.nvim",
-    event = "BufReadPre",
+    event = "LazyFile",
     -- stylua: ignore
     keys = {
       { "<leader>uw", function () require("incline").toggle() end, desc = "Toggle Winbar (incline)" },
