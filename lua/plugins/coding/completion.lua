@@ -41,15 +41,6 @@ return {
 
       "rcarriga/cmp-dap",
       {
-        "kristijanhusak/vim-dadbod-completion",
-        ft = { "sql", "mysql" },
-        init = function()
-          require("utils").on_ft({ "sql", "mysql" }, function()
-            vim.opt_local["omnifunc"] = "vim_dadbod_completion#omni"
-          end)
-        end,
-      },
-      {
         "Saecki/crates.nvim",
         event = { "BufRead Cargo.toml" },
         opts = {
@@ -64,19 +55,9 @@ return {
 
       local cmp = require("cmp")
 
-      -- opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-      --   -- { name = "rg" },
-      --   { name = "codeium", group_index = 1 },
-      -- }))
-
       cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
         sources = {
           { name = "dap" },
-        },
-      })
-      cmp.setup.filetype({ "sql", "mysql" }, {
-        sources = {
-          { name = "vim-dadbod-completion" },
         },
       })
 

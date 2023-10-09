@@ -130,4 +130,27 @@ return {
       end)
     end,
   },
+
+  -- vim-dadbod-completion cmp source
+  {
+    "nvim-cmp",
+    dependencies = {
+      {
+        "kristijanhusak/vim-dadbod-completion",
+        ft = { "sql", "mysql" },
+        init = function()
+          require("utils").on_ft({ "sql", "mysql" }, function()
+            vim.opt_local["omnifunc"] = "vim_dadbod_completion#omni"
+          end)
+        end,
+      },
+    },
+    opts = function()
+      require("cmp").setup.filetype({ "sql", "mysql" }, {
+        sources = {
+          { name = "vim-dadbod-completion" },
+        },
+      })
+    end,
+  },
 }
