@@ -168,7 +168,7 @@ local conf = {
       nls.builtins.formatting.rustfmt,
     },
   },
-  dap = {  -- nvim-dap: language specific extensions
+  dap = { -- nvim-dap: language specific extensions
   },
   test = { -- neotest: language specific adapters
     -- cargo install cargo-nextest --locked
@@ -184,4 +184,30 @@ local conf = {
   },
 }
 
-return generator:prepend({ "simrat39/rust-tools.nvim", ft = { "rust" } }):generate(conf)
+return generator
+  :prepend({ "simrat39/rust-tools.nvim", ft = { "rust" } })
+  :prepend(
+    -- crates cmp source
+    {
+      "nvim-cmp",
+      dependencies = {
+        {
+          "Saecki/crates.nvim",
+          event = { "BufRead Cargo.toml" },
+          opts = {
+            src = {
+              cmp = { enabled = true },
+            },
+          },
+        },
+      },
+      ---@param opts cmp.ConfigSchema
+      opts = function(_, opts)
+        local cmp = require("cmp")
+        opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+          { name = "crates", group_index = 2 },
+        }))
+      end,
+    }
+  )
+  :generate(conf)

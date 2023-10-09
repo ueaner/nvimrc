@@ -38,27 +38,12 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
-
-      {
-        "Saecki/crates.nvim",
-        event = { "BufRead Cargo.toml" },
-        opts = {
-          src = {
-            cmp = { enabled = true },
-          },
-        },
-      },
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
       local cmp = require("cmp")
 
-      cmp.setup.filetype({ "toml" }, {
-        sources = {
-          { name = "crates" },
-        },
-      })
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
