@@ -27,7 +27,7 @@ opt.undolevels = 1000
 opt.timeoutlen = 300
 opt.updatetime = 200
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
 opt.hidden = true
 
 opt.completeopt = "menu,menuone,noselect"
