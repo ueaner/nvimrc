@@ -58,14 +58,6 @@ return {
           },
         },
       },
-      {
-        "Exafunction/codeium.nvim",
-        cmd = "Codeium",
-        build = ":Codeium Auth",
-        config = function()
-          require("codeium").setup({})
-        end,
-      },
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -113,13 +105,12 @@ return {
           ["<A-,>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
         }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "codeium" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-        }),
+        sources = {
+          { name = "nvim_lsp", group_index = 1 },
+          { name = "luasnip", group_index = 1 },
+          { name = "buffer", group_index = 2 },
+          { name = "path", group_index = 2 },
+        },
 
         formatting = {
           format = function(_, item)
@@ -138,18 +129,4 @@ return {
       }
     end,
   },
-
-  -- {
-  --   "Exafunction/codeium.vim",
-  --   event = "InsertEnter",
-  --   -- stylua: ignore
-  --   config = function ()
-  --     vim.g.codeium_disable_bindings = 1
-  --     vim.keymap.set("i", "<A-m>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
-  --     vim.keymap.set("i", "<A-f>", function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true })
-  --     vim.keymap.set("i", "<A-b>", function() return vim.fn["codeium#CycleCompletions"](-1) end, { expr = true })
-  --     vim.keymap.set("i", "<A-x>", function() return vim.fn["codeium#Clear"]() end, { expr = true })
-  --     vim.keymap.set("i", "<A-s>", function() return vim.fn["codeium#Complete"]() end, { expr = true })
-  --   end,
-  -- },
 }
