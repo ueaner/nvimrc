@@ -69,4 +69,19 @@ return {
       { "<leader>dK", function() require("dap.ui.widgets").preview() end, desc = "preview expression"},
     },
   },
+
+  -- dap cmp source
+  {
+    "nvim-cmp",
+    dependencies = {
+      "rcarriga/cmp-dap",
+    },
+    opts = function()
+      require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+        sources = {
+          { name = "dap" },
+        },
+      })
+    end,
+  },
 }

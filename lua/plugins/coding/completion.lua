@@ -39,7 +39,6 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
 
-      "rcarriga/cmp-dap",
       {
         "Saecki/crates.nvim",
         event = { "BufRead Cargo.toml" },
@@ -54,12 +53,6 @@ return {
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
       local cmp = require("cmp")
-
-      cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-        sources = {
-          { name = "dap" },
-        },
-      })
 
       cmp.setup.filetype({ "toml" }, {
         sources = {
@@ -86,6 +79,7 @@ return {
           ["<A-,>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
         }),
+        -- :CmpStatus describes statuses and states of sources.
         sources = {
           { name = "nvim_lsp", group_index = 1 },
           { name = "luasnip", group_index = 1 },
