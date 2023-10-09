@@ -43,6 +43,10 @@ return {
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
       local cmp = require("cmp")
+      local border = {
+        winhighlight = "Normal:Pmenu,FloatBorder:TabLine,CursorLine:PmenuSel,Search:None",
+        -- border = "single",
+      }
 
       return {
         completion = {
@@ -80,6 +84,10 @@ return {
             end
             return item
           end,
+        },
+        window = {
+          -- completion = cmp.config.window.bordered(border),
+          documentation = cmp.config.window.bordered(border),
         },
         experimental = {
           ghost_text = {
