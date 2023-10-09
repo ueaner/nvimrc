@@ -10,12 +10,6 @@ return {
       { "folke/neodev.nvim", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      {
-        "hrsh7th/cmp-nvim-lsp",
-        cond = function()
-          return require("utils").has("nvim-cmp")
-        end,
-      },
       -- "mattn/efm-langserver",
       -- "creativenull/efmls-configs-nvim", -- Just uncomment this line
     },
