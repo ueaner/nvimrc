@@ -47,9 +47,6 @@ return {
         end
       end
 
-      -- vim/_editor.lua:0: User Autocommands for "VeryLazy"..script nvim_exec2() called at User Autocommands for "VeryLazy":0:
-      -- Vim(highlight):E5248: Invalid character in group name
-
       local Util = require("utils")
       local colors = {
         ok = { fg = Util.fg("Special") },
