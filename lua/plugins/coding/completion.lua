@@ -67,6 +67,10 @@ return {
           ["<A-.>"] = cmp.mapping.complete(),
           ["<A-,>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+          ["<C-CR>"] = function(fallback)
+            cmp.abort()
+            fallback()
+          end,
         }),
         -- :CmpStatus describes statuses and states of sources.
         sources = {
