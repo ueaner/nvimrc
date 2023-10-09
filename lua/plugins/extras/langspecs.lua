@@ -26,10 +26,10 @@
 
 ---@class LangSpecs
 ---@field defaults LangConfig
----@field specs LazyPlugin[]
----@field append fun(self: LangSpecs, spec: LazyPlugin): LangSpecs
----@field prepend fun(self: LangSpecs, spec: LazyPlugin): LangSpecs
----@field generate fun(self: LangSpecs, conf: LangConfig): LazyPlugin[]
+---@field specs LazyPluginSpec[]
+---@field append fun(self: LangSpecs, spec: LazyPluginSpec): LangSpecs
+---@field prepend fun(self: LangSpecs, spec: LazyPluginSpec): LangSpecs
+---@field generate fun(self: LangSpecs, conf: LangConfig): LazyPluginSpec[]
 
 local str_isempty = require("utils").str_isempty
 local isempty = require("utils").isempty
