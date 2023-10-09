@@ -1,6 +1,6 @@
 -- See https://github.com/LazyVim/LazyVim/blob/862e140a7ad8452cd5a103982687fca63a2f44da/lua/lazyvim/config/init.lua
 local M = {}
-M.lazy_file_events = { "BufReadPost", "BufNewFile" }
+M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
 -- Add support for the LazyFile event
 function M.add_lazy_file_event()
