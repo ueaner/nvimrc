@@ -24,12 +24,12 @@
 ---@field [1] string? package name
 ---@field adapter_fn (fun(): neotest.Adapter) neotest language specific adapter function
 
----@class LangSpecs
+---@class LangSpec
 ---@field defaults LangConfig
----@field specs LazyPluginSpec[]
----@field append fun(self: LangSpecs, spec: LazyPluginSpec): LangSpecs
----@field prepend fun(self: LangSpecs, spec: LazyPluginSpec): LangSpecs
----@field generate fun(self: LangSpecs, conf: LangConfig): LazyPluginSpec[]
+---@field plugin_specs LazyPluginSpec[]
+---@field append fun(self: LangSpec, spec: LazyPluginSpec): LangSpec
+---@field prepend fun(self: LangSpec, spec: LazyPluginSpec): LangSpec
+---@field generate fun(self: LangSpec, conf: LangConfig): LazyPluginSpec[]
 
 local str_isempty = require("utils").str_isempty
 local isempty = require("utils").isempty
@@ -50,30 +50,30 @@ local defaults = {
   },
 }
 
----@type LangSpecs
+---@class LangSpec
 local M = {
   defaults = defaults,
-  specs = {},
+  plugin_specs = {},
 }
 
 ---@param o table?
----@return LangSpecs
+---@return LangSpec
 function M:new(o)
   o = o or {}
   setmetatable(o, self)
   self.__index = self
   self.defaults = defaults
-  self.specs = {}
+  self.plugin_specs = {}
   return o
 end
 
 function M:append(spec)
-  table.insert(self.specs, spec)
+  table.insert(self.plugin_specs, spec)
   return M
 end
 
 function M:prepend(spec)
-  table.insert(self.specs, spec)
+  table.insert(self.plugin_specs, spec)
   return M
 end
 
@@ -84,8 +84,7 @@ function M:generate(conf)
   ---@type LangConfig
   conf = vim.tbl_deep_extend("force", M.defaults, conf or {})
 
-  ---@type LangSpecs
-  local specs = self.specs
+  local specs = self.plugin_specs
 
   -- add language parsers to treesitter
   if not vim.tbl_isempty(conf.parsers) then
@@ -176,7 +175,7 @@ function M:generate(conf)
     end
   end
 
-  self.specs = specs
+  self.plugin_specs = specs
 
   return specs
 end
