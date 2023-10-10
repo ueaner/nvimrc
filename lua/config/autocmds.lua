@@ -1,4 +1,5 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
+-- lua= vim.api.nvim_get_autocmds({event = "BufReadPost"})
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
@@ -34,9 +35,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].once_last_loc then
       return
     end
+    -- Avoid do `last_loc` more than once on the buffer
+    vim.b[buf].once_last_loc = true
     local mark = vim.api.nvim_buf_get_mark(buf, '"')
     local lcount = vim.api.nvim_buf_line_count(buf)
     if mark[1] > 0 and mark[1] <= lcount then
