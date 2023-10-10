@@ -341,6 +341,23 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>rr`    | Run http request      | n    | [rest.nvim] |
 | `<leader>rr`    | Run gRPC request      | n    | [grpc-nvim] |
 
+## More
+
+| Key           | Description                      | Mode | Provider         |
+| ------------- | -------------------------------- | ---- | ---------------- |
+| **Telescope** | Keymaps for `Telescope`          |      | Telescope        |
+| `<Tab`        | Select/Deselect                  | i, n | [telescope.nvim] |
+| `<C-Down>`    | Next search prompt in history    | i    | [telescope.nvim] |
+| `<C-Up>`      | Prev search prompt in history    | i    | [telescope.nvim] |
+| `<C-n>`       | Next search prompt in history    | n    | [telescope.nvim] |
+| `<C-p>`       | Prev search prompt in history    | n    | [telescope.nvim] |
+| `<C-f>`       | Scroll the preview window down   | i    | [telescope.nvim] |
+| `<C-b>`       | Scroll the preview window up     | i    | [telescope.nvim] |
+| `<C-d>`       | Scroll the preview window down   | i    | [telescope.nvim] |
+| `<C-u>`       | Scroll the preview window up     | i    | [telescope.nvim] |
+| `<C-x>`       | Show all results in trouble      | i    | [telescope.nvim] |
+| `<D-x>`       | Show selected results in Trouble | i    | [telescope.nvim] |
+
 [which-key.nvim]: https://github.com/folke/which-key.nvim
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
 [nvim-spectre]: https://github.com/windwp/nvim-spectre

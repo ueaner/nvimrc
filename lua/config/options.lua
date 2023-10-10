@@ -30,6 +30,9 @@ opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
 opt.hidden = true
 
+-- Allow cursor to move where there is no text in visual block mode
+-- opt.virtualedit = "block"
+
 opt.completeopt = "menu,menuone,noselect"
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
