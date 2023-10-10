@@ -26,8 +26,8 @@ return {
       { "<leader>tr", function() require('neotest').run.run() end, desc = "Run Nearest" },
       { "<leader>t.", function() require('neotest').run.run_last() end, desc = "Run repeat last" },
       { "<leader>tf", function() require('neotest').run.run(vim.fn.expand('%')) end, desc = "Run File" },
-      { "<leader>to", function() require('neotest').output.open() end, desc = "Output" },
       { "<leader>tq", function() require('neotest').run.stop() end, desc = "Stop" },
+      { "<leader>to", function() require('neotest').output.open() end, desc = "Output" },
       { "<leader>ts", function() require('neotest').summary.toggle() end, desc = "Summary Toggle" },
     },
     opts = {
