@@ -104,53 +104,63 @@ return {
         desc = "Goto Symbol (Workspace)",
       },
     },
-    opts = {
-      defaults = {
-        layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
-        sorting_strategy = "ascending",
-        winblend = 0,
-        prompt_prefix = " ",
-        selection_caret = " ",
-        mappings = {
-          i = {
-            ["<C-x>"] = function(...)
-              return require("trouble.providers.telescope").open_with_trouble(...)
-            end,
-            ["<A-x>"] = function(...)
-              return require("trouble.providers.telescope").open_selected_with_trouble(...)
-            end,
-            ["<C-f>"] = function(...)
-              return require("telescope.actions").preview_scrolling_down(...)
-            end,
-            ["<C-b>"] = function(...)
-              return require("telescope.actions").preview_scrolling_up(...)
-            end,
-            ["<C-d>"] = function(...)
-              return require("telescope.actions").preview_scrolling_down(...)
-            end,
-            ["<C-u>"] = function(...)
-              return require("telescope.actions").preview_scrolling_up(...)
-            end,
-          },
-          n = {
-            ["q"] = function(...)
-              return require("telescope.actions").close(...)
-            end,
+    opts = function()
+      local trouble = require("trouble.providers.telescope")
+      local actions = require("telescope.actions")
+
+      return {
+        ---@type Picker
+        defaults = {
+          layout_strategy = "horizontal",
+          layout_config = { prompt_position = "top" },
+          sorting_strategy = "ascending",
+          winblend = 0,
+          prompt_prefix = " ",
+          selection_caret = " ",
+          -- open files in the first window that is an actual file.
+          -- use the current window if no other window is available.
+          get_selection_window = function()
+            local wins = vim.api.nvim_list_wins()
+            table.insert(wins, 1, vim.api.nvim_get_current_win())
+            for _, win in ipairs(wins) do
+              local buf = vim.api.nvim_win_get_buf(win)
+              if vim.bo[buf].buftype == "" then
+                return win
+              end
+            end
+            return 0
+          end,
+          mappings = {
+            i = {
+              ["<C-x>"] = trouble.open_with_trouble,
+              ["<A-x>"] = trouble.open_selected_with_trouble,
+              ["<C-f>"] = actions.preview_scrolling_down,
+              ["<C-b>"] = actions.preview_scrolling_up,
+              ["<C-d>"] = actions.preview_scrolling_down,
+              ["<C-u>"] = actions.preview_scrolling_up,
+              -- `<C-n/p>` for select result items
+              ["<C-Down>"] = actions.cycle_history_next,
+              ["<C-Up>"] = actions.cycle_history_prev,
+            },
+            n = {
+              ["q"] = actions.close,
+              ["<C-n>"] = actions.cycle_history_next,
+              ["<C-p>"] = actions.cycle_history_prev,
+            },
           },
         },
-      },
-      extensions = {
-        project = {
-          base_dirs = {
-            "~/projects",
+        extensions = {
+          project = {
+            base_dirs = {
+              "~/projects",
+            },
+          },
+          live_grep_args = {
+            auto_quoting = true,
           },
         },
-        live_grep_args = {
-          auto_quoting = true,
-        },
-      },
-    },
+      }
+    end,
     config = function(_, opts)
       local telescope = require("telescope")
       telescope.setup(opts)
