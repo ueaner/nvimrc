@@ -30,7 +30,7 @@ return {
         severity_sort = true,
       },
       inlay_hints = {
-        enabled = vim.fn.has("nvim-0.10.0") and vim.bo.filetype ~= "lua",
+        enabled = vim.fn.has("nvim-0.10.0"),
       },
       -- add any global capabilities here
       capabilities = {},

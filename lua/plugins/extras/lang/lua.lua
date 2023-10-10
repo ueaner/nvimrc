@@ -50,7 +50,7 @@ local conf = {
               enable = false,
             },
             hint = {
-              enable = true,
+              enable = false,
             },
           }, -- end Lua
         },
