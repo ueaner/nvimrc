@@ -49,8 +49,8 @@ FROM Terminal TO Normal mode keyset: `tmap <Esc><Esc> <C-\><C-n>`
 | `C`             | Delete to end of line              | n -> i  | register       |
 | `D`             | Delete to end of line              | n, v    | register       |
 | `Y`             | Yank to end of line                | n, v    | register       |
-| `<D-j>`         | Move line/block down               | n, i, v | move           |
-| `<D-k>`         | Move line/block up                 | n, i, v | move           |
+| `<A-j>`         | Move line/block down               | n, i, v | move           |
+| `<A-k>`         | Move line/block up                 | n, i, v | move           |
 | `u`             | Undo                               | n       | undo           |
 | `<C-r>`         | Redo                               | n       | redo           |
 | `o`             | Insert line below                  | n       | Insert-mode    |
@@ -152,7 +152,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>cm` | Mason                    | n    | [mason.nvim]             |
 | `<leader>cl` | Lsp Info                 | n    | [nvim-lspconfig]         |
 | `<leader>gg` | Lazygit                  | n    | [lazygit]                |
-| `<leader>dr` | Show DAP configurations  | n    | [nvim-dap]               |
+| `<leader>dd` | Show DAP configurations  | n    | [nvim-dap]               |
 |              | Show Output Panel        | n    |                          |
 | `<leader>fv` | Live Preview (Markdown)  | n    | [glow.nvim]              |
 | `<leader>fv` | Live Preview (Plantuml)  | n    | [plantuml-previewer.vim] |
@@ -284,26 +284,35 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 - prefix: `<leader>d` for debug
 
-| Key          | Description             | Mode | Provider      |
-| ------------ | ----------------------- | ---- | ------------- |
-| `<leader>db` | Toggle breakpoint       | n    | [nvim-dap]    |
-| `<leader>dc` | Start / Continue        | n    | [nvim-dap]    |
-| `<leader>di` | Step into               | n    | [nvim-dap]    |
-| `<leader>do` | Step out                | n    | [nvim-dap]    |
-| `<leader>dn` | Step over               | n    | [nvim-dap]    |
-| `<leader>dh` | step to here(cursor)    | n    | [nvim-dap]    |
-| `<leader>dq` | Stop                    | n    | [nvim-dap]    |
-| `<leader>dk` | Show hover              | n, v | [nvim-dap]    |
-| `<leader>d.` | Run repeat last         | n    | [nvim-dap]    |
-| `<leader>dr` | Show DAP configurations | n    | [nvim-dap]    |
-| `<leader>dR` | Restart                 | n    | [nvim-dap]    |
-| `<leader>da` | Show all breakpoints    | n    | [nvim-dap]    |
-| `<leader>dx` | Remove all breakpoints  | n    | [nvim-dap]    |
-| `<leader>dB` | Conditional breakpoint  | n    | [nvim-dap]    |
-| `<leader>dL` | Logpoint                | n    | [nvim-dap]    |
-| `<leader>du` | Toggle dapui            | n    | [nvim-dap-ui] |
-| `<leader>dt` | Debug test              | n    | [nvim-dap-go] |
-| `<leader>dT` | Debug last test         | n    | [nvim-dap-go] |
+| Key          | Description                | Mode | Provider          |
+| ------------ | -------------------------- | ---- | ----------------- |
+| `<leader>db` | Toggle breakpoint          | n    | [nvim-dap]        |
+| `<leader>dc` | Start / Continue           | n    | [nvim-dap]        |
+| `<leader>di` | Step into                  | n    | [nvim-dap]        |
+| `<leader>do` | Step out                   | n    | [nvim-dap]        |
+| `<leader>dn` | Step over                  | n    | [nvim-dap]        |
+| `<leader>dh` | Step to here(cursor)       | n    | [nvim-dap]        |
+| `<A-e>`      | evel                       | n, v | [nvim-dap-ui]     |
+| `<leader>de` | Show hover (expression)    | n, v | [nvim-dap-ui]     |
+| `<leader>d.` | Run repeat last            | n    | [nvim-dap]        |
+| `<leader>dk` | Up (stacktrace)            | n    | [nvim-dap]        |
+| `<leader>dj` | Down (stacktrace)          | n    | [nvim-dap]        |
+| `<leader>dq` | Stop                       | n    | [nvim-dap]        |
+| `<leader>dd` | Show DAP configurations    | n    | [telescope.nvim]  |
+| `<leader>dr` | Start / Continue           | n    | [nvim-dap]        |
+| `<leader>dR` | Restart                    | n    | [nvim-dap]        |
+| `<leader>dx` | Show all breakpoints       | n    | [telescope.nvim]  |
+| `<leader>dX` | Remove all breakpoints     | n    | [nvim-dap]        |
+| `<leader>dB` | Conditional breakpoint     | n    | [nvim-dap]        |
+| `<leader>dL` | Logpoint                   | n    | [nvim-dap]        |
+| `<leader>du` | Toggle dapui               | n    | [nvim-dap-ui]     |
+| `<leader>ds` | Session                    | n    | [nvim-dap]        |
+| `<leader>dt` | Debug test                 | n    | [nvim-dap-go]     |
+| `<leader>dT` | Debug last test            | n    | [nvim-dap-go]     |
+| `<leader>dC` | Debug Class                | n    | [nvim-dap-python] |
+| `<leader>dM` | Debug Method               | n    | [nvim-dap-python] |
+| `<leader>dS` | Debug Selection            | n    | [nvim-dap-python] |
+| `<leader>dS` | Launch Lua Debugger Server | n    | [osv]             |
 
 ## Tests
 
@@ -315,8 +324,8 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>tr` | Run Nearest    | n    | [neotest] |
 | `<leader>tl` | Run Last       | n    | [neotest] |
 | `<leader>tf` | Run File       | n    | [neotest] |
-| `<leader>to` | Output         | n    | [neotest] |
 | `<leader>tq` | Stop           | n    | [neotest] |
+| `<leader>to` | Output         | n    | [neotest] |
 | `<leader>ts` | Summary Toggle | n    | [neotest] |
 
 ## Run/REPL
@@ -356,7 +365,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<C-d>`       | Scroll the preview window down   | i    | [telescope.nvim] |
 | `<C-u>`       | Scroll the preview window up     | i    | [telescope.nvim] |
 | `<C-x>`       | Show all results in trouble      | i    | [telescope.nvim] |
-| `<D-x>`       | Show selected results in Trouble | i    | [telescope.nvim] |
+| `<A-x>`       | Show selected results in Trouble | i    | [telescope.nvim] |
 
 [which-key.nvim]: https://github.com/folke/which-key.nvim
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
@@ -370,6 +379,8 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [nvim-dap]: https://github.com/mfussenegger/nvim-dap
 [nvim-dap-ui]: https://github.com/rcarriga/nvim-dap-ui
 [nvim-dap-go]: https://github.com/leoluz/nvim-dap-go
+[nvim-dap-python]: https://github.com/mfussenegger/nvim-dap-python
+[osv]: https://github.com/jbyuki/one-small-step-for-vimkind
 [neotest]: https://github.com/nvim-neotest/neotest
 [sniprun]: https://github.com/michaelb/sniprun
 [iron.nvim]: https://github.com/ueaner/iron.nvim

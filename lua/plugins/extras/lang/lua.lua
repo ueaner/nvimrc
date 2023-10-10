@@ -65,9 +65,9 @@ local conf = {
       "jbyuki/one-small-step-for-vimkind",
       -- stylua: ignore
       on_ft = function(event)
-        vim.keymap.set("n", "<leader>ds", function() require("osv").launch({ port = 8086 }) end,
+        vim.keymap.set("n", "<leader>dS", function() require("osv").launch({ port = 8086 }) end,
           { desc = "Launch Lua Debugger Server", buffer = event.buf })
-        vim.keymap.set("n", "<leader>dd", function() require("osv").run_this() end,
+        vim.keymap.set("n", "<leader>dr", function() require("osv").run_this() end,
           { desc = "Launch Lua Debugger", buffer = event.buf })
       end,
       config = function()

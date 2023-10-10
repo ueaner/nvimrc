@@ -44,7 +44,9 @@ return {
     -- stylua: ignore
     keys = {
       -- Running the program
-      { "<leader>dr", "<cmd>Telescope dap configurations<cr>", desc = "run" },
+      { "<leader>dd", function() require("telescope").extensions.dap.configurations({}) end, desc = "dap configurations" }, -- opts.language_filter
+      { "<leader>dc", function() require("dap").continue() end, desc = "continue" },   -- Run until breakpoint or program termination
+      { "<leader>dr", function() require("dap").continue() end, desc = "run" },        -- alias to <leader>dc
       { "<leader>d.", function() require("dap").run_last() end, desc = "run repeat last" },
       { "<leader>dR", function() require("dap").restart() end, desc = "restart" },
       { "<leader>dq", function() require("dap").terminate() end, desc = "terminate" },
@@ -53,20 +55,23 @@ return {
       { "<leader>dn", function() require("dap").step_over() end, desc = "step over" }, -- [n]ext
       { "<leader>di", function() require("dap").step_into() end, desc = "step into" }, -- [i]nto
       { "<leader>do", function() require("dap").step_out() end, desc = "step out" },   -- [o]ut, [u]ninto
-      { "<leader>dc", function() require("dap").continue() end, desc = "continue" },   -- Run until breakpoint or program termination
       { "<leader>dh", function() require("dap").run_to_cursor() end, desc = "step to here(cursor)" }, -- step to [h]ere
+      { "<leader>dg", function() require("dap").goto_() end, desc = "goto line (no execute)" },
+      { "<leader>dj", function() require("dap").down() end, desc = "down" },
+      { "<leader>dk", function() require("dap").up() end, desc = "up" },
       -- breakpoints
       { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "[B] toggle breakpoint" },
-      { "<leader>da", "<cmd>Telescope dap list_breakpoints<cr>", desc = "[B] show all breakpoints" },
-      { "<leader>dx", function() require("dap").clear_breakpoints() end, desc = "[B] removes all breakpoints" },
       { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "[B] conditional breakpoint" },
       { "<leader>dL", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "[B] logpoint" },
+      { "<leader>dx", "<cmd>Telescope dap list_breakpoints<cr>", desc = "[B] show all breakpoints" },
+      { "<leader>dX", function() require("dap").clear_breakpoints() end, desc = "[B] removes all breakpoints" },
       -- dapui
       { "<leader>du", function() require("dapui").toggle() end, desc = "toggle dapui" },
       -- watch expressions, show hover
       { "<A-e>", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
-      { "<leader>dk", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
-      { "<leader>dK", function() require("dap.ui.widgets").preview() end, desc = "preview expression"},
+      { "<leader>de", function() require("dap.ui.widgets").hover() end, desc = "eval expression", mode = { "n", "v" } },
+      -- others
+      { "<leader>ds", function() require("dap").session() end, desc = "session" },
     },
   },
 
