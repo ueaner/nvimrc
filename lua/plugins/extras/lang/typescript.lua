@@ -96,6 +96,15 @@ local conf = {
               processId = require("dap.utils").pick_process,
               cwd = "${workspaceFolder}",
             },
+
+            {
+              type = "pwa-node",
+              request = "launch",
+              name = "Launch file with arguments (" .. language .. ")",
+              program = "${file}",
+              args = require("utils.lang").dap_get_args,
+              cwd = "${workspaceFolder}",
+            },
           }
         end
       end,
