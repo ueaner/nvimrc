@@ -2,7 +2,7 @@ if not require("utils").has("creativenull/efmls-configs-nvim") then
   return {}
 end
 
-local generator = require("plugins.extras.langspecs"):new()
+local generator = require("plugins.extras.langspec"):new()
 
 ---@type LangConfig
 local conf = {
