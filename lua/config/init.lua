@@ -34,6 +34,7 @@ local M = {
     "neotest-output",
     "neotest-output-panel",
     "neotest-summary",
+    "dap-float",
     "notify",
     "oil",
     "qf",
