@@ -5,7 +5,7 @@ function M.get_loc()
   local me = debug.getinfo(1, "S")
   local level = 2
   local info = debug.getinfo(level, "S")
-  while info and info.source == me.source do
+  while info and (info.source == me.source or info.source == "@" .. vim.env.MYVIMRC or info.what ~= "Lua") do
     level = level + 1
     info = debug.getinfo(level, "S")
   end
@@ -17,12 +17,12 @@ end
 
 ---@param value any
 ---@param opts? {loc:string}
-function M.dump(value, opts)
+function M._dump(value, opts)
   opts = opts or {}
   opts.loc = opts.loc or M.get_loc()
   if vim.in_fast_event() then
     return vim.schedule(function()
-      M.dump(value, opts)
+      M._dump(value, opts)
     end)
   end
   opts.loc = vim.fn.fnamemodify(opts.loc, ":~:.")
@@ -41,19 +41,27 @@ function M.dump(value, opts)
   })
 end
 
+function M.dump(...)
+  local value = { ... }
+  if vim.tbl_isempty(value) then
+    value = nil
+  else
+    value = vim.tbl_islist(value) and vim.tbl_count(value) <= 1 and value[1] or value
+  end
+  M._dump(value)
+end
+
 function M.get_value(...)
   local value = { ... }
   return vim.tbl_islist(value) and vim.tbl_count(value) <= 1 and value[1] or value
 end
 
 function M.setup()
-  _G.d = function(...)
-    M.dump(M.get_value(...))
+  _G.dump = function(...)
+    M.dump(...)
   end
 
-  _G.dd = _G.d
-  _G.dump = _G.d
-  vim.print = _G.d
+  vim.print = _G.dump
 end
 
 return M
