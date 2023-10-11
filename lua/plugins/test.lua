@@ -29,6 +29,7 @@ return {
       { "<leader>tq", function() require('neotest').run.stop() end, desc = "Stop" },
       { "<leader>to", function() require('neotest').output.open() end, desc = "Output" },
       { "<leader>ts", function() require('neotest').summary.toggle() end, desc = "Summary Toggle" },
+      { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
     },
     opts = {
       -- Can be a list of adapters like what neotest expects,
