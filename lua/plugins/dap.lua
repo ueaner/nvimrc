@@ -61,8 +61,7 @@ return {
       { "<leader>dk", function() require("dap").up() end, desc = "up" },
       -- breakpoints
       { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "[B] toggle breakpoint" },
-      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "[B] conditional breakpoint" },
-      { "<leader>dL", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, desc = "[B] logpoint" },
+      { "<Leader>dB", function() require("utils.dap").breakpoint_condition() end, desc = "[B] conditional breakpoint" },
       { "<leader>dx", "<cmd>Telescope dap list_breakpoints<cr>", desc = "[B] show all breakpoints" },
       { "<leader>dX", function() require("dap").clear_breakpoints() end, desc = "[B] removes all breakpoints" },
       -- dapui

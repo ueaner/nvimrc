@@ -304,7 +304,6 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>dx` | Show all breakpoints       | n    | [telescope.nvim]  |
 | `<leader>dX` | Remove all breakpoints     | n    | [nvim-dap]        |
 | `<leader>dB` | Conditional breakpoint     | n    | [nvim-dap]        |
-| `<leader>dL` | Logpoint                   | n    | [nvim-dap]        |
 | `<leader>du` | Toggle dapui               | n    | [nvim-dap-ui]     |
 | `<leader>ds` | Session                    | n    | [nvim-dap]        |
 | `<leader>dt` | Debug test                 | n    | [nvim-dap-go]     |
