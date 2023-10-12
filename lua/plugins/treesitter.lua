@@ -107,10 +107,18 @@ return {
     end,
   },
 
+  -- Show context of the current function
   {
     "nvim-treesitter/nvim-treesitter-context",
-    event = { "LazyFile", "VeryLazy" },
-    config = true,
+    event = "LazyFile",
+    opts = { mode = "cursor" },
+  },
+
+  -- Automatically add closing tags for HTML and JSX
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    opts = {},
   },
 
   -- Motions based on syntax trees
