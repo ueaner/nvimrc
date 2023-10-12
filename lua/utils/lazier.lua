@@ -1,30 +1,34 @@
 -- See https://github.com/LazyVim/LazyVim/blob/862e140a7ad8452cd5a103982687fca63a2f44da/lua/lazyvim/config/init.lua
 local M = {}
-M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
--- Add support for the LazyFile event
-function M.add_lazy_file_event()
-  local Event = require("lazy.core.handler.event")
-  local _event = Event._event
-  ---@diagnostic disable-next-line: duplicate-set-field
-  Event._event = function(self, value)
-    return value == "LazyFile" and "User LazyFile" or _event(self, value)
-  end
-end
+M.use_lazy_file = true
+M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
 -- Properly load file based plugins without blocking the UI
 function M.lazy_file()
+  M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
+
+  -- Add support for the LazyFile event
+  local Event = require("lazy.core.handler.event")
+
+  if M.use_lazy_file then
+    -- We'll handle delayed execution of events ourselves
+    Event.mappings.LazyFile = { id = "LazyFile", event = "User", pattern = "LazyFile" }
+    Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+  else
+    -- Don't delay execution of LazyFile events, but let lazy know about the mapping
+    Event.mappings.LazyFile = { id = "LazyFile", event = M.lazy_file_events }
+    Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+    return
+  end
+
   local events = {} ---@type {event: string, buf: number, data?: any}[]
 
   local function load()
     if #events == 0 then
       return
     end
-    local Event = require("lazy.core.handler.event")
-    local Util = require("lazy.core.util")
     vim.api.nvim_del_augroup_by_name("lazy_file")
-
-    Util.track({ event = "LazyVim.lazy_file" })
 
     ---@type table<string,string[]>
     local skips = {}
@@ -49,7 +53,6 @@ function M.lazy_file()
     end
     vim.api.nvim_exec_autocmds("CursorMoved", { modeline = false })
     events = {}
-    Util.track()
   end
 
   -- schedule wrap so that nested autocmds are executed
@@ -104,8 +107,6 @@ end
 
 function M.setup()
   M.lazy_notify()
-
-  M.add_lazy_file_event()
   M.lazy_file()
 end
 
