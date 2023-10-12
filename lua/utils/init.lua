@@ -2,6 +2,8 @@
 
 local M = {}
 
+M.inject = require("utils.inject")
+
 M.root_patterns = { ".git", "lua" }
 
 -- Gets the winnr by filetype..

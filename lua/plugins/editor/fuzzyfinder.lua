@@ -65,42 +65,20 @@ return {
       { "<leader>uC", U.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
       {
         "<leader>ss",
-        U.telescope("lsp_document_symbols", {
-          symbols = {
-            "Class",
-            "Function",
-            "Method",
-            "Constructor",
-            "Interface",
-            "Module",
-            "Struct",
-            "Trait",
-            "Field",
-            "Property",
-            "Enum",
-            "Constant",
-          },
-        }),
+        function()
+          require("telescope.builtin").lsp_document_symbols({
+            symbols = require("config").get_kind_filter(),
+          })
+        end,
         desc = "Goto Symbol",
       },
       {
         "<leader>sS",
-        U.telescope("lsp_dynamic_workspace_symbols", {
-          symbols = {
-            "Class",
-            "Function",
-            "Method",
-            "Constructor",
-            "Interface",
-            "Module",
-            "Struct",
-            "Trait",
-            "Field",
-            "Property",
-            "Enum",
-            "Constant",
-          },
-        }),
+        function()
+          require("telescope.builtin").lsp_dynamic_workspace_symbols({
+            symbols = require("config").get_kind_filter(),
+          })
+        end,
         desc = "Goto Symbol (Workspace)",
       },
     },
