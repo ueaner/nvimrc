@@ -4,6 +4,10 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
+      -- PERF: No need for lualine require under lazyvim
+      local lualine_require = require("lualine_require")
+      lualine_require.require = require
+
       local icons = require("config").icons
       local U = require("utils")
 
