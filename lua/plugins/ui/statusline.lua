@@ -79,11 +79,6 @@ return {
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { "filename", path = 1 },
-            -- stylua: ignore
-            {
-              function() return require("nvim-navic").get_location() end,
-              cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-            },
           },
           lualine_x = {
             -- stylua: ignore
@@ -130,31 +125,6 @@ return {
         -- https://github.com/nvim-lualine/lualine.nvim#available-extensions
         -- https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/extensions
         extensions = { "lazy", "nvim-tree", "neo-tree", "quickfix", "man", "trouble", "nvim-dap-ui" },
-      }
-    end,
-  },
-
-  -- lsp symbol navigation for lualine
-  {
-    "SmiteshP/nvim-navic",
-    lazy = true,
-    init = function()
-      vim.g.navic_silence = true
-      ---@param client lsp.Client
-      require("utils.lsp").on_attach(function(client, buffer)
-        -- @see vim.lsp._request_name_to_capability documentSymbolProvider
-        if client.supports_method("textDocument/documentSymbol") then
-          require("nvim-navic").attach(client, buffer)
-        end
-      end)
-    end,
-    opts = function()
-      return {
-        separator = " ",
-        highlight = true,
-        depth_limit = 5,
-        icons = require("config").icons.kinds,
-        lazy_update_context = true,
       }
     end,
   },
