@@ -47,7 +47,7 @@ map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
 -- toggle options
 map("n", "<leader>uf", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
-map("n", "<leader>us", function() require("utils.toggler").toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>us", function() require("utils.toggler").option("spell") end, { desc = "Toggle Spelling" })
 map("n", "<leader>ud", require("utils.toggler").toggle_diagnostics, { desc = "Toggle Diagnostics" })
 map("n", "<leader>uc", require("utils.toggler").toggle_conceallevel, { desc = "Toggle Conceal" })
 map("n", "<leader>ub", require("utils.toggler").toggle_clipboard, { desc = "Toggle ClipBoard" })

@@ -6,7 +6,7 @@ local M = {}
 
 ---@param silent boolean?
 ---@param values? {[1]:any, [2]:any}
-function M.toggle(option, silent, values)
+function M.option(option, silent, values)
   -- custom option
   -- local fn = "toggle_" .. option
   -- if type(M[fn]) == "function" then
@@ -53,7 +53,7 @@ end
 
 M.toggle_conceallevel = function()
   local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-  M.toggle("conceallevel", false, { 0, conceallevel })
+  M.option("conceallevel", false, { 0, conceallevel })
 end
 
 M.toggles = function()
