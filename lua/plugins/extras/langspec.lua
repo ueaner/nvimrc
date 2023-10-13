@@ -4,7 +4,7 @@
 ---@field cmdtools string[]
 ---@field lsp LangConfig.lsp
 ---@field formatters string[]|table<string, conform.FormatterUnit[]>
----@field linters string[]
+---@field linters string[]|table<string, string[]>
 ---@field dap LangConfig.dap
 ---@field test LangConfig.test
 
@@ -160,6 +160,31 @@ function M:generate(conf)
       optional = true,
       opts = {
         formatters_by_ft = formatters_by_ft,
+      },
+    })
+  end
+
+  -- setup linters
+  if not vim.tbl_isempty(conf.linters) and require("utils").has("nvim-lint") then
+    ---@type table<string, conform.FormatterUnit[]>
+    local linters_by_ft = {}
+
+    local ft, _ = next(conf.linters)
+    if type(ft) == "string" then -- conf.linters is table<string, string[]>
+      linters_by_ft = conf.linters
+    else -- conf.linters is string[]
+      local fts = type(conf.ft) == "string" and { conf.ft } or conf.ft
+      ---@cast fts string[]
+      for _, f in pairs(fts) do
+        linters_by_ft[f] = conf.linters
+      end
+    end
+
+    table.insert(specs, {
+      "mfussenegger/nvim-lint",
+      optional = true,
+      opts = {
+        linters_by_ft = linters_by_ft,
       },
     })
   end

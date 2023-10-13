@@ -52,6 +52,9 @@ local conf = {
       nls.builtins.diagnostics.yamllint,
     },
   },
+  linters = { -- nvim-lint
+    "yamllint",
+  },
 }
 
 return generator:generate(conf)
