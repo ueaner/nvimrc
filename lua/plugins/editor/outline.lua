@@ -1,5 +1,4 @@
 local C = require("config")
-local UInject = require("utils.inject")
 
 return {
   -- outline
@@ -9,18 +8,6 @@ return {
     cmd = "AerialToggle",
     keys = { { "<leader>o", "<cmd>AerialToggle<cr>", desc = "Outline" } },
     opts = function()
-      ---@diagnostic disable-next-line: no-unknown
-      local lualine = require("lualine.components.aerial")
-
-      -- Strip trailing spaces from symbols in statusline
-      ---@param _ any
-      ---@param symbols {icon?:string}[]
-      lualine.format_status = UInject.args(lualine.format_status, function(_, symbols)
-        for _, s in ipairs(symbols) do
-          s.icon = s.icon and s.icon:gsub("%s*$", "") or nil
-        end
-      end)
-
       local icons = vim.deepcopy(C.icons.kinds)
 
       -- HACK: fix lua's weird choice for `Package` for control
