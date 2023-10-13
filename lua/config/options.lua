@@ -6,6 +6,9 @@ vim.g.markdown_folding = 1
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
+-- Enable auto format
+vim.g.autoformat = true
+
 -- Each entry can be:
 -- * the name of a detector function like `lsp` or `cwd`
 -- * a pattern or array of patterns like `.git` or `lua`.

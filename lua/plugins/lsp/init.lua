@@ -8,12 +8,10 @@ return {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       { "folke/neodev.nvim", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      -- "mattn/efm-langserver",
-      -- "creativenull/efmls-configs-nvim", -- Just uncomment this line
     },
     ---@class PluginLspOpts
     opts = {
@@ -31,16 +29,14 @@ return {
         },
         severity_sort = true,
       },
+      -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the inlay hints.
       inlay_hints = {
         enabled = vim.fn.has("nvim-0.10.0"),
       },
       -- add any global capabilities here
       capabilities = {},
-      -- Automatically format on save
-      autoformat = true,
-      -- Enable this to show formatters used in a notification
-      -- Useful for debugging formatter issues
-      format_notify = false,
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
       -- but can be also overridden when specified
@@ -84,10 +80,16 @@ return {
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
+      local U = require("utils")
       local ULsp = require("utils.lsp")
+      local UFormat = require("utils.format")
+      if U.has("neoconf.nvim") then
+        local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
+        require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
+      end
       -- setup autoformat
-      require("plugins.lsp.format").setup(opts)
-      -- setup formatting and keymaps
+      UFormat.register(ULsp.formatter())
+      -- setup keymaps
       ULsp.on_attach(function(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
@@ -110,6 +112,14 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
+      if opts.inlay_hints.enabled and vim.lsp.inlay_hint then
+        ULsp.on_attach(function(client, buffer)
+          if client.supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint(buffer, true)
+          end
+        end)
+      end
+
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
           or function(diagnostic)
@@ -124,20 +134,13 @@ return {
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-      if opts.inlay_hints.enabled and vim.lsp.inlay_hint then
-        ULsp.on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint(buffer, true)
-          end
-        end)
-      end
-
       local servers = opts.servers
+      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local capabilities = vim.tbl_deep_extend(
         "force",
         {},
         vim.lsp.protocol.make_client_capabilities(),
-        require("cmp_nvim_lsp").default_capabilities(),
+        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
         opts.capabilities or {}
       )
 
@@ -189,25 +192,6 @@ return {
           return not is_deno(root_dir)
         end)
       end
-    end,
-  },
-
-  -- code actions
-  {
-    "nvimtools/none-ls.nvim",
-    event = "LazyFile",
-    enabled = function()
-      return not require("utils").has("creativenull/efmls-configs-nvim")
-    end,
-    dependencies = { "mason.nvim" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-        sources = {
-          nls.builtins.formatting.stylua,
-        },
-      }
     end,
   },
 

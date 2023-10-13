@@ -3,6 +3,8 @@
 ---@field parsers string[]
 ---@field cmdtools string[]
 ---@field lsp LangConfig.lsp
+---@field formatters string[]|table<string, conform.FormatterUnit[]>
+---@field linters string[]
 ---@field dap LangConfig.dap
 ---@field test LangConfig.test
 
@@ -46,6 +48,8 @@ local defaults = {
     setup = {}, -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
     nls_sources = {}, -- null-ls.nvim: builtins formatters, diagnostics, code_actions
   },
+  formatters = {}, -- conform.nvim
+  linters = {}, -- nvim-lint
   dap = { -- nvim-dap: language specific extensions
   },
   test = { -- neotest: language specific adapters
@@ -128,11 +132,35 @@ function M:generate(conf)
   if not vim.tbl_isempty(conf.lsp.nls_sources) and require("utils").has("none-ls.nvim") then
     table.insert(specs, {
       "nvimtools/none-ls.nvim",
-      event = "LazyFile",
-      dependencies = { "mason.nvim" },
+      optional = true,
       opts = function(_, opts)
         vim.list_extend(opts.sources, conf.lsp.nls_sources)
       end,
+    })
+  end
+
+  -- setup formatters
+  if not vim.tbl_isempty(conf.formatters) and require("utils").has("conform.nvim") then
+    ---@type table<string, conform.FormatterUnit[]>
+    local formatters_by_ft = {}
+
+    local ft, _ = next(conf.formatters)
+    if type(ft) == "string" then -- conf.formatters is table<string, conform.FormatterUnit[]>
+      formatters_by_ft = conf.formatters
+    else -- conf.formatters is string[]
+      local fts = type(conf.ft) == "string" and { conf.ft } or conf.ft
+      ---@cast fts string[]
+      for _, f in pairs(fts) do
+        formatters_by_ft[f] = conf.formatters
+      end
+    end
+
+    table.insert(specs, {
+      "stevearc/conform.nvim",
+      optional = true,
+      opts = {
+        formatters_by_ft = formatters_by_ft,
+      },
     })
   end
 

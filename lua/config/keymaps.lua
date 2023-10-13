@@ -45,8 +45,12 @@ map("i", ";", ";<c-g>u")
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
+-- force formatting
+map({ "n", "v" }, "<leader>cf", function() require("utils.format")({ force = true }) end, { desc = "Format" })
+
 -- toggle options
-map("n", "<leader>uf", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
+map("n", "<leader>uf", function() require("utils.format").toggle() end, { desc = "Toggle auto format (global)" })
+map("n", "<leader>uF", function() require("utils.format").toggle(true) end, { desc = "Toggle auto format (buffer)" })
 map("n", "<leader>us", function() require("utils.toggler").option("spell") end, { desc = "Toggle Spelling" })
 map("n", "<leader>ud", require("utils.toggler").toggle_diagnostics, { desc = "Toggle Diagnostics" })
 map("n", "<leader>uc", require("utils.toggler").toggle_conceallevel, { desc = "Toggle Conceal" })

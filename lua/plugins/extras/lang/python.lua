@@ -40,6 +40,9 @@ local conf = {
       nls.builtins.formatting.black,
     },
   },
+  formatters = { -- conform.nvim
+    "black",
+  },
   dap = { -- nvim-dap: language specific extensions
     {
       "mfussenegger/nvim-dap-python",

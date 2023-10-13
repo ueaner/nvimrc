@@ -91,3 +91,24 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 vim.api.nvim_create_user_command("LazyRoot", function()
   require("utils.root").info()
 end, { desc = "LazyVim roots for the current buffer" })
+
+-- format setup
+do
+  -- Autoformat autocmd
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("LazyFormat", {}),
+    callback = function(event)
+      require("utils.format")({ buf = event.buf })
+    end,
+  })
+
+  -- Manual format
+  vim.api.nvim_create_user_command("LazyFormat", function()
+    require("utils.format")({ force = true })
+  end, { desc = "Format selection or buffer" })
+
+  -- Format info
+  vim.api.nvim_create_user_command("LazyFormatInfo", function()
+    require("utils.format").info()
+  end, { desc = "Show info about the formatters for the current buffer" })
+end

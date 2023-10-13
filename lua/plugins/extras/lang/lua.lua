@@ -62,6 +62,9 @@ local conf = {
       nls.builtins.formatting.stylua,
     },
   },
+  formatters = { -- conform.nvim
+    "stylua",
+  },
   dap = { -- nvim-dap: language specific extensions
     {
       "jbyuki/one-small-step-for-vimkind",

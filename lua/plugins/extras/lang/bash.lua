@@ -3,7 +3,7 @@ local nls = require("null-ls")
 
 ---@type LangConfig
 local conf = {
-  ft = "bash",
+  ft = { "sh", "bash" },
   parsers = { -- nvim-treesitter: language parsers
     "bash",
   },
@@ -19,6 +19,9 @@ local conf = {
     nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
       nls.builtins.formatting.shfmt,
     },
+  },
+  formatters = { -- conform.nvim
+    "shfmt",
   },
 }
 

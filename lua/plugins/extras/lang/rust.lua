@@ -168,6 +168,9 @@ local conf = {
       nls.builtins.formatting.rustfmt,
     },
   },
+  formatters = { -- conform.nvim
+    "rustfmt",
+  },
   dap = { -- nvim-dap: language specific extensions
   },
   test = { -- neotest: language specific adapters

@@ -23,6 +23,9 @@ if vim.fn.executable("php") == 1 then
         nls.builtins.formatting.phpcsfixer,
       },
     },
+    formatters = { -- conform.nvim
+      "php_cs_fixer",
+    },
   })
 end
 
