@@ -87,3 +87,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     require("utils.yadi").detect_indent()
   end,
 })
+
+vim.api.nvim_create_user_command("LazyRoot", function()
+  require("utils.root").info()
+end, { desc = "LazyVim roots for the current buffer" })

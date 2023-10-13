@@ -2,28 +2,7 @@
 
 local M = {}
 
-M.inject = require("utils.inject")
-
 M.root_patterns = { ".git", "lua" }
-
--- Gets the winnr by filetype..
---
--- Return: ~
---     window number
---- @return integer
-M.winnr_by_ft = function(ft)
-  if M.str_isempty(ft) or type(ft) ~= "string" then
-    return -1
-  end
-
-  local wins = vim.api.nvim_list_wins()
-  for _, nr in ipairs(wins) do
-    if ft == vim.fn.getwinvar(nr, "&filetype") then
-      return nr
-    end
-  end
-  return -1
-end
 
 -- Create a FileType autocommand event handler.
 -- Examples:
@@ -39,55 +18,11 @@ end
 --- @param group? string
 M.on_ft = function(ft, cb, group)
   local opts = { pattern = ft, callback = cb }
-  if not M.str_isempty(group) then
+  if not (group == nil or group == "") then
     opts["group"] = group
     vim.api.nvim_create_augroup(opts["group"], { clear = false })
   end
   vim.api.nvim_create_autocmd("FileType", opts)
-end
-
-M.str_isempty = function(s)
-  return s == nil or s == ""
-end
-
--- Checks if a string or table is empty.
-M.isempty = function(s)
-  return s == nil or (type(s) == "string" and s == "") or (type(s) == "table" and next(s) == nil)
-end
-
---- Extends a list-like table with the values of another list-like table.
----
----@see vim.tbl_extend()
----
----@param dst table List which will be modified and appended to
----@param src table List from which values will be inserted
----@param start? number Start index on src. Defaults to 1
----@param finish? number Final index on src. Defaults to `#src`
----@return table dst
-M.list_extend = function(dst, src, start, finish)
-  if type(dst) ~= "table" or type(src) ~= "table" then
-    return dst
-  end
-
-  for i = start or 1, finish or #src do
-    table.insert(dst, src[i])
-  end
-  return dst
-end
-
---- Removes `item` from `list` by value, returning the removed `list`.
----@generic T
----@param list T[]
----@param item T
----@return T
-M.list_remove = function(list, item)
-  for i, v in ipairs(list) do
-    if v == item then
-      table.remove(list, i)
-      return list
-    end
-  end
-  return list
 end
 
 --- Gets the highlight `fg` or `bg` color by name.
@@ -129,73 +64,8 @@ end
 -- * root pattern of filename of the current buffer
 -- * root pattern of cwd
 ---@return string
-function M.get_root()
-  ---@type string?
-  local path = vim.api.nvim_buf_get_name(0)
-  path = path ~= "" and vim.loop.fs_realpath(path) or nil
-  ---@type string[]
-  local roots = {}
-  if path then
-    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-      local workspace = client.config.workspace_folders
-      local paths = workspace and vim.tbl_map(function(ws)
-        return vim.uri_to_fname(ws.uri)
-      end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
-      for _, p in ipairs(paths) do
-        local r = vim.loop.fs_realpath(p)
-        if path:find(r, 1, true) then
-          roots[#roots + 1] = r
-        end
-      end
-    end
-  end
-  table.sort(roots, function(a, b)
-    return #a > #b
-  end)
-  ---@type string?
-  local root = roots[1]
-  if not root then
-    path = path and vim.fs.dirname(path) or vim.loop.cwd()
-    ---@type string?
-    root = vim.fs.find(M.root_patterns, { path = path, upward = true })[1]
-    root = root and vim.fs.dirname(root) or vim.loop.cwd()
-  end
-  ---@cast root string
-  return root
-end
-
-------------------------------------------------------------------
--- LSP
-------------------------------------------------------------------
-
----@param on_attach fun(client, buffer)
-function M.on_attach(on_attach)
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      local buffer = args.buf
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      on_attach(client, buffer)
-    end,
-  })
-end
-
----@return _.lspconfig.options
-function M.lsp_get_config(server)
-  local configs = require("lspconfig.configs")
-  return rawget(configs, server)
-end
-
----@param server string
----@param cond fun( root_dir, config): boolean
-function M.lsp_disable(server, cond)
-  local util = require("lspconfig.util")
-  local def = M.lsp_get_config(server)
-  ---@diagnostic disable-next-line: undefined-field
-  def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config, function(config, root_dir)
-    if cond(root_dir, config) then
-      config.enabled = false
-    end
-  end)
+function M.root()
+  return require("utils.root").get()
 end
 
 ---@param plugin string
@@ -223,15 +93,21 @@ function M.opts(name)
   return Plugin.values(plugin, "opts", false)
 end
 
+---@class utils.telescope.opts
+---@field cwd? string|boolean
+---@field show_untracked? boolean
+
 -- this will return a function that calls telescope.
 -- cwd will default to utils.get_root
 -- for `files`, git_files or find_files will be chosen depending on .git
+---@param builtin string
+---@param opts? utils.telescope.opts
 function M.telescope(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
     builtin = params.builtin
     opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = M.get_root() }, opts or {})
+    opts = vim.tbl_deep_extend("force", { cwd = require("utils.root").get() }, opts or {}) --[[@as utils.telescope.opts]]
     if builtin == "files" then
       if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
         opts.show_untracked = true
@@ -241,6 +117,7 @@ function M.telescope(builtin, opts)
       end
     end
     if opts.cwd and opts.cwd ~= vim.loop.cwd() then
+      ---@diagnostic disable-next-line: inject-field
       opts.attach_mappings = function(_, map)
         map("i", "<a-c>", function()
           local action_state = require("telescope.actions.state")

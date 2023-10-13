@@ -141,7 +141,7 @@ return {
     init = function()
       vim.g.navic_silence = true
       ---@param client lsp.Client
-      require("utils").on_attach(function(client, buffer)
+      require("utils.lsp").on_attach(function(client, buffer)
         -- @see vim.lsp._request_name_to_capability documentSymbolProvider
         if client.supports_method("textDocument/documentSymbol") then
           require("nvim-navic").attach(client, buffer)

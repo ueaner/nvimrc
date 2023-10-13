@@ -31,8 +31,10 @@
 ---@field prepend fun(self: LangSpec, spec: LazyPluginSpec): LangSpec
 ---@field generate fun(self: LangSpec, conf: LangConfig): LazyPluginSpec[]
 
-local str_isempty = require("utils").str_isempty
-local isempty = require("utils").isempty
+-- Checks if a string or table is empty.
+local isempty = function(s)
+  return s == nil or (type(s) == "string" and s == "") or (type(s) == "table" and next(s) == nil)
+end
 
 ---@type LangConfig
 local defaults = {
@@ -138,7 +140,7 @@ function M:generate(conf)
   if not vim.tbl_isempty(conf.dap) then
     for _, item in ipairs(conf.dap) do
       -- install dap adapter plugin
-      if not str_isempty(item[1]) then
+      if not (item[1] == nil or item[1] == "") then
         -- Automatically run `require(MAIN).setup(opts)` with `config = true`
         local spec = { item[1], event = "VeryLazy", config = true }
         if type(item.config) == "function" then
@@ -161,7 +163,7 @@ function M:generate(conf)
   if not vim.tbl_isempty(conf.test) then
     for _, item in ipairs(conf.test) do
       -- install neotest adapter plugin
-      if not str_isempty(item[1]) then
+      if not (item[1] == nil or item[1] == "") then
         local spec = {
           "nvim-neotest/neotest",
           optional = true,

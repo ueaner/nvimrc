@@ -18,7 +18,7 @@ return {
     cmd = "Neotree",
     keys = {
       -- stylua: ignore
-      { "<leader>e", function() require("neo-tree.command").execute({ toggle = true, dir = require("utils").get_root() }) end, desc = "Toggle File Explorer", mode = { "n", "t" } },
+      { "<leader>e", function() require("neo-tree.command").execute({ toggle = true, dir = require("utils").root() }) end, desc = "Toggle File Explorer", mode = { "n", "t" } },
     },
     deactivate = function()
       vim.cmd([[Neotree close]])

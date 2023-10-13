@@ -1,5 +1,7 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 
+ULsp = require("utils.lsp")
+
 return {
   -- lspconfig
   {
@@ -82,11 +84,11 @@ return {
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
-      local U = require("utils")
+      local ULsp = require("utils.lsp")
       -- setup autoformat
       require("plugins.lsp.format").setup(opts)
       -- setup formatting and keymaps
-      U.on_attach(function(client, buffer)
+      ULsp.on_attach(function(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
@@ -123,7 +125,7 @@ return {
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       if opts.inlay_hints.enabled and vim.lsp.inlay_hint then
-        U.on_attach(function(client, buffer)
+        ULsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint(buffer, true)
           end
@@ -180,10 +182,10 @@ return {
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
 
-      if U.lsp_get_config("denols") and U.lsp_get_config("tsserver") then
+      if ULsp.get_config("denols") and ULsp.get_config("tsserver") then
         local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-        U.lsp_disable("tsserver", is_deno)
-        U.lsp_disable("denols", function(root_dir)
+        ULsp.disable("tsserver", is_deno)
+        ULsp.disable("denols", function(root_dir)
           return not is_deno(root_dir)
         end)
       end

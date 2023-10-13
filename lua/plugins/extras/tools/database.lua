@@ -1,5 +1,24 @@
 local M = {}
 
+-- Gets the winnr by filetype..
+--
+-- Return: ~
+--     window number
+--- @return integer
+M.winnr_by_ft = function(ft)
+  if ft == nil or ft == "" or type(ft) ~= "string" then
+    return -1
+  end
+
+  local wins = vim.api.nvim_list_wins()
+  for _, nr in ipairs(wins) do
+    if ft == vim.fn.getwinvar(nr, "&filetype") then
+      return nr
+    end
+  end
+  return -1
+end
+
 M.fe = function()
   if require("utils").has("neo-tree.nvim") then
     return {
@@ -15,7 +34,7 @@ M.fe = function()
         require("neo-tree.command").execute({ action = "close" })
       end,
       toggle = function()
-        require("neo-tree.command").execute({ toggle = true, dir = require("utils").get_root() })
+        require("neo-tree.command").execute({ toggle = true, dir = require("utils").root() })
       end,
     }
   end
@@ -88,7 +107,7 @@ end
 --     dbui is visible
 --- @return boolean
 M.dbui_is_visible = function()
-  return require("utils").winnr_by_ft("dbui") > -1
+  return M.winnr_by_ft("dbui") > -1
 end
 
 return {

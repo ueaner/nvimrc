@@ -1,5 +1,5 @@
 local C = require("config")
-local U = require("utils")
+local UInject = require("utils.inject")
 
 return {
   -- outline
@@ -15,7 +15,7 @@ return {
       -- Strip trailing spaces from symbols in statusline
       ---@param _ any
       ---@param symbols {icon?:string}[]
-      lualine.format_status = U.inject.args(lualine.format_status, function(_, symbols)
+      lualine.format_status = UInject.args(lualine.format_status, function(_, symbols)
         for _, s in ipairs(symbols) do
           s.icon = s.icon and s.icon:gsub("%s*$", "") or nil
         end

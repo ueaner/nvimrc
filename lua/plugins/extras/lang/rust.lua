@@ -53,7 +53,7 @@ local conf = {
       rust_analyzer = function(_, opts)
         local codelldb_path, liblldb_path = get_codelldb()
 
-        require("utils").on_attach(function(client, bufnr)
+        require("utils.lsp").on_attach(function(client, bufnr)
           -- stylua: ignore
           if client.name == "rust_analyzer" then
             -- open hover action window
@@ -155,7 +155,7 @@ local conf = {
             vim.lsp.buf.hover()
           end
         end
-        require("utils").on_attach(function(client, bufnr)
+        require("utils.lsp").on_attach(function(client, bufnr)
           -- stylua: ignore
           if client.name == "taplo" then
             vim.keymap.set("n", "K", show_documentation, { buffer = bufnr, desc = "Show Crate Documentation" })

@@ -89,6 +89,9 @@ return {
       return {
         ---@type Picker
         defaults = {
+          -- path_display = {
+          --   shorten = { len = 1, exclude = { 1, -1 } },
+          -- },
           layout_strategy = "horizontal",
           layout_config = { prompt_position = "top" },
           sorting_strategy = "ascending",
