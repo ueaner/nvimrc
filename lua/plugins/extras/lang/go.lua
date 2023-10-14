@@ -1,5 +1,4 @@
 local generator = require("plugins.extras.langspec"):new()
-local nls = require("null-ls")
 
 ---@type LangConfig
 local conf = {
@@ -35,10 +34,10 @@ local conf = {
       },
       golangci_lint_ls = {}, -- linter
     },
-    nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
-      nls.builtins.code_actions.gomodifytags,
-      nls.builtins.code_actions.impl,
-    },
+  },
+  code_actions = { -- null-ls.nvim: builtins code_actions
+    "gomodifytags",
+    "impl",
   },
   dap = { -- nvim-dap: language specific extensions
     {

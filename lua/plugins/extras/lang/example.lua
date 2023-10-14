@@ -22,9 +22,13 @@ return {
       vim.list_extend(opts.ensure_installed, {
         "gopls",
         "goimports",
+        "gofumpt",
         "golangci-lint",
         "golangci-lint-langserver", -- Wraps golangci-lint as a language server
         "delve",
+        --"staticcheck",
+        "gomodifytags",
+        "impl",
       })
     end,
   },
@@ -37,13 +41,15 @@ return {
       -- server cmdline will be automatically installed with mason and loaded with lspconfig
       ---@type lspconfig.options
       servers = {
-        gopls = {},
+        gopls = {
+          gofumpt = true, -- formatter, default "goimports"
+        },
         golangci_lint_ls = {}, -- linter
       },
     },
   },
 
-  -- setup formatters & linters
+  -- setup code actions
   {
     "nvimtools/none-ls.nvim",
     event = "BufReadPre",
@@ -51,7 +57,8 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       vim.list_extend(opts.sources, {
-        nls.builtins.formatting.goimports,
+        nls.builtins.code_actions.gomodifytags,
+        nls.builtins.code_actions.impl,
       })
     end,
   },

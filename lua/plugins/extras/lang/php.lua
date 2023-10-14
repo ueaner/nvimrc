@@ -1,5 +1,4 @@
 local generator = require("plugins.extras.langspec"):new()
-local nls = require("null-ls")
 
 ---@type LangConfig
 local conf = {
@@ -18,9 +17,6 @@ if vim.fn.executable("php") == 1 then
     lsp = {
       servers = { -- nvim-lspconfig: setup lspconfig servers
         phpactor = {},
-      },
-      nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
-        nls.builtins.formatting.phpcsfixer,
       },
     },
     formatters = { -- conform.nvim

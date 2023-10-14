@@ -1,5 +1,4 @@
 local generator = require("plugins.extras.langspec"):new()
-local nls = require("null-ls")
 
 ---@type LangConfig
 local conf = {
@@ -47,9 +46,6 @@ local conf = {
           },
         },
       },
-    },
-    nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
-      nls.builtins.diagnostics.yamllint,
     },
   },
   linters = { -- nvim-lint

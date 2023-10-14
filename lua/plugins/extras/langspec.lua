@@ -5,13 +5,13 @@
 ---@field lsp LangConfig.lsp
 ---@field formatters string[]|table<string, conform.FormatterUnit[]>
 ---@field linters string[]|table<string, string[]>
+---@field code_actions string[]
 ---@field dap LangConfig.dap
 ---@field test LangConfig.test
 
 ---@class LangConfig.lsp
 ---@field servers lspconfig.options
 ---@field setup table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
----@field nls_sources table
 
 ---@alias LangConfig.dap LangDapAdapter[]
 
@@ -46,10 +46,10 @@ local defaults = {
   lsp = {
     servers = {}, -- nvim-lspconfig: lspconfig servers settings with filetype
     setup = {}, -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
-    nls_sources = {}, -- null-ls.nvim: builtins formatters, diagnostics, code_actions
   },
   formatters = {}, -- conform.nvim
   linters = {}, -- nvim-lint
+  code_actions = {}, -- null-ls.nvim: builtins code_actions
   dap = { -- nvim-dap: language specific extensions
   },
   test = { -- neotest: language specific adapters
@@ -128,17 +128,6 @@ function M:generate(conf)
     })
   end
 
-  -- setup formatters, linters and code_actions
-  if not vim.tbl_isempty(conf.lsp.nls_sources) and require("utils").has("none-ls.nvim") then
-    table.insert(specs, {
-      "nvimtools/none-ls.nvim",
-      optional = true,
-      opts = function(_, opts)
-        vim.list_extend(opts.sources, conf.lsp.nls_sources)
-      end,
-    })
-  end
-
   -- setup formatters
   if not vim.tbl_isempty(conf.formatters) and require("utils").has("conform.nvim") then
     ---@type table<string, conform.FormatterUnit[]>
@@ -187,6 +176,28 @@ function M:generate(conf)
         linters_by_ft = linters_by_ft,
       },
     })
+  end
+
+  -- setup code actions
+  if not vim.tbl_isempty(conf.code_actions) and require("utils").has("none-ls.nvim") then
+    local actions = {}
+    local nls = require("null-ls")
+    for _, action in pairs(conf.code_actions) do
+      if nls.builtins.code_actions[action] then
+        vim.list_extend(actions, { nls.builtins.code_actions[action] })
+      end
+    end
+
+    if not vim.tbl_isempty(actions) then
+      table.insert(specs, {
+        "nvimtools/none-ls.nvim",
+        optional = true,
+        opts = function(_, opts)
+          opts.sources = opts.sources or {}
+          vim.list_extend(opts.sources, actions)
+        end,
+      })
+    end
   end
 
   -- setup DAP

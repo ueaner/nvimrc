@@ -1,5 +1,4 @@
 local generator = require("plugins.extras.langspec"):new()
-local nls = require("null-ls")
 
 local function get_codelldb()
   local mason_registry = require("mason-registry")
@@ -163,9 +162,6 @@ local conf = {
         end)
         return false -- make sure the base implementation calls taplo.setup
       end,
-    },
-    nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
-      nls.builtins.formatting.rustfmt,
     },
   },
   formatters = { -- conform.nvim
