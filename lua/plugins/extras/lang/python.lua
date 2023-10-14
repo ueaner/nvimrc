@@ -34,6 +34,21 @@ local conf = {
             args = { "--max-line-length=180" },
           },
         },
+        keys = {
+          {
+            "<leader>cI",
+            function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                  only = { "source.organizeImports" },
+                  diagnostics = {},
+                },
+              })
+            end,
+            desc = "Organize Imports",
+          },
+        },
       },
     },
     nls_sources = { -- null-ls.nvim: builtins formatters, diagnostics, code_actions
