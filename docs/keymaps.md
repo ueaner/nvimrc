@@ -154,8 +154,9 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>gg` | Lazygit                  | n    | [lazygit]                |
 | `<leader>dd` | Show DAP configurations  | n    | [nvim-dap]               |
 |              | Show Output Panel        | n    |                          |
-| `<leader>fv` | Live Preview (Markdown)  | n    | [glow.nvim]              |
-| `<leader>fv` | Live Preview (Plantuml)  | n    | [plantuml-previewer.vim] |
+| `<leader>cP` | Preview (Markdown)       | n    | [glow.nvim]              |
+| `<leader>cp` | Live Preview (Markdown)  | n    | [peek.nvim]              |
+| `<leader>cp` | Live Preview (Plantuml)  | n    | [plantuml-previewer.vim] |
 
 ## Search and replace
 
@@ -397,6 +398,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [mason.nvim]: https://github.com/williamboman/mason.nvim
 [nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
 [glow.nvim]: https://github.com/ellisonleao/glow.nvim
+[peek.nvim]: https://github.com/toppair/peek.nvim
 [plantuml-previewer.vim]: https://github.com/weirongxu/plantuml-previewer.vim
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
 [utils.lua]: lua/utils.lua
