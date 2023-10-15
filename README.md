@@ -45,9 +45,12 @@ See [keymaps.md](docs/keymaps.md).
 - Package management with [mason.nvim]
 - Syntax Highlighting with [Treesitter]
 - Language Server Protocol with [Native LSP]
-- Formatting and Linting with [null-ls.nvim]
 - Debug Adapter Protocol with [nvim-dap]
 - Tests with [neotest]
+- Formatting with [conform.nvim]
+- Linting with [nvim-lint]
+- Code Actions with [null-ls.nvim]
+- Hover with [hover.nvim]
 - Auto Completion with [nvim-cmp]
 - Snippets with [LuaSnip] and [friendly-snippets]
 - Fuzzy Finding with [telescope.nvim]
@@ -109,9 +112,12 @@ Contents of ui, editor and coding:
 [mason.nvim]: https://github.com/williamboman/mason.nvim
 [Treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [Native LSP]: https://github.com/neovim/nvim-lspconfig
-[null-ls.nvim]: https://github.com/nvimtools/none-ls.nvim
 [nvim-dap]: https://github.com/mfussenegger/nvim-dap
 [neotest]: https://github.com/nvim-neotest/neotest
+[null-ls.nvim]: https://github.com/nvimtools/none-ls.nvim
+[hover.nvim]: https://github.com/lewis6991/hover.nvim
+[conform.nvim]: https://github.com/stevearc/conform.nvim
+[nvim-lint]: https://github.com/mfussenegger/nvim-lint
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
 [LuaSnip]: https://github.com/L3MON4D3/LuaSnip
 [friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
