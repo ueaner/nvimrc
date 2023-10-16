@@ -5,6 +5,23 @@ Just press any key like `,` will displays a popup with all possible keymaps star
 
 ![which-key]
 
+# Table of contents
+
+1.  [Modes](#modes)
+2.  [General](#general)
+3.  [Basic editing](#basic-editing)
+4.  [Rich languages editing](#rich-languages-editing)
+5.  [Multi-cursor and selection](#multi-cursor-and-selection)
+6.  [Display](#display)
+7.  [Search and replace](#search-and-replace)
+8.  [Navigation](#navigation)
+9.  [Buffers](#buffers)
+10. [Fuzzy finder](#fuzzy-finder)
+11. [Debug](#debug)
+12. [Tests](#tests)
+13. [Run/REPL](#run/repl)
+14. [More](#more)
+
 ## Modes
 
 References:
