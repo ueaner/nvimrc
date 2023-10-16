@@ -45,6 +45,9 @@ map("i", ";", ";<c-g>u")
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
+map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
+map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
+
 -- force formatting
 map({ "n", "v" }, "<leader>cf", function() require("utils.format")({ force = true }) end, { desc = "Format" })
 
