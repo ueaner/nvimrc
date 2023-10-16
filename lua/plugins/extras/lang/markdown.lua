@@ -8,10 +8,10 @@ local conf = {
     "markdown_inline",
   },
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
-    "prettierd",
+    "prettier",
   },
   formatters = { -- conform.nvim
-    "prettierd",
+    "prettier",
   },
 }
 

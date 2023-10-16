@@ -18,7 +18,7 @@ local conf = {
     "typescript-language-server",
     "eslint-lsp",
     "js-debug-adapter",
-    "prettierd",
+    "prettier",
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
@@ -62,7 +62,7 @@ local conf = {
     },
   },
   formatters = { -- conform.nvim
-    "prettierd",
+    "prettier",
   },
   dap = { -- nvim-dap: language specific extensions
     {
