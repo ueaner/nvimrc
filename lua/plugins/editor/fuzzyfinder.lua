@@ -7,7 +7,13 @@ return {
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-project.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        init = function()
+          local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+          vim.keymap.set("n", "<leader>gc", live_grep_args_shortcuts.grep_word_under_cursor)
+        end,
+      },
       {
         "nvim-telescope/telescope-cheat.nvim",
         dependencies = "kkharji/sqlite.lua",
@@ -24,6 +30,23 @@ return {
     keys = {
       { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
       { "<leader>/", "<cmd>Telescope live_grep_args<CR>", desc = "Grep (root dir)" },
+      {
+        "<leader>/",
+        function()
+          require("telescope-live-grep-args.shortcuts").grep_visual_selection({ postfix = false })
+        end,
+        desc = "Grep (root dir)",
+        mode = { "v" },
+      },
+      {
+        "<leader>k",
+        function()
+          require("telescope-live-grep-args.shortcuts").grep_word_under_cursor({ postfix = false })
+        end,
+        desc = "Grep (root dir)",
+        mode = { "n" },
+      },
+
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
       { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope Builtin" },
       -- find
@@ -34,7 +57,7 @@ return {
       { "<leader>fR", U.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
       { "<leader>fp", "<cmd>Telescope project display_type=full<cr>", desc = "Find project" },
       {
-        "<leader>fl",
+        "<leader>fP",
         function()
           require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
         end,
@@ -129,6 +152,7 @@ return {
               ["<C-p>"] = actions.cycle_history_prev,
             },
           },
+          -- require("telescope.config").values.vimgrep_arguments
         },
         extensions = {
           project = {

@@ -250,36 +250,40 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 - prefix: `<leader>f` for file/find
 - prefix: `<leader>s` for search more kinds
 
-| Key               | Description              | Mode | Provider         |
-| ----------------- | ------------------------ | ---- | ---------------- |
-| `<leader>,`       | Switch Buffer            | n    | [telescope.nvim] |
-| `<leader>/`       | Find in Files (Grep)     | n    | [telescope.nvim] |
-| `<leader>:`       | Command History          | n    | [telescope.nvim] |
-| `<leader><space>` | Telescope Builtin        | n    | [telescope.nvim] |
-| `<leader>fb`      | Buffers                  | n    | [telescope.nvim] |
-| `<leader>ff`      | Find Files (root dir)    | n    | [telescope.nvim] |
-| `<leader>fF`      | Find Files (cwd)         | n    | [telescope.nvim] |
-| `<leader>fr`      | Recent                   | n    | [telescope.nvim] |
-| `<leader>fR`      | Recent (cwd)             | n    | [telescope.nvim] |
-| `<leader>gc`      | git commits              | n    | [telescope.nvim] |
-| `<leader>gs`      | git status               | n    | [telescope.nvim] |
-| `<leader>sa`      | Auto Commands            | n    | [telescope.nvim] |
-| `<leader>sb`      | Buffer                   | n    | [telescope.nvim] |
-| `<leader>sc`      | Command History          | n    | [telescope.nvim] |
-| `<leader>sC`      | Commands                 | n    | [telescope.nvim] |
-| `<leader>sd`      | Diagnostics              | n    | [telescope.nvim] |
-| `<leader>sg`      | Grep (root dir)          | n    | [telescope.nvim] |
-| `<leader>sG`      | Grep (cwd)               | n    | [telescope.nvim] |
-| `<leader>sh`      | Help Pages               | n    | [telescope.nvim] |
-| `<leader>sH`      | Search Highlight Groups  | n    | [telescope.nvim] |
-| `<leader>sk`      | Key Maps                 | n    | [telescope.nvim] |
-| `<leader>sM`      | Man Pages                | n    | [telescope.nvim] |
-| `<leader>sm`      | Jump to Mark             | n    | [telescope.nvim] |
-| `<leader>so`      | Options                  | n    | [telescope.nvim] |
-| `<leader>sw`      | Word (root dir)          | n    | [telescope.nvim] |
-| `<leader>sW`      | Word (cwd)               | n    | [telescope.nvim] |
-| `<leader>uC`      | Colorscheme with preview | n    | [telescope.nvim] |
-| `<leader>ss`      | Goto Symbol              | n    | [telescope.nvim] |
+| Key               | Description               | Mode | Provider         |
+| ----------------- | ------------------------- | ---- | ---------------- |
+| `<leader>,`       | Switch Buffer             | n    | [telescope.nvim] |
+| `<leader>/`       | Find in Files (Grep)      | n    | [telescope.nvim] |
+| `<leader>/`       | Find in Files (Grep)      | v    | [telescope.nvim] |
+| `<leader>k`       | Grep keyword under cursor | v    | [telescope.nvim] |
+| `<leader>:`       | Command History           | n    | [telescope.nvim] |
+| `<leader><space>` | Telescope Builtin         | n    | [telescope.nvim] |
+| `<leader>fb`      | Buffers                   | n    | [telescope.nvim] |
+| `<leader>ff`      | Find Files (root dir)     | n    | [telescope.nvim] |
+| `<leader>fF`      | Find Files (cwd)          | n    | [telescope.nvim] |
+| `<leader>fr`      | Recent                    | n    | [telescope.nvim] |
+| `<leader>fR`      | Recent (cwd)              | n    | [telescope.nvim] |
+| `<leader>fp`      | Find project              | n    | [telescope.nvim] |
+| `<leader>fP`      | Find Plugin File          | n    | [telescope.nvim] |
+| `<leader>gc`      | git commits               | n    | [telescope.nvim] |
+| `<leader>gs`      | git status                | n    | [telescope.nvim] |
+| `<leader>sa`      | Auto Commands             | n    | [telescope.nvim] |
+| `<leader>sb`      | Buffer                    | n    | [telescope.nvim] |
+| `<leader>sc`      | Command History           | n    | [telescope.nvim] |
+| `<leader>sC`      | Commands                  | n    | [telescope.nvim] |
+| `<leader>sd`      | Diagnostics               | n    | [telescope.nvim] |
+| `<leader>sg`      | Grep (root dir)           | n    | [telescope.nvim] |
+| `<leader>sG`      | Grep (cwd)                | n    | [telescope.nvim] |
+| `<leader>sh`      | Help Pages                | n    | [telescope.nvim] |
+| `<leader>sH`      | Search Highlight Groups   | n    | [telescope.nvim] |
+| `<leader>sk`      | Key Maps                  | n    | [telescope.nvim] |
+| `<leader>sM`      | Man Pages                 | n    | [telescope.nvim] |
+| `<leader>sm`      | Jump to Mark              | n    | [telescope.nvim] |
+| `<leader>so`      | Options                   | n    | [telescope.nvim] |
+| `<leader>sw`      | Word (root dir)           | n    | [telescope.nvim] |
+| `<leader>sW`      | Word (cwd)                | n    | [telescope.nvim] |
+| `<leader>uC`      | Colorscheme with preview  | n    | [telescope.nvim] |
+| `<leader>ss`      | Goto Symbol               | n    | [telescope.nvim] |
 
 ## Debug
 
@@ -355,6 +359,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | Key           | Description                      | Mode | Provider         |
 | ------------- | -------------------------------- | ---- | ---------------- |
 | **Telescope** | Keymaps for `Telescope`          |      | Telescope        |
+| `<C-/>`       | Show keymaps of Telescope        | i    | [telescope.nvim] |
 | `<Tab`        | Select/Deselect                  | i, n | [telescope.nvim] |
 | `<C-Down>`    | Next search prompt in history    | i    | [telescope.nvim] |
 | `<C-Up>`      | Prev search prompt in history    | i    | [telescope.nvim] |
