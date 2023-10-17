@@ -102,6 +102,7 @@ function M.on_attach(_, buffer)
 
   for _, keys in pairs(keymaps) do
     if not keys.has or M.has(buffer, keys.has) then
+      ---@type table
       local opts = Keys.opts(keys)
       opts.has = nil
       opts.silent = opts.silent ~= false

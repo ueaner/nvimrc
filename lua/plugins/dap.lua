@@ -24,6 +24,7 @@ return {
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
       for name, sign in pairs(require("config").icons.dap) do
+        ---@cast sign string[]
         sign = type(sign) == "table" and sign or { sign }
         vim.fn.sign_define(
           "Dap" .. name,
