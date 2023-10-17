@@ -19,6 +19,9 @@ return {
           },
         },
         window = { margin = { vertical = 0, horizontal = 0 } },
+        ---@see incline-render
+        ---@alias IncLineRenderProps { buf: number, win: number, focused: boolean }
+        ---@param props IncLineRenderProps
         render = function(props)
           local bufnr = props.buf
           local items = {}

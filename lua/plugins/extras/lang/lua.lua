@@ -14,10 +14,10 @@ local conf = {
     -- "selene", -- linter
   },
   lsp = {
-    ---@type lspconfig.options
     servers = { -- nvim-lspconfig: setup lspconfig servers
       lua_ls = {
         -- mason = false, -- set to false if you don't want this server to be installed with mason
+        ---@type lspconfig.settings.lua_ls
         settings = {
           -- https://github.com/LuaLS/lua-language-server/blob/master/doc/zh-cn/config.md
           Lua = {
@@ -46,7 +46,7 @@ local conf = {
                 "vim",
                 "require",
               },
-              disable = { "incomplete-signature-doc", "trailing-space" },
+              disable = { "missing-fields", "incomplete-signature-doc", "trailing-space" },
               groupSeverity = {
                 strong = "Warning",
                 strict = "Warning",

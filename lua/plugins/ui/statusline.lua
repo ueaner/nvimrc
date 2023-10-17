@@ -106,6 +106,7 @@ return {
                 removed = icons.git.removed,
               },
               source = function()
+                ---@type table<string, number|string>
                 local gitsigns = vim.b.gitsigns_status_dict
                 if gitsigns then
                   return {
@@ -134,7 +135,7 @@ return {
         },
         -- https://github.com/nvim-lualine/lualine.nvim#available-extensions
         -- https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/extensions
-        extensions = { "lazy", "nvim-tree", "neo-tree", "quickfix", "man", "trouble", "nvim-dap-ui" },
+        extensions = { "lazy", "mason", "neo-tree", "quickfix", "man", "trouble", "nvim-dap-ui" },
       }
     end,
   },

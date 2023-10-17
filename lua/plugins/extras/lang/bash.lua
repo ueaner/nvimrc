@@ -13,6 +13,7 @@ local conf = {
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
+      ---@type lspconfig.options.bashls
       bashls = {},
     },
   },

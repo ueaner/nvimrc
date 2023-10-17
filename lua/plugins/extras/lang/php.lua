@@ -22,7 +22,7 @@ if vim.fn.executable("php") == 1 then
     formatters = { -- conform.nvim
       "php_cs_fixer",
     },
-  })
+  } --[[@as LangConfig]])
 end
 
 return generator:generate(conf)

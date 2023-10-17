@@ -47,8 +47,8 @@ local defaults = {
     servers = {}, -- nvim-lspconfig: lspconfig servers settings with filetype
     setup = {}, -- nvim-lspconfig: setup lspconfig servers, see https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
   },
-  formatters = {}, -- conform.nvim
-  linters = {}, -- nvim-lint
+  formatters = {}, -- conform.nvim: formatters
+  linters = {}, -- nvim-lint: linters
   code_actions = {}, -- null-ls.nvim: builtins code_actions
   dap = { -- nvim-dap: language specific extensions
   },
@@ -232,8 +232,9 @@ function M:generate(conf)
           "nvim-neotest/neotest",
           optional = true,
           dependencies = { item[1] },
+          ---@param opts neotest.Config
           opts = function(_, opts)
-            opts.adapters[#opts.adapters + 1] = item.adapter_fn
+            opts.adapters[#opts.adapters + 1] = item.adapter_fn --[[@as neotest.Adapter]]
           end,
         }
         table.insert(specs, spec)

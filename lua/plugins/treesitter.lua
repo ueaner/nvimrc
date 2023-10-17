@@ -95,6 +95,7 @@ return {
       if type(opts.ensure_installed) == "table" then
         ---@type table<string, boolean>
         local added = {}
+        ---@param lang string
         opts.ensure_installed = vim.tbl_filter(function(lang)
           if added[lang] then
             return false

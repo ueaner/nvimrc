@@ -63,24 +63,25 @@ return {
         virtual_text = {
           format = function(diagnostic)
             -- Replace newline and tab characters with space for more compact diagnostics
-            local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
-            return message
+            return diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
           end,
         },
       }, neotest_ns)
 
       -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/test/core.lua
       if opts.adapters then
+        ---@type neotest.Adapter[]
         local adapters = {}
         for name, config in pairs(opts.adapters or {}) do
           if type(name) == "number" then
             if type(config) == "string" then
-              config = require(config)
+              config = require(config) --[[@as neotest.Adapter]]
             elseif type(config) == "function" then
-              config = config()
+              config = config() --[[@as neotest.Adapter]]
             end
             adapters[#adapters + 1] = config
           elseif config ~= false then
+            ---@type table
             local adapter = require(name)
             if type(config) == "table" and not vim.tbl_isempty(config) then
               local meta = getmetatable(adapter)
