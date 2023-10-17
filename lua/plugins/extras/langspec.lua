@@ -137,7 +137,7 @@ function M:generate(conf)
     if type(ft) == "string" then -- conf.formatters is table<string, conform.FormatterUnit[]>
       formatters_by_ft = conf.formatters
     else -- conf.formatters is string[]
-      local fts = type(conf.ft) == "string" and { conf.ft } or conf.ft
+      local fts = type(conf.ft) == "table" and conf.ft or { conf.ft }
       ---@cast fts string[]
       for _, f in pairs(fts) do
         formatters_by_ft[f] = conf.formatters
@@ -162,7 +162,7 @@ function M:generate(conf)
     if type(ft) == "string" then -- conf.linters is table<string, string[]>
       linters_by_ft = conf.linters
     else -- conf.linters is string[]
-      local fts = type(conf.ft) == "string" and { conf.ft } or conf.ft
+      local fts = type(conf.ft) == "table" and conf.ft or { conf.ft }
       ---@cast fts string[]
       for _, f in pairs(fts) do
         linters_by_ft[f] = conf.linters
