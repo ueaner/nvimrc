@@ -7,13 +7,7 @@ return {
       { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-project.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      {
-        "nvim-telescope/telescope-live-grep-args.nvim",
-        init = function()
-          local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
-          vim.keymap.set("n", "<leader>gc", live_grep_args_shortcuts.grep_word_under_cursor)
-        end,
-      },
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
       {
         "nvim-telescope/telescope-cheat.nvim",
         dependencies = "kkharji/sqlite.lua",

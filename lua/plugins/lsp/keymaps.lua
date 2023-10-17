@@ -65,17 +65,6 @@ function M.get()
   else
     M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
   end
-
-  if require("utils").has("refactoring.nvim") then
-    M._keys[#M._keys + 1] = {
-      "<leader>cR",
-      function()
-        require("refactoring").select_refactor()
-      end,
-      desc = "Refactoring",
-      mode = { "n", "x" },
-    }
-  end
   return M._keys
 end
 
