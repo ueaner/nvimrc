@@ -16,9 +16,9 @@ local conf = {
     "css-lsp",
     "html-lsp",
     "typescript-language-server",
-    "eslint-lsp",
     "js-debug-adapter",
     "prettier",
+    "eslint-lsp", -- pnpm install -g eslint
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
@@ -57,6 +57,11 @@ local conf = {
           completions = {
             completeFunctionCalls = true,
           },
+        },
+      },
+      cssls = {
+        settings = {
+          css = { validate = false },
         },
       },
     },
