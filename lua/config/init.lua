@@ -50,6 +50,7 @@ local M = {
       lsp = "",
       dap = "",
       treesitter = "",
+      debugging = "",
     },
     -- https://microsoft.github.io/vscode-codicons/dist/codicon.html
     dap = {
