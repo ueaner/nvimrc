@@ -151,10 +151,6 @@ map("n", "<leader>bD", function() require("utils.buf").close_others() end, { des
 map({"n", "t"}, "<leader>bd", function() require("utils.buf").close() end, { desc = "Delete Buffer" })
 map({"n", "t"}, "<leader>bi", function() require("utils.buf").info() end, { desc = "Buffer Info" })
 
--- translation
-map("x", "<leader>tz", "<cmd>Translate ZH<cr><esc>", { desc = "Translate from English to Chinese", silent = true })
-map("x", "<leader>te", "<cmd>Translate EN<cr><esc>", { desc = "Translate from Chinese to English", silent = true })
-
 -- floating terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 

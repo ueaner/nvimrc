@@ -2,6 +2,8 @@ return {
   -- translation
   {
     "uga-rosa/translate.nvim",
+    event = "VeryLazy",
+    cmd = { "Translate" },
     config = function()
       require("translate").setup({
         preset = {
@@ -13,6 +15,20 @@ return {
         },
       })
     end,
-    cmd = { "Translate" },
+    keys = {
+      { "<leader>tz", "<cmd>Translate ZH<cr><esc>", desc = "Translate from English to Chinese", mode = { "x" } },
+      { "<leader>te", "<cmd>Translate EN<cr><sec>", desc = "Translate from Chinese to English", mode = { "x" } },
+    },
+  },
+
+  -- which key integration
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["<leader>t"] = { name = "+translate", mode = { "x" } },
+      },
+    },
   },
 }

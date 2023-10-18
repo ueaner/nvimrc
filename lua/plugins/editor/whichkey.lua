@@ -37,9 +37,6 @@ return {
         ["<leader>D"] = { name = "+db" },
         ["<leader>a"] = { name = "+a tool" },
       })
-      wk.register({
-        ["<leader>t"] = { name = "+translate", mode = { "x" } },
-      })
     end,
   },
 }
