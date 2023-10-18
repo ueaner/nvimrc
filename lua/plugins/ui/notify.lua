@@ -86,4 +86,15 @@ return {
       end
     end,
   },
+
+  -- which key integration
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["<leader>sn"] = { name = "+noice" },
+      },
+    },
+  },
 }

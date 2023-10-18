@@ -1,5 +1,7 @@
 return {
-  -- which-key
+
+  -- which-key helps you remember key bindings by showing a popup
+  -- with the active keybindings of the command you started typing.
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -38,12 +40,6 @@ return {
       wk.register({
         ["<leader>t"] = { name = "+translate", mode = { "x" } },
       })
-
-      if require("utils").has("noice.nvim") then
-        wk.register({
-          ["<leader>sn"] = { name = "+noice" },
-        })
-      end
     end,
   },
 }
