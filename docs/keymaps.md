@@ -373,21 +373,23 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 ## More
 
-| Key           | Description                      | Mode | Provider         |
-| ------------- | -------------------------------- | ---- | ---------------- |
-| **Telescope** | Keymaps for `Telescope`          |      | Telescope        |
-| `<C-/>`       | Show keymaps of Telescope        | i    | [telescope.nvim] |
-| `<Tab`        | Select/Deselect                  | i, n | [telescope.nvim] |
-| `<C-Down>`    | Next search prompt in history    | i    | [telescope.nvim] |
-| `<C-Up>`      | Prev search prompt in history    | i    | [telescope.nvim] |
-| `<C-n>`       | Next search prompt in history    | n    | [telescope.nvim] |
-| `<C-p>`       | Prev search prompt in history    | n    | [telescope.nvim] |
-| `<C-f>`       | Scroll the preview window down   | i    | [telescope.nvim] |
-| `<C-b>`       | Scroll the preview window up     | i    | [telescope.nvim] |
-| `<C-d>`       | Scroll the preview window down   | i    | [telescope.nvim] |
-| `<C-u>`       | Scroll the preview window up     | i    | [telescope.nvim] |
-| `<C-x>`       | Show all results in trouble      | i    | [telescope.nvim] |
-| `<A-x>`       | Show selected results in Trouble | i    | [telescope.nvim] |
+| Key              | Description                      | Mode | Provider         |
+| ---------------- | -------------------------------- | ---- | ---------------- |
+| **Fuzzy Finder** | Keymaps for `Telescope`          |      | Telescope        |
+| `<C-/>`          | Show keymaps of Telescope        | i    | [telescope.nvim] |
+| `<Tab>`          | Select/Deselect                  | i, n | [telescope.nvim] |
+| `<C-Down>`       | Next search prompt in history    | i    | [telescope.nvim] |
+| `<C-Up>`         | Prev search prompt in history    | i    | [telescope.nvim] |
+| `<C-n>`          | Next search prompt in history    | n    | [telescope.nvim] |
+| `<C-p>`          | Prev search prompt in history    | n    | [telescope.nvim] |
+| `<C-f>`          | Scroll the preview window down   | i    | [telescope.nvim] |
+| `<C-b>`          | Scroll the preview window up     | i    | [telescope.nvim] |
+| `<C-d>`          | Scroll the preview window down   | i    | [telescope.nvim] |
+| `<C-u>`          | Scroll the preview window up     | i    | [telescope.nvim] |
+| `<C-x>`          | Show all results in trouble      | i    | [telescope.nvim] |
+| `<A-x>`          | Show selected results in Trouble | i    | [telescope.nvim] |
+| **Database**     | Keymaps for `vim-dadbod-ui`      |      | vim-dadbod-ui    |
+| `<leader-S>`     | Execute Query                    | i, v | [vim-dadbod-ui]  |
 
 [which-key.nvim]: https://github.com/folke/which-key.nvim
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
@@ -414,6 +416,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [zen-mode.nvim]: https://github.com/folke/zen-mode.nvim
 [neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [vim-dadbod]: https://github.com/tpope/vim-dadbod
+[vim-dadbod-ui]: https://github.com/kristijanhusak/vim-dadbod-ui
 [aerial.nvim]: https://github.com/stevearc/aerial.nvim
 [nvterm]: https://github.com/NvChad/nvterm
 [lazy.nvim]: https://github.com/folke/lazy.nvim
