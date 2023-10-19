@@ -27,7 +27,7 @@ local M = {
     "PlenaryTestPopup",
     "checkhealth",
     "help",
-    "hierarchy-tree-go",
+    "dbout", -- vim-dadbod-ui output
     "httpResult",
     "lspinfo",
     "man",
