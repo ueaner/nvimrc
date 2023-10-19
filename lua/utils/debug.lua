@@ -56,12 +56,17 @@ function M.get_value(...)
   return vim.tbl_islist(value) and vim.tbl_count(value) <= 1 and value[1] or value
 end
 
+function M.is_debug()
+  return require("vim.lsp.log").get_level() == vim.log.levels.DEBUG
+end
+
 function M.setup()
   _G.dump = function(...)
     M.dump(...)
   end
 
   vim.print = _G.dump
+  _G.is_debug = M.is_debug
 end
 
 return M
