@@ -184,8 +184,8 @@ local conf = {
 }
 
 return generator
-  :prepend({ "simrat39/rust-tools.nvim", ft = { "rust" } })
   :prepend(
+    { "simrat39/rust-tools.nvim", ft = { "rust" } },
     -- crates cmp source
     {
       "nvim-cmp",

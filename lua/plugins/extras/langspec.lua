@@ -29,8 +29,8 @@
 ---@class LangSpec
 ---@field defaults LangConfig
 ---@field plugin_specs LazyPluginSpec[]
----@field append fun(self: LangSpec, spec: LazyPluginSpec): LangSpec
----@field prepend fun(self: LangSpec, spec: LazyPluginSpec): LangSpec
+---@field append fun(self: LangSpec, ...: LazyPluginSpec): LangSpec
+---@field prepend fun(self: LangSpec, ...: LazyPluginSpec): LangSpec
 ---@field generate fun(self: LangSpec, conf: LangConfig): LazyPluginSpec[]
 
 -- Checks if a string or table is empty.
@@ -73,13 +73,15 @@ function M:new(o)
   return o
 end
 
-function M:append(spec)
-  table.insert(self.plugin_specs, spec)
+---@param ... LazyPluginSpec
+function M:append(...)
+  vim.list_extend(self.plugin_specs, { ... })
   return M
 end
 
-function M:prepend(spec)
-  table.insert(self.plugin_specs, spec)
+---@param ... LazyPluginSpec
+function M:prepend(...)
+  vim.list_extend(self.plugin_specs, { ... })
   return M
 end
 
