@@ -38,6 +38,19 @@ local conf = {
             end,
             desc = "Organize Imports",
           },
+          {
+            "<leader>cu",
+            function()
+              vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                  only = { "source.removeUnused.ts" },
+                  diagnostics = {},
+                },
+              })
+            end,
+            desc = "Remove Unused Imports",
+          },
         },
         settings = {
           typescript = {
