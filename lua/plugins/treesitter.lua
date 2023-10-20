@@ -112,13 +112,13 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = "LazyFile",
-    opts = { mode = "cursor" },
+    opts = { mode = "cursor", max_lines = 3 },
   },
 
   -- Automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",
-    event = "InsertEnter",
+    event = "LazyFile",
     opts = {},
   },
 
