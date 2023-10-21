@@ -22,15 +22,38 @@ local conf = {
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
       gopls = {
-        hints = {
-          assignVariableTypes = true,
-          compositeLiteralFields = true,
-          constantValues = true,
-          functionTypeParameters = true,
-          parameterNames = true,
-          rangeVariableTypes = true,
+        settings = {
+          -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+          gopls = {
+            gofumpt = true, -- formatter, default "goimports"
+            codelenses = {
+              gc_details = false,
+              generate = true,
+              regenerate_cgo = true,
+              run_govulncheck = true,
+              test = true,
+              tidy = true,
+              upgrade_dependency = true,
+              vendor = true,
+            },
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+            analyses = {
+              fieldalignment = true,
+              nilness = true,
+              unusedparams = true,
+              unusedwrite = true,
+              useany = true,
+            },
+          },
         },
-        gofumpt = true, -- formatter, default "goimports"
       },
       golangci_lint_ls = {}, -- linter
     },
