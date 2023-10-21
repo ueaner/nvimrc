@@ -121,7 +121,7 @@ Command-line mode uses readline-style keymaps.
 | `<leader>cr` | Rename                            | n    | LSP        |
 | `<leader>ca` | Code Action                       | n, v | LSP        |
 | `<leader>cL` | Code Lens                         | n, v | LSP        |
-| `<leader>cR` | Code Lens Refresh                 | n    | LSP        |
+| `<leader>cR` | Refactoring                       | n    | LSP        |
 | `<leader>cc` | Code Clean                        | n    | LSP        |
 | `gf`         | Goto File                         | n, v | editing    |
 | `gi`         | Move to last insertion and INSERT | n    | insert     |
