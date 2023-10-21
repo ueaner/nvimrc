@@ -33,6 +33,8 @@ function M.get()
     { "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
     { "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
     { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+    { "<leader>cL", vim.lsp.codelens.run, desc = "Code Lens", mode = { "n", "v" }, has = "codeLens" },
+    { "<leader>cR", vim.lsp.codelens.refresh, desc = "Code Lens Refresh", mode = { "n" }, has = "codeLens" },
     { "<leader>ci", vim.lsp.buf.incoming_calls, desc = "Call Hierarchy Incoming Calls", mode = { "n", "v" }, has = "callHierarchy/incomingCalls" },
     { "<leader>co", vim.lsp.buf.outgoing_calls, desc = "Call Hierarchy Outgoing Calls", mode = { "n", "v" }, has = "callHierarchy/outgoingCalls" },
     {
