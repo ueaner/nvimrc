@@ -40,11 +40,13 @@ return {
       "saadparwaiz1/cmp_luasnip",
     },
     opts = function()
+      local U = require("utils")
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+      vim.api.nvim_set_hl(0, "CmpFloatBorder", { fg = U.fg("FloatBorder"), bg = U.bg("Normal"), default = true })
 
       local cmp = require("cmp")
       local border = {
-        winhighlight = "Normal:Pmenu,FloatBorder:TabLine,CursorLine:PmenuSel,Search:None",
+        winhighlight = "Normal:Normal,FloatBorder:CmpFloatBorder,CursorLine:PmenuSel,Search:None",
         -- border = "single",
       }
 
