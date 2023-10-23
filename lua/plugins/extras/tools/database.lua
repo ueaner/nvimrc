@@ -142,7 +142,7 @@ return {
     end,
     config = function()
       require("utils").on_ft("dbui", function()
-        -- 提示信息展示：只改变前景色和边框（如果支持边框的话，线条）
+        -- Notification info wireframe style display: only change the foreground color and border
         vim.api.nvim_set_hl(0, "NotificationInfo", { link = "Normal" })
         vim.api.nvim_set_hl(0, "NotificationError", { link = "ErrorMsg" })
         vim.api.nvim_set_hl(0, "WarningMsg", { link = "WarningMsg" })
