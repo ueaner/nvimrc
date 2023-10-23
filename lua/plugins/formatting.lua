@@ -18,6 +18,7 @@ return {
         mode = { "n", "v" },
         desc = "Format Injected Langs",
       },
+      { "<leader>mc", "<cmd>ConformInfo<cr>", desc = "Conform Info" },
     },
     init = function()
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -32,6 +33,7 @@ return {
           end,
           sources = function(buf)
             local ret = require("conform").list_formatters(buf)
+            ---@param v conform.FormatterInfo
             return vim.tbl_map(function(v)
               return v.name
             end, ret)
@@ -44,6 +46,8 @@ return {
       -- LazyVim will use these options when formatting with the conform.nvim formatter
       format = {
         timeout_ms = 1000,
+        async = false, -- not recommended to change
+        quiet = false, -- not recommended to change
       },
       formatters_by_ft = {
         lua = { "stylua" },

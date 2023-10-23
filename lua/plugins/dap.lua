@@ -45,7 +45,8 @@ return {
     -- stylua: ignore
     keys = {
       -- Running the program
-      { "<leader>dd", function() require("telescope").extensions.dap.configurations({}) end, desc = "dap configurations" }, -- opts.language_filter
+      { "<leader>mD", "<cmd>DapShowLog<cr>", desc = "Dap Show Log" },
+      { "<leader>md", function() require("telescope").extensions.dap.configurations({}) end, desc = "dap configurations" }, -- opts.language_filter
       { "<leader>dc", function() require("dap").continue() end, desc = "continue" },   -- Run until breakpoint or program termination
       { "<leader>dr", function() require("dap").continue() end, desc = "run" },        -- alias to <leader>dc
       { "<leader>d.", function() require("dap").run_last() end, desc = "run repeat last" },

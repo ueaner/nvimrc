@@ -63,7 +63,8 @@ end
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
 
 -- lazy
-map("n", "<leader>z", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>mz", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>mf", "<cmd>LazyFormatInfo<cr>", { desc = "Lazy Format Info" })
 
 -- default mappings improved
 map("n", "0", "^")
@@ -145,7 +146,7 @@ map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next Tab" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Tab" })
 map("n", "<leader>bD", function() require("utils.buf").close_others() end, { desc = "Delete Other Buffers" })
 map({"n", "t"}, "<leader>bd", function() require("utils.buf").close() end, { desc = "Delete Buffer" })
-map({"n", "t"}, "<leader>bi", function() require("utils.buf").info() end, { desc = "Buffer Info" })
+map({"n", "t"}, "<leader>mb", function() require("utils.buf").info() end, { desc = "Buffer Info" })
 
 -- floating terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })

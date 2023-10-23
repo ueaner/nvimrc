@@ -42,6 +42,7 @@ return {
     keys = {
       { "<Space>", desc = "Increment selection" },
       { "<BS>", desc = "Decrement selection", mode = "x" },
+      { "<leader>mt", "<cmd>TSConfigInfo<cr>", desc = "Treesitter Config Info" },
     },
     ---@type TSConfig
     opts = {

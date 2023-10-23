@@ -33,9 +33,10 @@ return {
       wk.register({
         ["<leader>d"] = { name = "+debug", mode = { "n", "x" } },
         ["<leader>t"] = { name = "+test", mode = { "n" } },
-        ["<leader>r"] = { name = "+run/REPL", mode = { "n", "x" } },
+        ["<leader>r"] = { name = "+run/repl", mode = { "n", "x" } },
         ["<leader>D"] = { name = "+db" },
         ["<leader>a"] = { name = "+a tool" },
+        ["<leader>m"] = { name = "+manager/info" },
       })
     end,
   },

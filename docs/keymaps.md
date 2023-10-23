@@ -120,7 +120,7 @@ Command-line mode uses readline-style keymaps.
 | `gr`         | Find References                   | n    | LSP        |
 | `<leader>cn` | Rename                            | n    | LSP        |
 | `<leader>ca` | Code Action                       | n, v | LSP        |
-| `<leader>cL` | Code Lens                         | n, v | LSP        |
+| `<leader>cl` | Code Lens                         | n, v | LSP        |
 | `<leader>cr` | Refactors                         | n, v | LSP        |
 | `<leader>cc` | Code Clean                        | n    | LSP        |
 | `gf`         | Goto File                         | n, v | editing    |
@@ -167,11 +167,16 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>E`  | Toggle Database Explorer | n    | [vim-dadbod]             |
 | `<leader>o`  | Toggle Outline           | n    | [aerial.nvim]            |
 | `<leader>tt` | Toggle Terminal          | n, t | [nvterm]                 |
-| `<leader>z`  | Lazy                     | n    | [lazy.nvim]              |
-| `<leader>cm` | Mason                    | n    | [mason.nvim]             |
-| `<leader>cl` | Lsp Info                 | n    | [nvim-lspconfig]         |
 | `<leader>gg` | Lazygit                  | n    | [lazygit]                |
-| `<leader>dd` | Show DAP configurations  | n    | [nvim-dap]               |
+| `<leader>mz` | Lazy                     | n    | [lazy.nvim]              |
+| `<leader>mm` | Mason                    | n    | [mason.nvim]             |
+| `<leader>ml` | Lsp Info                 | n    | [nvim-lspconfig]         |
+| `<leader>mt` | Treesitter Config Info   | n    | [nvim-treesitter]        |
+| `<leader>mb` | Buffer Info              | n    | utils.buf.info           |
+| `<leader>mc` | Conform Info             | n    | [conform.nvim]           |
+| `<leader>mf` | Lazy Format Info         | n    | LazyFormatInfo           |
+| `<leader>mD` | Dap Show Log             | n    | [nvim-dap]               |
+| `<leader>md` | Show DAP configurations  | n    | [nvim-dap]               |
 |              | Show Output Panel        | n    |                          |
 | `<leader>cP` | Preview (Markdown)       | n    | [glow.nvim]              |
 | `<leader>cp` | Live Preview (Markdown)  | n    | [peek.nvim]              |
@@ -424,9 +429,12 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [lazy.nvim]: https://github.com/folke/lazy.nvim
 [mason.nvim]: https://github.com/williamboman/mason.nvim
 [nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
+[nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [glow.nvim]: https://github.com/ellisonleao/glow.nvim
 [peek.nvim]: https://github.com/toppair/peek.nvim
 [plantuml-previewer.vim]: https://github.com/weirongxu/plantuml-previewer.vim
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
+[conform.nvim]: https://github.com/stevearc/conform.nvim
+[nvim-lint]: https://github.com/mfussenegger/nvim-lint
 [utils.lua]: lua/utils.lua
 [which-key]: https://github.com/ueaner/nvimrc/assets/318253/ae311950-0104-4d72-a368-a1234b5ba6ab "which key"
