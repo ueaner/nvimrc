@@ -5,6 +5,10 @@ local M = {}
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
 
+-- Examples:
+-- ```lua
+--    require("utils.lsp").get_clients({ method = "textDocument/codeAction" })
+-- ```
 ---@param opts? lsp.Client.filter
 function M.get_clients(opts)
   local ret = {} ---@type lsp.Client[]
