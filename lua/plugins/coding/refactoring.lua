@@ -13,12 +13,12 @@ return {
     end,
     keys = {
       {
-        "<leader>cR",
+        "<leader>cr",
         function()
           require("telescope").extensions.refactoring.refactors()
         end,
-        mode = { "n", "x" },
-        desc = "Select Refactor",
+        mode = { "n", "v" },
+        desc = "Refactors",
       },
     },
   },

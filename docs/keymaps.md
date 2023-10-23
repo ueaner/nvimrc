@@ -118,10 +118,10 @@ Command-line mode uses readline-style keymaps.
 | `gD`         | Goto Type Definition              | n    | LSP        |
 | `gI`         | Goto Implementation               | n    | LSP        |
 | `gr`         | Find References                   | n    | LSP        |
-| `<leader>cr` | Rename                            | n    | LSP        |
+| `<leader>cn` | Rename                            | n    | LSP        |
 | `<leader>ca` | Code Action                       | n, v | LSP        |
 | `<leader>cL` | Code Lens                         | n, v | LSP        |
-| `<leader>cR` | Refactoring                       | n    | LSP        |
+| `<leader>cr` | Refactors                         | n, v | LSP        |
 | `<leader>cc` | Code Clean                        | n    | LSP        |
 | `gf`         | Goto File                         | n, v | editing    |
 | `gi`         | Move to last insertion and INSERT | n    | insert     |

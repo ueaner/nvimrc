@@ -55,7 +55,7 @@ function M.get()
   }
   if require("utils").has("inc-rename.nvim") then
     M._keys[#M._keys + 1] = {
-      "<leader>cr",
+      "<leader>cn",
       function()
         local inc_rename = require("inc_rename")
         return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
@@ -65,7 +65,7 @@ function M.get()
       has = "rename",
     }
   else
-    M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
+    M._keys[#M._keys + 1] = { "<leader>cn", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
   end
   return M._keys
 end
