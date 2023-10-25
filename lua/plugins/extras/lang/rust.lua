@@ -32,14 +32,16 @@ local conf = {
           ["rust-analyzer"] = {
             cargo = {
               -- features = { "gnome" },
-              features = "all",
-              runBuildScripts = false,
+              -- features = "all",
+              buildScripts = {
+                enable = false,
+              },
             },
             -- Add clippy lints for Rust.
             checkOnSave = true,
             check = {
               command = "cargo clippy",
-              features = "all",
+              -- features = "all",
             },
             procMacro = {
               enable = true,
