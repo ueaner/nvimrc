@@ -22,11 +22,12 @@ return {
     },
     cmd = "Telescope",
     keys = {
-      { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
+      { "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch Buffer" },
       { "<leader>/", "<cmd>Telescope live_grep_args<CR>", desc = "Grep (root dir)" },
       {
         "<leader>/",
         function()
+          -- NOTE: There is an issue with the CJK character under the search cursor
           require("telescope-live-grep-args.shortcuts").grep_visual_selection({ postfix = false })
         end,
         desc = "Grep (root dir)",
@@ -44,7 +45,7 @@ return {
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
       { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope Builtin" },
       -- find
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+      { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>ff", U.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>fF", U.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
