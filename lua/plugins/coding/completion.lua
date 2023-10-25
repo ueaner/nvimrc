@@ -50,6 +50,7 @@ return {
         -- border = "single",
       }
 
+      ---@return cmp.ConfigSchema
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
@@ -82,8 +83,14 @@ return {
           { name = "path", group_index = 2 },
         },
 
+        ---@type cmp.FormattingConfig
         formatting = {
           format = function(_, item)
+            -- Maximum length of extra text for popup menu is 40
+            if type(item.menu) == "string" and string.len(item.menu) > 40 then
+              item.menu = string.sub(item.menu, 1, 40) .. "..."
+            end
+
             local icons = require("config").icons.kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
@@ -93,6 +100,7 @@ return {
         },
         window = {
           -- completion = cmp.config.window.bordered(border),
+          ---@type cmp.WindowConfig
           documentation = cmp.config.window.bordered(border),
         },
         experimental = {
