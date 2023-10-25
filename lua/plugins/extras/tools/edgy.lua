@@ -9,7 +9,7 @@ return {
       { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
     },
     opts = {
-      ---@type table<Edgy.Pos, {size:integer | fun():integer, wo?:vim.wo}>
+      ---@type table<Edgy.Pos, {size:integer | fun():integer, wo:vim.wo?}>
       options = {
         left = { size = 40 },
         bottom = { size = 10 },
@@ -21,18 +21,23 @@ return {
           ft = "terminal",
           title = "Terminal",
           size = { height = 0.3 },
-          filter = function(buf, win)
+          filter = function(_, win)
             return vim.api.nvim_win_get_config(win).relative == ""
           end,
         },
         {
           ft = "noice",
           size = { height = 0.3 },
-          filter = function(buf, win)
+          filter = function(_, win)
             return vim.api.nvim_win_get_config(win).relative == ""
           end,
         },
-        "Trouble",
+        {
+          ft = "Trouble",
+          filter = function(_, win)
+            return vim.api.nvim_win_get_config(win).relative == ""
+          end,
+        },
         { ft = "qf", title = "QuickFix" },
         {
           ft = "help",
