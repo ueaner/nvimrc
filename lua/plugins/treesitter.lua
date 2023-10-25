@@ -44,6 +44,10 @@ return {
       { "<BS>", desc = "Decrement selection", mode = "x" },
       { "<leader>mt", "<cmd>TSConfigInfo<cr>", desc = "Treesitter Config Info" },
     },
+    init = function(plugin)
+      require("lazy.core.loader").add_to_rtp(plugin)
+      require("nvim-treesitter.query_predicates")
+    end,
     ---@type TSConfig
     opts = {
       highlight = { enable = true },
