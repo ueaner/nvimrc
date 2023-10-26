@@ -60,6 +60,10 @@ function M.is_debug()
   return require("vim.lsp.log").get_level() == vim.log.levels.DEBUG
 end
 
+function M.set_debug()
+  vim.log.set_level(vim.log.levels.DEBUG)
+end
+
 function M.setup()
   _G.dump = function(...)
     M.dump(...)

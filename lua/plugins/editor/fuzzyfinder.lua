@@ -34,11 +34,11 @@ return {
         mode = { "v" },
       },
       {
-        "<leader>k",
+        "<leader>sk",
         function()
           require("telescope-live-grep-args.shortcuts").grep_word_under_cursor({ postfix = false })
         end,
-        desc = "Grep (root dir)",
+        desc = "Grep keyword under cursor (root dir)",
         mode = { "n" },
       },
 
@@ -69,8 +69,6 @@ return {
       { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
       { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
       { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
-      { "<leader>sg", U.telescope("live_grep"), desc = "Grep (root dir)" },
-      { "<leader>sG", U.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
       { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
       { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
       { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
@@ -78,6 +76,8 @@ return {
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+      { "<leader>sg", U.telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>sG", U.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
       { "<leader>sw", U.telescope("grep_string"), desc = "Word (root dir)" },
       { "<leader>sW", U.telescope("grep_string", { cwd = false }), desc = "Word (cwd)" },
       { "<leader>uC", U.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },

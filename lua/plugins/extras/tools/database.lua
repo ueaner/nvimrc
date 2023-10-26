@@ -119,7 +119,7 @@ return {
     dependencies = {
       {
         "kristijanhusak/vim-dadbod-ui",
-        cmd = { "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
+        cmd = { "DBUIToggle" },
       },
     },
     cmd = { "DB" },
@@ -127,11 +127,6 @@ return {
       -- stylua: ignore
       -- { "<leader>E", function() M.db_explorer_toggle() end, desc = "Toggle Database Explorer", },
       { "<leader>E", "<cmd>DBUIToggle<cr>", desc = "Toggle Database Explorer" },
-      { "<leader>Du", "<cmd>DBUIToggle<cr>", desc = "Toggle UI" },
-      { "<leader>Da", "<cmd>DBUIAddConnection<cr>", desc = "Add Connection" },
-      { "<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc = "Find buffer" },
-      { "<leader>Dr", "<cmd>DBUIRenameBuffer<cr>", desc = "Rename buffer" },
-      { "<leader>Dq", "<cmd>DBUILastQueryInfo<cr>", desc = "Last query info" },
     },
     init = function()
       vim.g.db_ui_save_location = vim.fn.stdpath("data") .. "/dbui"

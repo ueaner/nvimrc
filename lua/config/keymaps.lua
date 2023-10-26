@@ -151,6 +151,8 @@ map({"n", "t"}, "<leader>mb", function() require("utils.buf").info() end, { desc
 -- floating terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
+map("n", "<leader>D", function() vim.log.set_level(vim.log.levels.DEBUG) end, { desc = "Neovim log set to DEBUG level" })
+
 -- lazygit
 map("n", "<leader>gg", function() require("utils").float_term({ "lazygit" }, { cwd = require("utils").root(), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
 map("n", "<leader>gG", function() require("utils").float_term({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
