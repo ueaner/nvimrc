@@ -11,6 +11,7 @@ local conf = {
     "jsdoc",
     "typescript",
     "tsx", -- typescriptreact
+    "glimmer", -- .hbs
   },
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     "css-lsp",
