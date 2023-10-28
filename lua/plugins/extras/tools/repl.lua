@@ -42,7 +42,7 @@ return {
 
     ---@see iron-commands for all available commands
     -- NOTE: There needs to be a mapping for all file types so that the default +prefix does not appear in whichkey
-    { "<leader>ru", "<cmd>IronRepl<cr>", desc = "Repl UI Toggle" },
+    { "<leader>ru", "<cmd>IronRepl<cr>", desc = "Repl UI Toggle", mode = { "n", "v" } },
     -- { "<leader>ru", "<cmd>IronRepl<cr>", desc = "Repl UI Toggle", ft = supported_filetypes },
     { "<leader>rR", "<cmd>IronRestart<cr>", desc = "Repl Restart", ft = supported_filetypes },
     { "<leader>rF", "<cmd>IronFocus<cr>", desc = "Repl Focus", ft = supported_filetypes },
