@@ -103,6 +103,7 @@ return {
     opts = function()
       local trouble = require("trouble.providers.telescope")
       local actions = require("telescope.actions")
+      local layout = require("telescope.actions.layout")
 
       return {
         ---@type Picker
@@ -111,7 +112,7 @@ return {
           --   shorten = { len = 1, exclude = { 1, -1 } },
           -- },
           layout_strategy = "horizontal",
-          layout_config = { prompt_position = "top" },
+          layout_config = { prompt_position = "top", height = 0.9, width = 0.9 },
           sorting_strategy = "ascending",
           winblend = 0,
           prompt_prefix = " ",
@@ -140,11 +141,13 @@ return {
               -- `<C-n/p>` for select result items
               ["<C-Down>"] = actions.cycle_history_next,
               ["<C-Up>"] = actions.cycle_history_prev,
+              ["<A-p>"] = layout.toggle_preview,
             },
             n = {
               ["q"] = actions.close,
-              ["<C-n>"] = actions.cycle_history_next,
-              ["<C-p>"] = actions.cycle_history_prev,
+              ["<C-n>"] = actions.move_selection_next,
+              ["<C-p>"] = actions.move_selection_previous,
+              ["<A-p>"] = layout.toggle_preview,
             },
           },
           -- require("telescope.config").values.vimgrep_arguments
