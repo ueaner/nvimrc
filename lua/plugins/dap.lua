@@ -66,13 +66,37 @@ return {
       { "<Leader>dB", function() require("utils.dap").breakpoint_condition() end, desc = "[B] conditional breakpoint" },
       { "<leader>dx", "<cmd>Telescope dap list_breakpoints<cr>", desc = "[B] show all breakpoints" },
       { "<leader>dX", function() require("dap").clear_breakpoints() end, desc = "[B] removes all breakpoints" },
-      -- dapui
-      { "<leader>du", function() require("dapui").toggle() end, desc = "toggle dapui" },
       -- watch expressions, show hover
       { "<A-e>", function() require("dapui").eval() end, desc = "eval (<A-e>)", mode = { "n", "v" } },
       { "<leader>de", function() require("dap.ui.widgets").hover() end, desc = "eval expression", mode = { "n", "v" } },
-      -- others
-      { "<leader>ds", function() require("dap").session() end, desc = "session" },
+      -- dapui
+      { "<leader>du", function() require("dapui").toggle() end, desc = "toggle dapui" },
+
+      { "<leader>dwe",
+        function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").expression, { border = "rounded" }) end,
+        desc = "Eval",
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>dwf",
+        function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").frames, { border = "rounded" }) end,
+        desc = "Frames",
+      },
+      {
+        "<leader>dws",
+        function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes, { border = "rounded" }) end,
+        desc = "Scopes",
+      },
+      {
+        "<leader>dwt",
+        function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").threads, { border = "rounded" }) end,
+        desc = "Threads",
+      },
+      {
+        "<leader>dwS",
+        function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").sessions, { border = "rounded" }) end,
+        desc = "Sessions",
+      },
     },
   },
 

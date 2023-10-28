@@ -23,6 +23,13 @@ return {
         ["<leader>u"] = { name = "+ui" },
         ["<leader>w"] = { name = "+windows" },
         ["<leader>x"] = { name = "+diagnostics/quickfix" },
+
+        ["<leader>d"] = { name = "+debug", mode = { "n", "v" } },
+        ["<leader>dw"] = { name = "+dap widgets" },
+        ["<leader>t"] = { name = "+test", mode = { "n" } },
+        ["<leader>r"] = { name = "+run/repl", mode = { "n", "v" } },
+        ["<leader>a"] = { name = "+a tool" },
+        ["<leader>m"] = { name = "+manager/info" },
       },
     },
     config = function(_, opts)
@@ -31,11 +38,7 @@ return {
       wk.register(opts.defaults)
 
       wk.register({
-        ["<leader>d"] = { name = "+debug", mode = { "n", "x" } },
-        ["<leader>t"] = { name = "+test", mode = { "n" } },
-        ["<leader>r"] = { name = "+run/repl", mode = { "n", "x" } },
-        ["<leader>a"] = { name = "+a tool" },
-        ["<leader>m"] = { name = "+manager/info" },
+        ["<leader>t"] = { name = "+translate", mode = { "x" } },
       })
     end,
   },

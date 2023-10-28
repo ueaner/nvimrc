@@ -20,15 +20,4 @@ return {
       { "<leader>te", "<cmd>Translate EN<cr><sec>", desc = "Translate from Chinese to English", mode = { "x" } },
     },
   },
-
-  -- which key integration
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<leader>t"] = { name = "+translate", mode = { "x" } },
-      },
-    },
-  },
 }

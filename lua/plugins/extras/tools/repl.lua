@@ -1,9 +1,13 @@
+-- https://github.com/Vigemus/iron.nvim/blob/master/lua/iron/fts/init.lua
+local supported_filetypes = { "go", "python", "lua", "typescript", "javascript", "php", "sh", "zsh", "rust" }
+
 -- REPL
 return {
   "ueaner/iron.nvim",
+  ft = supported_filetypes,
+  cmd = { "IronRepl", "IronRestart", "IronFocus" },
   config = function()
     local iron = require("iron.core")
-    local supported_filetypes = { "go", "python", "lua", "typescript", "javascript", "php", "sh", "zsh", "rust" }
 
     iron.setup({
       config = {
@@ -23,35 +27,24 @@ return {
         },
         repl_open_cmd = require("iron.view").right(60),
       },
-
-      -- keymaps = {
-      --   send_motion = "<leader>rr", -- code block
-      --   visual_send = "<leader>rr", -- selected code block
-      --   send_line = "<leader>rl", -- cursor line
-      --   send_file = "<leader>rf", -- file
-      --   cr = "<leader>r<cr>", -- return
-      --   interrupt = "<leader>rc", -- <c-c>
-      --   exit = "<leader>rq", -- terminate
-      --   clear = "<leader>rx", -- clear
-      -- },
     })
-
-    -- stylua: ignore
-    -- https://github.com/Vigemus/iron.nvim/blob/master/lua/iron/fts/init.lua
-    require("utils").on_ft(supported_filetypes, function(event)
-      vim.keymap.set("n", "<leader>rr", function() iron.run_motion("send_motion") end, { desc = "Run code block", buffer = event.buf })
-      vim.keymap.set("v", "<leader>rr", iron.visual_send, { desc = "Run selected code block", buffer = event.buf })
-      vim.keymap.set("n", "<leader>rl", iron.send_line, { desc = "Run cursor line", buffer = event.buf })
-      vim.keymap.set("n", "<leader>rf", iron.send_file, { desc = "Run file", buffer = event.buf })
-      vim.keymap.set("n", "<leader>r<cr>", function() iron.send(nil, string.char(13)) end, { desc = "Return", buffer = event.buf })
-      vim.keymap.set("n", "<leader>rc", function() iron.send(nil, string.char(03)) end, { desc = "Interrupt (<C-c>)", buffer = event.buf })
-      vim.keymap.set("n", "<leader>rq", iron.close_repl, { desc = "Quit", buffer = event.buf })
-      vim.keymap.set("n", "<leader>rx", function() iron.send(nil, string.char(12)) end, { desc = "Clear", buffer = event.buf })
-
-      -- see :h iron-commands for all available commands
-      vim.keymap.set("n", "<leader>ru", "<cmd>IronRepl<cr>", { desc = "Repl UI Toggle", buffer = event.buf })
-      vim.keymap.set("n", "<leader>rR", "<cmd>IronRestart<cr>", { desc = "Repl Restart", buffer = event.buf })
-      vim.keymap.set("n", "<leader>rF", "<cmd>IronFocus<cr>", { desc = "Repl Focus", buffer = event.buf })
-    end)
   end,
+  -- stylua: ignore
+  keys = {
+    { "<leader>rr", function() require("iron.core").run_motion("send_motion") end, desc = "Run code block", ft = supported_filetypes },
+    { "<leader>rr", function() require("iron.core").visual_send() end, desc = "Run selected code block", mode = { "v" }, ft = supported_filetypes },
+    { "<leader>rl", function() require("iron.core").send_line() end, desc = "Run cursor line", ft = supported_filetypes },
+    { "<leader>rf", function() require("iron.core").send_file() end, desc = "Run file", ft = supported_filetypes },
+    { "<leader>r<rc>", function() require("iron.core").send(nil, string.char(13)) end, desc = "Return", ft = supported_filetypes },
+    { "<leader>rc", function() require("iron.core").send(nil, string.char(03)) end, desc = "Interrupt (<C-c>)", ft = supported_filetypes },
+    { "<leader>rq", function() require("iron.core").close_repl() end, desc = "Quit", ft = supported_filetypes },
+    { "<leader>rx", function() require("iron.core").send(nil, string.char(12)) end, desc = "Clear", ft = supported_filetypes },
+
+    ---@see iron-commands for all available commands
+    -- NOTE: There needs to be a mapping for all file types so that the default +prefix does not appear in whichkey
+    { "<leader>ru", "<cmd>IronRepl<cr>", desc = "Repl UI Toggle" },
+    -- { "<leader>ru", "<cmd>IronRepl<cr>", desc = "Repl UI Toggle", ft = supported_filetypes },
+    { "<leader>rR", "<cmd>IronRestart<cr>", desc = "Repl Restart", ft = supported_filetypes },
+    { "<leader>rF", "<cmd>IronFocus<cr>", desc = "Repl Focus", ft = supported_filetypes },
+  },
 }
