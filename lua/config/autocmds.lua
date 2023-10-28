@@ -58,6 +58,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- close some filetypes (float window) with <esc>
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("close_with_esc"),
+  pattern = require("config").close_with_esc,
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "<esc>", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),

@@ -29,7 +29,7 @@ local M = {
     "help",
     "dbout", -- vim-dadbod-ui output
     "httpResult",
-    "lspinfo",
+    "lspinfo", -- esc
     "man",
     "neotest-output",
     "neotest-output-panel",
@@ -42,6 +42,12 @@ local M = {
     "spectre_panel",
     "startuptime",
     "tsplayground",
+  },
+
+  -- close some filetypes (float window) with <esc>
+  close_with_esc = {
+    "dap-float",
+    "notify",
   },
 
   -- icons used by other plugins
