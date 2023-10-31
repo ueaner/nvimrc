@@ -106,11 +106,9 @@ local conf = {
     },
   },
   test = { -- neotest: language specific adapters
-    {
-      "nvim-neotest/neotest-plenary",
-      adapter_fn = function()
-        return require("neotest-plenary")
-      end,
+    "nvim-neotest/neotest-plenary",
+    adapters = {
+      ["neotest-plenary"] = {},
     },
   },
 }

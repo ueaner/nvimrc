@@ -72,19 +72,17 @@ local conf = {
     },
   },
   test = { -- neotest: language specific adapters
-    {
-      "nvim-neotest/neotest-python",
-      adapter_fn = function()
-        -- https://github.com/nvim-neotest/neotest-python/blob/master/lua/neotest-python/init.lua#L72
-        -- match_root_pattern: touch pyproject.toml in project root directory
-        --
-        -- ├── foo_test.py
-        -- └── pyproject.toml
-        --
-        return require("neotest-python")({
-          dap = { justMyCode = false },
-        })
-      end,
+    "nvim-neotest/neotest-python",
+    adapters = {
+      -- https://github.com/nvim-neotest/neotest-python/blob/master/lua/neotest-python/init.lua#L72
+      -- match_root_pattern: touch pyproject.toml in project root directory
+      --
+      -- ├── foo_test.py
+      -- └── pyproject.toml
+      --
+      ["neotest-python"] = {
+        dap = { justMyCode = false },
+      },
     },
   },
 }

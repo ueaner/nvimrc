@@ -135,14 +135,12 @@ local conf = {
     },
   },
   test = { -- neotest: language specific adapters
-    {
-      "nvim-neotest/neotest-jest",
-      adapter_fn = function()
-        return require("neotest-jest")({
-          -- jestCommand = "npm test --",
-          jestCommand = "jest --watch ",
-        })
-      end,
+    "nvim-neotest/neotest-jest",
+    adapters = {
+      ["neotest-jest"] = {
+        -- jestCommand = "npm test --",
+        jestCommand = "jest --watch ",
+      },
     },
   },
 }

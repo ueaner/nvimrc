@@ -107,8 +107,6 @@ return {
           if type(name) == "number" then
             if type(config) == "string" then
               config = require(config) --[[@as neotest.Adapter]]
-            elseif type(config) == "function" then
-              config = config() --[[@as neotest.Adapter]]
             end
             adapters[#adapters + 1] = config
           elseif config ~= false then

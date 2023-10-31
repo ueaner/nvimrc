@@ -123,8 +123,8 @@ local conf = {
         --     "version": "0.2.0",
         --     "configurations": [
         --         {
-        --             "name": "Launch file (rt_lldb)",
-        --             "type": "rt_lldb",
+        --             "name": "Launch file (codelldb)",
+        --             "type": "codelldb",
         --             "request": "launch",
         --             "cwd": "${workspaceFolder}",
         --             "program": "${workspaceFolder}/target/debug/${workspaceFolderBasename}",
@@ -137,7 +137,6 @@ local conf = {
         -- }
         -- ```
         -- a nil path defaults to .vscode/launch.json
-        -- require("dap.ext.vscode").load_launchjs(nil, { rt_lldb = { "rust" } })
         require("dap.ext.vscode").load_launchjs(nil, { codelldb = { "rust" } })
 
         return true
@@ -169,14 +168,12 @@ local conf = {
   },
   test = { -- neotest: language specific adapters
     -- cargo install cargo-nextest --locked
-    {
-      "rouge8/neotest-rust",
-      adapter_fn = function()
-        return require("neotest-rust")({
-          args = { "--no-capture" },
-          dap_adapter = "codelldb", -- rt_lldb
-        })
-      end,
+    "rouge8/neotest-rust",
+    adapters = {
+      ["neotest-rust"] = {
+        --- args = { "--no-capture" }, -- DON'T USE `--no-capture`
+        dap_adapter = "codelldb", -- codelldb is the default adapter used for debugging.
+      },
     },
   },
 }

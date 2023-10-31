@@ -20,11 +20,11 @@
 ---@field on_ft (fun(event:object?))
 ---@field config fun()
 
----@alias LangConfig.test LangTestAdapter[]
+---@alias LangConfig.test LangTestAdapter[]|LangTestAdapter
 
 ---@class LangTestAdapter
 ---@field [1] string? package name
----@field adapter_fn (fun(): neotest.Adapter) neotest language specific adapter function
+---@field adapters table
 
 ---@class LangSpec
 ---@field defaults LangConfig
@@ -227,17 +227,20 @@ function M:generate(conf)
 
   -- setup neotest adapter
   if not vim.tbl_isempty(conf.test) then
+    local _, first = next(conf.test)
+    if type(first) == "string" then -- conf.test is LangTestAdapter
+      conf.test = { conf.test } -- to LangTestAdapter[]
+    end
     for _, item in ipairs(conf.test) do
       -- install neotest adapter plugin
-      if not (item[1] == nil or item[1] == "") then
+      if not (item[1] == nil or item[1] == "") and item.adapters then
         local spec = {
           "nvim-neotest/neotest",
           optional = true,
           dependencies = { item[1] },
-          ---@param opts neotest.Config
-          opts = function(_, opts)
-            opts.adapters[#opts.adapters + 1] = item.adapter_fn --[[@as neotest.Adapter]]
-          end,
+          opts = {
+            adapters = item.adapters,
+          },
         }
         table.insert(specs, spec)
       end

@@ -75,13 +75,11 @@ local conf = {
     },
   },
   test = { -- neotest: language specific adapters
-    {
-      "nvim-neotest/neotest-go",
-      adapter_fn = function()
-        return require("neotest-go")({
-          args = { "-count=1", "-timeout=60s", "-race", "-cover" },
-        })
-      end,
+    "nvim-neotest/neotest-go",
+    adapters = {
+      ["neotest-go"] = {
+        args = { "-count=1", "-timeout=60s", "-race", "-cover" },
+      },
     },
   },
 }
