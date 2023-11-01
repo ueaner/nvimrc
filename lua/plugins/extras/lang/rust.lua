@@ -1,3 +1,5 @@
+local notify = require("lazy.core.util")
+local UDap = require("utils.dap")
 local generator = require("plugins.extras.langspec"):new()
 
 local function get_codelldb()
@@ -100,19 +102,61 @@ local conf = {
             -- detached = false,
           },
         }
-        -- dap.configurations.rust = {
-        --   {
-        --     name = "Launch file",
-        --     type = "codelldb",
-        --     request = "launch",
-        --     program = function()
-        --       return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-        --     end,
-        --     cwd = "${workspaceFolder}",
-        --     stopOnEntry = false,
-        --     args = {},
-        --   },
-        -- }
+
+        dap.configurations.rust = {
+          {
+            type = "codelldb",
+            request = "launch",
+            name = "Launch file",
+            -- program = function()
+            --   return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            --   return vim.fn.input("Path to executable: ", "~/.target/debug/", "file")
+            -- end,
+            program = function()
+              local workspaceFolderBasename = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+              -- ~/.cargo/config.toml: build.target-dir
+              local debug_bin = vim.fn.expand("~/.target/debug/" .. workspaceFolderBasename)
+              if vim.fn.executable(debug_bin) == 1 then
+                return debug_bin
+              end
+              notify.warn("Unable to find executable for '" .. debug_bin .. "'", { title = "DAP" })
+              return dap.ABORT
+            end,
+            args = {},
+            cwd = "${workspaceFolder}",
+            stopOnEntry = false,
+          },
+          {
+            type = "codelldb",
+            request = "launch",
+            name = "Launch file (cargo build)",
+            preLaunchTask = "cargo build",
+            -- ~/.cargo/config.toml: build.target-dir
+            program = "~/.target/debug/${workspaceFolderBasename}",
+            args = {},
+            cwd = "${workspaceFolder}",
+            stopOnEntry = false,
+          },
+          {
+            type = "codelldb",
+            request = "launch",
+            name = "Launch file with arguments",
+            program = "~/.target/debug/${workspaceFolderBasename}",
+            args = UDap.get_args,
+            cwd = "${workspaceFolder}",
+            stopOnEntry = false,
+          },
+          {
+            type = "codelldb",
+            request = "launch",
+            name = "Launch file with arguments (cargo build)",
+            preLaunchTask = "cargo build",
+            program = "~/.target/debug/${workspaceFolderBasename}",
+            args = UDap.get_args,
+            cwd = "${workspaceFolder}",
+            stopOnEntry = false,
+          },
+        }
 
         -- dap.configurations.c = dap.configurations.rust
         -- dap.configurations.cpp = dap.configurations.rust

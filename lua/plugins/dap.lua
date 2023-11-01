@@ -19,6 +19,10 @@ return {
           require("dapui").setup()
         end,
       },
+      {
+        "stevearc/overseer.nvim",
+        config = true,
+      },
     },
     config = function()
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
