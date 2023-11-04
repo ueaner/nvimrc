@@ -3,8 +3,7 @@ return {
   -- tokyonight
   {
     "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     opts = {
       style = "moon",
       transparent = false,
@@ -13,26 +12,33 @@ return {
         floats = "transparent",
       },
     },
-    config = function(_, opts)
-      local tokyonight = require("tokyonight")
-      tokyonight.setup(opts)
-      tokyonight.load()
-    end,
   },
 
   -- catppuccin
   {
     "catppuccin/nvim",
-    enabled = false,
     lazy = true,
     name = "catppuccin",
     opts = {
+      flavour = "macchiato",
+      background = {
+        light = "latte",
+        dark = "macchiato",
+      },
       integrations = {
+        aerial = true,
         cmp = true,
+        dap = {
+          enabled = true,
+          enable_ui = true, -- enable nvim-dap-ui
+        },
+        flash = true,
         gitsigns = true,
         illuminate = true,
         indent_blankline = { enabled = true },
         lsp_trouble = true,
+        mason = true,
+        markdown = true,
         mini = true,
         native_lsp = {
           enabled = true,
@@ -43,14 +49,16 @@ return {
             information = { "undercurl" },
           },
         },
-        navic = { enabled = true },
+        navic = { enabled = true, custom_bg = "lualine" },
         neotest = true,
+        neotree = true,
         noice = true,
         notify = true,
-        neotree = true,
+        overseer = true,
         semantic_tokens = true,
         telescope = true,
         treesitter = true,
+        treesitter_context = true,
         which_key = true,
       },
     },
