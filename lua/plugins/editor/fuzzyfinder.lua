@@ -111,6 +111,7 @@ return {
           -- path_display = {
           --   shorten = { len = 1, exclude = { 1, -1 } },
           -- },
+          dynamic_preview_title = true,
           layout_strategy = "horizontal",
           layout_config = { prompt_position = "top", height = 0.9, width = 0.9 },
           sorting_strategy = "ascending",
