@@ -1,4 +1,14 @@
 local U = require("utils")
+
+-- preview_cutoff = 120,
+local layout_strategy = function()
+  if vim.o.columns > vim.o.lines then
+    return vim.o.columns >= 120 and "horizontal" or "vertical"
+  else
+    return vim.o.lines >= 40 and "vertical" or "horizontal"
+  end
+end
+
 return {
   -- fuzzy finder
   {
@@ -112,8 +122,9 @@ return {
           --   shorten = { len = 1, exclude = { 1, -1 } },
           -- },
           dynamic_preview_title = true,
-          layout_strategy = "horizontal",
-          layout_config = { prompt_position = "top", height = 0.9, width = 0.9 },
+          layout_strategy = layout_strategy(),
+
+          layout_config = { prompt_position = "top", height = 0.90, width = 0.95 },
           sorting_strategy = "ascending",
           winblend = 0,
           prompt_prefix = " ",

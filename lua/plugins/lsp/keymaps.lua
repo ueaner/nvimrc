@@ -22,7 +22,7 @@ function M.get()
     { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
     { "gD", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto Type Definition" },
     { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
-    { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Find References" },
+    { "gr", "<cmd>Telescope lsp_references { reuse_win = true }<cr>", desc = "Find References" },
     { "K", vim.lsp.buf.hover, desc = "Hover" },
     { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
     { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
