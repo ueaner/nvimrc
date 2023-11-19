@@ -82,24 +82,72 @@ return {
         mode = { "n", "v" },
       },
       {
-        "<leader>dwf",
-        function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").frames, { border = "rounded" }) end,
-        desc = "Frames",
-      },
-      {
         "<leader>dws",
-        function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes, { border = "rounded" }) end,
-        desc = "Scopes",
-      },
-      {
-        "<leader>dwt",
-        function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").threads, { border = "rounded" }) end,
-        desc = "Threads",
-      },
-      {
-        "<leader>dwS",
         function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").sessions, { border = "rounded" }) end,
         desc = "Sessions",
+      },
+      {
+        "<leader>dw1",
+        function()
+          require("dapui").float_element("scopes", { enter = true })
+        end,
+        desc = "scopes      (element)",
+      },
+      {
+        "<leader>dw2",
+        function()
+          require("dapui").float_element("breakpoints", { enter = true })
+        end,
+        desc = "breakpoints (element)",
+      },
+      {
+        "<leader>dw3",
+        function()
+          require("dapui").float_element("stacks", { enter = true })
+        end,
+        desc = "stacks      (element)",
+      },
+      {
+        "<leader>dw4",
+        function()
+          require("dapui").float_element("watches", { enter = true })
+        end,
+        desc = "watches     (element)",
+      },
+      {
+        "<leader>dw5",
+        function()
+          require("dapui").float_element("repl", { enter = true })
+        end,
+        desc = "repl        (element)",
+      },
+      {
+        "<leader>dw6",
+        function()
+          require("dapui").float_element("console", { enter = true })
+        end,
+        desc = "console     (element)",
+      },
+      {
+        "<leader>dw7",
+        function()
+          require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes, { border = "rounded" })
+        end,
+        desc = "scopes      (widget) - scopes",
+      },
+      {
+        "<leader>dw8",
+        function()
+          require("dap.ui.widgets").centered_float(require("dap.ui.widgets").frames, { border = "rounded" })
+        end,
+        desc = "frames      (widget) - scopes",
+      },
+      {
+        "<leader>dw9",
+        function()
+          require("dap.ui.widgets").centered_float(require("dap.ui.widgets").threads, { border = "rounded" })
+        end,
+        desc = "threads     (widget) - event_thread",
       },
     },
   },
