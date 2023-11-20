@@ -33,7 +33,7 @@ return {
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the inlay hints.
       inlay_hints = {
-        enabled = vim.fn.has("nvim-0.10.0"),
+        enabled = vim.fn.has("nvim-0.10.0") == 1,
       },
       -- add any global capabilities here
       capabilities = {},
