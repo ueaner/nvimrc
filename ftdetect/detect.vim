@@ -1,4 +1,4 @@
-au BufRead,BufNewFile *.service    setlal ft=systemd
+au BufRead,BufNewFile *.service    setlocal ft=systemd
 
 au BufRead,BufNewFile go.sum       setlocal ft=gosum
 au BufRead,BufNewFile go.work.sum  setlocal ft=gosum
