@@ -4,11 +4,11 @@ return {
   {
     "nvim-cmp",
     dependencies = {
-      -- codeium
+      -- :Codeium Auth
       {
         "Exafunction/codeium.nvim",
         cmd = "Codeium",
-        build = ":Codeium Auth",
+        commit = "dab9126",
         opts = {},
       },
     },
