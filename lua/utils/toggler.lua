@@ -33,6 +33,62 @@ function M.option(option, silent, values)
   end
 end
 
+---@param buf? number nil get global, 0 current, otherwise buf
+function M.enable(name, buf)
+  -- When buf is number, set the buffer's local value
+  if type(buf) == "number" then
+    if buf > 0 then
+      vim.b[buf][name] = true
+    else
+      vim.b[name] = true
+    end
+  else
+    vim.g[name] = true
+    vim.b[name] = nil
+  end
+
+  notify.info("Enabled " .. name, { title = "Toggle" })
+end
+
+---@param buf? number nil get global, 0 current, otherwise buf
+function M.enabled(name, buf)
+  -- When buf is number, If the buffer has a local value, use that
+  if type(buf) == "number" then
+    buf = buf == 0 and vim.api.nvim_get_current_buf() or buf
+    local baf = vim.b[buf][name]
+
+    if baf ~= nil then
+      return baf
+    end
+  end
+
+  local gaf = vim.g[name]
+
+  -- Otherwise use the global value if set, or false by default
+  return gaf ~= nil and gaf or false
+end
+
+---@param buf? number nil set global, 0 current, otherwise buf
+function M.toggle(name, buf)
+  local enabled = M.enabled(name, buf)
+  if type(buf) == "number" then
+    if buf > 0 then
+      vim.b[buf][name] = not enabled
+    else
+      vim.b[name] = not enabled
+    end
+  else
+    vim.g[name] = not enabled
+    vim.b[name] = nil
+  end
+
+  if M.enabled(name, buf) then
+    notify.info("Enabled " .. name, { title = "Toggle" })
+  else
+    notify.warn("Disabled " .. name, { title = "Toggle" })
+  end
+end
+
 function M.toggle_diagnostics()
   if vim.diagnostic.is_disabled() then
     vim.diagnostic.enable()
