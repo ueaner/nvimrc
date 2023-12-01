@@ -335,10 +335,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>dB`  | Conditional breakpoint        | n    | [nvim-dap]        |
 | `<leader>du`  | Toggle dapui                  | n    | [nvim-dap-ui]     |
 | `<leader>dwe` | Show Eval (float window)      | n    | [nvim-dap]        |
-| `<leader>dwf` | Show Frames (float window)    | n    | [nvim-dap]        |
-| `<leader>dws` | Show Scopes (float window)    | n    | [nvim-dap]        |
-| `<leader>dwt` | Show Threads (float window)   | n    | [nvim-dap]        |
-| `<leader>dwS` | Show Sessions (float window)  | n    | [nvim-dap]        |
+| `<leader>dws` | Show Sessions (float window)  | n    | [nvim-dap]        |
 | `<leader>dt`  | Debug test                    | n    | [nvim-dap-go]     |
 | `<leader>dT`  | Debug last test               | n    | [nvim-dap-go]     |
 | `<leader>dC`  | Debug Class                   | n    | [nvim-dap-python] |
