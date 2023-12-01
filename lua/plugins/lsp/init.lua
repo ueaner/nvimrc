@@ -33,7 +33,7 @@ return {
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the inlay hints.
       inlay_hints = {
-        enabled = vim.fn.has("nvim-0.10.0") == 1,
+        enabled = vim.lsp.inlay_hint and true or false,
       },
       -- add any global capabilities here
       capabilities = {},
@@ -112,10 +112,11 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
-      if opts.inlay_hints.enabled and vim.lsp.inlay_hint then
+      if opts.inlay_hints.enabled and vim.lsp.inlay_hint and type(vim.lsp.inlay_hint) == "table" then
         ULsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint(buffer, true)
+            -- vim.lsp.inlay_hint.is_enabled()
+            vim.lsp.inlay_hint.enable(buffer, true)
           end
         end)
       end

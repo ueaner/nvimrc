@@ -56,8 +56,8 @@ map("n", "<leader>uc", require("utils.toggler").toggle_conceallevel, { desc = "T
 map("n", "<leader>ub", require("utils.toggler").toggle_clipboard, { desc = "Toggle ClipBoard" })
 map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
 
-if vim.lsp.inlay_hint then
-  map("n", "<leader>uh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
+if vim.lsp.inlay_hint and type(vim.lsp.inlay_hint) == "table" then
+  map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 end
 
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
