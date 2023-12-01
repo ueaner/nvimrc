@@ -16,9 +16,14 @@ function M.detect_indent()
     if line:sub(1, 1) == "\t" then
       tabbed = tabbed + 1
     else
-      -- The position of the first non-space character is the
-      -- indentation width.
-      local width = vim.fn.match(line, "[^ ]")
+      -- The position of the first non-space character is the indentation width.
+      -- > Sometimes stdout/stderr is redirected to a file and the "^@" null character is written
+      -- >  call match() will throw `Vim:E976: Using a Blob as a String`
+      local ok, width = pcall(vim.fn.match, line, "[^ ]")
+      if not ok then
+        return
+      end
+      -- local width = vim.fn.match(line, "[^ ]")
       if width ~= -1 then
         if width > 0 then
           spaced = spaced + 1
