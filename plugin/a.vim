@@ -14,7 +14,7 @@ command! VisualSelection call s:VisualSelection()
 "vnoremap <silent> * :call <sid>VisualSelection()<cr>
 "vnoremap <silent> # :call <sid>VisualSelection()<cr>
 
-" Remove Trailing Whitespace / ^M
+" Remove Trailing Whitespace / ^M / ^@
 function! s:Stripspace()
   " Remove Trailing Whitespace
   " save last search & cursor position
@@ -25,8 +25,11 @@ function! s:Stripspace()
   let @/=_s
   call cursor(l, c)
 
-  " Remove Trailing ^M
+  " Remove Trailing ^M (Windows End of Line)
   exec ":%s/\r//e"
+
+  " Remove null character ^@
+  exec "%s/[\x0]//g"
 endfunc
 command! Stripspace call s:Stripspace()
 "nnoremap <silent> <leader>cc :call <sid>Stripspace()<cr>
