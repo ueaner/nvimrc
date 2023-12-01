@@ -29,7 +29,7 @@ function! s:Stripspace()
   exec ":%s/\r//e"
 
   " Remove null character ^@
-  exec "%s/[\x0]//g"
+  :%s/[\x0]//g
 endfunc
 command! Stripspace call s:Stripspace()
 "nnoremap <silent> <leader>cc :call <sid>Stripspace()<cr>
