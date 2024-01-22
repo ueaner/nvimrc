@@ -1,6 +1,7 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 
-ULsp = require("utils.lsp")
+local ULsp = require("utils.lsp")
+local icons = require("config").icons
 
 return {
   -- lspconfig
@@ -28,6 +29,14 @@ return {
           -- prefix = "icons",
         },
         severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+          },
+        },
       },
       -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
       -- Be aware that you also will need to properly configure your LSP server to
