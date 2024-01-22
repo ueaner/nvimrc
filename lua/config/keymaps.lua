@@ -61,6 +61,7 @@ if vim.lsp.inlay_hint and type(vim.lsp.inlay_hint) == "table" then
 end
 
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
+map("n", "<leader>uB", function() require("utils.toggler").option("background", false, {"light", "dark"}) end, { desc = "Toggle Background" })
 
 -- lazy
 map("n", "<leader>mz", "<cmd>Lazy<cr>", { desc = "Lazy" })
