@@ -58,6 +58,7 @@ return {
       { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>ff", U.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>fF", U.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", U.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
       { "<leader>fp", "<cmd>Telescope project display_type=full<cr>", desc = "Find project" },
