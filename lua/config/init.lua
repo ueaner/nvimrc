@@ -30,7 +30,6 @@ local M = {
     "dbout", -- vim-dadbod-ui output
     "httpResult",
     "lspinfo", -- esc
-    "man",
     "neotest-output",
     "neotest-output-panel",
     "neotest-summary",
