@@ -18,7 +18,6 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 local opt = vim.opt
 
 opt.termguicolors = true -- True color support
-opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.splitbelow = true -- Put new windows below current
@@ -89,6 +88,12 @@ opt.foldmethod = "indent"
 -- highlighting matching pairs, $VIMRUNTIME/plugin/matchparen.vim
 opt.showmatch = true
 opt.matchtime = 3
+
+if not vim.env.SSH_TTY then
+  -- only set clipboard if not in ssh, to make sure the OSC 52
+  -- integration works automatically. Requires Neovim >= 0.10.0
+  opt.clipboard = "unnamedplus" -- Sync with system clipboard
+end
 
 -- Search for a filename and open the selected file :find somefile<TAB>
 opt.path:append("**")
