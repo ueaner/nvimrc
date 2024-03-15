@@ -59,7 +59,7 @@ end
 --
 --  Actual test conclusion: first close and then open, less side effects
 --  DE(database explorer) FE(file explorer)
---    DE   FE     doings
+--    DE   FE     doing
 --    on   on     close DE
 --    on   off    close DE, open? FE (stored state is open then reopen file explorer)
 --    off  off    open DE
@@ -151,16 +151,16 @@ return {
     dependencies = {
       {
         "kristijanhusak/vim-dadbod-completion",
-        ft = { "sql", "mysql" },
+        ft = { "sql", "mysql", "plsql" },
         init = function()
-          require("utils").on_ft({ "sql", "mysql" }, function()
+          require("utils").on_ft({ "sql", "mysql", "plsql" }, function()
             vim.opt_local["omnifunc"] = "vim_dadbod_completion#omni"
           end)
         end,
       },
     },
     opts = function()
-      require("cmp").setup.filetype({ "sql", "mysql" }, {
+      require("cmp").setup.filetype({ "sql", "mysql", "plsql" }, {
         sources = {
           { name = "vim-dadbod-completion" },
         },
