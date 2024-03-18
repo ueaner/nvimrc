@@ -2,6 +2,7 @@ return {
   -- http client, treesitter: http, json
   {
     "rest-nvim/rest.nvim",
+    version = "^1.2.1",
     ft = "http",
     dependencies = { "nvim-lua/plenary.nvim" },
     -- keys = {
