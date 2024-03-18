@@ -37,7 +37,7 @@ M.close = function(bufnr, force)
 
   -- buffer listed - File not modified or saved
   if not vim.bo[bufnr].modified then -- switch, close
-    vim.cmd("bp | bd!" .. bufnr)
+    vim.cmd("bp | bd" .. bufnr)
     return
   end
 
@@ -51,7 +51,7 @@ M.close = function(bufnr, force)
   --
   --  If choose to `cancel`, not need to switch buffer
   --
-  --   #    choice    doings
+  --   #    choice    doing
   --   1    Yes       save, switch, close
   --   2    No        switch, force close
   --   3    Cancel    do nothing
