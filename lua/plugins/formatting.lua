@@ -1,8 +1,5 @@
 local L = require("lazy.core.util")
 
----@type ConformOpts
-local format_opts = {}
-
 return {
   {
     "stevearc/conform.nvim",
@@ -21,7 +18,6 @@ return {
       { "<leader>mc", "<cmd>ConformInfo<cr>", desc = "Conform Info" },
     },
     init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
       -- Install the conform formatter on VeryLazy
       require("utils").on_very_lazy(function()
         require("utils.format").register({
@@ -29,7 +25,10 @@ return {
           priority = 100,
           primary = true,
           format = function(buf)
-            require("conform").format(L.merge(format_opts, { bufnr = buf }))
+            local plugin = require("lazy.core.config").plugins["conform.nvim"]
+            local Plugin = require("lazy.core.plugin")
+            local opts = Plugin.values(plugin, "opts", false)
+            require("conform").format(L.merge({}, opts.format, { bufnr = buf }))
           end,
           sources = function(buf)
             local ret = require("conform").list_formatters(buf)
@@ -55,7 +54,7 @@ return {
       },
       -- LazyVim will merge the options you set here with builtin formatters.
       -- You can also define any custom formatters here.
-      ---@type table<string,table>
+      ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
       formatters = {
         injected = { options = { ignore_errors = true } },
         -- -- Example of using dprint only when a dprint.json file is present
@@ -68,26 +67,6 @@ return {
     },
     ---@param opts ConformOpts
     config = function(_, opts)
-      opts.formatters = opts.formatters or {}
-      for name, formatter in pairs(opts.formatters) do
-        if type(formatter) == "table" then
-          local ok, defaults = pcall(require, "conform.formatters." .. name)
-          if ok and type(defaults) == "table" then
-            opts.formatters[name] = vim.tbl_deep_extend("force", {}, defaults, formatter)
-          end
-        end
-      end
-      for _, key in ipairs({ "format_on_save", "format_after_save" }) do
-        if opts[key] then
-          L.warn(
-            ("Don't set `opts.%s` for `conform.nvim`.\n**LazyVim** will use the conform formatter automatically"):format(
-              key
-            )
-          )
-          opts[key] = nil
-        end
-      end
-      format_opts = opts.format
       require("conform").setup(opts)
     end,
   },

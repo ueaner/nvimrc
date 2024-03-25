@@ -91,10 +91,10 @@ function M.formatter(opts)
     primary = true,
     priority = 1,
     format = function(buf)
-      M.format(L.merge(filter, { bufnr = buf }))
+      M.format(L.merge({}, filter, { bufnr = buf }))
     end,
     sources = function(buf)
-      local clients = M.get_clients(L.merge(filter, { bufnr = buf }))
+      local clients = M.get_clients({}, L.merge(filter, { bufnr = buf }))
       ---@param client lsp.Client
       local ret = vim.tbl_filter(function(client)
         return client.supports_method("textDocument/formatting")
