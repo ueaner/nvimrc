@@ -63,8 +63,12 @@ end
 -- * lsp root_dir
 -- * root pattern of filename of the current buffer
 -- * root pattern of cwd
+---@param opts? {git?:boolean}
 ---@return string
-function M.root()
+function M.root(opts)
+  if opts and opts.git then
+    return require("utils.root").git()
+  end
   return require("utils.root").get()
 end
 
