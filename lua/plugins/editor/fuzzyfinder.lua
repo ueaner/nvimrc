@@ -24,8 +24,8 @@ return {
         config = function()
           -- fix: https://github.com/nvim-telescope/telescope-cheat.nvim/issues/7
           local dbdir = vim.fn.stdpath("data") .. "/databases"
-          if not vim.loop.fs_stat(dbdir) then
-            vim.loop.fs_mkdir(dbdir, 493)
+          if not vim.uv.fs_stat(dbdir) then
+            vim.uv.fs_mkdir(dbdir, 493)
           end
         end,
       },
@@ -60,7 +60,7 @@ return {
       { "<leader>fF", U.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-      { "<leader>fR", U.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
+      { "<leader>fR", U.telescope("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       { "<leader>fp", "<cmd>Telescope project display_type=full<cr>", desc = "Find project" },
       {
         "<leader>fP",
