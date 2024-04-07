@@ -8,7 +8,6 @@ return {
       {
         "Exafunction/codeium.nvim",
         cmd = "Codeium",
-        commit = "dab9126",
         opts = {},
       },
     },
