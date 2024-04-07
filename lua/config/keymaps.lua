@@ -155,16 +155,17 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 map("n", "<leader>D", function() vim.log.set_level(vim.log.levels.DEBUG) end, { desc = "Neovim log set to DEBUG level" })
 
 -- lazygit
-map("n", "<leader>gg", function() require("utils").float_term({ "lazygit" }, { cwd = require("utils").root({ git = true }), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function() require("utils").float_term({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
+map("n", "<leader>gg", function() require("utils").terminal({ "lazygit" }, { cwd = require("utils").root({ git = true }), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>gG", function() require("utils").terminal({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
+
 -- tig
-map("n", "<leader>gt", function() require("utils").float_term({ "tig" }, { cwd = require("utils").root({ git = true }), esc_esc = false, border = "rounded" }) end, { desc = "Tig (root dir)" })
-map("n", "<leader>gT", function() require("utils").float_term({ "tig" }, { esc_esc = false, border = "rounded" }) end, { desc = "Tig (cwd)" })
+map("n", "<leader>gt", function() require("utils").terminal({ "tig" }, { cwd = require("utils").root({ git = true }), esc_esc = false, border = "rounded" }) end, { desc = "Tig (root dir)" })
+map("n", "<leader>gT", function() require("utils").terminal({ "tig" }, { esc_esc = false, border = "rounded" }) end, { desc = "Tig (cwd)" })
 
 if vim.fn.executable("btm") == 1 then
-  map("n", "<leader>ab", function() require("utils").float_term({ "btm" }) end, { desc = "bottom" })
+  map("n", "<leader>ab", function() require("utils").terminal({ "btm" }) end, { desc = "bottom" })
 elseif vim.fn.executable("btop") == 1 then
-  map("n", "<leader>ab", function() require("utils").float_term({ "btop" }) end, { desc = "btop" })
+  map("n", "<leader>ab", function() require("utils").terminal({ "btop" }) end, { desc = "btop" })
 end
 
 if vim.g.neovide then
