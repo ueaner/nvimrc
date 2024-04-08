@@ -22,3 +22,5 @@ au BufRead,BufNewFile */playbooks/handlers/*.yml      setlocal ft=yaml.ansible
 " Toggle folds with the `zi` command
 au BufRead,BufNewFile */lua/plugins/*.lua             setlocal foldlevel=1
 au BufRead,BufNewFile */lua/*/plugins/*.lua           setlocal foldlevel=1
+
+au BufRead,BufNewFile Caddyfile,*.Caddyfile,Caddyfile.* setlocal ft=caddyfile
