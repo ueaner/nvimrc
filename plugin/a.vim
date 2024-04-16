@@ -25,11 +25,11 @@ function! s:Stripspace()
   let @/=_s
   call cursor(l, c)
 
-  " Remove Trailing ^M (Windows End of Line)
-  exec ":%s/\r//e"
+  " Remove Trailing ^M (Windows End of Line) (CTRL-V CTRL-M)
+  silent! :%s/\r//e
 
-  " Remove null character ^@
-  :%s/[\x0]//g
+  " Remove null character ^@ (CTRL-V CTRL-J)
+  silent! :%s/[\x0]//g
 endfunc
 command! Stripspace call s:Stripspace()
 "nnoremap <silent> <leader>cc :call <sid>Stripspace()<cr>
