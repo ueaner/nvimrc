@@ -27,7 +27,7 @@ local conf = {
           },
         },
       },
-      ruff_lsp = { -- linter
+      ruff = { -- linter
         init_options = {
           settings = {
             args = { "--max-line-length=180" },
