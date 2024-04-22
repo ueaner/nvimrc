@@ -131,7 +131,7 @@ return {
         ULsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
             -- vim.lsp.inlay_hint.is_enabled()
-            vim.lsp.inlay_hint.enable(buffer, true)
+            vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
           end
         end)
       end
