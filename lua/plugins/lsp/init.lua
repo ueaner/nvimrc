@@ -47,7 +47,7 @@ return {
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the code lenses.
       codelens = {
-        enabled = vim.lsp.codelens and type(vim.lsp.codelens) == "table",
+        enabled = false and vim.lsp.codelens and type(vim.lsp.codelens) == "table",
       },
       -- add any global capabilities here
       capabilities = {},
