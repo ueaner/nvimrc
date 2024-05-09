@@ -110,6 +110,10 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
 if vim.g.neovide then
-  opt.guifont = "SauceCodePro Nerd Font:h9"
   vim.env.TERM = "xterm-256color"
+
+  -- Error: Font can't be updated ...
+  -- Set Chinese fonts in the `~/.config/neovide/config.toml`.
+  -- See: https://github.com/ueaner/dotfiles/blob/main/.config/neovide/config.toml
+  -- vim.opt.guifont = "SauceCodePro Nerd Font,Noto Sans Mono CJK SC:h12"
 end
