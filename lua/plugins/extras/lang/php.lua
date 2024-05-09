@@ -9,6 +9,8 @@ local conf = {
 }
 
 if vim.fn.executable("php") == 1 then
+  local UDap = require("utils.dap")
+
   conf = vim.tbl_extend("force", conf, {
     cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
       "phpactor",
@@ -23,63 +25,71 @@ if vim.fn.executable("php") == 1 then
     formatters = { -- conform.nvim
       "php_cs_fixer",
     },
+    dap = {
+      function()
+        local dap = require("dap")
+        dap.adapters.php = {
+          type = "executable",
+          command = vim.env.HOME .. "/.local/share/nvim/mason/bin/php-debug-adapter",
+        }
+
+        dap.configurations.php = {
+          {
+            type = "php",
+            request = "launch",
+            name = "Launch file (Xdebug)",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+            port = 9003,
+            stopOnEntry = false,
+            runtimeArgs = {
+              "-dxdebug.start_with_request=yes",
+            },
+            env = {
+              XDEBUG_MODE = "develop,coverage,debug",
+              XDEBUG_CONFIG = "idekey=nvim",
+            },
+          },
+          {
+            type = "php",
+            request = "launch",
+            name = "Launch file with arguments (Xdebug)",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+            port = 9003,
+            stopOnEntry = false,
+            args = UDap.get_args,
+            runtimeArgs = {
+              "-dxdebug.start_with_request=yes",
+            },
+            env = {
+              XDEBUG_MODE = "develop,coverage,debug",
+              XDEBUG_CONFIG = "idekey=nvim",
+            },
+          },
+        }
+      end,
+    },
     test = { -- neotest: language specific adapters
       "olimorris/neotest-phpunit",
       adapters = {
         ["neotest-phpunit"] = {
           env = {
-            XDEBUG_CONFIG = "idekey=neotest",
+            XDEBUG_CONFIG = "idekey=nvim",
           },
           dap = {
-            -- log = true,
             type = "php",
             request = "launch",
-            name = "PHPUnit: Listen for Xdebug",
+            name = "Launch file (Xdebug)",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
             port = 9003,
             stopOnEntry = false,
-            xdebugSettings = {
-              max_children = 512,
-              max_data = 1024,
-              max_depth = 4,
-            },
-            breakpoints = {
-              exception = {
-                Notice = false,
-                Warning = false,
-                Error = false,
-                Exception = false,
-                ["*"] = false,
-              },
-            },
           },
         },
       },
     },
   } --[[@as LangConfig]])
-
-  local dap = require("dap")
-  dap.adapters.php = {
-    type = "executable",
-    command = vim.env.HOME .. "/.local/share/nvim/mason/bin/php-debug-adapter",
-  }
-
-  dap.configurations.php = {
-    {
-      type = "php",
-      name = "Listen for Xdebug",
-      request = "launch",
-      program = "${file}",
-      cwd = "${workspaceFolder}",
-      port = 9003,
-      runtimeArgs = {
-        "-dxdebug.start_with_request=yes",
-      },
-      env = {
-        XDEBUG_MODE = "debug,develop",
-        XDEBUG_CONFIG = "client_port=${port}",
-      },
-    },
-  }
 end
 
 return generator:generate(conf)
