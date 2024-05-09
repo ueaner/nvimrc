@@ -13,7 +13,7 @@
 ---@field servers lspconfig.options
 ---@field setup table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
 
----@alias LangConfig.dap LangDapAdapter[]
+---@alias LangConfig.dap (function|LangDapAdapter)[]
 
 ---@class LangDapAdapter
 ---@field [1] string? package name
@@ -205,8 +205,10 @@ function M:generate(conf)
   -- setup DAP
   if not vim.tbl_isempty(conf.dap) then
     for _, item in ipairs(conf.dap) do
-      -- install dap adapter plugin
-      if not (item[1] == nil or item[1] == "") then
+      if type(item) == "function" then
+        item()
+      elseif not (item[1] == nil or item[1] == "") then
+        -- Install dap adapter plugin
         -- Automatically run `require(MAIN).setup(opts)` with `config = true`
         local spec = { item[1], event = "VeryLazy", config = true }
         if type(item.config) == "function" then
