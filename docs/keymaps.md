@@ -53,51 +53,52 @@ FROM Terminal TO Normal mode keyset: `tmap <Esc><Esc> <C-\><C-n>`
 
 ## Basic editing
 
-| Key             | Description                        | Mode    | Provider       |
-| --------------- | ---------------------------------- | ------- | -------------- |
-| `y`             | Yank selected                      | v       | register       |
-| `p`             | Put the text after the cursor      | n, v    | register       |
-| `P`             | Put the text before the cursor     | n, v    | register       |
-| `x`             | Delete char, same as `dl`          | n, v    | register       |
-| `X`             | Delete char, same as `dh`          | n, v    | register       |
-| `cc`            | Editing line                       | n -> i  | register       |
-| `dd`            | Delete line                        | n       | register       |
-| `yy`            | Yank line                          | n       | register       |
-| `C`             | Delete to end of line              | n -> i  | register       |
-| `D`             | Delete to end of line              | n, v    | register       |
-| `Y`             | Yank to end of line                | n, v    | register       |
-| `<A-j>`         | Move line/block down               | n, i, v | move           |
-| `<A-k>`         | Move line/block up                 | n, i, v | move           |
-| `u`             | Undo                               | n       | undo           |
-| `<C-r>`         | Redo                               | n       | redo           |
-| `o`             | Insert line below                  | n       | Insert-mode    |
-| `O`             | Insert line above                  | n       | Insert-mode    |
-| `%`             | Jump to matching bracket           | n       | motion         |
-| `>>`            | Indent line                        | n       | motion         |
-| `<<`            | Outdent line                       | n       | motion         |
-| `>`             | Indent line                        | v       | motion         |
-| `<`             | Outdent line                       | v       | motion         |
-| `^`             | Go to beginning of line            | n, v    | motion         |
-| `$`             | Go to end of line                  | n, v    | motion         |
-| `gg`            | Go to first line                   | n, v    | motion         |
-| `G`             | Go to last line                    | n, v    | motion         |
-| `j`             | Move cursor down                   | n, v    | motion         |
-| `k`             | Move cursor up                     | n, v    | motion         |
-| `H`             | To Header (top) line of window     | n, v    | motion         |
-| `M`             | To Middle line of window           | n, v    | motion         |
-| `L`             | To Last (bottom) line of window    | n, v    | motion         |
-| `<C-f>`         | Scroll page down                   | n, v    | scrolling      |
-| `<C-b>`         | Scroll page up                     | n, v    | scrolling      |
-| `<C-d>`         | Scroll page down (half a screen)   | n, v    | scrolling      |
-| `<C-u>`         | Scroll page up (half a screen)     | n, v    | scrolling      |
-| `zz`            | Scroll cursor to center screen     | n, v    | scrolling      |
-| `za`            | Toggle fold under cursor           | n       | fold           |
-| `zA`            | Toggle all folds under cursor      | n       | fold           |
-| `<leader>uw`    | Toggle word wrap                   | n       | options        |
-| `gcc`           | Toggle line comment                | n       | [mini.comment] |
-| `gc`            | Toggle selected comment            | v       | [mini.comment] |
-| `f{char}`       | Enhanced f/t motions               | n       | [flash.nvim]   |
-| `s{char}{char}` | Jump by 2-character search pattern | n       | [flash.nvim]   |
+| Key             | Description                        | Mode    | Provider     |
+| --------------- | ---------------------------------- | ------- | ------------ |
+| `y`             | Yank selected                      | v       | register     |
+| `p`             | Put the text after the cursor      | n, v    | register     |
+| `P`             | Put the text before the cursor     | n, v    | register     |
+| `x`             | Delete char, same as `dl`          | n, v    | register     |
+| `X`             | Delete char, same as `dh`          | n, v    | register     |
+| `cc`            | Editing line                       | n -> i  | register     |
+| `dd`            | Delete line                        | n       | register     |
+| `yy`            | Yank line                          | n       | register     |
+| `C`             | Delete to end of line              | n -> i  | register     |
+| `D`             | Delete to end of line              | n, v    | register     |
+| `Y`             | Yank to end of line                | n, v    | register     |
+| `<A-j>`         | Move line/block down               | n, i, v | move         |
+| `<A-k>`         | Move line/block up                 | n, i, v | move         |
+| `u`             | Undo                               | n       | undo         |
+| `<C-r>`         | Redo                               | n       | redo         |
+| `o`             | Insert line below                  | n       | Insert-mode  |
+| `O`             | Insert line above                  | n       | Insert-mode  |
+| `%`             | Jump to matching bracket           | n       | motion       |
+| `>>`            | Indent line                        | n       | motion       |
+| `<<`            | Outdent line                       | n       | motion       |
+| `>`             | Indent line                        | v       | motion       |
+| `<`             | Outdent line                       | v       | motion       |
+| `^`             | Go to beginning of line            | n, v    | motion       |
+| `$`             | Go to end of line                  | n, v    | motion       |
+| `gg`            | Go to first line                   | n, v    | motion       |
+| `G`             | Go to last line                    | n, v    | motion       |
+| `j`             | Move cursor down                   | n, v    | motion       |
+| `k`             | Move cursor up                     | n, v    | motion       |
+| `H`             | To Header (top) line of window     | n, v    | motion       |
+| `M`             | To Middle line of window           | n, v    | motion       |
+| `L`             | To Last (bottom) line of window    | n, v    | motion       |
+| `<C-f>`         | Scroll page down                   | n, v    | scrolling    |
+| `<C-b>`         | Scroll page up                     | n, v    | scrolling    |
+| `<C-d>`         | Scroll page down (half a screen)   | n, v    | scrolling    |
+| `<C-u>`         | Scroll page up (half a screen)     | n, v    | scrolling    |
+| `zz`            | Scroll cursor to center screen     | n, v    | scrolling    |
+| `za`            | Toggle fold under cursor           | n       | fold         |
+| `zA`            | Toggle all folds under cursor      | n       | fold         |
+| `<leader>uw`    | Toggle word wrap                   | n       | options      |
+| `gcc`           | Toggle line comment                | n       | various      |
+| `gc`            | Toggle selected comment            | v       | various      |
+| `dgc`           | Delete comment                     | v       | various      |
+| `f{char}`       | Enhanced f/t motions               | n       | [flash.nvim] |
+| `s{char}{char}` | Jump by 2-character search pattern | n       | [flash.nvim] |
 
 Command-line mode uses readline-style keymaps.
 
@@ -425,7 +426,6 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
 [grpc-nvim]: https://github.com/hudclark/grpc-nvim
 [lazygit]: https://github.com/jesseduffield/lazygit
-[mini.comment]: https://github.com/echasnovski/mini.comment
 [windows.nvim]: https://github.com/anuvyklack/windows.nvim
 [zen-mode.nvim]: https://github.com/folke/zen-mode.nvim
 [neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
