@@ -112,6 +112,9 @@ vim.g.loaded_perl_provider = 0
 if vim.g.neovide then
   vim.env.TERM = "xterm-256color"
 
+  -- default configuration, see: https://github.com/neovide/neovide/blob/main/src/window/settings.rs
+  vim.g.neovide_fullscreen = true
+
   -- Error: Font can't be updated ...
   -- Set Chinese fonts in the `~/.config/neovide/config.toml`.
   -- See: https://github.com/ueaner/dotfiles/blob/main/.config/neovide/config.toml
