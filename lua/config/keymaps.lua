@@ -169,13 +169,14 @@ elseif vim.fn.executable("btop") == 1 then
 end
 
 if vim.g.neovide then
-  vim.g.neovide_input_use_logo = true
+  vim.keymap.set('n', '<C-s>', ':w<CR>') -- Save
   -- system clipboard
-  map("n", "<D-c>", '"+y')
-  map("v", "<D-c>", '"+y')
-  map("n", "<D-v>", '"+p')
-  map("i", "<D-v>", "<C-r>+")
-  map("c", "<D-v>", "<C-r>+")
+  vim.keymap.set('n', '<C-c>', '"+y')    -- Copy normal mode
+  vim.keymap.set('v', '<C-c>', '"+y')    -- Copy visual mode
+  vim.keymap.set('n', '<C-v>', '"+p')    -- Paste normal mode
+  vim.keymap.set('v', '<C-v>', '"+p')    -- Paste visual mode
+  vim.keymap.set('c', '<C-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<C-v>', '<C-R>+') -- Paste insert mode
 end
 
 -- stylua: ignore end
