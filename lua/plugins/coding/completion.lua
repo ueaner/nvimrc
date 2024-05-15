@@ -7,6 +7,8 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      { "rafamadriz/friendly-snippets" },
+      { "garymjr/nvim-snippets", opts = { friendly_snippets = true } },
     },
     opts = function(_, opts)
       local U = require("utils")
@@ -52,6 +54,7 @@ return {
           { name = "nvim_lsp", group_index = 1 },
           { name = "buffer", group_index = 2 },
           { name = "path", group_index = 2 },
+          { name = "snippets", group_index = 2 },
         },
 
         ---@type cmp.FormattingConfig
