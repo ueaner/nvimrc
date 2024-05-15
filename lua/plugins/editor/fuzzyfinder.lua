@@ -29,6 +29,15 @@ return {
           end
         end,
       },
+      {
+        "dhruvmanila/browser-bookmarks.nvim",
+        version = "*",
+        config = function()
+          require("browser_bookmarks").setup({
+            selected_browser = "chrome",
+          })
+        end,
+      },
     },
     cmd = "Telescope",
     keys = {
@@ -56,6 +65,7 @@ return {
       { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope Builtin" },
       -- find
       { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "<leader>fB", "<cmd>Telescope bookmarks<cr>", desc = "Browser Bookmarks" },
       { "<leader>ff", U.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>fF", U.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
@@ -185,6 +195,7 @@ return {
       telescope.load_extension("fzf")
       telescope.load_extension("live_grep_args")
       telescope.load_extension("cheat")
+      telescope.load_extension("bookmarks")
     end,
   },
 }
