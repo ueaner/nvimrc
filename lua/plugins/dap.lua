@@ -169,6 +169,17 @@ return {
         end,
         desc = "All Commands",
       },
+      {
+        "<leader>dd",
+        function()
+          require("telescope").extensions.dap.configurations({
+            language_filter = function(lang)
+              return lang == vim.bo.filetype
+            end,
+          })
+        end,
+        desc = "Show DAP configurations",
+      },
     },
   },
 
