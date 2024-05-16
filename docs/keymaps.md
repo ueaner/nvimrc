@@ -316,6 +316,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 | Key           | Description                   | Mode | Provider          |
 | ------------- | ----------------------------- | ---- | ----------------- |
+| `<leader>da`  | All Commands                  | n    | [telescope.nvim]  |
 | `<leader>db`  | Toggle breakpoint             | n    | [nvim-dap]        |
 | `<leader>dc`  | Start / Continue              | n    | [nvim-dap]        |
 | `<leader>di`  | Step into                     | n    | [nvim-dap]        |

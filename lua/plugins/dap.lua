@@ -4,7 +4,6 @@ return {
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
     dependencies = {
-      "nvim-telescope/telescope-dap.nvim",
       {
         "theHamsta/nvim-dap-virtual-text",
         config = function()
@@ -149,6 +148,26 @@ return {
           require("dap.ui.widgets").centered_float(require("dap.ui.widgets").threads, { border = "rounded" })
         end,
         desc = "threads     (widget) - event_thread",
+      },
+    },
+  },
+
+  {
+    "nvim-telescope/telescope-dap.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    lazy = true,
+    config = function()
+      require("telescope").load_extension("dap")
+    end,
+    keys = {
+      {
+        "<leader>da",
+        function()
+          require("telescope").extensions.dap.commands()
+        end,
+        desc = "All Commands",
       },
     },
   },
