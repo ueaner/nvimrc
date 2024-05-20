@@ -1,5 +1,11 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
+-- Hide deprecation warnings
+vim.g.deprecation_warnings = false
+if vim.g.deprecation_warnings == false then
+  vim.deprecate = function() end
+end
+
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 vim.g.markdown_folding = 1
