@@ -90,12 +90,12 @@ function M.toggle(name, buf)
 end
 
 function M.toggle_diagnostics()
-  if vim.diagnostic.is_disabled() then
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+    notify.warn("Disabled diagnostics", { title = "Diagnostics" })
+  else
     vim.diagnostic.enable()
     notify.info("Enabled diagnostics", { title = "Diagnostics" })
-  else
-    vim.diagnostic.disable()
-    notify.warn("Disabled diagnostics", { title = "Diagnostics" })
   end
 end
 
