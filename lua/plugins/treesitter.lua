@@ -1,3 +1,5 @@
+local U = require("utils")
+
 -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/lua/nvim-treesitter/parsers.lua
 -- List of installed treesitter parsers `:checkhealth nvim-treesitter`
@@ -72,28 +74,22 @@ return {
     ---@param opts TSConfig
     config = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        ---@type table<string, boolean>
-        local added = {}
-        ---@param lang string
-        opts.ensure_installed = vim.tbl_filter(function(lang)
-          if added[lang] then
-            return false
-          end
-          added[lang] = true
-          return true
-        end, opts.ensure_installed --[[@as table]])
+        opts.ensure_installed = U.dedup(opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
-      vim.schedule(function()
-        require("lazy").load({ plugins = { "nvim-treesitter-textobjects" } })
-      end)
     end,
   },
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    lazy = true,
+    event = "VeryLazy",
     config = function()
+      -- If treesitter is already loaded, we need to run config again for textobjects
+      if U.is_loaded("nvim-treesitter") then
+        local opts = U.opts("nvim-treesitter")
+        require("nvim-treesitter.configs").setup({ textobjects = opts.textobjects })
+      end
+
       -- When in diff mode, we want to use the default
       -- vim text objects c & C instead of the treesitter ones.
       local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
