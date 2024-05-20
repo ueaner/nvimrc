@@ -5,29 +5,7 @@ local M = {}
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
 
--- Examples:
--- ```lua
---    require("utils.lsp").get_clients({ method = "textDocument/codeAction" })
--- ```
----@param opts? lsp.Client.filter
-function M.get_clients(opts)
-  local ret = {} ---@type lsp.Client[]
-  if vim.lsp.get_clients then
-    ret = vim.lsp.get_clients(opts)
-  else
-    ---@diagnostic disable-next-line: deprecated
-    ret = vim.lsp.get_active_clients(opts)
-    if opts and opts.method then
-      ---@param client lsp.Client
-      ret = vim.tbl_filter(function(client)
-        return client.supports_method(opts.method, { bufnr = opts.bufnr })
-      end, ret)
-    end
-  end
-  return opts and opts.filter and vim.tbl_filter(opts.filter, ret) or ret
-end
-
----@param on_attach fun(client, buffer)
+---@param on_attach fun(client:lsp.Client, buffer)
 function M.on_attach(on_attach)
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
@@ -41,7 +19,7 @@ end
 ---@param from string
 ---@param to string
 function M.on_rename(from, to)
-  local clients = M.get_clients()
+  local clients = vim.lsp.get_clients()
   for _, client in ipairs(clients) do
     if client.supports_method("workspace/willRenameFiles") then
       ---@diagnostic disable-next-line: invisible
@@ -94,7 +72,7 @@ function M.formatter(opts)
       M.format(L.merge({}, filter, { bufnr = buf }))
     end,
     sources = function(buf)
-      local clients = M.get_clients({}, L.merge(filter, { bufnr = buf }))
+      local clients = vim.lsp.get_clients(L.merge({}, filter, { bufnr = buf }))
       ---@param client lsp.Client
       local ret = vim.tbl_filter(function(client)
         return client.supports_method("textDocument/formatting")
