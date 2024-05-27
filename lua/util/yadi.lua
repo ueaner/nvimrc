@@ -1,7 +1,5 @@
 -- lua of https://github.com/timakro/vim-yadi/blob/main/plugin/yadi.vim
 
-local notify = require("lazy.core.util")
-
 local M = {}
 
 function M.detect_indent()
@@ -50,13 +48,13 @@ function M.detect_indent()
 
   if tabbed > spaced * 4 then -- Over 80% tabs
     local s = string.format("setlocal noexpandtab shiftwidth=%d softtabstop=%d", 0, 0)
-    notify.debug(s, { title = "Detect Indent (tab)" })
+    LazyUtil.debug(s, { title = "Detect Indent (tab)" })
     vim.cmd(s)
   elseif spaced > tabbed * 4 and max * 5 > total * 3 then
     -- Detected over 80% spaces and the most common indentation level makes
     -- up over 60% of all indentations in the file.
     local s = string.format("setlocal expandtab shiftwidth=%d softtabstop=%d", winner, winner)
-    notify.debug(s, { title = "Detect Indent (space)" })
+    LazyUtil.debug(s, { title = "Detect Indent (space)" })
     vim.cmd(s)
   end
 end

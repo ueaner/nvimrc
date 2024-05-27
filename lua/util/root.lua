@@ -1,5 +1,3 @@
-local L = require("lazy.core.util")
-
 ---@class util.root
 ---@overload fun(): string
 local M = setmetatable({}, {
@@ -40,7 +38,7 @@ function M.detectors.lsp(buf)
     end
   end
   return vim.tbl_filter(function(path)
-    path = L.norm(path)
+    path = LazyUtil.norm(path)
     return path and bufpath:find(path, 1, true) == 1
   end, roots)
 end
@@ -66,7 +64,7 @@ function M.realpath(path)
     return nil
   end
   path = vim.uv.fs_realpath(path) or path
-  return L.norm(path)
+  return LazyUtil.norm(path)
 end
 
 ---@param spec LazyRootSpec
@@ -132,7 +130,7 @@ function M.info()
   lines[#lines + 1] = "```lua"
   lines[#lines + 1] = "vim.g.root_spec = " .. vim.inspect(spec)
   lines[#lines + 1] = "```"
-  L.info(lines, { title = "LazyVim Roots" })
+  LazyUtil.info(lines, { title = "LazyVim Roots" })
   return roots[1] and roots[1].paths[1] or vim.uv.cwd()
 end
 

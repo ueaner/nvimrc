@@ -1,7 +1,5 @@
 -- require("util.option").toggle()
 
-local notify = require("lazy.core.util")
-
 local M = {}
 
 ---@param silent boolean?
@@ -19,16 +17,16 @@ function M.option(option, silent, values)
     else
       vim.opt_local[option] = values[1]
     end
-    return notify.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
+    return LazyUtil.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
   end
 
   vim.opt_local[option] = not vim.opt_local[option]:get()
 
   if not silent then
     if vim.opt_local[option]:get() then
-      notify.info("Enabled " .. option, { title = "Option" })
+      LazyUtil.info("Enabled " .. option, { title = "Option" })
     else
-      notify.warn("Disabled " .. option, { title = "Option" })
+      LazyUtil.warn("Disabled " .. option, { title = "Option" })
     end
   end
 end
@@ -47,7 +45,7 @@ function M.enable(name, buf)
     vim.b[name] = nil
   end
 
-  notify.info("Enabled " .. name, { title = "Toggle" })
+  LazyUtil.info("Enabled " .. name, { title = "Toggle" })
 end
 
 ---@param buf? number nil get global, 0 current, otherwise buf
@@ -83,19 +81,19 @@ function M.toggle(name, buf)
   end
 
   if M.enabled(name, buf) then
-    notify.info("Enabled " .. name, { title = "Toggle" })
+    LazyUtil.info("Enabled " .. name, { title = "Toggle" })
   else
-    notify.warn("Disabled " .. name, { title = "Toggle" })
+    LazyUtil.warn("Disabled " .. name, { title = "Toggle" })
   end
 end
 
 function M.toggle_diagnostics()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)
-    notify.warn("Disabled diagnostics", { title = "Diagnostics" })
+    LazyUtil.warn("Disabled diagnostics", { title = "Diagnostics" })
   else
     vim.diagnostic.enable()
-    notify.info("Enabled diagnostics", { title = "Diagnostics" })
+    LazyUtil.info("Enabled diagnostics", { title = "Diagnostics" })
   end
 end
 

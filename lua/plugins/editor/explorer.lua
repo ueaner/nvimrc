@@ -2,7 +2,7 @@ local neotree_get_node = function(state)
   local tree = state.tree
   local success, node = pcall(tree.get_node, tree)
   if not (success and node) then
-    require("lazy.core.util").warn("Could not get node.")
+    LazyUtil.warn("Could not get node.")
     return
   end
   if node.type == "message" then

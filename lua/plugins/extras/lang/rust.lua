@@ -1,4 +1,3 @@
-local notify = require("lazy.core.util")
 local UDap = require("util.dap")
 
 local function get_codelldb()
@@ -160,7 +159,7 @@ return {
             if vim.fn.executable(debug_bin) == 1 then
               return debug_bin
             end
-            notify.warn("Unable to find executable for '" .. debug_bin .. "'", { title = "DAP" })
+            LazyUtil.warn("Unable to find executable for '" .. debug_bin .. "'", { title = "DAP" })
             return dap.ABORT
           end,
           args = {},

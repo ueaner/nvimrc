@@ -1,5 +1,3 @@
-local L = require("lazy.core.util")
-
 ---@class util.lsp
 local M = {}
 
@@ -69,10 +67,10 @@ function M.formatter(opts)
     primary = true,
     priority = 1,
     format = function(buf)
-      M.format(L.merge({}, filter, { bufnr = buf }))
+      M.format(LazyUtil.merge({}, filter, { bufnr = buf }))
     end,
     sources = function(buf)
-      local clients = vim.lsp.get_clients(L.merge({}, filter, { bufnr = buf }))
+      local clients = vim.lsp.get_clients(LazyUtil.merge({}, filter, { bufnr = buf }))
       ---@param client lsp.Client
       local ret = vim.tbl_filter(function(client)
         return client.supports_method("textDocument/formatting")
@@ -84,7 +82,7 @@ function M.formatter(opts)
       end, ret)
     end,
   }
-  return L.merge(ret, opts) --[[@as LazyFormatter]]
+  return LazyUtil.merge(ret, opts) --[[@as LazyFormatter]]
 end
 
 ---@alias lsp.Client.format {timeout_ms?: number, format_options?: table} | lsp.Client.filter

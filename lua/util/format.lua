@@ -1,5 +1,3 @@
-local L = require("lazy.core.util")
-
 ---@class util.format
 ---@overload fun(opts?: {force?:boolean})
 local M = setmetatable({}, {
@@ -69,7 +67,7 @@ function M.info(buf)
   if not have then
     lines[#lines + 1] = "\n***No formatters available for this buffer.***"
   end
-  L[enabled and "info" or "warn"](
+  LazyUtil[enabled and "info" or "warn"](
     table.concat(lines, "\n"),
     { title = "LazyFormat (" .. (enabled and "enabled" or "disabled") .. ")" }
   )
@@ -113,14 +111,14 @@ function M.format(opts)
   for _, formatter in ipairs(M.resolve(buf)) do
     if formatter.active then
       done = true
-      L.try(function()
+      LazyUtil.try(function()
         return formatter.format(buf)
       end, { msg = "Formatter `" .. formatter.name .. "` failed" })
     end
   end
 
   if not done and opts and opts.force then
-    L.warn("No formatter available", { title = "LazyVim" })
+    LazyUtil.warn("No formatter available", { title = "LazyVim" })
   end
 end
 
