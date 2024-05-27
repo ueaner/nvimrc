@@ -15,11 +15,6 @@ return {
     event = { "LazyFile", "VeryLazy" },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    keys = {
-      { "<Space>", desc = "Increment selection" },
-      { "<BS>", desc = "Decrement selection", mode = "x" },
-      { "<leader>mt", "<cmd>TSConfigInfo<cr>", desc = "Treesitter Config Info" },
-    },
     init = function(plugin)
       require("lazy.core.loader").add_to_rtp(plugin)
       require("nvim-treesitter.query_predicates")
@@ -125,19 +120,5 @@ return {
     "windwp/nvim-ts-autotag",
     event = "LazyFile",
     opts = {},
-  },
-
-  -- Motions based on syntax trees
-  -- Use `v, c, d, y` to enter Operator-pending mode, and then press `m` to visually select/change/delete/yank
-  {
-    "mfussenegger/nvim-treehopper",
-    event = "LazyFile",
-    keys = { { "m", mode = { "o", "x" } } },
-    config = function()
-      vim.cmd([[
-        omap     <silent> m :<C-U>lua require('tsht').nodes()<cr>
-        xnoremap <silent> m :lua require('tsht').nodes()<cr>
-      ]])
-    end,
   },
 }

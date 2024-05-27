@@ -123,11 +123,6 @@ return {
       },
     },
     cmd = { "DB" },
-    keys = {
-      -- stylua: ignore
-      -- { "<leader>E", function() M.db_explorer_toggle() end, desc = "Toggle Database Explorer", },
-      { "<leader>E", "<cmd>DBUIToggle<cr>", desc = "Toggle Database Explorer" },
-    },
     init = function()
       vim.g.db_ui_save_location = vim.fn.stdpath("data") .. "/dbui"
       vim.g.db_ui_show_help = 0

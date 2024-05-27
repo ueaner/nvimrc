@@ -97,13 +97,6 @@ return {
     ft = { "rust" },
     opts = {
       server = {
-        -- stylua: ignore
-        on_attach = function(_, bufnr)
-          vim.keymap.set("n", "K", function() vim.cmd.RustLsp({ "hover", "actions" }) end, { desc = "Hover Actions", buffer = bufnr })
-          vim.keymap.set("n", "<leader>ca", function() vim.cmd.RustLsp("codeAction") end, { desc = "Code Action", buffer = bufnr })
-          vim.keymap.set("n", "<leader>dr", function() vim.cmd.RustLsp("debuggables") end, { desc = "Run Debuggables", buffer = bufnr })
-          vim.keymap.set("n", "<leader>rA", function() vim.cmd.RustLsp("runnables") end, { desc = "Run Runnables", buffer = bufnr })
-        end,
         default_settings = {
           -- rust-analyzer language server configuration
           ["rust-analyzer"] = {

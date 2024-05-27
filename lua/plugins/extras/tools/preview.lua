@@ -10,12 +10,6 @@ return {
     "ellisonleao/glow.nvim",
     ft = "markdown",
     cmd = { "Glow" },
-    init = function()
-      -- stylua: ignore
-      require("utils").on_ft("markdown", function(event)
-        vim.keymap.set("n", "<leader>cP", "<cmd>Glow!<cr>", { desc = "Preview (Glow)", buffer = event.buf })
-      end)
-    end,
     config = function()
       require("glow").setup({
         style = "dark",
@@ -32,18 +26,6 @@ return {
     ft = { "markdown" },
     cond = function()
       return vim.fn.executable("deno") == 1
-    end,
-    init = function()
-      require("utils").on_ft("markdown", function(event)
-        vim.keymap.set("n", "<leader>cp", function()
-          local peek = require("peek")
-          if peek.is_open() then
-            peek.close()
-          else
-            peek.open()
-          end
-        end, { desc = "Live Preview (Peek)", buffer = event.buf })
-      end)
     end,
     opts = {
       theme = "light",

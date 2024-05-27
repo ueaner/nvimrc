@@ -3,11 +3,6 @@ return {
   {
     "folke/edgy.nvim",
     event = "VeryLazy",
-    -- stylua: ignore
-    keys = {
-      { "<leader>ue", function() require("edgy").toggle() end, desc = "Edgy Toggle" },
-      { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
-    },
     opts = {
       ---@type table<Edgy.Pos, {size:integer | fun():integer, wo:vim.wo?}>
       options = {

@@ -7,8 +7,14 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      { "rafamadriz/friendly-snippets" },
-      { "garymjr/nvim-snippets", opts = { friendly_snippets = true } },
+      {
+        "garymjr/nvim-snippets",
+        opts = {
+          friendly_snippets = true,
+          global_snippets = { "all", "global" },
+        },
+        dependencies = { "rafamadriz/friendly-snippets" },
+      },
     },
     opts = function(_, opts)
       local U = require("utils")
@@ -21,13 +27,11 @@ return {
         -- border = "single",
       }
 
-      if type(vim.snippet) == "table" then
-        opts.snippet = {
-          expand = function(args)
-            vim.snippet.expand(args.body)
-          end,
-        }
-      end
+      opts.snippet = {
+        expand = function(args)
+          vim.snippet.expand(args.body)
+        end,
+      }
 
       ---@return cmp.ConfigSchema
       return {
@@ -51,10 +55,10 @@ return {
         }),
         -- :CmpStatus describes statuses and states of sources.
         sources = {
-          { name = "nvim_lsp", group_index = 1 },
-          { name = "buffer", group_index = 2 },
-          { name = "path", group_index = 2 },
-          { name = "snippets", group_index = 2 },
+          { name = "nvim_lsp" },
+          { name = "path" },
+          { name = "buffer" },
+          { name = "snippets" },
         },
 
         ---@type cmp.FormattingConfig
@@ -84,98 +88,5 @@ return {
         },
       }
     end,
-  },
-  keys = function()
-    if type(vim.snippet) == "table" then
-      return {
-        {
-          "<Tab>",
-          function()
-            if vim.snippet.active({ direction = 1 }) then
-              vim.schedule(function()
-                vim.snippet.jump(1)
-              end)
-              return
-            end
-            return "<Tab>"
-          end,
-          expr = true,
-          silent = true,
-          mode = "i",
-        },
-        {
-          "<Tab>",
-          function()
-            vim.schedule(function()
-              vim.snippet.jump(1)
-            end)
-          end,
-          silent = true,
-          mode = "s",
-        },
-        {
-          "<S-Tab>",
-          function()
-            if vim.snippet.active({ direction = -1 }) then
-              vim.schedule(function()
-                vim.snippet.jump(-1)
-              end)
-              return
-            end
-            return "<S-Tab>"
-          end,
-          expr = true,
-          silent = true,
-          mode = { "i", "s" },
-        },
-      }
-    end
-  end,
-
-  -- snippets
-  {
-    "L3MON4D3/LuaSnip",
-    enabled = type(vim.snippet) == "nil", -- nvim 0.10.0-
-    build = (not jit.os:find("Windows"))
-        and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-      or nil,
-    dependencies = {
-      {
-        "rafamadriz/friendly-snippets",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
-      {
-        "nvim-cmp",
-        dependencies = {
-          "saadparwaiz1/cmp_luasnip",
-        },
-        opts = function(_, opts)
-          opts.snippet = {
-            expand = function(args)
-              require("luasnip").lsp_expand(args.body)
-            end,
-          }
-          table.insert(opts.sources, { name = "luasnip" })
-        end,
-      },
-    },
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
-    -- stylua: ignore
-    keys = {
-      {
-        "<tab>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-        end,
-        expr = true, silent = true, mode = "i",
-      },
-      { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    },
   },
 }

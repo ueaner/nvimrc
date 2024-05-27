@@ -11,15 +11,5 @@ return {
       require("refactoring").setup({})
       require("telescope").load_extension("refactoring")
     end,
-    keys = {
-      {
-        "<leader>cr",
-        function()
-          require("telescope").extensions.refactoring.refactors()
-        end,
-        mode = { "n", "v" },
-        desc = "Refactors",
-      },
-    },
   },
 }

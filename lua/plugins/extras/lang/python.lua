@@ -60,15 +60,6 @@ local conf = {
       config = function()
         require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
       end,
-      -- stylua: ignore
-      on_ft = function(event)
-        vim.keymap.set("n", "<leader>dC", function() require("dap-python").test_class() end,
-          { buffer = event.buf, desc = "Debug Class" })
-        vim.keymap.set("n", "<leader>dM", function() require("dap-python").test_method() end,
-          { buffer = event.buf, desc = "Debug Method" })
-        vim.keymap.set("v", "<leader>dS", function() require("dap-python").debug_selection() end,
-          { buffer = event.buf, desc = "Debug Selection" })
-      end,
     },
   },
   test = { -- neotest: language specific adapters

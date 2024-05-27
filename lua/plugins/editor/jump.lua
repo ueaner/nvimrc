@@ -19,13 +19,6 @@ return {
         },
       },
     },
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-      -- use treesitter incremental_selection
-      -- { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
   },
 
   -- Flash Telescope config
@@ -57,6 +50,16 @@ return {
     end,
   },
 
+  -- Motions based on syntax trees
+  -- Use `v, c, d, y` to enter Operator-pending mode, and then press `m` to visually select/change/delete/yank
+  {
+    "mfussenegger/nvim-treehopper",
+    event = "LazyFile",
+    config = function()
+      require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
+    end,
+  },
+
   -- highlighted references under cursor
   {
     "RRethy/vim-illuminate",
@@ -70,28 +73,6 @@ return {
     },
     config = function(_, opts)
       require("illuminate").configure(opts)
-
-      local function map(key, dir, buffer)
-        vim.keymap.set("n", key, function()
-          require("illuminate")["goto_" .. dir .. "_reference"](false)
-        end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
-      end
-
-      map("]]", "next")
-      map("[[", "prev")
-
-      -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
-          local buffer = vim.api.nvim_get_current_buf()
-          map("]]", "next", buffer)
-          map("[[", "prev", buffer)
-        end,
-      })
     end,
-    keys = {
-      { "]]", desc = "Next Reference" },
-      { "[[", desc = "Prev Reference" },
-    },
   },
 }

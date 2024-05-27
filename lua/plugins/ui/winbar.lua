@@ -3,10 +3,6 @@ return {
   {
     "b0o/incline.nvim",
     event = "LazyFile",
-    -- stylua: ignore
-    keys = {
-      { "<leader>uw", function () require("incline").toggle() end, desc = "Toggle Winbar (incline)" },
-    },
     config = function()
       local colors = require("tokyonight.colors").setup()
       local darken = require("tokyonight.util").darken

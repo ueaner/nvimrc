@@ -63,16 +63,7 @@ local conf = {
     "impl",
   },
   dap = { -- nvim-dap: language specific extensions
-    {
-      "leoluz/nvim-dap-go",
-      -- stylua: ignore
-      on_ft = function(event)
-        vim.keymap.set("n", "<leader>dt", function() require("dap-go").debug_test() end,
-          { desc = "debug test", buffer = event.buf })
-        vim.keymap.set("n", "<leader>dT", function() require("dap-go").debug_last_test() end,
-          { desc = "debug last test", buffer = event.buf })
-      end,
-    },
+    { "leoluz/nvim-dap-go" },
   },
   test = { -- neotest: language specific adapters
     "nvim-neotest/neotest-go",

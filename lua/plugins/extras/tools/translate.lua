@@ -15,9 +15,5 @@ return {
         },
       })
     end,
-    keys = {
-      { "<leader>tz", "<cmd>Translate ZH<cr><esc>", desc = "Translate from English to Chinese", mode = { "x" } },
-      { "<leader>te", "<cmd>Translate EN<cr><sec>", desc = "Translate from Chinese to English", mode = { "x" } },
-    },
   },
 }

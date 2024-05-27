@@ -13,7 +13,7 @@ Just press any key like `,` will displays a popup with all possible keymaps star
 4.  [Rich languages editing](#rich-languages-editing)
 5.  [Multi-cursor and selection](#multi-cursor-and-selection)
 6.  [Display](#display)
-7.  [Search and replace](#search-and-replace)
+7.  [Find and replace](#find-and-replace)
 8.  [Navigation](#navigation)
 9.  [Buffers](#buffers)
 10. [Fuzzy finder](#fuzzy-finder)
@@ -122,7 +122,7 @@ Command-line mode uses readline-style keymaps.
 | `<leader>cn` | Rename                            | n    | LSP        |
 | `<leader>ca` | Code Action                       | n, v | LSP        |
 | `<leader>cl` | Code Lens                         | n, v | LSP        |
-| `<leader>cr` | Refactors                         | n, v | LSP        |
+| `<leader>cr` | Refactor                          | n, v | LSP        |
 | `<leader>cc` | Code Clean                        | n    | LSP        |
 | `gf`         | Goto File                         | n, v | editing    |
 | `gi`         | Move to last insertion and INSERT | n    | insert     |
@@ -158,36 +158,38 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 - prefix: `<leader>a` for `a` tool
 - prefix: `<leader>u` for ui
 
-| Key          | Description              | Mode | Provider                 |
-| ------------ | ------------------------ | ---- | ------------------------ |
-| `gz`         | Zoom                     | n, t | [windows.nvim]           |
-| `gZ`         | Zen Mode                 | n, t | [zen-mode.nvim]          |
-| `<C-=>`      | Zoom in                  | n, t | system                   |
-| `<C-->`      | Zoom out                 | n, t | system                   |
-| `<leader>e`  | Toggle File Explorer     | n, t | [neo-tree.nvim]          |
-| `<leader>E`  | Toggle Database Explorer | n    | [vim-dadbod]             |
-| `<leader>o`  | Toggle Outline           | n    | [aerial.nvim]            |
-| `<leader>tt` | Toggle Terminal          | n, t | [nvterm]                 |
-| `<leader>gg` | Lazygit                  | n    | [lazygit]                |
-| `<leader>mz` | Lazy                     | n    | [lazy.nvim]              |
-| `<leader>mm` | Mason                    | n    | [mason.nvim]             |
-| `<leader>ml` | Lsp Info                 | n    | [nvim-lspconfig]         |
-| `<leader>mt` | Treesitter Config Info   | n    | [nvim-treesitter]        |
-| `<leader>mb` | Buffer Info              | n    | utils.buf.info           |
-| `<leader>mc` | Conform Info             | n    | [conform.nvim]           |
-| `<leader>mf` | Lazy Format Info         | n    | LazyFormatInfo           |
-| `<leader>mD` | Dap Show Log             | n    | [nvim-dap]               |
-| `<leader>md` | Show DAP configurations  | n    | [nvim-dap]               |
-|              | Show Output Panel        | n    |                          |
-| `<leader>cP` | Preview (Markdown)       | n    | [glow.nvim]              |
-| `<leader>cp` | Live Preview (Markdown)  | n    | [peek.nvim]              |
-| `<leader>cp` | Live Preview (Plantuml)  | n    | [plantuml-previewer.vim] |
+| Key          | Description             | Mode | Provider                 |
+| ------------ | ----------------------- | ---- | ------------------------ |
+| `gz`         | Zen Mode                | n, t | [zen-mode.nvim]          |
+| `<C-=>`      | Zoom in                 | n, t | system                   |
+| `<C-->`      | Zoom out                | n, t | system                   |
+| `<leader>e`  | File Explorer           | n, t | [neo-tree.nvim]          |
+| `<leader>E`  | Database Explorer       | n    | [vim-dadbod]             |
+| `ge`         | Git Explorer            | n    | [neo-tree.nvim]          |
+| `<leader>o`  | Outline                 | n    | [aerial.nvim]            |
+| `<leader>tt` | Terminal                | n, t | [nvterm]                 |
+| `<leader>gg` | Lazygit                 | n    | [lazygit]                |
+| `<leader>gt` | Tig                     | n    | [tig]                    |
+| `<leader>mz` | Lazy                    | n    | [lazy.nvim]              |
+| `<leader>mm` | Mason                   | n    | [mason.nvim]             |
+| `<leader>ml` | Lsp Info                | n    | [nvim-lspconfig]         |
+| `<leader>mt` | Treesitter Config Info  | n    | [nvim-treesitter]        |
+| `<leader>md` | Dap Show Log            | n    | [nvim-dap]               |
+| `<leader>mc` | Conform Info            | n    | [conform.nvim]           |
+| `<leader>mf` | Lazy Format Info        | n    | LazyFormatInfo           |
+| `<leader>mb` | Buffer Info             | n    | utils.buf.info           |
+| `<leader>mk` | Which Key               | n    | [which-key.nvim]         |
+| `<leader>dd` | Show DAP configurations | n    | [nvim-dap]               |
+|              | Show Output Panel       | n    |                          |
+| `<leader>cp` | Preview (markdown)      | n    | [glow.nvim]              |
+| `<leader>cp` | Live Preview (markdown) | n    | [peek.nvim]              |
+| `<leader>cp` | Live Preview (plantuml) | n    | [plantuml-previewer.vim] |
 
-## Search and replace
+## Find and replace
 
 | Key          | Description                | Mode    | Provider         |
 | ------------ | -------------------------- | ------- | ---------------- |
-| `<leader>sr` | Replace in files (Spectre) | n       | [nvim-spectre]   |
+| `<leader>fr` | Replace in files (Spectre) | n       | [nvim-spectre]   |
 | `<leader>/`  | Find in files (grep)       | n       | [telescope.nvim] |
 | `*`          | Search forward             | n, v    | pattern          |
 | `#`          | Search backward            | n, v    | pattern          |
@@ -198,32 +200,33 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 - prefix: `<leader>x` for diagnostics/quickfix
 
-| Key          | Description                     | Mode | Provider             |
-| ------------ | ------------------------------- | ---- | -------------------- |
-| `:{number}`  | Go to Line                      | n    | cmdline              |
-| `<leader>ff` | Go to File                      | n    | [telescope.nvim]     |
-| `<leader>ss` | Find Symbols                    | n    | [telescope.nvim]     |
-| `]t`         | Next todo comment               | n    | [todo-comments.nvim] |
-| `[t`         | Previous todo comment           | n    | [todo-comments.nvim] |
-| `<leader>xt` | Todo (Trouble)                  | n    | [todo-comments.nvim] |
-| `<leader>xT` | Todo/Fix/Fixme (Trouble)        | n    | [todo-comments.nvim] |
-| `<leader>st` | Todo                            | n    | [todo-comments.nvim] |
-| `<leader>xx` | Document Diagnostics (Trouble)  | n    | [trouble.nvim]       |
-| `<leader>xX` | Workspace Diagnostics (Trouble) | n    | [trouble.nvim]       |
-| `<leader>xL` | Location List (Trouble)         | n    | [trouble.nvim]       |
-| `<leader>xQ` | Quickfix List (Trouble)         | n    | [trouble.nvim]       |
-| `<C-i>`      | Go forward                      | n    | jumplist             |
-| `<C-o>`      | Go backward                     | n    | jumplist             |
-| `]d`         | Next Diagnostic                 | n    | LSP                  |
-| `[d`         | Prev Diagnostic                 | n    | LSP                  |
-| `]e`         | Next Error                      | n    | LSP                  |
-| `[e`         | Prev Error                      | n    | LSP                  |
-| `]w`         | Next Warning                    | n    | LSP                  |
-| `[w`         | Prev Warning                    | n    | LSP                  |
-| `]]`         | Next Reference                  | n    | [vim-illuminate]     |
-| `[[`         | Prev Reference                  | n    | [vim-illuminate]     |
-| `` `{A-Z} `` | Jump to the mark {a-zA-Z}       | n    | marks                |
-| `m{a-zA-Z'}` | Set mark {a-zA-Z}               | n    | marks                |
+| Key          | Description                    | Mode | Provider             |
+| ------------ | ------------------------------ | ---- | -------------------- |
+| `:{number}`  | Go to Line                     | n    | cmdline              |
+| `<leader>ff` | Go to File                     | n    | [telescope.nvim]     |
+| `<leader>fs` | Find Symbols                   | n    | [telescope.nvim]     |
+| `]t`         | Next todo comment              | n    | [todo-comments.nvim] |
+| `[t`         | Previous todo comment          | n    | [todo-comments.nvim] |
+| `<leader>xt` | Todo (Trouble)                 | n    | [todo-comments.nvim] |
+| `<leader>xT` | Todo                           | n    | [todo-comments.nvim] |
+| `<leader>xx` | Diagnostics (Trouble)          | n    | [trouble.nvim]       |
+| `<leader>xX` | Document Diagnostics (Trouble) | n    | [trouble.nvim]       |
+| `<leader>xl` | Location List                  | n    | quickfix             |
+| `<leader>xl` | Location List (Trouble)        | n    | [trouble.nvim]       |
+| `<leader>xq` | Quickfix List                  | n    | quickfix             |
+| `<leader>xq` | Quickfix List (Trouble)        | n    | [trouble.nvim]       |
+| `<C-i>`      | Go forward                     | n    | jumplist             |
+| `<C-o>`      | Go backward                    | n    | jumplist             |
+| `]d`         | Next Diagnostic                | n    | LSP                  |
+| `[d`         | Prev Diagnostic                | n    | LSP                  |
+| `]e`         | Next Error                     | n    | LSP                  |
+| `[e`         | Prev Error                     | n    | LSP                  |
+| `]w`         | Next Warning                   | n    | LSP                  |
+| `[w`         | Prev Warning                   | n    | LSP                  |
+| `]]`         | Next Reference                 | n    | [vim-illuminate]     |
+| `[[`         | Prev Reference                 | n    | [vim-illuminate]     |
+| `` `{A-Z} `` | Jump to the mark {a-zA-Z}      | n    | marks                |
+| `m{a-zA-Z'}` | Set mark {a-zA-Z}              | n    | marks                |
 
 ## Buffers
 
@@ -231,84 +234,66 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 - prefix: `<leader>w` for windows
 - prefix: `<leader>b` for buffers
 
-| Key                  | Description               | Mode    | Provider          |
-| -------------------- | ------------------------- | ------- | ----------------- |
-| **tabpage**          |                           |         | tabpage           |
-| `<leader><tab>l`     | Last Tab                  | n       |                   |
-| `<leader><tab>f`     | First Tab                 | n       |                   |
-| `<leader><tab><tab>` | New Tab                   | n       |                   |
-| `<leader><tab>]`     | Next Tab                  | n       |                   |
-| `<leader><tab>d`     | Close Tab                 | n       |                   |
-| `<leader><tab>[`     | Previous Tab              | n       |                   |
-| **windows**          |                           |         | windows           |
-| `<C-h>`              | Go to left window         | n       |                   |
-| `<C-j>`              | Go to lower window        | n       |                   |
-| `<C-k>`              | Go to upper window        | n       |                   |
-| `<C-l>`              | Go to right window        | n       |                   |
-| `<C-Up>`             | Increase window height    | n       |                   |
-| `<C-Down>`           | Decrease window height    | n       |                   |
-| `<C-Left>`           | Decrease window width     | n       |                   |
-| `<C-Right>`          | Increase window width     | n       |                   |
-| `<leader>w-`         | Split window below        | n       |                   |
-| `<leader>w\|`        | Split window right        | n       |                   |
-| `<leader>-`          | Split window below        | n       |                   |
-| `<leader>\|`         | Split window right        | n       |                   |
-| `<leader>ww`         | Switch to Other window    | n       |                   |
-| `<leader>wd`         | Delete window             | n       |                   |
-| **buffers**          |                           |         | buffers           |
-| `<C-p>`              | Prev buffer               | n       |                   |
-| `<C-n>`              | Next buffer               | n       |                   |
-| `[b`                 | Prev buffer               | n       | [bufferline.nvim] |
-| `]b`                 | Next buffer               | n       | [bufferline.nvim] |
-| `<leader>bb`         | Switch to Other Buffer    | n       | editing           |
-| `<leader>bp`         | Toggle pin buffer         | n       | [bufferline.nvim] |
-| `<leader>bP`         | Delete non-pinned buffers | n       | [bufferline.nvim] |
-| `<leader>bd`         | Delete Buffer             | n       | [utils.lua]       |
-| `<leader>bD`         | Delete Other Buffers      | n       | [utils.lua]       |
-| **file**             |                           |         |                   |
-| `<C-s>`              | Save file                 | n, i, v | editing           |
-| `<leader>fn`         | New File                  | n       | editing           |
-| `<leader>qq`         | Quit all                  | n       | editing           |
+| Key           | Description               | Mode    | Provider          |
+| ------------- | ------------------------- | ------- | ----------------- |
+| **tabpage**   |                           |         | tabpage           |
+|               | Last Tab                  | n       |                   |
+|               | First Tab                 | n       |                   |
+|               | New Tab                   | n       |                   |
+|               | Next Tab                  | n       |                   |
+|               | Close Tab                 | n       |                   |
+|               | Previous Tab              | n       |                   |
+| **windows**   |                           |         | windows           |
+| `<C-h>`       | Go to left window         | n       |                   |
+| `<C-j>`       | Go to lower window        | n       |                   |
+| `<C-k>`       | Go to upper window        | n       |                   |
+| `<C-l>`       | Go to right window        | n       |                   |
+| `<C-Up>`      | Increase window height    | n       |                   |
+| `<C-Down>`    | Decrease window height    | n       |                   |
+| `<C-Left>`    | Decrease window width     | n       |                   |
+| `<C-Right>`   | Increase window width     | n       |                   |
+| `<leader>w-`  | Split window below        | n       |                   |
+| `<leader>w\|` | Split window right        | n       |                   |
+| `<leader>-`   | Split window below        | n       |                   |
+| `<leader>\|`  | Split window right        | n       |                   |
+| `<leader>ww`  | Switch to Other window    | n       |                   |
+| `<leader>wd`  | Delete window             | n       |                   |
+| **buffers**   |                           |         | buffers           |
+| `<C-p>`       | Prev buffer               | n       |                   |
+| `<C-n>`       | Next buffer               | n       |                   |
+| `[b`          | Prev buffer               | n       | [bufferline.nvim] |
+| `]b`          | Next buffer               | n       | [bufferline.nvim] |
+| `<leader>bb`  | Switch to Other Buffer    | n       | editing           |
+| `<leader>bp`  | Toggle pin buffer         | n       | [bufferline.nvim] |
+| `<leader>bP`  | Delete non-pinned buffers | n       | [bufferline.nvim] |
+| `<leader>bd`  | Delete Buffer             | n       | [utils.lua]       |
+| `<leader>bD`  | Delete Other Buffers      | n       | [utils.lua]       |
+| **file**      |                           |         |                   |
+| `<C-s>`       | Save file                 | n, i, v | editing           |
+| `<leader>fn`  | New File                  | n       | editing           |
+| `<leader>qq`  | Quit all                  | n       | editing           |
 
 ## Fuzzy finder
 
 - prefix: `<leader>f` for file/find
-- prefix: `<leader>s` for search more kinds
 
 | Key               | Description               | Mode | Provider         |
 | ----------------- | ------------------------- | ---- | ---------------- |
+| `<leader><space>` | Telescope Builtin         | n    | [telescope.nvim] |
+| `<leader>fa`      | same as `<leader><space>` | n    | [telescope.nvim] |
 | `<leader>,`       | Switch Buffer             | n    | [telescope.nvim] |
 | `<leader>/`       | Find in Files (Grep)      | n    | [telescope.nvim] |
 | `<leader>/`       | Find in Files (Grep)      | v    | [telescope.nvim] |
-| `<leader>sk`      | Grep keyword under cursor | n    | [telescope.nvim] |
 | `<leader>:`       | Command History           | n    | [telescope.nvim] |
-| `<leader><space>` | Telescope Builtin         | n    | [telescope.nvim] |
-| `<leader>fb`      | Buffers                   | n    | [telescope.nvim] |
-| `<leader>ff`      | Find Files (root dir)     | n    | [telescope.nvim] |
-| `<leader>fF`      | Find Files (cwd)          | n    | [telescope.nvim] |
-| `<leader>fr`      | Recent                    | n    | [telescope.nvim] |
-| `<leader>fR`      | Recent (cwd)              | n    | [telescope.nvim] |
-| `<leader>fp`      | Find project              | n    | [telescope.nvim] |
-| `<leader>fP`      | Find Plugin File          | n    | [telescope.nvim] |
-| `<leader>gc`      | git commits               | n    | [telescope.nvim] |
-| `<leader>gs`      | git status                | n    | [telescope.nvim] |
-| `<leader>sa`      | Auto Commands             | n    | [telescope.nvim] |
-| `<leader>sb`      | Buffer                    | n    | [telescope.nvim] |
-| `<leader>sc`      | Command History           | n    | [telescope.nvim] |
-| `<leader>sC`      | Commands                  | n    | [telescope.nvim] |
-| `<leader>sd`      | Diagnostics               | n    | [telescope.nvim] |
-| `<leader>sg`      | Grep (root dir)           | n    | [telescope.nvim] |
-| `<leader>sG`      | Grep (cwd)                | n    | [telescope.nvim] |
-| `<leader>sh`      | Help Pages                | n    | [telescope.nvim] |
-| `<leader>sH`      | Search Highlight Groups   | n    | [telescope.nvim] |
-| `<leader>sk`      | Key Maps                  | n    | [telescope.nvim] |
-| `<leader>sM`      | Man Pages                 | n    | [telescope.nvim] |
-| `<leader>sm`      | Jump to Mark              | n    | [telescope.nvim] |
-| `<leader>so`      | Options                   | n    | [telescope.nvim] |
-| `<leader>sw`      | Word (root dir)           | n    | [telescope.nvim] |
-| `<leader>sW`      | Word (cwd)                | n    | [telescope.nvim] |
-| `<leader>uC`      | Colorscheme with preview  | n    | [telescope.nvim] |
-| `<leader>ss`      | Goto Symbol               | n    | [telescope.nvim] |
+| `<leader>fc`      | Cheatsheets               | n    | [telescope.nvim] |
+| `<leader>fk`      | Keymaps                   | n    | [telescope.nvim] |
+| `<leader>fs`      | Go to Symbol              | n    | [telescope.nvim] |
+| `<leader>ff`      | Find Files                | n    | [telescope.nvim] |
+| `<leader>fg`      | Find Git Files            | n    | [telescope.nvim] |
+| `<leader>fR`      | Recent                    | n    | [telescope.nvim] |
+| `<leader>fp`      | Find Project              | n    | [telescope.nvim] |
+| `<leader>fx`      | Find Plugin Config        | n    | [telescope.nvim] |
+| `<leader>fz`      | Find Plugin File          | n    | [telescope.nvim] |
 
 ## Debug
 
@@ -317,25 +302,25 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | Key           | Description                   | Mode | Provider          |
 | ------------- | ----------------------------- | ---- | ----------------- |
 | `<leader>da`  | All Commands                  | n    | [telescope.nvim]  |
-| `<leader>db`  | Toggle breakpoint             | n    | [nvim-dap]        |
+| `<leader>db`  | Toggle Breakpoint             | n    | [nvim-dap]        |
 | `<leader>dc`  | Start / Continue              | n    | [nvim-dap]        |
-| `<leader>di`  | Step into                     | n    | [nvim-dap]        |
-| `<leader>do`  | Step out                      | n    | [nvim-dap]        |
-| `<leader>dn`  | Step over                     | n    | [nvim-dap]        |
-| `<leader>dh`  | Step to here(cursor)          | n    | [nvim-dap]        |
+| `<leader>di`  | Step Into                     | n    | [nvim-dap]        |
+| `<leader>do`  | Step Out                      | n    | [nvim-dap]        |
+| `<leader>dn`  | Step Over (Next)              | n    | [nvim-dap]        |
+| `<leader>dh`  | Step to Cursor (Here)         | n    | [nvim-dap]        |
 | `<A-e>`       | evel                          | n, v | [nvim-dap-ui]     |
-| `<leader>de`  | Show hover (expression)       | n, v | [nvim-dap-ui]     |
-| `<leader>d.`  | Run repeat last               | n    | [nvim-dap]        |
+| `<leader>de`  | Show Hover (expression)       | n, v | [nvim-dap-ui]     |
+| `<leader>d.`  | Run Last                      | n    | [nvim-dap]        |
 | `<leader>dk`  | Up (stacktrace)               | n    | [nvim-dap]        |
 | `<leader>dj`  | Down (stacktrace)             | n    | [nvim-dap]        |
 | `<leader>dq`  | Stop                          | n    | [nvim-dap]        |
 | `<leader>dd`  | Show DAP configurations       | n    | [telescope.nvim]  |
 | `<leader>dr`  | Start / Continue              | n    | [nvim-dap]        |
 | `<leader>dR`  | Restart                       | n    | [nvim-dap]        |
-| `<leader>dx`  | Show all breakpoints          | n    | [telescope.nvim]  |
-| `<leader>dX`  | Remove all breakpoints        | n    | [nvim-dap]        |
-| `<leader>dB`  | Conditional breakpoint        | n    | [nvim-dap]        |
-| `<leader>du`  | Toggle dapui                  | n    | [nvim-dap-ui]     |
+| `<leader>dx`  | Show All Breakpoints          | n    | [telescope.nvim]  |
+| `<leader>dX`  | Remove All Breakpoints        | n    | [nvim-dap]        |
+| `<leader>dB`  | Conditional Breakpoint        | n    | [nvim-dap]        |
+| `<leader>du`  | Dap UI                        | n    | [nvim-dap-ui]     |
 | `<leader>dwe` | Show Eval (float window)      | n    | [nvim-dap]        |
 | `<leader>dws` | Show Sessions (float window)  | n    | [nvim-dap]        |
 | `<leader>dt`  | Debug test                    | n    | [nvim-dap-go]     |
@@ -349,15 +334,17 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 - prefix: `<leader>t` for tests
 
-| Key          | Description    | Mode | Provider  |
-| ------------ | -------------- | ---- | --------- |
-| `<leader>ta` | Attach         | n    | [neotest] |
-| `<leader>tr` | Run Nearest    | n    | [neotest] |
-| `<leader>tl` | Run Last       | n    | [neotest] |
-| `<leader>tf` | Run File       | n    | [neotest] |
-| `<leader>tq` | Stop           | n    | [neotest] |
-| `<leader>to` | Output         | n    | [neotest] |
-| `<leader>ts` | Summary Toggle | n    | [neotest] |
+| Key          | Description       | Mode | Provider  |
+| ------------ | ----------------- | ---- | --------- |
+| `<leader>ta` | Attach            | n    | [neotest] |
+| `<leader>tr` | Run Nearest       | n    | [neotest] |
+| `<leader>t.` | Run Last          | n    | [neotest] |
+| `<leader>tf` | Run File          | n    | [neotest] |
+| `<leader>tq` | Stop              | n    | [neotest] |
+| `<leader>to` | Show Output       | n    | [neotest] |
+| `<leader>ts` | Show Summary      | n    | [neotest] |
+| `<leader>td` | Debug Nearest     | n    | [neotest] |
+| `<leader>tO` | Show Output Panel | n    | [neotest] |
 
 ## Run/REPL
 
@@ -427,7 +414,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
 [grpc-nvim]: https://github.com/hudclark/grpc-nvim
 [lazygit]: https://github.com/jesseduffield/lazygit
-[windows.nvim]: https://github.com/anuvyklack/windows.nvim
+[tig]: https://github.com/jonas/tig
 [zen-mode.nvim]: https://github.com/folke/zen-mode.nvim
 [neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [vim-dadbod]: https://github.com/tpope/vim-dadbod

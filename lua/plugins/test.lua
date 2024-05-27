@@ -20,17 +20,6 @@ return {
         end,
       },
     },
-    -- stylua: ignore
-    keys = {
-      { "<leader>ta", function() require('neotest').run.attach() end, desc = "Attach" },
-      { "<leader>tr", function() require('neotest').run.run() end, desc = "Run Nearest" },
-      { "<leader>t.", function() require('neotest').run.run_last() end, desc = "Run repeat last" },
-      { "<leader>tf", function() require('neotest').run.run(vim.fn.expand('%')) end, desc = "Run File" },
-      { "<leader>tq", function() require('neotest').run.stop() end, desc = "Stop" },
-      { "<leader>to", function() require('neotest').output.open() end, desc = "Output" },
-      { "<leader>ts", function() require('neotest').summary.toggle() end, desc = "Summary Toggle" },
-      { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
-    },
     opts = {
       -- Can be a list of adapters like what neotest expects,
       -- or a list of adapter names,

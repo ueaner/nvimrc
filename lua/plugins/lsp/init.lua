@@ -12,6 +12,14 @@ return {
       { "folke/neodev.nvim", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      -- inc-rename.nvim instead of vim.lsp.buf.rename
+      {
+        "smjonas/inc-rename.nvim",
+        lazy = true,
+        opts = {
+          cmd_name = "Rename",
+        },
+      },
     },
     ---@class PluginLspOpts
     opts = {
@@ -228,7 +236,6 @@ return {
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>mm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {

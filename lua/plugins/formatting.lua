@@ -6,17 +6,6 @@ return {
     dependencies = { "mason.nvim" },
     lazy = true,
     cmd = "ConformInfo",
-    keys = {
-      {
-        "<leader>cF",
-        function()
-          require("conform").format({ formatters = { "injected" } })
-        end,
-        mode = { "n", "v" },
-        desc = "Format Injected Langs",
-      },
-      { "<leader>mc", "<cmd>ConformInfo<cr>", desc = "Conform Info" },
-    },
     init = function()
       -- Install the conform formatter on VeryLazy
       require("utils").on_very_lazy(function()

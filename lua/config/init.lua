@@ -171,4 +171,6 @@ function M.get_kind_filter(buf)
   return type(M.kind_filter) == "table" and type(M.kind_filter.default) == "table" and M.kind_filter.default or nil
 end
 
+M.keys = require("config.keymaps.keys")
+
 return M

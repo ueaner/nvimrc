@@ -6,7 +6,6 @@ return {
     "stevearc/aerial.nvim",
     event = "VeryLazy",
     cmd = "AerialToggle",
-    keys = { { "<leader>o", "<cmd>AerialToggle<cr>", desc = "Outline" } },
     opts = function()
       local icons = vim.deepcopy(C.icons.kinds)
 

@@ -16,10 +16,6 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
-    keys = {
-      -- stylua: ignore
-      { "<leader>e", function() require("neo-tree.command").execute({ toggle = true, dir = require("utils").root() }) end, desc = "Toggle File Explorer", mode = { "n", "t" } },
-    },
     deactivate = function()
       vim.cmd([[Neotree close]])
     end,
@@ -33,7 +29,7 @@ return {
       end
     end,
     opts = {
-      sources = { "filesystem", "buffers", "git_status" },
+      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "aerial", "Outline", "notify", "edgy" },
       filesystem = {
         bind_to_cwd = false,
@@ -68,7 +64,7 @@ return {
 
           ["<cr>"] = "open",
           ["o"] = "open",
-          ["<esc>"] = "revert_preview",
+          ["<esc>"] = "cancel",
           ["P"] = { "toggle_preview", config = { use_float = true } },
           ["l"] = "focus_preview",
           ["<space>"] = "close_node",
@@ -94,6 +90,8 @@ return {
           ["?"] = "show_help",
           ["<"] = "prev_source",
           [">"] = "next_source",
+
+          ["gg"] = "noop",
         },
       },
       default_component_configs = {

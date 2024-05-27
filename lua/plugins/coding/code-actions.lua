@@ -10,10 +10,6 @@ return {
   {
     "aznhe21/actions-preview.nvim",
     event = "LazyFile",
-    -- stylua: ignore
-    keys = {
-      { "ga", function() require("actions-preview").code_actions() end, desc = "Code Action Preview", mode = { "n", "v" } },
-    },
     opts = {},
   },
 

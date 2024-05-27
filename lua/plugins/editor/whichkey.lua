@@ -13,7 +13,6 @@ return {
         ["z"] = { name = "+fold" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
-        ["<leader><tab>"] = { name = "+tabs" },
         ["<leader>b"] = { name = "+buffer" },
         ["<leader>c"] = { name = "+code" },
         ["<leader>f"] = { name = "+file/find" },
@@ -31,6 +30,7 @@ return {
         ["<leader>r"] = { name = "+run/repl", mode = { "n", "v" } },
         ["<leader>a"] = { name = "+a tool" },
         ["<leader>m"] = { name = "+manager/info" },
+        ["<leader>n"] = { name = "+notes/noice" },
       },
     },
     config = function(_, opts)
