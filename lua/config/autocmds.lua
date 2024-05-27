@@ -116,12 +116,12 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- and then set the tab or space options
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   callback = function()
-    require("utils.yadi").detect_indent()
+    require("util.yadi").detect_indent()
   end,
 })
 
 vim.api.nvim_create_user_command("LazyRoot", function()
-  require("utils.root").info()
+  require("util.root").info()
 end, { desc = "LazyVim roots for the current buffer" })
 
 -- format setup
@@ -130,17 +130,17 @@ do
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("LazyFormat", {}),
     callback = function(event)
-      require("utils.format")({ buf = event.buf })
+      require("util.format")({ buf = event.buf })
     end,
   })
 
   -- Manual format
   vim.api.nvim_create_user_command("LazyFormat", function()
-    require("utils.format")({ force = true })
+    require("util.format")({ force = true })
   end, { desc = "Format selection or buffer" })
 
   -- Format info
   vim.api.nvim_create_user_command("LazyFormatInfo", function()
-    require("utils.format").info()
+    require("util.format").info()
   end, { desc = "Show info about the formatters for the current buffer" })
 end

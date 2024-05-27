@@ -8,8 +8,8 @@ return {
     cmd = "ConformInfo",
     init = function()
       -- Install the conform formatter on VeryLazy
-      require("utils").on_very_lazy(function()
-        require("utils.format").register({
+      require("util").on_very_lazy(function()
+        require("util.format").register({
           name = "conform.nvim",
           priority = 100,
           primary = true,

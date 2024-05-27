@@ -46,7 +46,7 @@ return {
         end
       end
 
-      local Util = require("utils")
+      local Util = require("util")
       local colors = {
         ok = { fg = Util.fg("Special") },
         error = { fg = Util.fg("DiagnosticError") },

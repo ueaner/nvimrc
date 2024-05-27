@@ -1,6 +1,6 @@
 local L = require("lazy.core.util")
 
----@class utils.lsp
+---@class util.lsp
 local M = {}
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
@@ -95,8 +95,8 @@ function M.format(opts)
     "force",
     {},
     opts or {},
-    require("utils").opts("nvim-lspconfig").format or {},
-    require("utils").opts("conform.nvim").format or {}
+    require("util").opts("nvim-lspconfig").format or {},
+    require("util").opts("conform.nvim").format or {}
   )
   local ok, conform = pcall(require, "conform")
   -- use conform for formatting with LSP when available,

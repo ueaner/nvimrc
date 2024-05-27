@@ -36,7 +36,7 @@ command! Stripspace call s:Stripspace()
 
 " 关闭当前 buffer, 避免影响编辑器布局
 "
-" @see lua/utils/buf.lua:close()
+" @see lua/util/buf.lua:close()
 "
 "  :echo &buftype &buflisted &modified &modifiable
 "

@@ -6,9 +6,9 @@ return {
     opts = {
       options = {
         -- stylua: ignore
-        close_command = function(n) require("utils.buf").close(n) end,
+        close_command = function(n) require("util.buf").close(n) end,
         -- stylua: ignore
-        right_mouse_command = function(n) require("utils.buf").close(n) end,
+        right_mouse_command = function(n) require("util.buf").close(n) end,
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)

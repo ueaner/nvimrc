@@ -17,7 +17,7 @@ return {
       },
     },
     opts = function(_, opts)
-      local U = require("utils")
+      local U = require("util")
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       vim.api.nvim_set_hl(0, "CmpFloatBorder", { fg = U.fg("FloatBorder"), bg = U.bg("Normal"), default = true })
 

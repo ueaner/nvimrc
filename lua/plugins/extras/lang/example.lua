@@ -67,7 +67,7 @@ return {
   {
     "leoluz/nvim-dap-go",
     init = function()
-      require("utils").on_ft("go", function(event)
+      require("util").on_ft("go", function(event)
         -- stylua: ignore start
         vim.keymap.set("n", "<leader>dt", function() require("dap-go").debug_test() end, { desc = "debug test", buffer = event.buf })
         vim.keymap.set("n", "<leader>dT", function() require("dap-go").debug_last_test() end, { desc = "debug last test", buffer = event.buf })

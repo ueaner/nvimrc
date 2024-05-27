@@ -1,6 +1,6 @@
 local L = require("lazy.core.util")
 
----@class utils.format
+---@class util.format
 ---@overload fun(opts?: {force?:boolean})
 local M = setmetatable({}, {
   __call = function(m, ...)

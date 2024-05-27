@@ -1,4 +1,4 @@
-require("utils.debug").setup()
+require("util.debug").setup()
 require("config.options")
 require("config.lazy")
 

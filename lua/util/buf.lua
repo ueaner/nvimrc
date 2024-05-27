@@ -1,4 +1,4 @@
--- require("utils.buf").close()
+-- require("util.buf").close()
 local M = {}
 
 M.valid = function(bufnr)
@@ -65,7 +65,7 @@ M.close = function(bufnr, force)
     vim.cmd("bp | bd!" .. bufnr)
   elseif choice == 3 then
     vim.api.nvim_echo(
-      { { "E516", "WarningMsg" }, { ": No buffers were deleted: utils.buf.close()", "None" } },
+      { { "E516", "WarningMsg" }, { ": No buffers were deleted: util.buf.close()", "None" } },
       false,
       {}
     )
@@ -86,7 +86,7 @@ end
 
 -- Display buffer information in a floating window
 M.info = function()
-  require("utils.buf.info")()
+  require("util.buf.info")()
 end
 
 return M

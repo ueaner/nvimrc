@@ -1,4 +1,4 @@
-local U = require("utils")
+local U = require("util")
 
 local M = {}
 
@@ -17,8 +17,8 @@ end
 local keys = {
   -- Explorer
   ["neo-tree.nvim"] = {
-    { "<leader>e", function() require("neo-tree.command").execute({ toggle = true, dir = require("utils").root() }) end, desc = "File Explorer", mode = { "n", "t" } },
-    { "ge", function() require("neo-tree.command").execute({ toggle = true, dir = require("utils").root(), source = "git_status" }) end, desc = "Git Explorer", mode = { "n", "t" } },
+    { "<leader>e", function() require("neo-tree.command").execute({ toggle = true, dir = require("util").root() }) end, desc = "File Explorer", mode = { "n", "t" } },
+    { "ge", function() require("neo-tree.command").execute({ toggle = true, dir = require("util").root(), source = "git_status" }) end, desc = "Git Explorer", mode = { "n", "t" } },
     { "<leader>E", "<cmd>DBUIToggle<cr>", desc = "Database Explorer", mode = { "n", "t" } },
   },
 
@@ -42,7 +42,7 @@ local keys = {
     { "<leader>dk", function() require("dap").up() end, desc = "Up" },
     -- breakpoints
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-    { "<Leader>dB", function() require("utils.dap").breakpoint_condition() end, desc = "Conditional Breakpoint" },
+    { "<Leader>dB", function() require("util.dap").breakpoint_condition() end, desc = "Conditional Breakpoint" },
     { "<leader>dx", "<cmd>Telescope dap list_breakpoints<cr>", desc = "Show All Breakpoints" },
     { "<leader>dX", function() require("dap").clear_breakpoints() end, desc = "Removes All Breakpoints" },
     -- watch expressions, show hover

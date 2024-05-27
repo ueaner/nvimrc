@@ -97,7 +97,7 @@ lua
 │           ├── go.lua
 │           ├── ...
 │           +-- spec.lua
-└── utils.lua
+└── util.lua
 ```
 
 Contents of ui, editor and coding:

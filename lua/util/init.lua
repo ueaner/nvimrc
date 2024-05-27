@@ -1,4 +1,4 @@
--- ~/.config/nvim/lua/utils.lua
+-- ~/.config/nvim/lua/util.lua
 
 local M = {}
 
@@ -7,7 +7,7 @@ M.root_patterns = { ".git", "lua" }
 -- Create a FileType autocommand event handler.
 -- Examples:
 -- ```lua
---    require("utils").on_ft("go", function(event)
+--    require("util").on_ft("go", function(event)
 --      vim.keymap.set("n", "<leader>dt", function()
 --        require("dap-go").debug_test()
 --      end, { desc = "debug test", buffer = event.buf })
@@ -49,7 +49,7 @@ end
 ---@param cmd? string[]|string
 ---@param opts? LazyTermOpts
 function M.terminal(cmd, opts)
-  return require("utils.terminal").open(cmd, opts)
+  return require("util.terminal").open(cmd, opts)
 end
 
 -- returns the root directory based on:
@@ -61,9 +61,9 @@ end
 ---@return string
 function M.root(opts)
   if opts and opts.git then
-    return require("utils.root").git()
+    return require("util.root").git()
   end
-  return require("utils.root").get()
+  return require("util.root").get()
 end
 
 ---@param plugin string
@@ -91,21 +91,21 @@ function M.opts(name)
   return Plugin.values(plugin, "opts", false)
 end
 
----@class utils.telescope.opts
+---@class util.telescope.opts
 ---@field cwd? string|boolean
 ---@field show_untracked? boolean
 
 -- this will return a function that calls telescope.
--- cwd will default to utils.get_root
+-- cwd will default to util.get_root
 -- for `files`, git_files or find_files will be chosen depending on .git
 ---@param builtin string
----@param opts? utils.telescope.opts
+---@param opts? util.telescope.opts
 function M.telescope(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
     builtin = params.builtin
     opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = require("utils.root").get() }, opts or {}) --[[@as utils.telescope.opts]]
+    opts = vim.tbl_deep_extend("force", { cwd = require("util.root").get() }, opts or {}) --[[@as util.telescope.opts]]
     if builtin == "files" then
       if vim.uv.fs_stat((opts.cwd or vim.uv.cwd()) .. "/.git") then
         opts.show_untracked = true

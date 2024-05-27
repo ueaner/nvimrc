@@ -1,5 +1,5 @@
 local notify = require("lazy.core.util")
-local UDap = require("utils.dap")
+local UDap = require("util.dap")
 
 local function get_codelldb()
   local extension_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"

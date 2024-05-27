@@ -9,7 +9,7 @@ return {
       lualine_require.require = require
 
       local icons = require("config").icons
-      local U = require("utils")
+      local U = require("util")
 
       return {
         options = {

@@ -1,4 +1,4 @@
-local U = require("utils")
+local U = require("util")
 
 -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/lua/nvim-treesitter/parsers.lua

@@ -1,4 +1,4 @@
--- require("utils.option").toggle()
+-- require("util.option").toggle()
 
 local notify = require("lazy.core.util")
 

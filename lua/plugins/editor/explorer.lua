@@ -106,7 +106,7 @@ return {
     config = function(_, opts)
       -- rename / move file
       local function on_move(data)
-        require("utils.lsp").on_rename(data.source, data.destination)
+        require("util.lsp").on_rename(data.source, data.destination)
       end
 
       local events = require("neo-tree.events")

@@ -1,5 +1,5 @@
 local generator = require("plugins.extras.langspec"):new()
-local UDap = require("utils.dap")
+local UDap = require("util.dap")
 
 ---@type LangConfig
 local conf = {

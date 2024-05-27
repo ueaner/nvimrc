@@ -131,7 +131,7 @@ function M:generate(conf)
   end
 
   -- setup formatters
-  if not vim.tbl_isempty(conf.formatters) and require("utils").has("conform.nvim") then
+  if not vim.tbl_isempty(conf.formatters) and require("util").has("conform.nvim") then
     ---@type table<string, conform.FormatterUnit[]>
     local formatters_by_ft = {}
 
@@ -156,7 +156,7 @@ function M:generate(conf)
   end
 
   -- setup linters
-  if not vim.tbl_isempty(conf.linters) and require("utils").has("nvim-lint") then
+  if not vim.tbl_isempty(conf.linters) and require("util").has("nvim-lint") then
     ---@type table<string, conform.FormatterUnit[]>
     local linters_by_ft = {}
 
@@ -181,7 +181,7 @@ function M:generate(conf)
   end
 
   -- setup code actions
-  if not vim.tbl_isempty(conf.code_actions) and require("utils").has("none-ls.nvim") then
+  if not vim.tbl_isempty(conf.code_actions) and require("util").has("none-ls.nvim") then
     local actions = {}
     local nls = require("null-ls")
     for _, action in pairs(conf.code_actions) do
@@ -218,7 +218,7 @@ function M:generate(conf)
           spec.ft = conf.ft
           if type(item.on_ft) == "function" then
             spec.init = function()
-              require("utils").on_ft(conf.ft, item.on_ft)
+              require("util").on_ft(conf.ft, item.on_ft)
             end
           end
         end

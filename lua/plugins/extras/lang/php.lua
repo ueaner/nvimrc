@@ -9,7 +9,7 @@ local conf = {
 }
 
 if vim.fn.executable("php") == 1 then
-  local UDap = require("utils.dap")
+  local UDap = require("util.dap")
 
   conf = vim.tbl_extend("force", conf, {
     -- NOTE: When the `composer` mirror is not synchronized, it may not match the version in `Mason` and cannot be installed.
