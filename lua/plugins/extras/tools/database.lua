@@ -20,7 +20,7 @@ M.winnr_by_ft = function(ft)
 end
 
 M.fe = function()
-  if require("util").has("neo-tree.nvim") then
+  if U.has("neo-tree.nvim") then
     return {
       is_visible = function()
         local state = require("neo-tree.sources.manager").get_state("filesystem")
@@ -34,7 +34,7 @@ M.fe = function()
         require("neo-tree.command").execute({ action = "close" })
       end,
       toggle = function()
-        require("neo-tree.command").execute({ toggle = true, dir = require("util").root() })
+        require("neo-tree.command").execute({ toggle = true, dir = U.root() })
       end,
     }
   end
@@ -131,7 +131,7 @@ return {
       vim.g.db_ui_notification_width = 36
     end,
     config = function()
-      require("util").on_ft("dbui", function()
+      U.on_ft("dbui", function()
         -- Notification info wireframe style display: only change the foreground color and border
         vim.api.nvim_set_hl(0, "NotificationInfo", { link = "Normal" })
         vim.api.nvim_set_hl(0, "NotificationError", { link = "ErrorMsg" })
@@ -148,7 +148,7 @@ return {
         "kristijanhusak/vim-dadbod-completion",
         ft = { "sql", "mysql", "plsql" },
         init = function()
-          require("util").on_ft({ "sql", "mysql", "plsql" }, function()
+          U.on_ft({ "sql", "mysql", "plsql" }, function()
             vim.opt_local["omnifunc"] = "vim_dadbod_completion#omni"
           end)
         end,

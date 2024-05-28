@@ -1,160 +1,163 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/init.lua
 
 _G.LazyUtil = require("lazy.core.util")
+_G.U = require("util")
 
-local M = {
-  excluded_filetypes = {
-    "",
-    "NvimTree",
-    "Outline",
-    "TelescopePrompt",
-    "TelescopeResults",
-    "Trouble",
-    "aerial",
-    "alpha",
-    "checkhealth",
-    "dashboard",
-    "gitcommit",
-    "help",
-    "lazy",
-    "lspinfo",
-    "man",
-    "mason",
-    "neo-tree",
-    "notify",
+---@class Config
+local M = {}
+U.config = M
+
+M.excluded_filetypes = {
+  "",
+  "NvimTree",
+  "Outline",
+  "TelescopePrompt",
+  "TelescopeResults",
+  "Trouble",
+  "aerial",
+  "alpha",
+  "checkhealth",
+  "dashboard",
+  "gitcommit",
+  "help",
+  "lazy",
+  "lspinfo",
+  "man",
+  "mason",
+  "neo-tree",
+  "notify",
+}
+
+-- close some filetypes with <q>
+M.close_with_q = {
+  "PlenaryTestPopup",
+  "checkhealth",
+  "help",
+  "dbout", -- vim-dadbod-ui output
+  "httpResult",
+  "lspinfo", -- esc
+  "neotest-output",
+  "neotest-output-panel",
+  "neotest-summary",
+  "dap-float",
+  "notify",
+  "oil",
+  "qf",
+  "query", -- :InspectTree
+  "spectre_panel",
+  "startuptime",
+  "tsplayground",
+}
+
+-- close some filetypes (float window) with <esc>
+M.close_with_esc = {
+  "dap-float",
+  "notify",
+}
+
+-- icons used by other plugins
+M.icons = {
+  general = {
+    lsp = "",
+    dap = "",
+    treesitter = "",
+    debugging = "",
   },
-
-  -- close some filetypes with <q>
-  close_with_q = {
-    "PlenaryTestPopup",
-    "checkhealth",
-    "help",
-    "dbout", -- vim-dadbod-ui output
-    "httpResult",
-    "lspinfo", -- esc
-    "neotest-output",
-    "neotest-output-panel",
-    "neotest-summary",
-    "dap-float",
-    "notify",
-    "oil",
-    "qf",
-    "query", -- :InspectTree
-    "spectre_panel",
-    "startuptime",
-    "tsplayground",
+  -- https://microsoft.github.io/vscode-codicons/dist/codicon.html
+  dap = {
+    Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+    Breakpoint = " ",
+    BreakpointCondition = " ",
+    BreakpointRejected = { " ", "DiagnosticError" },
+    LogPoint = ".>",
   },
-
-  -- close some filetypes (float window) with <esc>
-  close_with_esc = {
-    "dap-float",
-    "notify",
+  diagnostics = {
+    Error = " ",
+    Warn = " ",
+    Hint = " ",
+    Info = " ",
   },
-
-  -- icons used by other plugins
-  icons = {
-    general = {
-      lsp = "",
-      dap = "",
-      treesitter = "",
-      debugging = "",
-    },
-    -- https://microsoft.github.io/vscode-codicons/dist/codicon.html
-    dap = {
-      Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-      Breakpoint = " ",
-      BreakpointCondition = " ",
-      BreakpointRejected = { " ", "DiagnosticError" },
-      LogPoint = ".>",
-    },
-    diagnostics = {
-      Error = " ",
-      Warn = " ",
-      Hint = " ",
-      Info = " ",
-    },
-    git = {
-      added = " ",
-      modified = " ",
-      removed = " ",
-    },
-    kinds = {
-      Array = " ",
-      Boolean = "󰨙 ",
-      Class = " ",
-      Codeium = "󰘦 ",
-      Color = " ",
-      Control = " ",
-      Collapsed = " ",
-      Constant = "󰏿 ",
-      Constructor = " ",
-      Copilot = " ",
-      Enum = " ",
-      EnumMember = " ",
-      Event = " ",
-      Field = " ",
-      File = " ",
-      Folder = " ",
-      Function = "󰊕 ",
-      Interface = " ",
-      Key = " ",
-      Keyword = " ",
-      Method = "󰊕 ",
-      Module = " ",
-      Namespace = "󰦮 ",
-      Null = " ",
-      Number = "󰎠 ",
-      Object = " ",
-      Operator = " ",
-      Package = " ",
-      Property = " ",
-      Reference = " ",
-      Snippet = " ",
-      String = " ",
-      Struct = "󰆼 ",
-      Text = " ",
-      TypeParameter = " ",
-      Unit = " ",
-      Value = " ",
-      Variable = "󰀫 ",
-    },
+  git = {
+    added = " ",
+    modified = " ",
+    removed = " ",
   },
+  kinds = {
+    Array = " ",
+    Boolean = "󰨙 ",
+    Class = " ",
+    Codeium = "󰘦 ",
+    Color = " ",
+    Control = " ",
+    Collapsed = " ",
+    Constant = "󰏿 ",
+    Constructor = " ",
+    Copilot = " ",
+    Enum = " ",
+    EnumMember = " ",
+    Event = " ",
+    Field = " ",
+    File = " ",
+    Folder = " ",
+    Function = "󰊕 ",
+    Interface = " ",
+    Key = " ",
+    Keyword = " ",
+    Method = "󰊕 ",
+    Module = " ",
+    Namespace = "󰦮 ",
+    Null = " ",
+    Number = "󰎠 ",
+    Object = " ",
+    Operator = " ",
+    Package = " ",
+    Property = " ",
+    Reference = " ",
+    Snippet = " ",
+    String = " ",
+    Struct = "󰆼 ",
+    Text = " ",
+    TypeParameter = " ",
+    Unit = " ",
+    Value = " ",
+    Variable = "󰀫 ",
+  },
+}
 
-  ---@type table<string, string[]|boolean>?
-  kind_filter = {
-    default = {
-      "Class",
-      "Constructor",
-      "Enum",
-      "Field",
-      "Function",
-      "Interface",
-      "Method",
-      "Module",
-      "Namespace",
-      "Package",
-      "Property",
-      "Struct",
-      "Trait",
-    },
-    markdown = false,
-    help = false,
-    -- you can specify a different filter for each filetype
-    lua = {
-      "Class",
-      "Constructor",
-      "Enum",
-      "Field",
-      "Function",
-      "Interface",
-      "Method",
-      "Module",
-      "Namespace",
-      -- "Package", -- remove package since luals uses it for control flow structures
-      "Property",
-      "Struct",
-      "Trait",
-    },
+---@type table<string, string[]|boolean>?
+M.kind_filter = {
+  default = {
+    "Class",
+    "Constructor",
+    "Enum",
+    "Field",
+    "Function",
+    "Interface",
+    "Method",
+    "Module",
+    "Namespace",
+    "Package",
+    "Property",
+    "Struct",
+    "Trait",
+  },
+  markdown = false,
+  help = false,
+  -- you can specify a different filter for each filetype
+  lua = {
+    "Class",
+    "Constructor",
+    "Enum",
+    "Field",
+    "Function",
+    "Interface",
+    "Method",
+    "Module",
+    "Namespace",
+    -- "Package", -- remove package since luals uses it for control flow structures
+    "Property",
+    "Struct",
+    "Trait",
   },
 }
 
@@ -174,5 +177,7 @@ function M.get_kind_filter(buf)
 end
 
 M.keys = require("config.keymaps.keys")
+
+function M.setup() end
 
 return M

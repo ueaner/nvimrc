@@ -41,7 +41,8 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("util.lazier").setup()
+require("util.lazier").lazy_notify()
+require("util.lazier").lazy_file()
 
 -- Configure lazy.nvim
 require("lazy").setup({

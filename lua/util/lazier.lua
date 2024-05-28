@@ -1,4 +1,5 @@
 -- See https://github.com/LazyVim/LazyVim/blob/965a469ca8cb1d58b49c4e5d8b85430e8c6c0a25/lua/lazyvim/util/init.lua
+---@class util.lazier
 local M = {}
 
 M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
@@ -72,11 +73,6 @@ function M.lazy_notify()
   end)
   -- or if it took more than 500ms, then something went wrong
   timer:start(500, 0, replay)
-end
-
-function M.setup()
-  M.lazy_notify()
-  M.lazy_file()
 end
 
 return M

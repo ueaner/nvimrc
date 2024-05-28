@@ -1,6 +1,7 @@
 require("util.debug").setup()
 require("config.options")
 require("config.lazy")
+require("config").setup()
 
 require("tokyonight").load()
 -- vim.cmd.colorscheme("catppuccin")

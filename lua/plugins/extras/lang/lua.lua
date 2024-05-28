@@ -33,6 +33,7 @@ local conf = {
               checkThirdParty = false,
             },
             completion = {
+              enable = false,
               callSnippet = "Replace",
             },
             runtime = {
@@ -42,6 +43,7 @@ local conf = {
               castNumberToInteger = true,
             },
             diagnostics = {
+              enable = false,
               globals = {
                 "vim",
                 "require",
@@ -52,6 +54,15 @@ local conf = {
               enable = false,
             },
             hint = {
+              enable = false,
+            },
+            hover = {
+              enable = true,
+            },
+            semantic = {
+              enable = false,
+            },
+            addonManager = {
               enable = false,
             },
           }, -- end Lua

@@ -1,5 +1,3 @@
-local UDap = require("util.dap")
-
 local function get_codelldb()
   local extension_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
   local codelldb_path = extension_path .. "adapter/codelldb"
@@ -182,7 +180,7 @@ return {
           request = "launch",
           name = "Launch file with arguments",
           program = "~/.target/debug/${workspaceFolderBasename}",
-          args = UDap.get_args,
+          args = U.dap.get_args,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
         },
@@ -192,7 +190,7 @@ return {
           name = "Launch file with arguments (cargo build)",
           preLaunchTask = "cargo build",
           program = "~/.target/debug/${workspaceFolderBasename}",
-          args = UDap.get_args,
+          args = U.dap.get_args,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
         },

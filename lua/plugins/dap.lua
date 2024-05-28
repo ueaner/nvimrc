@@ -41,7 +41,7 @@ return {
         require("dapui").open()
       end
 
-      require("util").on_ft("dap-repl", function(event)
+      U.on_ft("dap-repl", function(event)
         vim.bo[event.buf]["buflisted"] = false
         require("dap.ext.autocompl").attach()
       end)

@@ -1,5 +1,4 @@
--- require("util.option").toggle()
-
+---@class util.toggler
 local M = {}
 
 ---@param silent boolean?

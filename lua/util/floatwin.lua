@@ -1,3 +1,4 @@
+---@class util.floatwin
 local M = {}
 
 --- Create window that takes up certain percentags of the current screen.

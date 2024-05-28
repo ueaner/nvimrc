@@ -1,4 +1,5 @@
 -- https://github.com/folke/dot/blob/master/nvim/lua/util/debug.lua
+
 local M = {}
 
 function M.get_loc()
@@ -16,7 +17,7 @@ function M.get_loc()
 end
 
 ---@param value any
----@param opts? {loc:string}
+---@param opts? {loc:string, bt?:boolean}
 function M._dump(value, opts)
   opts = opts or {}
   opts.loc = opts.loc or M.get_loc()
@@ -27,6 +28,9 @@ function M._dump(value, opts)
   end
   opts.loc = vim.fn.fnamemodify(opts.loc, ":~:.")
   local msg = vim.inspect(value)
+  if opts.bt then
+    msg = msg .. "\n" .. debug.traceback("", 2)
+  end
   vim.notify(msg, vim.log.levels.INFO, {
     title = "Debug: " .. opts.loc,
     on_open = function(win)

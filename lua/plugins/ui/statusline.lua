@@ -9,7 +9,6 @@ return {
       lualine_require.require = require
 
       local icons = require("config").icons
-      local U = require("util")
 
       return {
         options = {
@@ -38,24 +37,24 @@ return {
             {
               function() return require("noice").api.status.command.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = { fg = U.fg("Statement") },
+              color = { fg = U.ui.fg("Statement") },
             },
             -- stylua: ignore
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = { fg = U.fg("Constant") },
+              color = { fg = U.ui.fg("Constant") },
             },
             -- stylua: ignore
             {
               function() return icons.general.debugging .. "  " .. require("dap").status() end,
               cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = { fg = U.fg("Debug") },
+              color = { fg = U.ui.fg("Debug") },
             },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = { fg = U.fg("Special") },
+              color = { fg = U.ui.fg("Special") },
             },
             {
               "diff",

@@ -1,5 +1,6 @@
 -- lua of https://github.com/timakro/vim-yadi/blob/main/plugin/yadi.vim
 
+---@class util.yadi
 local M = {}
 
 function M.detect_indent()

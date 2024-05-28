@@ -1,5 +1,4 @@
 local generator = require("plugins.extras.langspec"):new()
-local UDap = require("util.dap")
 
 ---@type LangConfig
 local conf = {
@@ -122,7 +121,7 @@ local conf = {
               request = "launch",
               name = "Launch file with arguments (" .. language .. ")",
               program = "${file}",
-              args = UDap.get_args,
+              args = U.dap.get_args,
               cwd = "${workspaceFolder}",
             },
 

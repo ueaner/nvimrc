@@ -9,8 +9,6 @@ local conf = {
 }
 
 if vim.fn.executable("php") == 1 then
-  local UDap = require("util.dap")
-
   conf = vim.tbl_extend("force", conf, {
     -- NOTE: When the `composer` mirror is not synchronized, it may not match the version in `Mason` and cannot be installed.
     cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
@@ -59,7 +57,7 @@ if vim.fn.executable("php") == 1 then
             cwd = "${workspaceFolder}",
             port = 9003,
             stopOnEntry = false,
-            args = UDap.get_args,
+            args = U.dap.get_args,
             runtimeArgs = {
               "-dxdebug.start_with_request=yes",
             },

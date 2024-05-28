@@ -46,15 +46,15 @@ map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- force formatting
-map({ "n", "v" }, "<leader>cf", function() require("util.format")({ force = true }) end, { desc = "Format" })
+map({ "n", "v" }, "<leader>cf", function() U.format({ force = true }) end, { desc = "Format" })
 
 -- toggle options
-map("n", "<leader>uf", function() require("util.format").toggle() end, { desc = "Toggle auto format (global)" })
-map("n", "<leader>uF", function() require("util.format").toggle(true) end, { desc = "Toggle auto format (buffer)" })
-map("n", "<leader>us", function() require("util.toggler").option("spell") end, { desc = "Toggle Spelling" })
-map("n", "<leader>ud", require("util.toggler").toggle_diagnostics, { desc = "Toggle Diagnostics" })
-map("n", "<leader>uc", require("util.toggler").toggle_conceallevel, { desc = "Toggle Conceal" })
-map("n", "<leader>ub", require("util.toggler").toggle_clipboard, { desc = "Toggle ClipBoard" })
+map("n", "<leader>uf", function() U.format.toggle() end, { desc = "Toggle auto format (global)" })
+map("n", "<leader>uF", function() U.format.toggle(true) end, { desc = "Toggle auto format (buffer)" })
+map("n", "<leader>us", function() U.toggler.option("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>ud", U.toggler.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+map("n", "<leader>uc", U.toggler.toggle_conceallevel, { desc = "Toggle Conceal" })
+map("n", "<leader>ub", U.toggler.toggle_clipboard, { desc = "Toggle ClipBoard" })
 map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
 
 if vim.lsp.inlay_hint and type(vim.lsp.inlay_hint) == "table" then
@@ -62,7 +62,7 @@ if vim.lsp.inlay_hint and type(vim.lsp.inlay_hint) == "table" then
 end
 
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
-map("n", "<leader>uB", function() require("util.toggler").option("background", false, {"light", "dark"}) end, { desc = "Toggle Background" })
+map("n", "<leader>uB", function() U.toggler.option("background", false, {"light", "dark"}) end, { desc = "Toggle Background" })
 
 -- lazy
 map("n", "<leader>mz", "<cmd>Lazy<cr>", { desc = "Lazy" })
@@ -146,9 +146,9 @@ map("n", "<leader>bl", "<cmd>blast<cr>", { desc = "Last Tab" })
 map("n", "<leader>bf", "<cmd>bfirst<cr>", { desc = "First Tab" })
 map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next Tab" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Tab" })
-map("n", "<leader>bD", function() require("util.buf").close_others() end, { desc = "Delete Other Buffers" })
-map({"n", "t"}, "<leader>bd", function() require("util.buf").close() end, { desc = "Delete Buffer" })
-map({"n", "t"}, "<leader>mb", function() require("util.buf").info() end, { desc = "Buffer Info" })
+map("n", "<leader>bD", function() U.ui.close_others() end, { desc = "Delete Other Buffers" })
+map({"n", "t"}, "<leader>bd", function() U.ui.close() end, { desc = "Delete Buffer" })
+map({"n", "t"}, "<leader>mb", function() U.ui.info() end, { desc = "Buffer Info" })
 
 -- floating terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
@@ -156,17 +156,17 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 map("n", "<leader>D", function() vim.log.set_level(vim.log.levels.DEBUG) end, { desc = "Neovim log set to DEBUG level" })
 
 -- lazygit
-map("n", "<leader>gg", function() require("util").terminal({ "lazygit" }, { cwd = require("util").root({ git = true }), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function() require("util").terminal({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
+map("n", "<leader>gg", function() U.terminal({ "lazygit" }, { cwd = U.root.git(), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>gG", function() U.terminal({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
 
 -- tig
-map("n", "<leader>gt", function() require("util").terminal({ "tig" }, { cwd = require("util").root({ git = true }), esc_esc = false, border = "rounded" }) end, { desc = "Tig (root dir)" })
-map("n", "<leader>gT", function() require("util").terminal({ "tig" }, { esc_esc = false, border = "rounded" }) end, { desc = "Tig (cwd)" })
+map("n", "<leader>gt", function() U.terminal({ "tig" }, { cwd = U.root.git(), esc_esc = false, border = "rounded" }) end, { desc = "Tig (root dir)" })
+map("n", "<leader>gT", function() U.terminal({ "tig" }, { esc_esc = false, border = "rounded" }) end, { desc = "Tig (cwd)" })
 
 if vim.fn.executable("btm") == 1 then
-  map("n", "<leader>ab", function() require("util").terminal({ "btm" }) end, { desc = "bottom" })
+  map("n", "<leader>ab", function() U.terminal({ "btm" }) end, { desc = "bottom" })
 elseif vim.fn.executable("btop") == 1 then
-  map("n", "<leader>ab", function() require("util").terminal({ "btop" }) end, { desc = "btop" })
+  map("n", "<leader>ab", function() U.terminal({ "btop" }) end, { desc = "btop" })
 end
 
 if vim.g.neovide then

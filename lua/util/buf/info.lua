@@ -62,7 +62,7 @@ function M.info()
     "smartindent",
   }
 
-  local toggles = require("util.toggler").toggles()
+  local toggles = U.toggler.toggles()
 
   local lines = {}
   local l = ""
@@ -112,7 +112,7 @@ function M.info()
 
   -- MORE
 
-  local buf, win = require("util.floatwin").make(lines)
+  local buf, win = U.floatwin.make(lines)
 
   -- Highlight information windows using Markdown syntax
   local lang = "markdown"

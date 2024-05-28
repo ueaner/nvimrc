@@ -177,7 +177,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>md` | Dap Show Log            | n    | [nvim-dap]               |
 | `<leader>mc` | Conform Info            | n    | [conform.nvim]           |
 | `<leader>mf` | Lazy Format Info        | n    | LazyFormatInfo           |
-| `<leader>mb` | Buffer Info             | n    | util.buf.info           |
+| `<leader>mb` | Buffer Info             | n    | [util.ui]                |
 | `<leader>mk` | Which Key               | n    | [which-key.nvim]         |
 | `<leader>dd` | Show DAP configurations | n    | [nvim-dap]               |
 |              | Show Output Panel       | n    |                          |
@@ -266,8 +266,8 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>bb`  | Switch to Other Buffer    | n       | editing           |
 | `<leader>bp`  | Toggle pin buffer         | n       | [bufferline.nvim] |
 | `<leader>bP`  | Delete non-pinned buffers | n       | [bufferline.nvim] |
-| `<leader>bd`  | Delete Buffer             | n       | [util.lua]       |
-| `<leader>bD`  | Delete Other Buffers      | n       | [util.lua]       |
+| `<leader>bd`  | Delete Buffer             | n       | [util.ui]         |
+| `<leader>bD`  | Delete Other Buffers      | n       | [util.ui]         |
 | **file**      |                           |         |                   |
 | `<C-s>`       | Save file                 | n, i, v | editing           |
 | `<leader>fn`  | New File                  | n       | editing           |
@@ -431,5 +431,5 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
 [conform.nvim]: https://github.com/stevearc/conform.nvim
 [nvim-lint]: https://github.com/mfussenegger/nvim-lint
-[util.lua]: lua/util.lua
+[util.ui]: lua/util/ui.lua
 [which-key]: https://github.com/ueaner/nvimrc/assets/318253/ae311950-0104-4d72-a368-a1234b5ba6ab "which key"

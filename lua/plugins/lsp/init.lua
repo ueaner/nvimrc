@@ -103,17 +103,14 @@ return {
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
-      local U = require("util")
-      local ULsp = require("util.lsp")
-      local UFormat = require("util.format")
       if U.has("neoconf.nvim") then
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
       end
       -- setup autoformat
-      UFormat.register(ULsp.formatter())
+      U.format.register(U.lsp.formatter())
       -- setup keymaps
-      ULsp.on_attach(function(client, buffer)
+      U.lsp.on_attach(function(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
@@ -136,7 +133,7 @@ return {
 
       -- inlay hints
       if opts.inlay_hints.enabled then
-        ULsp.on_attach(function(client, buffer)
+        U.lsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
             -- vim.lsp.inlay_hint.is_enabled()
             vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
@@ -146,7 +143,7 @@ return {
 
       -- code lens
       if opts.codelens.enabled then
-        ULsp.on_attach(function(client, buffer)
+        U.lsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/codeLens") then
             vim.lsp.codelens.refresh()
             --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
@@ -222,10 +219,10 @@ return {
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
 
-      if ULsp.get_config("denols") and ULsp.get_config("tsserver") then
+      if U.lsp.get_config("denols") and U.lsp.get_config("tsserver") then
         local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-        ULsp.disable("tsserver", is_deno)
-        ULsp.disable("denols", function(root_dir)
+        U.lsp.disable("tsserver", is_deno)
+        U.lsp.disable("denols", function(root_dir)
           return not is_deno(root_dir)
         end)
       end

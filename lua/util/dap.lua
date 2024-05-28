@@ -1,3 +1,4 @@
+---@class util.dap
 local M = {}
 
 -- https://github.com/leoluz/nvim-dap-go/blob/a5cc8dcad43f0732585d4793deb02a25c4afb766/lua/dap-go.lua#L25

@@ -46,11 +46,10 @@ return {
         end
       end
 
-      local Util = require("util")
       local colors = {
-        ok = { fg = Util.fg("Special") },
-        error = { fg = Util.fg("DiagnosticError") },
-        pending = { fg = Util.fg("DiagnosticWarn") },
+        ok = { fg = U.ui.fg("Special") },
+        error = { fg = U.ui.fg("DiagnosticError") },
+        pending = { fg = U.ui.fg("DiagnosticWarn") },
       }
       table.insert(opts.sections.lualine_x, 2, {
         function()
