@@ -148,7 +148,7 @@ map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next Tab" })
 map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Tab" })
 map("n", "<leader>bD", function() U.ui.close_others() end, { desc = "Delete Other Buffers" })
 map({"n", "t"}, "<leader>bd", function() U.ui.close() end, { desc = "Delete Buffer" })
-map({"n", "t"}, "<leader>mb", function() U.ui.info() end, { desc = "Buffer Info" })
+map({"n", "t"}, "<leader>mb", function() U.ui.bufinfo() end, { desc = "Buffer Info" })
 
 -- floating terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })

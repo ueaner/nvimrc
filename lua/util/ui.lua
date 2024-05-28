@@ -144,8 +144,8 @@ M.close_others = function()
 end
 
 -- Display buffer information in a floating window
-M.info = function()
-  require("util.buf.info")()
+M.bufinfo = function()
+  U.bufinfo()
 end
 
 return M
