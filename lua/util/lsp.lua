@@ -193,6 +193,18 @@ function M.format(opts)
   end
 end
 
+---@param method string
+function M.has(buffer, method)
+  method = method:find("/") and method or "textDocument/" .. method
+  local clients = vim.lsp.get_clients({ bufnr = buffer })
+  for _, client in ipairs(clients) do
+    if client.supports_method(method) then
+      return true
+    end
+  end
+  return false
+end
+
 ---@alias LspWord {from:{[1]:number, [2]:number}, to:{[1]:number, [2]:number}} 1-0 indexed
 M.words = {}
 M.words.enabled = false
@@ -219,7 +231,7 @@ function M.words.setup(opts)
       group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true }),
       buffer = buf,
       callback = function(ev)
-        if not require("lazyvim.plugins.lsp.keymaps").has(buf, "documentHighlight") then
+        if not M.has(buf, "textDocument/documentHighlight") then
           return false
         end
         if not ({ M.words.get() })[2] then

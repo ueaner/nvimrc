@@ -30,10 +30,13 @@ return {
         virtual_text = {
           spacing = 4,
           source = "if_many",
-          prefix = "●",
-          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-          -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-          -- prefix = "icons",
+          prefix = function(diagnostic)
+            for name, icon in pairs(icons.diagnostics) do
+              if diagnostic.severity == vim.diagnostic.severity[name:upper()] then
+                return icon
+              end
+            end
+          end,
         },
         severity_sort = true,
         signs = {
@@ -49,13 +52,17 @@ return {
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the inlay hints.
       inlay_hints = {
-        enabled = vim.lsp.inlay_hint and type(vim.lsp.inlay_hint) == "table",
+        enabled = true,
       },
       -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the code lenses.
       codelens = {
-        enabled = false and vim.lsp.codelens and type(vim.lsp.codelens) == "table",
+        enabled = false,
+      },
+      -- Enable lsp cursor word highlighting
+      document_highlight = {
+        enabled = true,
       },
       -- add any global capabilities here
       capabilities = {},
@@ -83,6 +90,14 @@ return {
               },
               completion = {
                 callSnippet = "Replace",
+              },
+              hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
               },
             },
           },
@@ -114,27 +129,15 @@ return {
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
-      local register_capability = vim.lsp.handlers["client/registerCapability"]
-      --- @diagnostic disable-next-line: duplicate-set-field
-      vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
-        local ret = register_capability(err, res, ctx)
-        local client_id = ctx.client_id
-        local client = vim.lsp.get_client_by_id(client_id)
-        local buffer = vim.api.nvim_get_current_buf()
-        require("plugins.lsp.keymaps").on_attach(client, buffer)
-        return ret
-      end
+      U.lsp.setup()
+      U.lsp.on_dynamic_capability(require("plugins.lsp.keymaps").on_attach)
 
-      -- diagnostics
-      for name, icon in pairs(icons.diagnostics) do
-        name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-      end
+      U.lsp.words.setup(opts.document_highlight)
 
       -- inlay hints
       if opts.inlay_hints.enabled then
-        U.lsp.on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
+        U.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
+          if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == "" then
             -- vim.lsp.inlay_hint.is_enabled()
             vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
           end
@@ -143,27 +146,14 @@ return {
 
       -- code lens
       if opts.codelens.enabled then
-        U.lsp.on_attach(function(client, buffer)
-          if client.supports_method("textDocument/codeLens") then
-            vim.lsp.codelens.refresh()
-            --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-              buffer = buffer,
-              callback = vim.lsp.codelens.refresh,
-            })
-          end
-        end)
-      end
-
-      if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            for name, icon in pairs(icons.diagnostics) do
-              if diagnostic.severity == vim.diagnostic.severity[name:upper()] then
-                return icon
-              end
-            end
-          end
+        if client.supports_method("textDocument/codeLens") then
+          vim.lsp.codelens.refresh()
+          --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+            buffer = buffer,
+            callback = vim.lsp.codelens.refresh,
+          })
+        end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))

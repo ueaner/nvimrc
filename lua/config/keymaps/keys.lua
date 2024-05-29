@@ -234,6 +234,8 @@ local keys = {
       desc = "Source Action",
       has = "codeAction",
     },
+    { "]]", function() U.lsp.words.jump(vim.v.count1, true) end, desc = "Next Reference", has = "documentHighlight" },
+    { "[[", function() U.lsp.words.jump(-vim.v.count1, true) end, desc = "Prev Reference", has = "documentHighlight" },
   },
 
   ["rustaceanvim"] = {
@@ -327,11 +329,6 @@ local keys = {
     { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
     { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
     { "<leader>xT", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-  },
-
-  ["vim-illuminate"] = {
-    { "]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference" },
-    { "[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference" },
   },
 
   -- git

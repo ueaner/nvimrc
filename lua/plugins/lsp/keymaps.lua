@@ -18,18 +18,6 @@ function M.get()
   return M._keys
 end
 
----@param method string
-function M.has(buffer, method)
-  method = method:find("/") and method or "textDocument/" .. method
-  local clients = vim.lsp.get_clients({ bufnr = buffer })
-  for _, client in ipairs(clients) do
-    if client.supports_method(method) then
-      return true
-    end
-  end
-  return false
-end
-
 ---@return (LazyKeys|{has?:string})[]
 function M.resolve(buffer)
   local Keys = require("lazy.core.handler.keys")
@@ -51,7 +39,7 @@ function M.on_attach(_, buffer)
   local keymaps = M.resolve(buffer)
 
   for _, keys in pairs(keymaps) do
-    if not keys.has or M.has(buffer, keys.has) then
+    if not keys.has or U.lsp.has(buffer, keys.has) then
       ---@type table
       local opts = Keys.opts(keys)
       opts.has = nil
@@ -59,14 +47,6 @@ function M.on_attach(_, buffer)
       opts.buffer = buffer
       vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
     end
-  end
-end
-
-function M.diagnostic_goto(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
   end
 end
 

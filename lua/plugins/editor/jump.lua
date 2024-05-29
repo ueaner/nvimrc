@@ -59,20 +59,4 @@ return {
       require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
     end,
   },
-
-  -- highlighted references under cursor
-  {
-    "RRethy/vim-illuminate",
-    event = "LazyFile",
-    opts = {
-      delay = 200,
-      large_file_cutoff = 2000,
-      large_file_overrides = {
-        providers = { "lsp" },
-      },
-    },
-    config = function(_, opts)
-      require("illuminate").configure(opts)
-    end,
-  },
 }

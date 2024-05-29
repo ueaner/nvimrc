@@ -223,8 +223,8 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `[e`         | Prev Error                     | n    | LSP                  |
 | `]w`         | Next Warning                   | n    | LSP                  |
 | `[w`         | Prev Warning                   | n    | LSP                  |
-| `]]`         | Next Reference                 | n    | [vim-illuminate]     |
-| `[[`         | Prev Reference                 | n    | [vim-illuminate]     |
+| `]]`         | Next Reference                 | n    | LSP                  |
+| `[[`         | Prev Reference                 | n    | LSP                  |
 | `` `{A-Z} `` | Jump to the mark {a-zA-Z}      | n    | marks                |
 | `m{a-zA-Z'}` | Set mark {a-zA-Z}              | n    | marks                |
 
@@ -403,7 +403,6 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [trouble.nvim]: https://github.com/folke/trouble.nvim
 [nvim-treehopper]: https://github.com/mfussenegger/nvim-treehopper
 [flash.nvim]: https://github.com/folke/flash.nvim
-[vim-illuminate]: https://github.com/RRethy/vim-illuminate
 [nvim-dap]: https://github.com/mfussenegger/nvim-dap
 [nvim-dap-ui]: https://github.com/rcarriga/nvim-dap-ui
 [nvim-dap-go]: https://github.com/leoluz/nvim-dap-go
