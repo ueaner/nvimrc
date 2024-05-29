@@ -9,7 +9,6 @@
 ---@field toggler util.toggler
 ---@field format util.format
 ---@field lazier util.lazier
----@field cmp util.cmp
 ---@field dap util.dap
 ---@field yadi util.yadi
 local M = {}
