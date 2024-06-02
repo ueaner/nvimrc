@@ -2,7 +2,6 @@ return {
   -- better diagnostics list and others
   {
     "folke/trouble.nvim",
-    branch = "dev",
     cmd = { "Trouble" },
     config = true,
   },

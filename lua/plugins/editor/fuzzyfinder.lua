@@ -42,12 +42,7 @@ return {
       local actions = require("telescope.actions")
       local layout = require("telescope.actions.layout")
 
-      local open_with_trouble = function(...)
-        return require("trouble.providers.telescope").open_with_trouble(...)
-      end
-      local open_selected_with_trouble = function(...)
-        return require("trouble.providers.telescope").open_selected_with_trouble(...)
-      end
+      local open_with_trouble = require("trouble.sources.telescope").open
 
       return {
         ---@type Picker
@@ -79,7 +74,7 @@ return {
           mappings = {
             i = {
               ["<C-x>"] = open_with_trouble,
-              ["<A-x>"] = open_selected_with_trouble,
+              ["<A-x>"] = open_with_trouble,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
               ["<C-d>"] = actions.preview_scrolling_down,
