@@ -316,6 +316,11 @@ local keys = {
   },
 
   ["bufferline.nvim"] = {
+    { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin Buffer" },
+    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+    { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+    { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+    { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
     { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
   },

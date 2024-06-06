@@ -234,44 +234,44 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 - prefix: `<leader>w` for windows
 - prefix: `<leader>b` for buffers
 
-| Key           | Description               | Mode    | Provider          |
-| ------------- | ------------------------- | ------- | ----------------- |
-| **tabpage**   |                           |         | tabpage           |
-|               | Last Tab                  | n       |                   |
-|               | First Tab                 | n       |                   |
-|               | New Tab                   | n       |                   |
-|               | Next Tab                  | n       |                   |
-|               | Close Tab                 | n       |                   |
-|               | Previous Tab              | n       |                   |
-| **windows**   |                           |         | windows           |
-| `<C-h>`       | Go to left window         | n       |                   |
-| `<C-j>`       | Go to lower window        | n       |                   |
-| `<C-k>`       | Go to upper window        | n       |                   |
-| `<C-l>`       | Go to right window        | n       |                   |
-| `<C-Up>`      | Increase window height    | n       |                   |
-| `<C-Down>`    | Decrease window height    | n       |                   |
-| `<C-Left>`    | Decrease window width     | n       |                   |
-| `<C-Right>`   | Increase window width     | n       |                   |
-| `<leader>w-`  | Split window below        | n       |                   |
-| `<leader>w\|` | Split window right        | n       |                   |
-| `<leader>-`   | Split window below        | n       |                   |
-| `<leader>\|`  | Split window right        | n       |                   |
-| `<leader>ww`  | Switch to Other window    | n       |                   |
-| `<leader>wd`  | Delete window             | n       |                   |
-| **buffers**   |                           |         | buffers           |
-| `<C-p>`       | Prev buffer               | n       |                   |
-| `<C-n>`       | Next buffer               | n       |                   |
-| `[b`          | Prev buffer               | n       | [bufferline.nvim] |
-| `]b`          | Next buffer               | n       | [bufferline.nvim] |
-| `<leader>bb`  | Switch to Other Buffer    | n       | editing           |
-| `<leader>bp`  | Toggle pin buffer         | n       | [bufferline.nvim] |
-| `<leader>bP`  | Delete non-pinned buffers | n       | [bufferline.nvim] |
-| `<leader>bd`  | Delete Buffer             | n       | [util.ui]         |
-| `<leader>bD`  | Delete Other Buffers      | n       | [util.ui]         |
-| **file**      |                           |         |                   |
-| `<C-s>`       | Save file                 | n, i, v | editing           |
-| `<leader>fn`  | New File                  | n       | editing           |
-| `<leader>qq`  | Quit all                  | n       | editing           |
+| Key           | Description                        | Mode    | Provider          |
+| ------------- | ---------------------------------- | ------- | ----------------- |
+| **tabpage**   |                                    |         | tabpage           |
+|               | Last Tab                           | n       |                   |
+|               | First Tab                          | n       |                   |
+|               | New Tab                            | n       |                   |
+|               | Next Tab                           | n       |                   |
+|               | Close Tab                          | n       |                   |
+|               | Previous Tab                       | n       |                   |
+| **windows**   |                                    |         | windows           |
+| `<C-h>`       | Go to left window                  | n       |                   |
+| `<C-j>`       | Go to lower window                 | n       |                   |
+| `<C-k>`       | Go to upper window                 | n       |                   |
+| `<C-l>`       | Go to right window                 | n       |                   |
+| `<C-Up>`      | Increase window height             | n       |                   |
+| `<C-Down>`    | Decrease window height             | n       |                   |
+| `<C-Left>`    | Decrease window width              | n       |                   |
+| `<C-Right>`   | Increase window width              | n       |                   |
+| `<leader>w-`  | Split window below                 | n       |                   |
+| `<leader>w\|` | Split window right                 | n       |                   |
+| `<leader>-`   | Split window below                 | n       |                   |
+| `<leader>\|`  | Split window right                 | n       |                   |
+| `<leader>ww`  | Switch to Other window             | n       |                   |
+| `<leader>wd`  | Delete window                      | n       |                   |
+| **buffers**   |                                    |         | buffers           |
+| `<leader>bn`  | New File                           | n       | editing           |
+| `<C-s>`       | Save file                          | n, i, v | editing           |
+| `<C-p>`       | Prev buffer                        | n       |                   |
+| `<C-n>`       | Next buffer                        | n       |                   |
+| `[b`          | Prev buffer                        | n       | [bufferline.nvim] |
+| `]b`          | Next buffer                        | n       | [bufferline.nvim] |
+| `[B`          | Move Buffer Prev                   | n       | [bufferline.nvim] |
+| `]B`          | Move Buffer Next                   | n       | [bufferline.nvim] |
+| `<leader>bb`  | Switch to Other Buffer             | n       | editing           |
+| `<leader>bd`  | Delete Buffer                      | n       | [util.ui]         |
+| `<leader>bo`  | Delete Other Buffers (Buffer Only) | n       | [util.ui]         |
+| `<leader>bp`  | Toggle Pin Buffer                  | n       | [bufferline.nvim] |
+| `<leader>bP`  | Delete Non-Pinned Buffers          | n       | [bufferline.nvim] |
 
 ## Fuzzy finder
 

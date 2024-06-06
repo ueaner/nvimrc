@@ -11,7 +11,6 @@ local map = vim.keymap.set
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
-
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
@@ -129,26 +128,28 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsea
 -- taken from runtime/lua/_editor.lua
 map( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
 
--- save file
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
--- new file
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
-
--- Switch buffers with <c-p> <c-n>
-map("n", "<C-p>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("n", "<C-n>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
-
 -- buffers
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New File" })
+-- Switch buffers with <c-p> <c-n>
+map("n", "<C-p>", "[b", { desc = "Previous Buffer", remap = true })
+map("n", "<C-n>", "]b", { desc = "Next Buffer", remap = true })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>bl", "<cmd>blast<cr>", { desc = "Last Tab" })
-map("n", "<leader>bf", "<cmd>bfirst<cr>", { desc = "First Tab" })
-map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Next Tab" })
-map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Tab" })
-map("n", "<leader>bD", function() U.ui.close_others() end, { desc = "Delete Other Buffers" })
+map("n", "<leader>bo", function() U.ui.close_others() end, { desc = "Delete Other Buffers" })
 map({"n", "t"}, "<leader>bd", function() U.ui.close() end, { desc = "Delete Buffer" })
 map({"n", "t"}, "<leader>mb", function() U.ui.bufinfo() end, { desc = "Buffer Info" })
+
+-- tabs
+map("n", "<leader><tab><tab>", "<cmd>tabs<cr>", { desc = "List Tabs" })
+map("n", "<leader><tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- floating terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
