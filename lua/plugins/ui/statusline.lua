@@ -13,7 +13,7 @@ return {
       return {
         options = {
           theme = "auto",
-          globalstatus = true,
+          globalstatus = vim.o.laststatus == 3,
           disabled_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {

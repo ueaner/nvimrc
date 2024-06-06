@@ -8,8 +8,6 @@ return {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = false },
-      { "folke/neodev.nvim", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       -- inc-rename.nvim instead of vim.lsp.buf.rename
@@ -208,14 +206,6 @@ return {
       if have_mason then
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
-
-      if U.lsp.get_config("denols") and U.lsp.get_config("tsserver") then
-        local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-        U.lsp.disable("tsserver", is_deno)
-        U.lsp.disable("denols", function(root_dir)
-          return not is_deno(root_dir)
-        end)
-      end
     end,
   },
 
@@ -243,19 +233,15 @@ return {
           })
         end, 100)
       end)
-      local function ensure_installed()
+
+      mr.refresh(function()
         for _, tool in ipairs(opts.ensure_installed) do
           local p = mr.get_package(tool)
           if not p:is_installed() then
             p:install()
           end
         end
-      end
-      if mr.refresh then
-        mr.refresh(ensure_installed)
-      else
-        ensure_installed()
-      end
+      end)
     end,
   },
 

@@ -157,6 +157,7 @@ local keys = {
     { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
     { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Show Summary" },
     { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
+    { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end, desc = "Watch" },
 
     { "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Show Output Panel" },
   },
@@ -218,22 +219,7 @@ local keys = {
     { "<leader>ci", vim.lsp.buf.incoming_calls, desc = "Call Hierarchy Incoming Calls", mode = { "n", "x" }, has = "callHierarchy/incomingCalls" },
     { "<leader>co", vim.lsp.buf.outgoing_calls, desc = "Call Hierarchy Outgoing Calls", mode = { "n", "x" }, has = "callHierarchy/outgoingCalls" },
     { "<leader>cn", function() return ":Rename " .. vim.fn.expand("<cword>") end, expr = true, desc = "Rename", has = "rename" },
-    {
-      "<leader>cA",
-      function()
-        vim.lsp.buf.code_action({
-          apply = true,
-          context = {
-            only = {
-              "source",
-            },
-            diagnostics = {},
-          },
-        })
-      end,
-      desc = "Source Action",
-      has = "codeAction",
-    },
+    { "<leader>cA", U.lsp.action.source, desc = "Source Action", has = "codeAction" },
     { "]]", function() U.lsp.words.jump(vim.v.count1, true) end, desc = "Next Reference", has = "documentHighlight" },
     { "[[", function() U.lsp.words.jump(-vim.v.count1, true) end, desc = "Prev Reference", has = "documentHighlight" },
   },
@@ -291,8 +277,6 @@ local keys = {
   ["trouble.nvim"] = {
     { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
     { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Document Diagnostics (Trouble)" },
-    { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-    { "<leader>cS", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP references/definitions/... (Trouble)" },
     { "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
     { "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
     {
@@ -327,8 +311,13 @@ local keys = {
   ["todo-comments.nvim"] = {
     { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
     { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
-    { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+    { "<leader>xt", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
     { "<leader>xT", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+  },
+
+  ["bufferline.nvim"] = {
+    { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
+    { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
   },
 
   -- git
@@ -352,6 +341,10 @@ local keys = {
   -- outline
   ["aerial.nvim"] = {
     { "<leader>o", "<cmd>AerialToggle<cr>", desc = "Outline" }
+  },
+
+  ["outline.nvim"] = {
+    { "<leader>cs", "<cmd>Outline<cr>", desc = "Outline" }
   },
 
   ["zen-mode.nvim"] = {

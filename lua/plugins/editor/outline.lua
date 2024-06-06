@@ -1,12 +1,14 @@
 local C = require("config")
 
 return {
-  -- outline
+  -- Code outline sidebar powered by Treesitter or LSP.
   {
     "stevearc/aerial.nvim",
     event = "VeryLazy",
     cmd = "AerialToggle",
     opts = function()
+      vim.api.nvim_set_hl(0, "AerialLine", { bg = U.ui.bg("CursorLine"), fg = U.ui.fg("Title") })
+
       local icons = vim.deepcopy(C.icons.kinds)
 
       -- HACK: fix lua's weird choice for `Package` for control
@@ -36,14 +38,67 @@ return {
         },
         icons = icons,
         filter_kind = filter_kind,
-        -- stylua: ignore
-        guides = {
-          mid_item   = "├╴",
-          last_item  = "└╴",
-          nested_top = "│ ",
-          whitespace = "  ",
+      }
+      return opts
+    end,
+  },
+
+  -- Code outline sidebar powered by LSP, a properly configured LSP client is required.
+  {
+    "hedyhli/outline.nvim",
+    cmd = "Outline",
+    opts = function()
+      local defaults = require("outline.config").defaults
+      local opts = {
+        symbols = {},
+        symbol_blacklist = {},
+
+        outline_items = {
+          show_symbol_details = false,
+        },
+        outline_window = {
+          position = "right",
+          width = 40,
+          relative_width = false,
+        },
+        keymaps = {
+          show_help = "?",
+          close = { "<esc>", "q" },
+          goto_location = "<cr>",
+          peek_location = "<tab>",
+          goto_and_close = "<S-cr>",
+          restore_location = "<C-g>",
+          hover_symbol = "K",
+          toggle_preview = "P",
+          rename_symbol = "r",
+          code_actions = "a",
+          fold_toggle = "o",
+          fold_toggle_all = "O",
+          fold_reset = "R",
+          down_and_jump = "<C-j>",
+          up_and_jump = "<C-k>",
+          fold = "<space>", -- Fold symbol or parent symbol
+          unfold = nil,
+          fold_all = nil,
+          unfold_all = nil,
         },
       }
+      local filter = C.kind_filter
+
+      if type(filter) == "table" then
+        filter = filter.default
+        if type(filter) == "table" then
+          for kind, symbol in pairs(defaults.symbols) do
+            opts.symbols[kind] = {
+              icon = C.icons.kinds[kind] or symbol.icon,
+              hl = symbol.hl,
+            }
+            if not vim.tbl_contains(filter, kind) then
+              table.insert(opts.symbol_blacklist, kind)
+            end
+          end
+        end
+      end
       return opts
     end,
   },
