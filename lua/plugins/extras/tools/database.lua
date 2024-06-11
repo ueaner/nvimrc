@@ -129,6 +129,7 @@ return {
       vim.g.db_ui_use_nerd_fonts = 1
       vim.g.db_ui_winwidth = 40
       vim.g.db_ui_notification_width = 36
+      vim.g.db_ui_execute_on_save = false
     end,
     config = function()
       U.on_ft("dbui", function()

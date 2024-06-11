@@ -99,7 +99,14 @@ local conf = {
               .. "/dist/adapter.bundle.js",
           },
         }
-        for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
+
+        local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
+
+        local vscode = require("dap.ext.vscode")
+        vscode.type_to_filetypes["node"] = js_filetypes
+        vscode.type_to_filetypes["pwa-node"] = js_filetypes
+
+        for _, language in ipairs(js_filetypes) do
           dap.configurations[language] = {
             {
               type = "pwa-node",

@@ -44,6 +44,7 @@ return {
         },
         { ft = "spectre_panel", size = { height = 0.3 } },
         { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 0.3 } },
+        { title = "DB Query Result", ft = "dbout", size = { height = 0.3 } },
       },
       left = {
         -- Use `>`/`<` to switch git_status/buffers sources on the neo-tree window
@@ -68,8 +69,16 @@ return {
           ft = "aerial",
         },
         {
+          title = "Outline",
+          ft = "Outline",
+          pinned = true,
+          open = "Outline",
+        },
+        {
           title = "Database",
           ft = "dbui",
+          pinned = true,
+          open = "DBUIToggle",
         },
       },
       keys = {

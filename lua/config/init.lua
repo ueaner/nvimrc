@@ -1,6 +1,7 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/init.lua
 
 _G.LazyUtil = require("lazy.core.util")
+---@type util
 _G.U = require("util")
 
 ---@class Config

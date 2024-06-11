@@ -42,7 +42,9 @@ return {
       local actions = require("telescope.actions")
       local layout = require("telescope.actions.layout")
 
-      local open_with_trouble = require("trouble.sources.telescope").open
+      local open_with_trouble = function(...)
+        return require("trouble.sources.telescope").open(...)
+      end
 
       return {
         ---@type Picker

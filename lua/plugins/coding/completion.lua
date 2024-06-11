@@ -57,7 +57,7 @@ return {
           { name = "nvim_lsp" },
           { name = "path" },
           { name = "buffer" },
-          { name = "snippets" },
+          { name = "snippets" }, -- nvim-snippets
         },
 
         ---@type cmp.FormattingConfig

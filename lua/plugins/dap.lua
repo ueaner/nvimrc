@@ -36,6 +36,13 @@ return {
         )
       end
 
+      -- setup dap config by VsCode launch.json file
+      local vscode = require("dap.ext.vscode")
+      local json = require("plenary.json")
+      vscode.json_decode = function(str)
+        return vim.json.decode(json.json_strip_comments(str))
+      end
+
       -- Open automatically when a new debug session is created
       require("dap").listeners.after.event_initialized["dapui_config"] = function()
         require("dapui").open()
