@@ -90,6 +90,7 @@ return {
           ["?"] = "show_help",
           ["<"] = "prev_source",
           [">"] = "next_source",
+          ["P"] = { "toggle_preview", config = { use_float = false } },
 
           ["gg"] = "noop",
         },
