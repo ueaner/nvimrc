@@ -53,7 +53,7 @@ return {
       }
       table.insert(opts.sections.lualine_x, 2, {
         function()
-          return require("config").icons.kinds.Codeium
+          return U.config.icons.kinds.Codeium
         end,
         cond = function()
           return status() ~= nil

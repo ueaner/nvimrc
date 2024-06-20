@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
-  pattern = require("config").close_with_q,
+  pattern = U.config.close_with_q,
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- close some filetypes (float window) with <esc>
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_esc"),
-  pattern = require("config").close_with_esc,
+  pattern = U.config.close_with_esc,
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "<esc>", "<cmd>close<cr>", { buffer = event.buf, silent = true })

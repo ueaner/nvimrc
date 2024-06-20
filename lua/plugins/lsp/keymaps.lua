@@ -13,7 +13,7 @@ function M.get()
   if M._keys then
     return M._keys
   end
-  local keys = require("config").keys
+  local keys = U.config.keys
   M._keys = keys["nvim-lspconfig keys"] and keys["nvim-lspconfig keys"] or {}
   return M._keys
 end

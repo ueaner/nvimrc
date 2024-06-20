@@ -1,7 +1,5 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 
-local icons = require("config").icons
-
 return {
   -- lspconfig
   {
@@ -29,7 +27,7 @@ return {
           spacing = 4,
           source = "if_many",
           prefix = function(diagnostic)
-            for name, icon in pairs(icons.diagnostics) do
+            for name, icon in pairs(U.config.icons.diagnostics) do
               if diagnostic.severity == vim.diagnostic.severity[name:upper()] then
                 return icon
               end
@@ -39,10 +37,10 @@ return {
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
-            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
-            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+            [vim.diagnostic.severity.ERROR] = U.config.icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = U.config.icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = U.config.icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = U.config.icons.diagnostics.Info,
           },
         },
       },

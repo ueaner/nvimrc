@@ -1,5 +1,3 @@
-local C = require("config")
-
 return {
   -- Code outline sidebar powered by Treesitter or LSP.
   {
@@ -9,7 +7,7 @@ return {
     opts = function()
       vim.api.nvim_set_hl(0, "AerialLine", { bg = U.ui.bg("CursorLine"), fg = U.ui.fg("Title") })
 
-      local icons = vim.deepcopy(C.icons.kinds)
+      local icons = vim.deepcopy(U.config.icons.kinds)
 
       -- HACK: fix lua's weird choice for `Package` for control
       -- structures like if/else/for/etc.
@@ -17,8 +15,8 @@ return {
 
       ---@type table<string, string[]>|false
       local filter_kind = false
-      if C.kind_filter then
-        filter_kind = assert(vim.deepcopy(C.kind_filter))
+      if U.config.kind_filter then
+        filter_kind = assert(vim.deepcopy(U.config.kind_filter))
         filter_kind._ = filter_kind.default
         filter_kind.default = nil
       end
@@ -83,14 +81,14 @@ return {
           unfold_all = nil,
         },
       }
-      local filter = C.kind_filter
+      local filter = U.config.kind_filter
 
       if type(filter) == "table" then
         filter = filter.default
         if type(filter) == "table" then
           for kind, symbol in pairs(defaults.symbols) do
             opts.symbols[kind] = {
-              icon = C.icons.kinds[kind] or symbol.icon,
+              icon = U.config.icons.kinds[kind] or symbol.icon,
               hl = symbol.hl,
             }
             if not vim.tbl_contains(filter, kind) then

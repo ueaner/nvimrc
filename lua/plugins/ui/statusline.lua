@@ -8,7 +8,7 @@ return {
       local lualine_require = require("lualine_require")
       lualine_require.require = require
 
-      local icons = require("config").icons
+      local icons = U.config.icons
 
       return {
         options = {

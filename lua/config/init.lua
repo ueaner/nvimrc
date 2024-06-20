@@ -1,12 +1,7 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/init.lua
 
-_G.LazyUtil = require("lazy.core.util")
----@type util
-_G.U = require("util")
-
 ---@class Config
 local M = {}
-U.config = M
 
 M.excluded_filetypes = {
   "",
@@ -65,6 +60,7 @@ M.icons = {
     debugging = "",
   },
   -- https://microsoft.github.io/vscode-codicons/dist/codicon.html
+  -- https://microsoft.github.io/vscode-codicons/dist/codicon.csv
   dap = {
     Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
     Breakpoint = " ",
@@ -177,8 +173,7 @@ function M.get_kind_filter(buf)
   return type(M.kind_filter) == "table" and type(M.kind_filter.default) == "table" and M.kind_filter.default or nil
 end
 
+-- keys requires _G.U variable
 M.keys = require("config.keymaps.keys")
-
-function M.setup() end
 
 return M

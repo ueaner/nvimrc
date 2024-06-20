@@ -75,4 +75,48 @@ function M.lazy_notify()
   timer:start(500, 0, replay)
 end
 
+---@param keymaps { [string]: LazyKeysSpec[] }
+function M.lazy_plugin_keymaps(keymaps)
+  -- lazy.nvim v10.21.0
+  -- Triggered after LazyPlugins User Event
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LazyPlugins",
+    callback = function()
+      for name, _ in pairs(require("lazy.core.config").spec.plugins) do
+        local keys = keymaps[name]
+        if keys then
+          -- keys for specific filetypes
+          if keys.ft then
+            local ft = keys.ft
+            keys.ft = nil
+            if type(ft) == "function" then
+              ft = ft()
+            end
+            for i, mapping in ipairs(keys) do
+              keys[i].ft = ft
+            end
+          end
+
+          require("lazy.core.config").spec.plugins[name].keys = keymaps[name]
+        end
+      end
+    end,
+  })
+end
+
+function M.install()
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not vim.uv.fs_stat(lazypath) then
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable",
+      lazypath,
+    })
+  end
+  vim.opt.rtp:prepend(lazypath)
+end
+
 return M

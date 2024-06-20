@@ -32,7 +32,7 @@ return {
         timeout_ms = 1000,
         async = false, -- not recommended to change
         quiet = false, -- not recommended to change
-        lsp_fallback = true,
+        lsp_format = true,
       },
       formatters_by_ft = {
         lua = { "stylua" },

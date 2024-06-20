@@ -18,7 +18,7 @@ return {
         separator = " ",
         highlight = true,
         depth_limit = 5,
-        icons = require("config").icons.kinds,
+        icons = U.config.icons.kinds,
         lazy_update_context = true,
       }
     end,

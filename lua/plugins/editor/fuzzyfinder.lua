@@ -98,7 +98,7 @@ return {
         pickers = {
           buffers = { sort_mru = true, sort_lastused = true },
           colorscheme = { enable_preview = true },
-          lsp_document_symbols = { symbols = require("config").get_kind_filter() },
+          lsp_document_symbols = { symbols = U.config.get_kind_filter() },
         },
         extensions = {
           project = {

@@ -1,5 +1,3 @@
-local icons = require("config").icons
-
 local M = setmetatable({}, {
   __call = function(m, ...)
     return m.info(...)
@@ -7,7 +5,7 @@ local M = setmetatable({}, {
 })
 
 function M.langserver_names()
-  local info = icons.general.lsp .. " client(s): "
+  local info = U.config.icons.general.lsp .. " client(s): "
   local clients = vim.lsp.get_active_clients()
   if next(clients) == nil then
     return info .. "<empty>"
@@ -23,7 +21,7 @@ function M.langserver_names()
 end
 
 function M.treesitter_has_parser()
-  local info = icons.general.treesitter .. " treesitter has parser(s): "
+  local info = U.config.icons.general.treesitter .. " treesitter has parser(s): "
   if package.loaded["nvim-treesitter"] and require("nvim-treesitter.parsers").has_parser() then
     return info .. "YES"
   end
@@ -31,7 +29,7 @@ function M.treesitter_has_parser()
 end
 
 function M.dap_has_adapter()
-  local info = icons.general.dap .. " dap has adapter(s): "
+  local info = U.config.icons.general.dap .. " dap has adapter(s): "
   if require("dap").configurations[vim.bo.filetype] ~= nil then
     return info .. "YES"
   end

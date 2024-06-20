@@ -68,7 +68,7 @@ return {
               item.menu = string.sub(item.menu, 1, 40) .. "..."
             end
 
-            local icons = require("config").icons.kinds
+            local icons = U.config.icons.kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
             end
