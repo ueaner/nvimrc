@@ -103,7 +103,7 @@ return {
               },
             },
             -- Add clippy lints for Rust.
-            checkOnSave = {
+            check = {
               command = "cargo clippy",
               extraArgs = { "--no-deps" },
             },
