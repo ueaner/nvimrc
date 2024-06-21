@@ -112,6 +112,7 @@ function M.rename_file()
   vim.ui.input({
     prompt = "New File Name: ",
     default = extra,
+    completion = "file",
   }, function(new)
     if not new or new == "" or new == extra then
       return
@@ -136,7 +137,7 @@ function M.on_rename(from, to, rename)
     newUri = vim.uri_from_fname(to),
   } } }
 
-  local clients = M.get_clients()
+  local clients = vim.lsp.get_clients()
   for _, client in ipairs(clients) do
     if client.supports_method("workspace/willRenameFiles") then
       local resp = client.request_sync("workspace/willRenameFiles", changes, 1000, 0)
