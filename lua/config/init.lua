@@ -43,6 +43,7 @@ M.close_with_q = {
   "spectre_panel",
   "startuptime",
   "tsplayground",
+  "gitsigns.blame",
 }
 
 -- close some filetypes (float window) with <esc>

@@ -327,8 +327,8 @@ local keys = {
 
   -- git
   ["gitsigns.nvim"] = {
-    { "]h", function() require("gitsigns").nav_hunk("next") end, desc = "Next Hunk" },
-    { "[h", function() require("gitsigns").nav_hunk("prev") end, desc = "Prev Hunk" },
+    { "]h", function() if vim.wo.diff then vim.cmd.normal({ "]c", bang = true }) else require("gitsigns").nav_hunk("next") end end, desc = "Next Hunk" },
+    { "[h", function() if vim.wo.diff then vim.cmd.normal({ "]c", bang = true }) else require("gitsigns").nav_hunk("prev") end end, desc = "Prev Hunk" },
     { "]H", function() require("gitsigns").nav_hunk("last") end, desc = "Last Hunk" },
     { "[H", function() require("gitsigns").nav_hunk("first") end, desc = "First Hunk" },
     { "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", desc = "Stage Hunk", mode = { "n", "x" } },
@@ -338,9 +338,9 @@ local keys = {
     { "<leader>ghR", function() require("gitsigns").reset_buffer() end, desc = "Reset Buffer" },
     { "<leader>ghp", function() require("gitsigns").preview_hunk_inline() end, desc = "Preview Hunk Inline" },
     { "<leader>ghb", function() require("gitsigns").blame_line({ full = true }) end, desc = "Blame Line" },
+    { "<leader>ghB", function() require("gitsigns").blame() end, desc = "Blame Buffer" },
     { "<leader>ghd", function() require("gitsigns").diffthis() end, desc = "Diff This" },
     { "<leader>ghD", function() require("gitsigns").diffthis("~") end, desc = "Diff This ~" },
-    { "ih", ":<C-U>Gitsigns select_hunk<cr>", desc = "GitSigns Select Hunk", mode = { "o", "x" } },
   },
 
   -- outline
