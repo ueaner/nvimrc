@@ -77,7 +77,7 @@ end
 
 ---@param keymaps { [string]: LazyKeysSpec[] }
 function M.lazy_plugin_keymaps(keymaps)
-  -- lazy.nvim v10.21.0
+  -- lazy.nvim v10.24.3
   -- Triggered after LazyPlugins User Event
   vim.api.nvim_create_autocmd("User", {
     pattern = "LazyPlugins",

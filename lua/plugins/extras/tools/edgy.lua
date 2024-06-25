@@ -46,23 +46,23 @@ return {
         { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 0.3 } },
         { title = "DB Query Result", ft = "dbout", size = { height = 0.3 } },
       },
-      left = {
-        -- Use `>`/`<` to switch git_status/buffers sources on the neo-tree window
-        -- or use the telescope git_status/buffers commands
-        {
-          title = "Explorer",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "filesystem"
-          end,
-          pinned = true,
-          open = function()
-            vim.api.nvim_input(vim.g.mapleader .. "e") -- <leader>e
-          end,
-          size = { height = 0.5 },
-        },
-        { title = "Neotest Summary", ft = "neotest-summary" },
-      },
+      -- left = {
+      --   -- Use `>`/`<` to switch git_status/buffers sources on the neo-tree window
+      --   -- or use the telescope git_status/buffers commands
+      --   {
+      --     title = "FILE SYSTEM",
+      --     ft = "neo-tree",
+      --     filter = function(buf)
+      --       return vim.b[buf].neo_tree_source == "filesystem"
+      --     end,
+      --     pinned = true,
+      --     open = function()
+      --       vim.api.nvim_input(vim.g.mapleader .. "e") -- <leader>e
+      --     end,
+      --     size = { height = 0.5 },
+      --   },
+      --   { title = "Neotest Summary", ft = "neotest-summary" },
+      -- },
       right = {
         {
           title = "Outline",
@@ -79,6 +79,10 @@ return {
           ft = "dbui",
           pinned = true,
           open = "DBUIToggle",
+        },
+        {
+          title = "Neotest Summary",
+          ft = "neotest-summary",
         },
       },
       keys = {
