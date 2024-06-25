@@ -66,10 +66,11 @@ local conf = {
     { "leoluz/nvim-dap-go" },
   },
   test = { -- neotest: language specific adapters
-    "nvim-neotest/neotest-go",
+    "fredrikaverpil/neotest-golang",
     adapters = {
-      ["neotest-go"] = {
-        args = { "-count=1", "-timeout=60s", "-race", "-cover" },
+      ["neotest-golang"] = {
+        go_test_args = { "-count=1", "-timeout=60s", "-race", "-cover" },
+        dap_go_enabled = true,
       },
     },
   },
