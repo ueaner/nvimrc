@@ -16,6 +16,8 @@ return {
     init = function(plugin)
       require("lazy.core.loader").add_to_rtp(plugin)
       require("nvim-treesitter.query_predicates")
+      -- Download the parsers using Git instead of curl
+      require("nvim-treesitter.install").prefer_git = true
     end,
     ---@type TSConfig
     opts = {
