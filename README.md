@@ -64,7 +64,7 @@ See [keymaps.md](docs/keymaps.md).
 - Database Explorer with [vim-dadbod]
 - Http Client with [rest.nvim]
 - gRPC Client with [grpc-nvim]
-- icons with [nvim-web-devicons] and [vscode-codicons]
+- icons with [mini.icons] and [vscode-codicons]
 
 ## 📁 File Structure
 
@@ -131,5 +131,5 @@ Contents of ui, editor and coding:
 [vim-dadbod]: https://github.com/tpope/vim-dadbod
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
 [grpc-nvim]: https://github.com/hudclark/grpc-nvim
-[nvim-web-devicons]: https://github.com/nvim-tree/nvim-web-devicons
+[mini.icons]: https://github.com/echasnovski/mini.icons
 [vscode-codicons]: https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv
