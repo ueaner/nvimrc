@@ -32,10 +32,6 @@ local conf = {
               },
               checkThirdParty = false,
             },
-            completion = {
-              enable = false,
-              callSnippet = "Replace",
-            },
             runtime = {
               version = "LuaJIT",
             },
@@ -44,20 +40,28 @@ local conf = {
             },
             diagnostics = {
               enable = false,
-              globals = {
-                "vim",
-                "require",
-              },
+              -- See https://github.com/folke/lazydev.nvim/discussions/42
+              -- With lazydev you should defintely not configure any globals.
+              -- globals = {
+              --   "vim",
+              --   "require",
+              -- },
               disable = { "missing-fields", "incomplete-signature-doc", "trailing-space" },
             },
-            format = { -- EmmyLuaCodeStyle
+            format = { -- Use stylua instead of EmmyLuaCodeStyle
               enable = false,
             },
+            completion = {
+              enable = true,
+            },
             hint = {
-              enable = false,
+              enable = true,
             },
             hover = {
               enable = true,
+            },
+            codeLens = {
+              enable = false,
             },
             semantic = {
               enable = false,

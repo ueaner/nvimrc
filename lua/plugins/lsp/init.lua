@@ -7,7 +7,8 @@ return {
     event = "LazyFile",
     dependencies = {
       "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "williamboman/mason-lspconfig.nvim", config = function() end },
+      { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
       -- inc-rename.nvim instead of vim.lsp.buf.rename
       {
         "smjonas/inc-rename.nvim",
@@ -17,7 +18,6 @@ return {
         },
       },
     },
-    ---@class PluginLspOpts
     opts = {
       -- options for vim.diagnostic.config()
       diagnostics = {
@@ -61,7 +61,14 @@ return {
         enabled = true,
       },
       -- add any global capabilities here
-      capabilities = {},
+      capabilities = {
+        workspace = {
+          fileOperations = {
+            didRename = true,
+            willRename = true,
+          },
+        },
+      },
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
       -- but can be also overridden when specified
@@ -84,7 +91,11 @@ return {
               workspace = {
                 checkThirdParty = false,
               },
+              format = { -- Use stylua instead of EmmyLuaCodeStyle
+                enable = false,
+              },
               completion = {
+                enable = true,
                 callSnippet = "Replace",
               },
               hint = {
@@ -104,7 +115,7 @@ return {
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
         -- example to setup with typescript.nvim
-        -- tsserver = function(_, opts)
+        -- ts_ls = function(_, opts)
         --   require("typescript").setup({ server = opts })
         --   return true
         -- end,
@@ -112,12 +123,7 @@ return {
         -- ["*"] = function(server, opts) end,
       },
     },
-    ---@param opts PluginLspOpts
     config = function(_, opts)
-      if U.has("neoconf.nvim") then
-        local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
-        require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
-      end
       -- setup autoformat
       U.format.register(U.lsp.formatter())
       -- setup keymaps
@@ -168,6 +174,9 @@ return {
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
         }, servers[server] or {})
+        if server_opts.enabled == false then
+          return
+        end
 
         if opts.setup[server] then
           if opts.setup[server](server, server_opts) then
@@ -192,11 +201,13 @@ return {
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
-          -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-          if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-            setup(server)
-          elseif server_opts.enabled ~= false then
-            ensure_installed[#ensure_installed + 1] = server
+          if server_opts.enabled ~= false then
+            -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
+            if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
+              setup(server)
+            else
+              ensure_installed[#ensure_installed + 1] = server
+            end
           end
         end
       end
