@@ -90,9 +90,10 @@ return {
 
   {
     "mrcjkb/rustaceanvim",
-    version = "^4", -- Recommended
+    version = "^5", -- Recommended
     ft = { "rust" },
     opts = {
+      ---@type RustaceanLspClientOpts
       server = {
         default_settings = {
           -- rust-analyzer language server configuration
@@ -103,10 +104,11 @@ return {
               },
             },
             -- Add clippy lints for Rust.
-            check = {
-              command = "cargo clippy",
-              extraArgs = { "--no-deps" },
-            },
+            checkOnSave = true,
+            -- check = {
+            --   command = "cargo clippy",
+            --   extraArgs = { "--no-deps" },
+            -- },
             procMacro = {
               enable = true,
               ignored = {
