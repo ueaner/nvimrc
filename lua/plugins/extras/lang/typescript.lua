@@ -23,8 +23,8 @@ local conf = {
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
-      ---@type lspconfig.options.tsserver
-      tsserver = {
+      ---@type lspconfig.options.ts_ls
+      ts_ls = {
         keys = {
           {
             "<leader>cI",
