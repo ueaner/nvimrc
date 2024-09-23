@@ -5,7 +5,7 @@ return {
     ft = { "json", "yaml" },
   },
 
-  -- markdown preview in terminal
+  -- previewing markdown in terminal
   {
     "ellisonleao/glow.nvim",
     ft = "markdown",
@@ -19,7 +19,7 @@ return {
     end,
   },
 
-  -- markdown preview in browser
+  -- previewing markdown (image) in browser
   {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
@@ -30,6 +30,24 @@ return {
     opts = {
       theme = "light",
       app = "browser",
+    },
+  },
+
+  -- rendering markdown in neovim
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    opts = {
+      file_types = { "markdown" },
+      code = {
+        sign = false,
+        width = "block",
+        right_pad = 1,
+      },
+      heading = {
+        sign = false,
+        icons = {},
+      },
     },
   },
 }

@@ -406,6 +406,9 @@ local keys = {
   ["peek.nvim"] = {
     { "<leader>cp", function() local peek = require("peek"); if peek.is_open() then peek.close() else peek.open() end end, desc = "Live Preview (Peek)", ft = "markdown" },
   },
+  ["render-markdown.nvim"] = {
+    { "<leader>um", "<cmd>RenderMarkdown toggle<cr>", desc = "Markdown Render", ft = "markdown" },
+  },
 
   -- If both Sniprun and Iron are installed, Iron will be used first.
   ["sniprun"] = {
