@@ -65,8 +65,8 @@ return {
     "folke/which-key.nvim",
     optional = true,
     opts = {
-      defaults = {
-        ["<leader>sn"] = { name = "+noice" },
+      spec = {
+        { "<leader>sn", group = "noice" },
       },
     },
   },

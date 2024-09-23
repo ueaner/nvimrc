@@ -17,6 +17,7 @@ lazier.lazy_file()
 -- Configure lazy.nvim
 require("lazy").setup({
   spec = {
+    -- { "folke/lazy.nvim", version = "10.24.3" },
     { import = "plugins" },
     { import = "plugins.ui" },
     { import = "plugins.editor" },
