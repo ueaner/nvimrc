@@ -51,7 +51,7 @@ See [keymaps.md](docs/keymaps.md).
 - Linting with [nvim-lint]
 - Code Actions with [null-ls.nvim]
 - Auto Completion with [nvim-cmp]
-- Snippets with [LuaSnip] and [friendly-snippets]
+- Snippets with [nvim-snippets] and [friendly-snippets]
 - Fuzzy Finding with [telescope.nvim]
 - File Explorer with [neo-tree.nvim]
 - Code Outline with [aerial.nvim]
@@ -117,7 +117,7 @@ Contents of ui, editor and coding:
 [conform.nvim]: https://github.com/stevearc/conform.nvim
 [nvim-lint]: https://github.com/mfussenegger/nvim-lint
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
-[LuaSnip]: https://github.com/L3MON4D3/LuaSnip
+[nvim-snippets]: https://github.com/garymjr/nvim-snippets
 [friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
 [telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
 [neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
