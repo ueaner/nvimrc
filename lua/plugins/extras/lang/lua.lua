@@ -21,6 +21,9 @@ local conf = {
         settings = {
           -- https://github.com/LuaLS/lua-language-server/blob/master/doc/zh-cn/config.md
           Lua = {
+            runtime = {
+              version = "LuaJIT",
+            },
             workspace = {
               library = {
                 "~/.config/luameta",
@@ -31,9 +34,8 @@ local conf = {
                 ---@diagnostic enable: assign-type-mismatch
               },
               checkThirdParty = false,
-            },
-            runtime = {
-              version = "LuaJIT",
+              -- Skip files larger than 1000KB when preloading
+              preloadFileSize = 1000,
             },
             type = {
               castNumberToInteger = true,
