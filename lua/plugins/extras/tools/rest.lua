@@ -1,10 +1,11 @@
 return {
-  -- http client, treesitter: http, json
+  -- HTTP Client
+  -- treesitter: http, json
+  -- sudo dnf install compat-lua-libs-5.1.5 compat-lua-devel-5.1.5 compat-lua-5.1.5 luajit-devel luarocks
+  -- /usr/bin/lua-5.1
   {
     "rest-nvim/rest.nvim",
-    version = "^1.2.1",
     ft = "http",
-    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("rest-nvim").setup({
         -- Open request results in a horizontal split
@@ -29,6 +30,16 @@ return {
         env_file = ".env",
         custom_dynamic_variables = {},
         yank_dry_run = true,
+      })
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "http",
       })
     end,
   },

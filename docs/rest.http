@@ -1,7 +1,9 @@
+### basic get statement
 GET https://httpbin.org/get
 
-# POST data
+### POST json body
 POST https://httpbin.org/post
+Content-Type: application/json
 
 {
     "name": "httpbin"

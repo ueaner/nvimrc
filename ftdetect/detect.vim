@@ -7,6 +7,8 @@ au BufRead,BufNewFile go.mod       setlocal ft=gomod
 
 au BufRead,BufNewFile *.mdx        setlocal ft=markdown.mdx
 
+au BufRead,BufNewFile *.http       setlocal ft=http
+
 au BufRead,BufNewFile *.grpc       setlocal ft=grpc
 
 au BufRead,BufNewFile */roles/*/tasks/*.yml           setlocal ft=yaml.ansible

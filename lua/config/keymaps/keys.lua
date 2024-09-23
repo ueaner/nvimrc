@@ -453,8 +453,8 @@ local keys = {
     { "<leader>rr", "<cmd>Grpc<cr>", desc = "Run gRPC Request", ft = "grpc" },
   },
   ["rest.nvim"] = {
-    { "<leader>rr", "<Plug>RestNvim", desc = "Run Http Request", ft = "http" },
-    { "<leader>r.", "<Plug>RestNvimLast", desc = "Run Last Http Request", ft = "http" },
+    { "<leader>rr", "<cmd>Rest run<cr>", desc = "Run Http Request", ft = "http" },
+    { "<leader>r.", "<cmd>Rest last<cr>", desc = "Run Last Http Request", ft = "http" },
   },
 
   ["nvim-toc"] = {
