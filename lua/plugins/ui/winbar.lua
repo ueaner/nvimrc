@@ -31,7 +31,7 @@ return {
           -- item = { { " " }, { icon, guifg = color }, { " " }, { filename, guifg = colors.fg } }
           -- vim.list_extend(contents, item, 1, #item)
 
-          local toggles = U.toggler.toggles()
+          local toggles = U.toggle.toggles()
           for _, t in ipairs(toggles) do
             item = { { "  " }, { t[2], guifg = (t[3] and colors.orange or colors.blue) } }
             vim.list_extend(items, item)

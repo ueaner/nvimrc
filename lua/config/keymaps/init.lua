@@ -48,20 +48,16 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 map({ "n", "v" }, "<leader>cf", function() U.format({ force = true }) end, { desc = "Format" })
 
 -- toggle options
-map("n", "<leader>uf", function() U.format.toggle() end, { desc = "Toggle auto format (global)" })
-map("n", "<leader>uF", function() U.format.toggle(true) end, { desc = "Toggle auto format (buffer)" })
-map("n", "<leader>us", function() U.toggler.option("spell") end, { desc = "Toggle Spelling" })
-map("n", "<leader>ud", U.toggler.toggle_diagnostics, { desc = "Toggle Diagnostics" })
-map("n", "<leader>uc", U.toggler.toggle_conceallevel, { desc = "Toggle Conceal" })
-map("n", "<leader>ub", U.toggler.toggle_clipboard, { desc = "Toggle ClipBoard" })
-map("n", "<leader>up", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
-
-if vim.lsp.inlay_hint and type(vim.lsp.inlay_hint) == "table" then
-  map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
-end
-
-map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
-map("n", "<leader>uB", function() U.toggler.option("background", false, {"light", "dark"}) end, { desc = "Toggle Background" })
+U.toggle.map("<leader>uf", U.toggle.format())
+U.toggle.map("<leader>uF", U.toggle.format(true))
+U.toggle.map("<leader>us", U.toggle("spell", { name = "Spelling" })) -- bool, set spell!
+U.toggle.map("<leader>up", U.toggle("paste", { name = "Paste" })) -- bool, set paste!
+U.toggle.map("<leader>ud", U.toggle.diagnostics)
+U.toggle.map("<leader>uc", U.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } }))
+U.toggle.map("<leader>ub", U.toggle("clipboard", { values = { "", "unnamedplus" } }))
+U.toggle.map("<leader>uT", U.toggle.treesitter)
+U.toggle.map("<leader>uB", U.toggle("background", { values = { "light", "dark" }, name = "Background" }))
+U.toggle.map("<leader>uh", U.toggle.inlay_hints)
 
 -- lazy
 map("n", "<leader>mz", "<cmd>Lazy<cr>", { desc = "Lazy" })

@@ -60,7 +60,7 @@ function M.info()
     "smartindent",
   }
 
-  local toggles = U.toggler.toggles()
+  local toggles = U.toggle.toggles()
 
   local lines = {}
   local l = ""
@@ -120,7 +120,7 @@ function M.info()
   if not ok then
     pcall(require, "nvim-treesitter")
   end
-  vim.wo[win].conceallevel = 3
+  vim.wo[win].conceallevel = 2
   vim.wo[win].concealcursor = ""
   vim.wo[win].spell = false
   if not pcall(vim.treesitter.start, buf, lang) then

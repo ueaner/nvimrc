@@ -34,7 +34,7 @@ function M._dump(value, opts)
   vim.notify(msg, vim.log.levels.INFO, {
     title = "Debug: " .. opts.loc,
     on_open = function(win)
-      vim.wo[win].conceallevel = 3
+      vim.wo[win].conceallevel = 2
       vim.wo[win].concealcursor = ""
       vim.wo[win].spell = false
       local buf = vim.api.nvim_win_get_buf(win)
@@ -49,8 +49,8 @@ function M.dump(...)
   local value = { ... }
   if vim.tbl_isempty(value) then
     value = nil
-  else
-    value = vim.islist(value) and vim.tbl_count(value) <= 1 and value[1] or value
+  elseif vim.islist(value) and vim.tbl_count(value) <= 1 then
+    value = value[1]
   end
   M._dump(value)
 end
