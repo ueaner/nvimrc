@@ -1,3 +1,6 @@
+" Saving files without permissions
+command! W w !sudo tee % > /dev/null
+
 " Visual mode pressing * or # searches for the current selection
 " https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 func s:VisualSelection() range
