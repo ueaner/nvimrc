@@ -21,7 +21,7 @@ return {
           typescript = { command = { "tsx" } },
           -- cargo install evcxr_repl
           -- NOTE: switch to the repl window and press Enter
-          rust = { command = { "evcxr" } },
+          rust = { command = { "evcxr", "--ide-mode" } },
         },
         repl_open_cmd = require("iron.view").right(60),
       },

@@ -8,6 +8,12 @@ function M.diagnostic_goto(next, severity)
   end
 end
 
+function M.RustReplAppendSendCr()
+  if vim.bo.filetype == "rust" then
+    require("iron.core").send(nil, string.char(13))
+  end
+end
+
 -- NOTE: Adding ` keys` after the plugin name is handled by the plugin itself.
 
 -- stylua: ignore
@@ -438,11 +444,11 @@ local keys = {
 
   ["iron.nvim"] = {
     ft = function () return require("lazy.core.config").spec.plugins["iron.nvim"].ft end,
-    { "<leader>rr", function() require("iron.core").run_motion("send_motion") end, desc = "Run Code Block" },
-    { "<leader>rr", function() require("iron.core").visual_send() end, desc = "Run Selected Code Block", mode = { "v" } },
-    { "<leader>rl", function() require("iron.core").send_line() end, desc = "Run Cursor Line" },
-    { "<leader>rf", function() require("iron.core").send_file() end, desc = "Run File" },
-    { "<leader>r<rc>", function() require("iron.core").send(nil, string.char(13)) end, desc = "Return" },
+    { "<leader>rr", function() require("iron.core").run_motion("send_motion") M.RustReplAppendSendCr() end, desc = "Run Code Block" },
+    { "<leader>rr", function() require("iron.core").visual_send() M.RustReplAppendSendCr() end, desc = "Run Selected Code Block", mode = { "v" } },
+    { "<leader>rl", function() require("iron.core").send_line() M.RustReplAppendSendCr() end, desc = "Run Cursor Line" },
+    { "<leader>rf", function() require("iron.core").send_file() M.RustReplAppendSendCr() end, desc = "Run File" },
+    { "<leader>r<cr>", function() require("iron.core").send(nil, string.char(13)) end, desc = "Return" },
     { "<leader>rc", function() require("iron.core").send(nil, string.char(03)) end, desc = "Interrupt (<C-c>)" },
     { "<leader>rq", function() require("iron.core").close_repl() end, desc = "Quit" },
     { "<leader>rx", function() require("iron.core").send(nil, string.char(12)) end, desc = "Clear" },
