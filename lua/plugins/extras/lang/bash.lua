@@ -1,8 +1,11 @@
 local generator = require("plugins.extras.langspec"):new()
 
+-- Register the bash parser for zsh
+vim.treesitter.language.register("bash", "zsh")
+
 ---@type LangConfig
 local conf = {
-  ft = { "sh", "bash" },
+  ft = { "sh", "bash", "zsh" },
   parsers = { -- nvim-treesitter: language parsers
     "bash",
   },
