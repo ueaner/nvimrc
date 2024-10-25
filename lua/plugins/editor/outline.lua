@@ -27,7 +27,7 @@ return {
         show_guides = true,
         layout = {
           resize_to_content = false,
-          min_width = 40,
+          min_width = U.config.sidebar.width,
           win_opts = {
             winhl = "Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB",
             signcolumn = "yes",
@@ -56,7 +56,7 @@ return {
         },
         outline_window = {
           position = "right",
-          width = 40,
+          width = U.config.sidebar.width,
           relative_width = false,
         },
         keymaps = {

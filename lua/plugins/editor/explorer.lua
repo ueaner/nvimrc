@@ -58,6 +58,7 @@ return {
         end,
       },
       window = {
+        width = U.config.sidebar.width,
         mappings = {
           ["Y"] = "copy_filename",
           ["gy"] = "copy_filepath",

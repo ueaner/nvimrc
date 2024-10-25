@@ -177,4 +177,14 @@ end
 -- keys requires _G.U variable
 M.keys = require("config.keymaps.keys")
 
+-- Explorer: Outline, Database, etc
+M.sidebar = {
+  width = vim.fn.winwidth(0) > 150 and 40 or 36,
+}
+
+-- Panel: Output, Terminal, etc
+M.panel = {
+  height = vim.fn.winheight(0) > 35 and 10 or 8,
+}
+
 return M

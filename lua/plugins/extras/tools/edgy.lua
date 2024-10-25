@@ -6,10 +6,10 @@ return {
     opts = {
       ---@type table<Edgy.Pos, {size:integer | fun():integer, wo:vim.wo?}>
       options = {
-        left = { size = 40 },
-        bottom = { size = 10 },
-        right = { size = 40 },
-        top = { size = 10 },
+        left = { size = U.config.sidebar.width },
+        bottom = { size = U.config.panel.height },
+        right = { size = U.config.sidebar.width },
+        top = { size = U.config.panel.height },
       },
       bottom = {
         {

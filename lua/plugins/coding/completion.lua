@@ -64,8 +64,9 @@ return {
         formatting = {
           format = function(_, item)
             -- Maximum length of extra text for popup menu is 40
-            if type(item.menu) == "string" and string.len(item.menu) > 40 then
-              item.menu = string.sub(item.menu, 1, 40) .. "..."
+            local width = U.config.sidebar.width
+            if type(item.menu) == "string" and string.len(item.menu) > width then
+              item.menu = string.sub(item.menu, 1, width) .. "..."
             end
 
             local icons = U.config.icons.kinds
