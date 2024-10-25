@@ -1,5 +1,12 @@
 local generator = require("plugins.extras.langspec"):new()
 
+-- Register the markdown.mdx filetype
+-- au BufRead,BufNewFile *.mdx   setlocal ft=markdown.mdx
+vim.filetype.add({ extension = { mdx = "markdown.mdx" } })
+
+-- Register the markdown parser for markdown.mdx files
+vim.treesitter.language.register("markdown", "markdown.mdx")
+
 ---@type LangConfig
 local conf = {
   ft = { "markdown", "markdown.mdx" },
