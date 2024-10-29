@@ -54,7 +54,13 @@ return {
           -- },
           dynamic_preview_title = true,
           layout_strategy = layout_strategy(),
-          layout_config = { prompt_position = "top", height = 0.90, width = 0.95, preview_width = 0.6 },
+          layout_config = {
+            prompt_position = "top",
+            height = 0.90,
+            width = 0.95,
+            horizontal = { preview_width = 0.6 },
+          },
+
           sorting_strategy = "ascending",
           winblend = 0,
           prompt_prefix = " ",
