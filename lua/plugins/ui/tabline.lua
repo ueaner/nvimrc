@@ -2,7 +2,7 @@ return {
   -- bufferline
   {
     "akinsho/bufferline.nvim",
-    event = "VeryLazy",
+    event = "LazyFile",
     opts = {
       options = {
         -- stylua: ignore

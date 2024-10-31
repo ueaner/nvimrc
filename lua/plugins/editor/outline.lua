@@ -2,7 +2,7 @@ return {
   -- Code outline sidebar powered by Treesitter or LSP.
   {
     "stevearc/aerial.nvim",
-    event = "VeryLazy",
+    event = "LazyFile",
     cmd = "AerialToggle",
     opts = function()
       vim.api.nvim_set_hl(0, "AerialLine", { bg = U.ui.bg("CursorLine"), fg = U.ui.fg("Title") })

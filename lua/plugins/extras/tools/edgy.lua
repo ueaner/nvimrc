@@ -65,13 +65,13 @@ return {
       -- },
       right = {
         {
-          title = "Outline",
+          title = "Aerial",
           ft = "aerial",
+          open = "AerialOpen",
         },
         {
           title = "Outline",
           ft = "Outline",
-          pinned = true,
           open = "Outline",
         },
         {
