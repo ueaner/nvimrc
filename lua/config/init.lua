@@ -44,6 +44,7 @@ M.close_with_q = {
   "startuptime",
   "tsplayground",
   "gitsigns-blame",
+  "jqx",
 }
 
 -- close some filetypes (float window) with <esc>

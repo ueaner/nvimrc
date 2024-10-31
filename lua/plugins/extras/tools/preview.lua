@@ -1,5 +1,7 @@
 return {
   -- browse and preview json files
+  -- 1. jsonls save auto-formatting
+  -- 2. outline.nvim browse and search
   {
     "gennaro-tedesco/nvim-jqx",
     event = { "LazyFile", "VeryLazy" },
