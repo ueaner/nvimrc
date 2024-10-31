@@ -51,6 +51,7 @@ return {
         sign = false,
         icons = {},
       },
+      latex = { enabled = false },
     },
   },
 }
