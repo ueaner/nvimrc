@@ -167,6 +167,13 @@ elseif vim.fn.executable("btop") == 1 then
   map("n", "<leader>ab", function() U.terminal({ "btop" }) end, { desc = "btop" })
 end
 
+if vim.fn.executable("glow") == 1 then
+  map("n", "<leader>ag", function() U.terminal(
+    { "glow", vim.api.nvim_buf_get_name(0) },
+    { interactive = false, size = { width = 0.75, height = 0.85 } }
+  ) end, { desc = "glow" })
+end
+
 if vim.g.neovide then
   vim.keymap.set('n', '<C-s>', ':w<CR>') -- Save
   -- system clipboard
