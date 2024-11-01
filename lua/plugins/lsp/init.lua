@@ -228,6 +228,10 @@ return {
         "lua-language-server",
         "stylua",
       },
+      providers = {
+        -- "mason.providers.registry-api",
+        "mason.providers.client",
+      },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
     config = function(_, opts)
