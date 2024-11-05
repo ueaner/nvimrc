@@ -154,7 +154,7 @@ return {
           program = function()
             local workspaceFolderBasename = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
             -- ~/.cargo/config.toml: build.target-dir
-            local debug_bin = vim.fn.expand("~/.target/debug/" .. workspaceFolderBasename)
+            local debug_bin = vim.fn.expand(vim.env.CARGO_BUILD_TARGET_DIR .. "/debug/" .. workspaceFolderBasename)
             if vim.fn.executable(debug_bin) == 1 then
               return debug_bin
             end
@@ -171,7 +171,7 @@ return {
           name = "Launch file (cargo build)",
           preLaunchTask = "cargo build",
           -- ~/.cargo/config.toml: build.target-dir
-          program = "~/.target/debug/${workspaceFolderBasename}",
+          program = vim.env.CARGO_BUILD_TARGET_DIR .. "/debug/${workspaceFolderBasename}",
           args = {},
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
@@ -180,7 +180,7 @@ return {
           type = "codelldb",
           request = "launch",
           name = "Launch file with arguments",
-          program = "~/.target/debug/${workspaceFolderBasename}",
+          program = vim.env.CARGO_BUILD_TARGET_DIR .. "/debug/${workspaceFolderBasename}",
           args = U.dap.get_args,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
@@ -190,7 +190,7 @@ return {
           request = "launch",
           name = "Launch file with arguments (cargo build)",
           preLaunchTask = "cargo build",
-          program = "~/.target/debug/${workspaceFolderBasename}",
+          program = vim.env.CARGO_BUILD_TARGET_DIR .. "/debug/${workspaceFolderBasename}",
           args = U.dap.get_args,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
