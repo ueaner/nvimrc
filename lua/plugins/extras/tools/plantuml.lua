@@ -18,7 +18,7 @@ return {
       "PlantumlSave",
     },
     init = function()
-      vim.g["plantuml_previewer#plantuml_jar_path"] = vim.env.XDG_LIB_HOME .. "/java/plantuml.jar"
+      vim.g["plantuml_previewer#plantuml_jar_path"] = vim.env.XDG_BIN_HOME .. "/plantuml.jar"
     end,
   },
 }
