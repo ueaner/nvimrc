@@ -13,6 +13,7 @@ if vim.fn.executable("php") == 1 then
     -- NOTE: When the `composer` mirror is not synchronized, it may not match the version in `Mason` and cannot be installed.
     cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
       "phpactor",
+      "phpcs",
       "php-cs-fixer",
       "php-debug-adapter", -- https://github.com/xdebug/vscode-php-debug
     },
@@ -23,6 +24,9 @@ if vim.fn.executable("php") == 1 then
     },
     formatters = { -- conform.nvim
       "php_cs_fixer",
+    },
+    linters = { -- nvim-lint
+      "phpcs",
     },
     dap = {
       function()
