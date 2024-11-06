@@ -10,25 +10,23 @@ end
 
 return {
 
-  -- crates cmp source
+  -- LSP for Cargo.toml
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      {
-        "Saecki/crates.nvim",
-        event = { "BufRead Cargo.toml" },
-        opts = {
-          completion = {
-            cmp = { enabled = true },
-          },
+    "Saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    opts = {
+      completion = {
+        crates = {
+          enabled = true,
         },
       },
+      lsp = {
+        enabled = true,
+        actions = true,
+        completion = true,
+        hover = true,
+      },
     },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, { name = "crates" })
-    end,
   },
 
   -- Add Rust & related to treesitter
@@ -39,7 +37,6 @@ return {
       vim.list_extend(opts.ensure_installed, {
         "ron",
         "rust",
-        "toml",
       })
     end,
   },
@@ -53,7 +50,6 @@ return {
       vim.list_extend(opts.ensure_installed, {
         "rust-analyzer",
         "codelldb",
-        "taplo",
       })
     end,
   },
@@ -63,27 +59,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        rust_analyzer = {},
-        taplo = {
-          keys = {
-            {
-              "K",
-              function()
-                if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-                  require("crates").show_popup()
-                else
-                  vim.lsp.buf.hover()
-                end
-              end,
-              desc = "Show Crate Documentation",
-            },
-          },
-        },
-      },
-      setup = {
-        rust_analyzer = function()
-          return true
-        end,
+        rust_analyzer = { enabled = false },
       },
     },
   },
@@ -219,8 +195,9 @@ return {
       --     ]
       -- }
       -- ```
-      -- a nil path defaults to .vscode/launch.json
-      require("dap.ext.vscode").load_launchjs(nil, { codelldb = { "rust" } })
+      -- nvim-dap always load .vscode/launch.json
+      -- see https://github.com/mfussenegger/nvim-dap/pull/1237
+      -- require("dap.ext.vscode").load_launchjs(nil, { codelldb = { "rust" } })
     end,
   },
 
