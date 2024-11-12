@@ -154,8 +154,10 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 map("n", "<leader>D", function() vim.log.set_level(vim.log.levels.DEBUG) end, { desc = "Neovim log set to DEBUG level" })
 
 -- lazygit
-map("n", "<leader>gg", function() U.terminal({ "lazygit" }, { cwd = U.root.git(), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function() U.terminal({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
+if vim.fn.executable("lazygit") == 1 then
+  map("n", "<leader>gg", function() U.terminal({ "lazygit" }, { cwd = U.root.git(), esc_esc = false }) end, { desc = "Lazygit (root dir)" })
+  map("n", "<leader>gG", function() U.terminal({ "lazygit" }, { esc_esc = false }) end, { desc = "Lazygit (cwd)" })
+end
 
 -- tig
 map("n", "<leader>gt", function() U.terminal({ "tig" }, { cwd = U.root.git(), esc_esc = false, border = "rounded" }) end, { desc = "Tig (root dir)" })
