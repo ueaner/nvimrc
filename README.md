@@ -54,17 +54,31 @@ See [keymaps.md](docs/keymaps.md).
 - Snippets with [nvim-snippets] and [friendly-snippets]
 - Fuzzy Finding with [telescope.nvim]
 - File Explorer with [neo-tree.nvim]
-- Code Outline with [aerial.nvim]
+- Code Outline with [aerial.nvim] and [outline.nvim]
 - Live prompt for keymaps with [which-key.nvim]
+- Quickly Jump with [flash.nvim] and [nvim-treehopper]
+- Colorscheme with [tokyonight.nvim] and [catppuccin]
 - Statusline with [lualine.nvim]
 - Tabline with [bufferline.nvim]
 - Floating Winbar with [incline.nvim]
+- Scrollbar with [satellite.nvim]
+- Indent guides with [indent-blankline.nvim]
 - Git integration with [gitsigns.nvim]
 - Terminal with [nvterm]
 - Database Explorer with [vim-dadbod]
 - Http Client with [kulala.nvim]
 - gRPC Client with [grpc-nvim]
 - icons with [mini.icons] and [vscode-codicons]
+
+Supported Programming Languages:
+
+- [Go]
+- [Rust]
+- [Python]
+- [PHP]
+- [TypeScript/JavaScript]
+- [Bash/Zsh Script]
+- etc.
 
 ## 📁 File Structure
 
@@ -122,14 +136,27 @@ Contents of ui, editor and coding:
 [telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
 [neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [aerial.nvim]: https://github.com/stevearc/aerial.nvim
+[outline.nvim]: https://github.com/hedyhli/outline.nvim
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [nvterm]: https://github.com/NvChad/nvterm
 [which-key.nvim]: https://github.com/folke/which-key.nvim
+[flash.nvim]: https://github.com/folke/flash.nvim
+[nvim-treehopper]: https://github.com/mfussenegger/nvim-treehopper
+[tokyonight.nvim]: https://github.com/folke/flash.nvim
+[catppuccin]: https://github.com/folke/flash.nvim
 [lualine.nvim]: https://github.com/nvim-lualine/lualine.nvim
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
 [incline.nvim]: https://github.com/b0o/incline.nvim
+[satellite.nvim]: https://github.com/lewis6991/satellite.nvim
+[indent-blankline.nvim]: https://github.com/lukas-reineke/indent-blankline.nvim
 [vim-dadbod]: https://github.com/tpope/vim-dadbod
 [kulala.nvim]: https://github.com/mistweaverco/kulala.nvim
 [grpc-nvim]: https://github.com/hudclark/grpc-nvim
 [mini.icons]: https://github.com/echasnovski/mini.icons
 [vscode-codicons]: https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv
+[Go]: lua/plugins/extras/lang/go.lua
+[Rust]: lua/plugins/extras/lang/rust.lua
+[Python]: lua/plugins/extras/lang/python.lua
+[PHP]: lua/plugins/extras/lang/php.lua
+[TypeScript/JavaScript]: lua/plugins/extras/lang/typescript.lua
+[Bash/Zsh Script]: lua/plugins/extras/lang/bash.lua
