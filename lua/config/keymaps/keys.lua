@@ -449,7 +449,7 @@ local keys = {
     { "<leader>rl", function() require("iron.core").send_line() M.RustReplAppendSendCr() end, desc = "Run Cursor Line" },
     { "<leader>rf", function() require("iron.core").send_file() M.RustReplAppendSendCr() end, desc = "Run File" },
     { "<leader>r<cr>", function() require("iron.core").send(nil, string.char(13)) end, desc = "Return" },
-    { "<leader>rc", function() require("iron.core").send(nil, string.char(03)) end, desc = "Interrupt (<C-c>)" },
+    { "<leader>ri", function() require("iron.core").send(nil, string.char(03)) end, desc = "Interrupt (<C-c>)" },
     { "<leader>rq", function() require("iron.core").close_repl() end, desc = "Quit" },
     { "<leader>rx", function() require("iron.core").send(nil, string.char(12)) end, desc = "Clear" },
 
@@ -461,9 +461,13 @@ local keys = {
   ["grpc-nvim"] = {
     { "<leader>rr", "<cmd>Grpc<cr>", desc = "Run gRPC Request", ft = "grpc" },
   },
-  ["rest.nvim"] = {
-    { "<leader>rr", "<cmd>Rest run<cr>", desc = "Run Http Request", ft = "http" },
-    { "<leader>r.", "<cmd>Rest last<cr>", desc = "Run Last Http Request", ft = "http" },
+  ["kulala.nvim"] = {
+    { "<leader>rr", "<cmd>lua require('kulala').run()<cr>", desc = "Run Http Request", ft = "http" },
+    { "<leader>r.", "<cmd>lua require('kulala').replay()<cr>", desc = "Run Last Http Request", ft = "http" },
+    { "<leader>rc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy as cURL", ft = "http" },
+    { "<leader>rp", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Paste from curl", ft = "http" },
+    { "<leader>rs", "<cmd>lua require('kulala').show_stats()<cr>", desc = "Show stats", ft = "http" },
+    { "<leader>rq", "<cmd>lua require('kulala').close()<cr>", desc = "Close window", ft = "http" },
   },
 
   ["nvim-toc"] = {

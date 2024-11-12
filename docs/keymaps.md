@@ -350,23 +350,26 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 - prefix: `<leader>r` for run/REPL
 
-| Key             | Description           | Mode | Provider    |
-| --------------- | --------------------- | ---- | ----------- |
-| **REPL**        |                       |      | REPL        |
-| `<leader>rr`    | Run code block        | n, v | [iron.nvim] |
-| `<leader>rl`    | Run cursor line       | n    | [iron.nvim] |
-| `<leader>rf`    | Run file              | n    | [iron.nvim] |
-| `<leader>r<cr>` | Send `return` to repl | n    | [iron.nvim] |
-| `<leader>rc`    | Interrupt (`<C-c>`)   | n    | [iron.nvim] |
-| `<leader>rq`    | Quit                  | n    | [iron.nvim] |
-| `<leader>rx`    | Clear                 | n    | [iron.nvim] |
-| `<leader>ru`    | Repl UI Toggle        | n    | [iron.nvim] |
-| `<leader>rR`    | Repl Restart          | n    | [iron.nvim] |
-| `<leader>rF`    | Repl Focus            | n    | [iron.nvim] |
-| **Others**      |                       |      | Clients     |
-| `<leader>r.`    | Run repeat last       | n    | [rest.nvim] |
-| `<leader>rr`    | Run http request      | n    | [rest.nvim] |
-| `<leader>rr`    | Run gRPC request      | n    | [grpc-nvim] |
+| Key             | Description           | Mode | Provider      |
+| --------------- | --------------------- | ---- | ------------- |
+| **REPL**        |                       |      | REPL          |
+| `<leader>rr`    | Run code block        | n, v | [iron.nvim]   |
+| `<leader>rl`    | Run cursor line       | n    | [iron.nvim]   |
+| `<leader>rf`    | Run file              | n    | [iron.nvim]   |
+| `<leader>r<cr>` | Send `return` to repl | n    | [iron.nvim]   |
+| `<leader>ri`    | Interrupt (`<C-c>`)   | n    | [iron.nvim]   |
+| `<leader>rq`    | Quit                  | n    | [iron.nvim]   |
+| `<leader>rx`    | Clear                 | n    | [iron.nvim]   |
+| `<leader>ru`    | Repl UI Toggle        | n    | [iron.nvim]   |
+| `<leader>rR`    | Repl Restart          | n    | [iron.nvim]   |
+| `<leader>rF`    | Repl Focus            | n    | [iron.nvim]   |
+| **Others**      |                       |      | Clients       |
+| `<leader>rr`    | Run gRPC request      | n    | [grpc-nvim]   |
+| `<leader>rr`    | Run http request      | n    | [kulala.nvim] |
+| `<leader>r.`    | Run Last Http Request | n    | [kulala.nvim] |
+| `<leader>rc`    | Copy as cURL          | n    | [kulala.nvim] |
+| `<leader>rp`    | Paste from curl       | n    | [kulala.nvim] |
+| `<leader>rs`    | Show stats            | n    | [kulala.nvim] |
 
 ## More
 
@@ -410,7 +413,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [neotest]: https://github.com/nvim-neotest/neotest
 [sniprun]: https://github.com/michaelb/sniprun
 [iron.nvim]: https://github.com/ueaner/iron.nvim
-[rest.nvim]: https://github.com/rest-nvim/rest.nvim
+[kulala.nvim]: https://github.com/mistweaverco/kulala.nvim
 [grpc-nvim]: https://github.com/hudclark/grpc-nvim
 [lazygit]: https://github.com/jesseduffield/lazygit
 [tig]: https://github.com/jonas/tig

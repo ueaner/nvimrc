@@ -62,7 +62,7 @@ See [keymaps.md](docs/keymaps.md).
 - Git integration with [gitsigns.nvim]
 - Terminal with [nvterm]
 - Database Explorer with [vim-dadbod]
-- Http Client with [rest.nvim]
+- Http Client with [kulala.nvim]
 - gRPC Client with [grpc-nvim]
 - icons with [mini.icons] and [vscode-codicons]
 
@@ -129,7 +129,7 @@ Contents of ui, editor and coding:
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
 [incline.nvim]: https://github.com/b0o/incline.nvim
 [vim-dadbod]: https://github.com/tpope/vim-dadbod
-[rest.nvim]: https://github.com/rest-nvim/rest.nvim
+[kulala.nvim]: https://github.com/mistweaverco/kulala.nvim
 [grpc-nvim]: https://github.com/hudclark/grpc-nvim
 [mini.icons]: https://github.com/echasnovski/mini.icons
 [vscode-codicons]: https://github.com/microsoft/vscode-codicons/blob/main/dist/codicon.csv
