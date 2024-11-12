@@ -237,7 +237,7 @@ local keys = {
   ["telescope.nvim"] = {
     { "<leader><space>", "<cmd>Telescope<cr>", desc = "Telescope Builtin" },
     { "<leader>fa", "<cmd>Telescope<cr>", desc = "More... (<leader><space>)" },
-    { "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Switch Buffer" },
+    { "<leader>,", "<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>", desc = "Switch Buffer" },
     { "<leader>/", "<cmd>Telescope live_grep_args<CR>", desc = "Grep" },
     -- NOTE: There is an issue with the CJK character under the search cursor
     { "<leader>/", function() require("telescope-live-grep-args.shortcuts").grep_visual_selection({ postfix = false }) end, desc = "Grep", mode = { "x" } },
