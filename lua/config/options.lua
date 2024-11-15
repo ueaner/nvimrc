@@ -31,7 +31,6 @@ opt.splitright = true -- Put new windows right of current
 opt.splitkeep = "screen"
 opt.spell = true
 opt.spelllang = "en_us,cjk" -- :help spell-cjk  exclude CJK characters form spell checking
-opt.spelloptions:append("noplainbuffer")
 opt.mouse = "nvi" -- Enable mouse mode
 opt.shortmess:append({ W = true, I = true, c = true, C = true, s = true })
 
