@@ -138,13 +138,11 @@ return generator
       cmd = "LazyDev",
       opts = {
         library = {
-          { path = "luvit-meta/library", words = { "vim%.uv" } },
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
           { path = "lazy.nvim", words = { "LazyUtil" } },
         },
       },
     },
-    -- Manage libuv types with lazy. Plugin will never be loaded
-    { "Bilal2453/luvit-meta", ft = "lua", lazy = true },
     -- Add lazydev source to cmp
     {
       "hrsh7th/nvim-cmp",
