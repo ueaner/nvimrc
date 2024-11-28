@@ -223,6 +223,7 @@ return {
     "williamboman/mason.nvim",
     cmd = "Mason",
     build = ":MasonUpdate",
+    ---@type MasonSettings
     opts = {
       ensure_installed = {
         "lua-language-server",
@@ -231,6 +232,9 @@ return {
       providers = {
         -- "mason.providers.registry-api",
         "mason.providers.client",
+      },
+      github = {
+        download_url_template = "https://ghp.ci/https://github.com/%s/releases/download/%s/%s",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
