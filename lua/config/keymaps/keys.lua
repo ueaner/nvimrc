@@ -341,7 +341,7 @@ local keys = {
   },
 
   ["noice.nvim"] = {
-    { "<leader>nh", function() require("noice").cmd("telescope") end, desc = "Noice History" },
+    { "<leader>mn", function() require("noice").cmd("telescope") end, desc = "Noice History" },
 
     { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<Right>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i"}},
     { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<Left>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i"}},

@@ -26,7 +26,6 @@ return {
           { "<leader>q", group = "quit/session" },
           { "<leader>r", group = "run/repl" },
           { "<leader>s", group = "search" },
-          { "<leader>sn", group = "noice" },
           { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
           { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
           {

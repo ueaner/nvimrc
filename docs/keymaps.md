@@ -179,6 +179,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>mf` | Lazy Format Info        | n    | LazyFormatInfo           |
 | `<leader>mb` | Buffer Info             | n    | [util.ui]                |
 | `<leader>mk` | Which Key               | n    | [which-key.nvim]         |
+| `<leader>mn` | Noice History           | n    | [noice.nvim]             |
 | `<leader>dd` | Show DAP configurations | n    | [nvim-dap]               |
 |              | Show Output Panel       | n    |                          |
 | `<leader>cp` | Preview (markdown)      | n    | [glow.nvim]              |
@@ -399,6 +400,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader-S>`     | Execute Query                    | i, v | [vim-dadbod-ui]  |
 
 [which-key.nvim]: https://github.com/folke/which-key.nvim
+[noice.nvim]: https://github.com/folke/noice.nvim
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
 [nvim-spectre]: https://github.com/windwp/nvim-spectre
 [telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
