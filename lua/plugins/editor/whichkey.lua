@@ -5,6 +5,7 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    opts_extend = { "spec" },
     opts = {
       plugins = { spelling = true },
       ---@type wk.Spec
@@ -14,19 +15,17 @@ return {
         { "<leader>t", group = "translate", mode = "x", desc = "Translate" },
         {
           mode = { "n", "v" },
-          { "<leader>a", group = "a tool" },
           { "<leader>c", group = "code" },
           { "<leader>d", group = "debug" },
           { "<leader>dw", group = "dap widgets" },
           { "<leader>f", group = "file/find" },
           { "<leader>g", group = "git" },
           { "<leader>gh", group = "hunks" },
-          { "<leader>m", group = "manager/info" },
-          { "<leader>n", group = "notes" },
-          { "<leader>q", group = "quit/session" },
-          { "<leader>r", group = "run/repl" },
-          { "<leader>s", group = "search" },
+          { "<leader>m", group = "manager/info", icon = { icon = "", color = "green" } },
+          { "<leader>n", group = "notes", icon = { icon = "", color = "green" } },
+          { "<leader>r", group = "run/repl", icon = { icon = "", color = "red" } },
           { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
+          { "<leader>v", group = "tool", icon = { icon = " ", color = "magenta" } },
           { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
           {
             "<leader>b",
@@ -43,11 +42,21 @@ return {
               return require("which-key.extras").expand.win()
             end,
           },
+          { "<leader><tab>", group = "tabs" },
           { "[", group = "prev" },
           { "]", group = "next" },
           { "g", group = "goto" },
           { "z", group = "fold" },
         },
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Keymaps (which-key)",
       },
     },
     config = function(_, opts)

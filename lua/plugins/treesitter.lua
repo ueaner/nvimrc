@@ -121,4 +121,14 @@ return {
     event = "LazyFile",
     opts = {},
   },
+
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        { "<space>", desc = "Increment Selection", mode = { "x", "n" } },
+        { "<BS>", desc = "Decrement Selection", mode = "x" },
+      },
+    },
+  },
 }

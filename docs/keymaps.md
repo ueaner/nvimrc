@@ -93,7 +93,6 @@ FROM Terminal TO Normal mode keyset: `tmap <Esc><Esc> <C-\><C-n>`
 | `zz`            | Scroll cursor to center screen     | n, v    | scrolling    |
 | `za`            | Toggle fold under cursor           | n       | fold         |
 | `zA`            | Toggle all folds under cursor      | n       | fold         |
-| `<leader>uw`    | Toggle word wrap                   | n       | options      |
 | `gcc`           | Toggle line comment                | n       | various      |
 | `gc`            | Toggle selected comment            | v       | various      |
 | `dgc`           | Delete comment                     | v       | various      |
@@ -154,9 +153,9 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 ## Display
 
 - prefix: `<leader>g` for git
-- prefix: `<leader>D` for db
-- prefix: `<leader>a` for `a` tool
+- prefix: `<leader>m` for manager/info
 - prefix: `<leader>u` for ui
+- prefix: `<leader>v` for tool
 
 | Key          | Description             | Mode | Provider                 |
 | ------------ | ----------------------- | ---- | ------------------------ |
@@ -300,36 +299,36 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 
 - prefix: `<leader>d` for debug
 
-| Key           | Description                   | Mode | Provider          |
-| ------------- | ----------------------------- | ---- | ----------------- |
-| `<leader>da`  | All Commands                  | n    | [telescope.nvim]  |
-| `<leader>db`  | Toggle Breakpoint             | n    | [nvim-dap]        |
-| `<leader>dc`  | Start / Continue              | n    | [nvim-dap]        |
-| `<leader>di`  | Step Into                     | n    | [nvim-dap]        |
-| `<leader>do`  | Step Out                      | n    | [nvim-dap]        |
-| `<leader>dn`  | Step Over (Next)              | n    | [nvim-dap]        |
-| `<leader>dh`  | Step to Cursor (Here)         | n    | [nvim-dap]        |
-| `<A-e>`       | evel                          | n, v | [nvim-dap-ui]     |
-| `<leader>de`  | Show Hover (expression)       | n, v | [nvim-dap-ui]     |
-| `<leader>d.`  | Run Last                      | n    | [nvim-dap]        |
-| `<leader>dk`  | Up (stacktrace)               | n    | [nvim-dap]        |
-| `<leader>dj`  | Down (stacktrace)             | n    | [nvim-dap]        |
-| `<leader>dq`  | Stop                          | n    | [nvim-dap]        |
-| `<leader>dd`  | Show DAP configurations       | n    | [telescope.nvim]  |
-| `<leader>dr`  | Start / Continue              | n    | [nvim-dap]        |
-| `<leader>dR`  | Restart                       | n    | [nvim-dap]        |
-| `<leader>dx`  | Show All Breakpoints          | n    | [telescope.nvim]  |
-| `<leader>dX`  | Remove All Breakpoints        | n    | [nvim-dap]        |
-| `<leader>dB`  | Conditional Breakpoint        | n    | [nvim-dap]        |
-| `<leader>du`  | Dap UI                        | n    | [nvim-dap-ui]     |
-| `<leader>dwe` | Show Eval (float window)      | n    | [nvim-dap]        |
-| `<leader>dws` | Show Sessions (float window)  | n    | [nvim-dap]        |
-| `<leader>dt`  | Debug test                    | n    | [nvim-dap-go]     |
-| `<leader>dT`  | Debug last test               | n    | [nvim-dap-go]     |
-| `<leader>dC`  | Debug Class                   | n    | [nvim-dap-python] |
-| `<leader>dM`  | Debug Method                  | n    | [nvim-dap-python] |
-| `<leader>dS`  | Debug Selection               | n    | [nvim-dap-python] |
-| `<leader>D`   | Neovim log set to DEBUG level | n    | [nvim-dap-python] |
+| Key           | Description                  | Mode | Provider          |
+| ------------- | ---------------------------- | ---- | ----------------- |
+| `<leader>da`  | All Commands                 | n    | [telescope.nvim]  |
+| `<leader>db`  | Toggle Breakpoint            | n    | [nvim-dap]        |
+| `<leader>dc`  | Start / Continue             | n    | [nvim-dap]        |
+| `<leader>di`  | Step Into                    | n    | [nvim-dap]        |
+| `<leader>do`  | Step Out                     | n    | [nvim-dap]        |
+| `<leader>dn`  | Step Over (Next)             | n    | [nvim-dap]        |
+| `<leader>dh`  | Step to Cursor (Here)        | n    | [nvim-dap]        |
+| `<A-e>`       | evel                         | n, v | [nvim-dap-ui]     |
+| `<leader>de`  | Show Hover (expression)      | n, v | [nvim-dap-ui]     |
+| `<leader>d.`  | Run Last                     | n    | [nvim-dap]        |
+| `<leader>dk`  | Up (stacktrace)              | n    | [nvim-dap]        |
+| `<leader>dj`  | Down (stacktrace)            | n    | [nvim-dap]        |
+| `<leader>dq`  | Stop                         | n    | [nvim-dap]        |
+| `<leader>dd`  | Show DAP configurations      | n    | [telescope.nvim]  |
+| `<leader>dr`  | Start / Continue             | n    | [nvim-dap]        |
+| `<leader>dR`  | Restart                      | n    | [nvim-dap]        |
+| `<leader>dx`  | Show All Breakpoints         | n    | [telescope.nvim]  |
+| `<leader>dX`  | Remove All Breakpoints       | n    | [nvim-dap]        |
+| `<leader>dB`  | Conditional Breakpoint       | n    | [nvim-dap]        |
+| `<leader>du`  | Dap UI                       | n    | [nvim-dap-ui]     |
+| `<leader>dwe` | Show Eval (float window)     | n    | [nvim-dap]        |
+| `<leader>dws` | Show Sessions (float window) | n    | [nvim-dap]        |
+| `<leader>dt`  | Debug test                   | n    | [nvim-dap-go]     |
+| `<leader>dT`  | Debug last test              | n    | [nvim-dap-go]     |
+| `<leader>dC`  | Debug Class                  | n    | [nvim-dap-python] |
+| `<leader>dM`  | Debug Method                 | n    | [nvim-dap-python] |
+| `<leader>dS`  | Debug Selection              | n    | [nvim-dap-python] |
+| `<leader>D`   | Neovim log set to            |
 
 ## Tests
 

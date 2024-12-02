@@ -174,13 +174,13 @@ map("n", "<leader>gt", function() U.terminal({ "tig" }, { cwd = U.root.git(), es
 map("n", "<leader>gT", function() U.terminal({ "tig" }, { esc_esc = false, border = "rounded" }) end, { desc = "Tig (cwd)" })
 
 if vim.fn.executable("btm") == 1 then
-  map("n", "<leader>ab", function() U.terminal({ "btm" }) end, { desc = "bottom" })
+  map("n", "<leader>vb", function() U.terminal({ "btm" }) end, { desc = "bottom" })
 elseif vim.fn.executable("btop") == 1 then
-  map("n", "<leader>ab", function() U.terminal({ "btop" }) end, { desc = "btop" })
+  map("n", "<leader>vb", function() U.terminal({ "btop" }) end, { desc = "btop" })
 end
 
 if vim.fn.executable("glow") == 1 then
-  map("n", "<leader>ag", function() U.terminal(
+  map("n", "<leader>vg", function() U.terminal(
     { "glow", vim.api.nvim_buf_get_name(0) },
     { interactive = false, size = { width = 0.75, height = 0.85 } }
   ) end, { desc = "glow" })
