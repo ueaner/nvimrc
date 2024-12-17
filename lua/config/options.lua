@@ -96,11 +96,26 @@ opt.foldmethod = "indent"
 opt.showmatch = true
 opt.matchtime = 3
 
-if not vim.env.SSH_TTY then
-  -- only set clipboard if not in ssh, to make sure the OSC 52
-  -- integration works automatically. Requires Neovim >= 0.10.0
-  opt.clipboard = "unnamedplus" -- Sync with system clipboard
+-- in $VIMRUNTIME/plugin/osc52.lua
+--    - require('vim.termcap').query('Ms', cb)
+--      - TermResponse event not triggered
+-- So, force Nvim to use the OSC 52 provider in ssh, :help clipboard-osc52
+if vim.env.SSH_TTY then
+  local osc52 = require("vim.ui.clipboard.osc52")
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = osc52.copy("+"),
+      ["*"] = osc52.copy("*"),
+    },
+    paste = {
+      ["+"] = osc52.paste("+"),
+      ["*"] = osc52.paste("*"),
+    },
+  }
 end
+-- and clipboard option must be set
+opt.clipboard = "unnamedplus" -- Sync with system clipboard
 
 -- Search for a filename and open the selected file :find somefile<TAB>
 opt.path:append("**")
