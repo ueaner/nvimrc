@@ -248,10 +248,10 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<C-j>`       | Go to lower window                 | n       |                   |
 | `<C-k>`       | Go to upper window                 | n       |                   |
 | `<C-l>`       | Go to right window                 | n       |                   |
-| `<C-Up>`      | Increase window height             | n       |                   |
-| `<C-Down>`    | Decrease window height             | n       |                   |
-| `<C-Left>`    | Decrease window width              | n       |                   |
-| `<C-Right>`   | Increase window width              | n       |                   |
+| `<A-Up>`      | Increase window height             | n       |                   |
+| `<A-Down>`    | Decrease window height             | n       |                   |
+| `<A-Left>`    | Decrease window width              | n       |                   |
+| `<A-Right>`   | Increase window width              | n       |                   |
 | `<leader>w-`  | Split window below                 | n       |                   |
 | `<leader>w\|` | Split window right                 | n       |                   |
 | `<leader>-`   | Split window below                 | n       |                   |
