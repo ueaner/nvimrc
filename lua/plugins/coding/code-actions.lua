@@ -13,11 +13,11 @@ return {
     opts = {},
   },
 
-  {
-    "kosayoda/nvim-lightbulb",
-    event = "LazyFile",
-    opts = {
-      autocmd = { enabled = true, events = { "CursorHold", "CursorHoldI" } },
-    },
-  },
+  -- {
+  --   "kosayoda/nvim-lightbulb",
+  --   event = "LazyFile",
+  --   opts = {
+  --     autocmd = { enabled = true, events = { "CursorHold", "CursorHoldI" } },
+  --   },
+  -- },
 }
