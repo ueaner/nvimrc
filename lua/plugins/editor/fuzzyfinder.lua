@@ -87,8 +87,8 @@ return {
               ["<C-d>"] = actions.preview_scrolling_down,
               ["<C-u>"] = actions.preview_scrolling_up,
               -- `<C-n/p>` for select result items
-              ["<C-Down>"] = actions.cycle_history_next,
-              ["<C-Up>"] = actions.cycle_history_prev,
+              ["<A-Down>"] = actions.cycle_history_next,
+              ["<A-Up>"] = actions.cycle_history_prev,
               ["<A-p>"] = layout.toggle_preview,
             },
             n = {
