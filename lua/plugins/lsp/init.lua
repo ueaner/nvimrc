@@ -234,7 +234,7 @@ return {
         "mason.providers.client",
       },
       github = {
-        download_url_template = "https://ghp.ci/https://github.com/%s/releases/download/%s/%s",
+        download_url_template = "https://github.com/%s/releases/download/%s/%s",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
