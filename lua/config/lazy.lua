@@ -16,6 +16,7 @@ lazier.lazy_file()
 
 -- Configure lazy.nvim
 require("lazy").setup({
+  concurrency = 10,
   spec = {
     -- { "folke/lazy.nvim", version = "10.24.3" },
     { import = "plugins" },
@@ -38,7 +39,7 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  checker = { enabled = true, concurrency = 10 }, -- automatically check for plugin updates
   ui = {
     size = { width = 0.85, height = 0.8 },
   },
