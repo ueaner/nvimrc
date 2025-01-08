@@ -39,7 +39,7 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = { enabled = true, concurrency = 10 }, -- automatically check for plugin updates
+  checker = { enabled = true, concurrency = 10, frequency = 86400 * 7 }, -- automatically check for plugin updates
   ui = {
     size = { width = 0.85, height = 0.8 },
   },
