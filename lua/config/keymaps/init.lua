@@ -133,7 +133,7 @@ map("n", "<C-p>", "[b", { desc = "Previous Buffer", remap = true })
 map("n", "<C-n>", "]b", { desc = "Next Buffer", remap = true })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Alternate Buffer" }) -- Previously Buffer
 map("n", "<leader>bo", function() U.ui.bufremove_others() end, { desc = "Delete Other Buffers" })
 map({"n", "t"}, "<leader>bd", function() U.ui.bufremove() end, { desc = "Delete Buffer" })
 map({"n", "t"}, "<leader>mb", function() U.ui.bufinfo() end, { desc = "Buffer Info" })
