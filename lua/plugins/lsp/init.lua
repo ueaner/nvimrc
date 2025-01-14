@@ -1,5 +1,10 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 
+local download_url_template = "https://github.com/%s/releases/download/%s/%s"
+if vim.env.GITHUB_PROXY ~= nil then
+  download_url_template = vim.env.GITHUB_PROXY .. download_url_template
+end
+
 return {
   -- lspconfig
   {
@@ -229,12 +234,13 @@ return {
         "lua-language-server",
         "stylua",
       },
+      log_level = vim.log.levels.DEBUG,
       providers = {
         -- "mason.providers.registry-api",
         "mason.providers.client",
       },
       github = {
-        download_url_template = "https://github.com/%s/releases/download/%s/%s",
+        download_url_template = download_url_template,
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
