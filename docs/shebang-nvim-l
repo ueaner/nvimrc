@@ -1,0 +1,11 @@
+#!/usr/bin/env -S nvim -l
+
+local filename = function()
+  local str = debug.getinfo(2, "S").source:sub(2)
+  return str:match("^.*/(.*).lua$") or str
+end
+
+local formatted = string.format("nvim -l %s", filename())
+print(formatted)
+
+-- vim: set ft=lua :
