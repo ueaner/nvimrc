@@ -24,6 +24,7 @@ au BufRead,BufNewFile */ansible/handlers/*.yml        setlocal ft=yaml.ansible
 au BufRead,BufNewFile */playbooks/hosts               setlocal ft=cfg
 au BufRead,BufNewFile */playbooks/tasks/*.yml         setlocal ft=yaml.ansible
 au BufRead,BufNewFile */playbooks/handlers/*.yml      setlocal ft=yaml.ansible
+au BufRead,BufNewFile */roles/*/templates/*.j2        setlocal ft=jinja
 
 " Toggle folds with the `zi` command
 au BufRead,BufNewFile */lua/plugins/*.lua             setlocal foldlevel=1
