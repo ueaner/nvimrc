@@ -5,12 +5,21 @@ return {
     "folke/tokyonight.nvim",
     lazy = true,
     opts = {
-      style = "moon",
+      style = "night",
       transparent = false,
       styles = {
         sidebars = "transparent",
         floats = "transparent",
       },
+      on_colors = function(colors)
+        colors.bg = os.getenv("COLOR_BLACK") or colors.bg
+        colors.bg_dark = os.getenv("COLOR_DARK") or colors.bg_dark
+      end,
+      -- on_highlights = function(hl, c)
+      --   hl.Normal = {
+      --     bg = "#0d1117", -- #07090c
+      --   }
+      -- end,
     },
   },
 
