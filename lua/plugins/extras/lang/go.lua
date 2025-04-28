@@ -2,11 +2,12 @@ local generator = require("plugins.extras.langspec"):new()
 
 ---@type LangConfig
 local conf = {
-  ft = "go",
+  ft = { "go", "go.mod", "go.work", "gosum" },
   parsers = { -- nvim-treesitter: language parsers
     "go",
     "gomod",
     "gowork",
+    "gosum",
   },
 }
 
