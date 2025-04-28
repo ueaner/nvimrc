@@ -10,7 +10,7 @@ return {
         highlight = {
           groups = {
             -- floating winbar default background color same as `TreesitterContext`
-            InclineNormal = { guifg = colors.blue, guibg = darken(colors.fg_gutter, 0.8) },
+            InclineNormal = { guifg = colors.blue, guibg = darken(colors.fg_gutter, 0.1) },
             InclineNormalNC = { guifg = colors.blue },
           },
         },
