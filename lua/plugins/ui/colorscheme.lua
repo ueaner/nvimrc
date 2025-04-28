@@ -12,8 +12,11 @@ return {
         floats = "transparent",
       },
       on_colors = function(colors)
-        colors.bg = os.getenv("COLOR_BLACK") or colors.bg
-        colors.bg_dark = os.getenv("COLOR_DARK") or colors.bg_dark
+        local black = os.getenv("COLOR_BLACK") or colors.bg
+        local dark = os.getenv("COLOR_DARK") or colors.bg_dark
+        colors.bg = black
+        colors.bg_dark = dark
+        colors.bg_statusline = os.getenv("TMUX") and black or dark
       end,
       -- on_highlights = function(hl, c)
       --   hl.Normal = {
