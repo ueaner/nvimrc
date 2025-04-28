@@ -15,6 +15,7 @@ if vim.fn.executable("php") == 1 then
       "phpactor",
       "phpcs",
       "php-cs-fixer",
+      "phpstan", -- https://phpactor.readthedocs.io/en/master/extensions/phpstan.html
       "php-debug-adapter", -- https://github.com/xdebug/vscode-php-debug
     },
     lsp = {
@@ -27,6 +28,7 @@ if vim.fn.executable("php") == 1 then
     },
     linters = { -- nvim-lint
       "phpcs",
+      "phpstan",
     },
     dap = {
       function()
@@ -52,6 +54,11 @@ if vim.fn.executable("php") == 1 then
               XDEBUG_MODE = "develop,coverage,debug",
               XDEBUG_CONFIG = "idekey=nvim",
             },
+            -- Map the path in the container back to a path recognized by local Neovim
+            -- pathMappings = {
+            --   ["/app"] = vim.fn.getcwd(),
+            -- },
+            -- log = true,
           },
           {
             type = "php",
