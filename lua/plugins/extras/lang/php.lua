@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local generator = require("plugins.extras.langspec"):new()
 
 ---@type LangConfig
@@ -35,7 +36,10 @@ if vim.fn.executable("php") == 1 then
         local dap = require("dap")
         dap.adapters.php = {
           type = "executable",
-          command = vim.env.HOME .. "/.local/share/nvim/mason/bin/php-debug-adapter",
+          -- command = vim.env.HOME .. "/.local/share/nvim/mason/bin/php-debug-adapter",
+          -- command = vim.env.MASON .. "/bin/php-debug-adapter",
+          command = "php-debug-adapter",
+          args = {},
         }
 
         dap.configurations.php = {

@@ -425,7 +425,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [aerial.nvim]: https://github.com/stevearc/aerial.nvim
 [nvterm]: https://github.com/NvChad/nvterm
 [lazy.nvim]: https://github.com/folke/lazy.nvim
-[mason.nvim]: https://github.com/williamboman/mason.nvim
+[mason.nvim]: https://github.com/mason-org/mason.nvim
 [nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
 [nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [glow.nvim]: https://github.com/ellisonleao/glow.nvim

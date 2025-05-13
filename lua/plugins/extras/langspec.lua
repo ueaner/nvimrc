@@ -107,7 +107,7 @@ function M:generate(conf)
   -- cmdline tools for LSP servers, DAP servers, formatters and linters
   if not vim.tbl_isempty(conf.cmdtools) then
     table.insert(specs, {
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
       opts = function(_, opts)
         vim.list_extend(opts.ensure_installed, conf.cmdtools)
       end,

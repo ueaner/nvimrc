@@ -17,7 +17,7 @@ return {
 
   -- cmdline tools for LSP servers, DAP servers, formatters and linters
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "gopls",

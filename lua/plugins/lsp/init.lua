@@ -11,8 +11,8 @@ return {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
     dependencies = {
-      "williamboman/mason.nvim",
-      { "williamboman/mason-lspconfig.nvim", config = function() end },
+      "mason-org/mason.nvim",
+      { "mason-org/mason-lspconfig.nvim", config = function() end },
       { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
       -- inc-rename.nvim instead of vim.lsp.buf.rename
       {
@@ -153,14 +153,13 @@ return {
 
       -- code lens
       if opts.codelens.enabled then
-        if client.supports_method("textDocument/codeLens") then
+        U.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
           vim.lsp.codelens.refresh()
-          --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
           vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
             buffer = buffer,
             callback = vim.lsp.codelens.refresh,
           })
-        end
+        end)
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -196,11 +195,7 @@ return {
       end
 
       -- get all the servers that are available through mason-lspconfig
-      local have_mason, mlsp = pcall(require, "mason-lspconfig")
-      local all_mslp_servers = {}
-      if have_mason then
-        all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-      end
+      local all_mslp_servers = vim.tbl_keys(require("mason-lspconfig").get_mappings().lspconfig_to_package)
 
       local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(servers) do
@@ -217,15 +212,13 @@ return {
         end
       end
 
-      if have_mason then
-        mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
-      end
+      require("mason-lspconfig").setup({ ensure_installed = ensure_installed, handlers = { setup } })
     end,
   },
 
   -- cmdline tools and lsp servers
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = "Mason",
     build = ":MasonUpdate",
     ---@type MasonSettings

@@ -122,7 +122,7 @@ Contents of ui, editor and coding:
 
 [LazyVim]: https://github.com/LazyVim/LazyVim/tree/7a36e2989c3d62e8dbaf4036f5c4551929c565a5
 [💤 lazy.nvim]: https://github.com/folke/lazy.nvim
-[mason.nvim]: https://github.com/williamboman/mason.nvim
+[mason.nvim]: https://github.com/mason-org/mason.nvim
 [Treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [Native LSP]: https://github.com/neovim/nvim-lspconfig
 [nvim-dap]: https://github.com/mfussenegger/nvim-dap

@@ -1,5 +1,5 @@
 local function get_codelldb()
-  local extension_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
+  local extension_path = vim.env.MASON .. "/packages/codelldb/extension"
   local codelldb_path = extension_path .. "adapter/codelldb"
   local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
   if vim.fn.has("mac") == 1 then
@@ -43,7 +43,7 @@ return {
 
   -- Ensure Rust debugger is installed
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     optional = true,
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
