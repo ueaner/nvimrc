@@ -8,6 +8,8 @@ local function get_codelldb()
   return codelldb_path, liblldb_path
 end
 
+vim.env.CARGO_BUILD_TARGET_DIR = vim.env.CARGO_BUILD_TARGET_DIR or (vim.env.HOME .. "/.cache/cargo-build")
+
 return {
 
   -- LSP for Cargo.toml

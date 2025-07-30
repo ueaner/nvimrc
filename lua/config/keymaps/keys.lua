@@ -408,7 +408,7 @@ local keys = {
       end,
       desc = "Quit",
     },
-    { "<leader>ri", function() vim.cmd("e " .. os.getenv("XDG_CACHE_HOME") .. "/sniprun/infofile.txt") end, desc = "Info" },
+    { "<leader>ri", function() vim.cmd("e " .. vim.fn.stdpath("cache") .. "/sniprun/infofile.txt") end, desc = "Info" },
     {
       "<leader>rI",
       function()

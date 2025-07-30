@@ -1,3 +1,5 @@
+vim.env.XDG_BIN_HOME = vim.env.XDG_BIN_HOME or (vim.env.HOME .. "/.local/bin")
+
 return {
   -- plantuml syntax
   {
