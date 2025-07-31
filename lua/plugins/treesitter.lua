@@ -16,8 +16,21 @@ return {
     init = function(plugin)
       require("lazy.core.loader").add_to_rtp(plugin)
       require("nvim-treesitter.query_predicates")
-      -- Download the parsers using Git instead of curl
-      require("nvim-treesitter.install").prefer_git = true
+      if vim.env.GITHUB_PROXY ~= nil then
+        -- Using a GitHub mirror
+        for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
+          config.install_info.url =
+            config.install_info.url:gsub("https://github.com/", vim.env.GITHUB_PROXY .. "https://github.com/")
+        end
+      elseif os.execute("lsof -i:1080 &>/dev/null") then
+        -- Using curl with a proxy
+        require("nvim-treesitter.install").command_extra_args = {
+          curl = { "--proxy", "socks5h://127.0.0.1:1080" },
+        }
+      else
+        -- Download the parsers using Git instead of curl
+        require("nvim-treesitter.install").prefer_git = true
+      end
     end,
     ---@type TSConfig
     opts = {
