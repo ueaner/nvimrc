@@ -43,3 +43,5 @@ au BufNewFile,BufRead */etc/man_db.conf               setlocal ft=manconf
 au BufNewFile,BufRead *.xt                            setlocal ft=xt
 au BufNewFile,BufRead *.trace,*.trace.*               setlocal ft=strace
 au BufNewFile,BufRead *.strace,*.strace.*             setlocal ft=strace
+
+au BufNewFile,BufRead */sway/config.d/*.conf          setlocal ft=swayconfig
