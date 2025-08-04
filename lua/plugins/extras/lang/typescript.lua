@@ -194,7 +194,7 @@ if vim.fn.executable("node") == 1 then
                 -- 💀 Make sure to update this path to point to your installation
                 args = {
                   -- ~/.local/share/nvim/mason/bin/js-debug-adapter
-                  vim.env.MASON .. "/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+                  vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
                   "${port}",
                 },
               },
@@ -204,7 +204,7 @@ if vim.fn.executable("node") == 1 then
             type = "executable",
             command = "node",
             args = {
-              vim.env.MASON .. "/packages/firefox-debug-adapter/dist/adapter.bundle.js",
+              vim.fn.stdpath("data") .. "/mason/packages/firefox-debug-adapter/dist/adapter.bundle.js",
             },
           }
 

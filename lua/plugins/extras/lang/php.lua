@@ -37,7 +37,7 @@ if vim.fn.executable("php") == 1 then
         dap.adapters.php = {
           type = "executable",
           -- command = vim.env.HOME .. "/.local/share/nvim/mason/bin/php-debug-adapter",
-          -- command = vim.env.MASON .. "/bin/php-debug-adapter",
+          -- command = vim.fn.stdpath("data") .. "/mason/bin/php-debug-adapter",
           command = "php-debug-adapter",
           args = {},
         }

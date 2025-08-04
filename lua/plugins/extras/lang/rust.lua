@@ -1,5 +1,5 @@
 local function get_codelldb()
-  local extension_path = vim.env.MASON .. "/packages/codelldb/extension/"
+  local extension_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/"
   local codelldb_path = extension_path .. "adapter/codelldb"
   local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
   if vim.fn.has("mac") == 1 then
