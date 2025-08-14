@@ -3,6 +3,7 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    enabled = vim.env.COLORTERM == "truecolor",
     opts = {
       lsp = {
         override = {
@@ -38,6 +39,7 @@ return {
   {
     "rcarriga/nvim-notify",
     dependencies = { "folke/noice.nvim" },
+    enabled = vim.env.COLORTERM == "truecolor",
     opts = {
       timeout = 3000,
       max_height = function()

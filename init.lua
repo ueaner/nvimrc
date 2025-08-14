@@ -3,8 +3,11 @@ require("util.debug").setup()
 require("config.options")
 require("config.lazy")
 
-require("tokyonight").load()
--- vim.cmd.colorscheme("catppuccin")
+if vim.env.COLORTERM == "truecolor" then
+  require("tokyonight").load()
+else
+  vim.cmd.colorscheme("habamax")
+end
 
 if vim.fn.argc(-1) == 0 then
   local group = vim.api.nvim_create_augroup("nvimrc", { clear = true })
