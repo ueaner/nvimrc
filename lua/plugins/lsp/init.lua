@@ -94,6 +94,12 @@ return {
           settings = {
             Lua = {
               workspace = {
+                library = {
+                  -- Make the server aware of Neovim runtime files
+                  ---@diagnostic disable: assign-type-mismatch
+                  vim.fn.expand("$VIMRUNTIME/lua/vim"),
+                  ---@diagnostic enable: assign-type-mismatch
+                },
                 checkThirdParty = false,
               },
               format = { -- Use stylua instead of EmmyLuaCodeStyle
