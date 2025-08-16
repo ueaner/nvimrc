@@ -23,7 +23,8 @@ if vim.fn.executable("node") == 1 then
       "js-debug-adapter",
       -- "firefox-debug-adapter",
       "prettier",
-      "eslint-lsp", -- pnpm install -g eslint
+      -- "eslint-lsp", -- pnpm install -g eslint
+      "oxlint", -- Create .oxlintrc.json in the project root directory
     },
     lsp = {
       servers = { -- nvim-lspconfig: setup lspconfig servers
@@ -63,6 +64,9 @@ if vim.fn.executable("node") == 1 then
                 parameterTypes = { enabled = true },
                 propertyDeclarationTypes = { enabled = true },
                 variableTypes = { enabled = false },
+              },
+              tsserver = {
+                experimental = { enableProjectDiagnostics = false },
               },
             },
           },
@@ -113,10 +117,12 @@ if vim.fn.executable("node") == 1 then
           },
         },
         cssls = {
+          init_options = { provideFormatter = false },
           settings = {
             css = { validate = false },
           },
         },
+        oxlint = {},
       },
       setup = {
         vtsls = function(_, opts)
