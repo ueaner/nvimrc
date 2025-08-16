@@ -73,11 +73,13 @@ return {
       ---@type RustaceanLspClientOpts
       server = {
         default_settings = {
-          -- rust-analyzer language server configuration
+          -- Only check and completion but not build
           ["rust-analyzer"] = {
             cargo = {
+              allTargets = false,
               buildScripts = {
                 enable = false,
+                rebuildOnSave = false,
               },
             },
             -- Add clippy lints for Rust.
@@ -88,6 +90,7 @@ return {
             -- },
             procMacro = {
               enable = false,
+              attributes = { enable = false },
               ignored = {
                 ["async-trait"] = { "async_trait" },
                 ["napi-derive"] = { "napi" },
