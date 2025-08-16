@@ -24,19 +24,19 @@ return {
   },
 
   -- previewing markdown (image) in browser
-  {
-    "toppair/peek.nvim",
-    event = { "LazyFile", "VeryLazy" },
-    build = "deno task --quiet build:fast",
-    ft = { "markdown" },
-    cond = function()
-      return vim.fn.executable("deno") == 1
-    end,
-    opts = {
-      theme = "light",
-      app = "browser",
-    },
-  },
+  -- {
+  --   "toppair/peek.nvim",
+  --   event = { "LazyFile", "VeryLazy" },
+  --   build = "deno task --quiet build:fast",
+  --   ft = { "markdown" },
+  --   cond = function()
+  --     return vim.fn.executable("deno") == 1
+  --   end,
+  --   opts = {
+  --     theme = "light",
+  --     app = "browser",
+  --   },
+  -- },
 
   -- rendering markdown in neovim
   {

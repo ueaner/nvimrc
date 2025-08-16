@@ -21,7 +21,7 @@ if vim.fn.executable("node") == 1 then
       "html-lsp",
       "vtsls",
       "js-debug-adapter",
-      "firefox-debug-adapter",
+      -- "firefox-debug-adapter",
       "prettier",
       "eslint-lsp", -- pnpm install -g eslint
     },
@@ -200,13 +200,13 @@ if vim.fn.executable("node") == 1 then
               },
             }
           end
-          dap.adapters.firefox = {
-            type = "executable",
-            command = "node",
-            args = {
-              vim.fn.stdpath("data") .. "/mason/packages/firefox-debug-adapter/dist/adapter.bundle.js",
-            },
-          }
+          -- dap.adapters.firefox = {
+          --   type = "executable",
+          --   command = "node",
+          --   args = {
+          --     vim.fn.stdpath("data") .. "/mason/packages/firefox-debug-adapter/dist/adapter.bundle.js",
+          --   },
+          -- }
 
           local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
 
@@ -240,15 +240,15 @@ if vim.fn.executable("node") == 1 then
                 cwd = "${workspaceFolder}",
               },
 
-              {
-                name = "Launch Firefox to debug client",
-                type = "firefox",
-                request = "launch",
-                reAttach = true,
-                url = "http://localhost:1420",
-                webRoot = "${workspaceFolder}",
-                firefoxExecutable = "/usr/bin/firefox",
-              },
+              -- {
+              --   name = "Launch Firefox to debug client",
+              --   type = "firefox",
+              --   request = "launch",
+              --   reAttach = true,
+              --   url = "http://localhost:1420",
+              --   webRoot = "${workspaceFolder}",
+              --   firefoxExecutable = "/usr/bin/firefox",
+              -- },
             }
           end
         end,
