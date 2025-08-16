@@ -123,11 +123,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- Try to auto detect the indentation style in the current buffer
 -- and then set the tab or space options
-vim.api.nvim_create_autocmd({ "BufReadPost" }, {
-  callback = function()
-    U.yadi.detect_indent()
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+--   callback = function()
+--     U.yadi.detect_indent()
+--   end,
+-- })
 
 vim.api.nvim_create_user_command("LazyRoot", function()
   U.root.info()
