@@ -8,7 +8,7 @@ local conf = {
   },
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     "pyright",
-    "black",
+    -- "black",
     "ruff",
     "debugpy",
   },
@@ -40,7 +40,12 @@ local conf = {
     },
   },
   formatters = { -- conform.nvim
-    "black",
+    -- To fix auto-fixable lint errors.
+    "ruff_fix",
+    -- To run the Ruff formatter.
+    "ruff_format",
+    -- To organize the imports.
+    "ruff_organize_imports",
   },
   dap = { -- nvim-dap: language specific extensions
     {
