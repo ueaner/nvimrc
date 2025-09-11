@@ -104,6 +104,7 @@ Command-line mode uses readline-style keymaps.
 ## Rich languages editing
 
 - prefix: `<leader>c` for code
+- prefix: `gr` for LSP
 
 | Key          | Description                       | Mode | Provider   |
 | ------------ | --------------------------------- | ---- | ---------- |
@@ -114,15 +115,19 @@ Command-line mode uses readline-style keymaps.
 | `<leader>cf` | Format Document                   | n    | LSP        |
 | `<leader>cf` | Format Range                      | v    | LSP        |
 | `ge`         | Goto D[e]claration                | n    | LSP        |
-| `gd`         | Goto Definition                   | n    | LSP        |
-| `gD`         | Goto Type Definition              | n    | LSP        |
-| `gI`         | Goto Implementation               | n    | LSP        |
-| `gr`         | Find References                   | n    | LSP        |
+| `gd`         | Goto Type Definition              | n    | LSP        |
+| `grt`        | Goto Definition                   | n    | LSP        |
+| `gri`        | Goto Implementation               | n    | LSP        |
+| `grr`        | Find References                   | n    | LSP        |
 | `<leader>cn` | Rename                            | n    | LSP        |
+| `grn`        | Rename                            | n    | LSP        |
 | `<leader>ca` | Code Action                       | n, v | LSP        |
+| `gra`        | Code Action                       | n, v | LSP        |
 | `<leader>cl` | Code Lens                         | n, v | LSP        |
 | `<leader>cr` | Refactor                          | n, v | LSP        |
 | `<leader>cc` | Code Clean                        | n    | LSP        |
+| `<leader>fs` | Goto Document Symbol              | n    | LSP        |
+| `gO`         | Goto Document Symbol              | n    | LSP        |
 | `gf`         | Goto File                         | n, v | editing    |
 | `gi`         | Move to last insertion and INSERT | n    | insert     |
 | `gw`         | Highlighting word under cursor    | n    | keymaps    |

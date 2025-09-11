@@ -57,7 +57,7 @@ function M._check_methods(client, buffer)
   for method, clients in pairs(M._supports_method) do
     clients[client] = clients[client] or {}
     if not clients[client][buffer] then
-      if client.supports_method and client.supports_method(method, { bufnr = buffer }) then
+      if client:supports_method(method, buffer) then
         clients[client][buffer] = true
         vim.api.nvim_exec_autocmds("User", {
           pattern = "LspSupportsMethod",
@@ -138,7 +138,7 @@ function M.on_rename(from, to, rename)
 
   local clients = vim.lsp.get_clients()
   for _, client in ipairs(clients) do
-    if client.supports_method("workspace/willRenameFiles") then
+    if client:supports_method("workspace/willRenameFiles") then
       local resp = client.request_sync("workspace/willRenameFiles", changes, 1000, 0)
       if resp and resp.result ~= nil then
         vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
@@ -151,7 +151,7 @@ function M.on_rename(from, to, rename)
   end
 
   for _, client in ipairs(clients) do
-    if client.supports_method("workspace/didRenameFiles") then
+    if client:supports_method("workspace/didRenameFiles") then
       client.notify("workspace/didRenameFiles", changes)
     end
   end
@@ -199,8 +199,8 @@ function M.formatter(opts)
       local clients = vim.lsp.get_clients(LazyUtil.merge({}, filter, { bufnr = buf }))
       ---@param client vim.lsp.Client
       local ret = vim.tbl_filter(function(client)
-        return client.supports_method("textDocument/formatting")
-          or client.supports_method("textDocument/rangeFormatting")
+        return client:supports_method("textDocument/formatting")
+          or client:supports_method("textDocument/rangeFormatting")
       end, clients)
       ---@param client vim.lsp.Client
       return vim.tbl_map(function(client)
@@ -238,7 +238,7 @@ function M.has(buffer, method)
   method = method:find("/") and method or "textDocument/" .. method
   local clients = vim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
-    if client.supports_method(method) then
+    if client:supports_method(method) then
       return true
     end
   end

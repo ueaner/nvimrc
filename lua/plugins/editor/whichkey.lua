@@ -46,6 +46,7 @@ return {
           { "[", group = "prev" },
           { "]", group = "next" },
           { "g", group = "goto" },
+          { "gr", group = "lsp" },
           { "z", group = "fold" },
         },
       },

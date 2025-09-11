@@ -126,7 +126,8 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsea
 map( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / Clear hlsearch / Diff Update" })
 
 -- buffers
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+-- CTRL-S is mapped in Insert mode to vim.lsp.buf.signature_help()
+-- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New File" })
 -- Switch buffers with <c-p> <c-n>
 map("n", "<C-p>", "[b", { desc = "Previous Buffer", remap = true })

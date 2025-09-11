@@ -68,42 +68,42 @@ local keys = {
     {
       "<leader>dw1",
       function()
-        require("dapui").float_element("scopes", { enter = true })
+        require("dapui").float_element("scopes")
       end,
       desc = "Scopes      (element)",
     },
     {
       "<leader>dw2",
       function()
-        require("dapui").float_element("breakpoints", { enter = true })
+        require("dapui").float_element("breakpoints")
       end,
       desc = "Breakpoints (element)",
     },
     {
       "<leader>dw3",
       function()
-        require("dapui").float_element("stacks", { enter = true })
+        require("dapui").float_element("stacks")
       end,
       desc = "Stacks      (element)",
     },
     {
       "<leader>dw4",
       function()
-        require("dapui").float_element("watches", { enter = true })
+        require("dapui").float_element("watches")
       end,
       desc = "Watches     (element)",
     },
     {
       "<leader>dw5",
       function()
-        require("dapui").float_element("repl", { enter = true })
+        require("dapui").float_element("repl")
       end,
       desc = "Repl        (element)",
     },
     {
       "<leader>dw6",
       function()
-        require("dapui").float_element("console", { enter = true })
+        require("dapui").float_element("console")
       end,
       desc = "Console     (element)",
     },
@@ -184,10 +184,8 @@ local keys = {
     { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     -- NOTE: method textDocument/declaration is not supported by any of the servers registered for the current buffer
     { "ge", vim.lsp.buf.declaration, desc = "Go to D[e]claration", has = "declaration" },
-    { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Go to Definition", has = "definition" },
-    { "gD", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Go to Type Definition" },
-    { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Go to Implementation" },
-    { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Find References" },
+    -- <grt>: vim.lsp.buf.type_definition()
+    { "gd", vim.lsp.buf.type_definition, desc = "Go to Type Definition" },
     { "K", function() return vim.lsp.buf.hover() end, desc = "Hover" },
     { "gK", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
     { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
@@ -202,7 +200,9 @@ local keys = {
     { "<leader>cL", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
     { "<leader>ci", vim.lsp.buf.incoming_calls, desc = "Call Hierarchy Incoming Calls", mode = { "n", "x" }, has = "callHierarchy/incomingCalls" },
     { "<leader>co", vim.lsp.buf.outgoing_calls, desc = "Call Hierarchy Outgoing Calls", mode = { "n", "x" }, has = "callHierarchy/outgoingCalls" },
+    -- <grn>: vim.lsp.buf.rename()
     { "<leader>cn", function() return ":Rename " .. vim.fn.expand("<cword>") end, expr = true, desc = "Rename", has = "rename" },
+    -- <gra>: vim.lsp.buf.code_action()
     { "<leader>cA", U.lsp.action.source, desc = "Source Action", has = "codeAction" },
     { "]]", function() U.lsp.words.jump(vim.v.count1, true) end, desc = "Next Reference", has = "documentHighlight" },
     { "[[", function() U.lsp.words.jump(-vim.v.count1, true) end, desc = "Prev Reference", has = "documentHighlight" },
