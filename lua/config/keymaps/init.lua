@@ -26,12 +26,12 @@ map("n", "<leader>\\", "<C-W>s", { desc = "Split window below" })
 map("n", '<leader>|', "<C-W>v", { desc = "Split window right" })
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down", silent = true })
+map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up", silent = true })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down", silent = true })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up", silent = true })
+map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down", silent = true })
+map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up", silent = true })
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
@@ -184,17 +184,6 @@ if vim.fn.executable("glow") == 1 then
     { "glow", vim.api.nvim_buf_get_name(0) },
     { interactive = false, size = { width = 0.75, height = 0.85 } }
   ) end, { desc = "glow" })
-end
-
-if vim.g.neovide then
-  vim.keymap.set('n', '<C-s>', ':w<CR>') -- Save
-  -- system clipboard
-  vim.keymap.set('n', '<C-c>', '"+y')    -- Copy normal mode
-  vim.keymap.set('v', '<C-c>', '"+y')    -- Copy visual mode
-  vim.keymap.set('n', '<C-v>', '"+p')    -- Paste normal mode
-  vim.keymap.set('v', '<C-v>', '"+p')    -- Paste visual mode
-  vim.keymap.set('c', '<C-v>', '<C-R>+') -- Paste command mode
-  vim.keymap.set('i', '<C-v>', '<C-R>+') -- Paste insert mode
 end
 
 -- stylua: ignore end

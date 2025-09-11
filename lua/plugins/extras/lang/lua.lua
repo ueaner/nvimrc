@@ -176,9 +176,11 @@ return {
       library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         { path = "lazy.nvim", words = { "LazyUtil" } },
+        { path = "U", words = { "U" } },
       },
     },
   },
+
   -- Add lazydev source to cmp
   {
     "hrsh7th/nvim-cmp",

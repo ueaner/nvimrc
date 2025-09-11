@@ -5,4 +5,9 @@ return {
     event = "LazyFile",
     opts = {},
   },
+
+  {
+    "akinsho/git-conflict.nvim",
+    config = true,
+  },
 }

@@ -3,7 +3,6 @@ local M = {}
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
 
----@param on_attach fun(client:lsp.Client, buffer)
 ---@param on_attach fun(client:vim.lsp.Client, buffer)
 ---@param name? string
 function M.on_attach(on_attach, name)

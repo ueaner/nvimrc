@@ -6,7 +6,7 @@ local M = setmetatable({}, {
 
 function M.langserver_names()
   local info = U.config.icons.general.lsp .. " client(s): "
-  local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_clients()
   if next(clients) == nil then
     return info .. "<empty>"
   end

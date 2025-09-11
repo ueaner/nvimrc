@@ -1,11 +1,5 @@
 -- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
--- Hide deprecation warnings
-vim.g.deprecation_warnings = false
-if vim.g.deprecation_warnings == false then
-  vim.deprecate = function() end
-end
-
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 vim.g.markdown_folding = 1
@@ -32,7 +26,7 @@ opt.splitkeep = "screen"
 opt.spell = true
 opt.spelllang = "en_us,cjk" -- :help spell-cjk  exclude CJK characters form spell checking
 opt.mouse = "nvi" -- Enable mouse mode
-opt.shortmess:append({ W = true, I = true, c = true, C = true, s = true })
+opt.shortmess:append("WIcCs")
 
 opt.autowrite = true -- Enable auto write
 opt.writebackup = false
@@ -60,9 +54,7 @@ opt.ignorecase = true -- Ignore case
 opt.smartcase = true -- Don't ignore case with capitals
 opt.inccommand = "nosplit" -- preview incremental substitute
 
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-end
+opt.smoothscroll = true
 
 opt.wrap = false -- Disable line wrap
 opt.linebreak = true
@@ -131,14 +123,8 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
+-- ~/.config/neovide/config.toml
 if vim.g.neovide then
   vim.env.TERM = "xterm-256color"
-
-  -- default configuration, see: https://github.com/neovide/neovide/blob/main/src/window/settings.rs
-  vim.g.neovide_fullscreen = true
-
-  -- Error: Font can't be updated ...
-  -- Set Chinese fonts in the `~/.config/neovide/config.toml`.
-  -- See: https://github.com/ueaner/dotfiles/blob/main/.config/neovide/config.toml
-  -- vim.opt.guifont = "SauceCodePro Nerd Font,Noto Sans Mono CJK SC:h12"
+  vim.env.COLORTERM = "truecolor"
 end

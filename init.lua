@@ -1,3 +1,8 @@
+if vim.g.vscode then
+  require("config.options")
+  return
+end
+
 require("util.debug").setup()
 
 require("config.options")

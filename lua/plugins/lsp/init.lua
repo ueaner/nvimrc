@@ -12,8 +12,7 @@ return {
     event = "LazyFile",
     dependencies = {
       "mason-org/mason.nvim",
-      { "mason-org/mason-lspconfig.nvim", config = function() end },
-      { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
+      "mason-org/mason-lspconfig.nvim",
       -- inc-rename.nvim instead of vim.lsp.buf.rename
       {
         "smjonas/inc-rename.nvim",
@@ -25,6 +24,7 @@ return {
     },
     opts = {
       -- options for vim.diagnostic.config()
+      ---@type vim.diagnostic.Opts
       diagnostics = {
         underline = true,
         update_in_insert = false,
@@ -83,6 +83,7 @@ return {
       },
       -- LSP Server Settings
       servers = {
+        ---@module "lspconfig"
         ---@type lspconfig.options.lua_ls
         lua_ls = {
           -- mason = false, -- set to false if you don't want this server to be installed with mason
