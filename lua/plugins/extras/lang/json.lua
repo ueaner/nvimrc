@@ -9,8 +9,8 @@ local conf = {
     "jsonc",
   },
   lsp = {
+    ---@type table<string, vim.lsp.Config>
     servers = { -- nvim-lspconfig: setup lspconfig servers
-      ---@type lspconfig.options.jsonls
       jsonls = {
         -- lazy-load schemastore when needed
         on_new_config = function(new_config)

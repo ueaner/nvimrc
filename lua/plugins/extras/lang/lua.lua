@@ -27,14 +27,13 @@ return {
   -- setup lspconfig servers
   {
     "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
+    ---@type PluginLspOpts
     opts = {
       -- server cmdline will be automatically installed with mason and loaded with lspconfig
-      ---@type lspconfig.options
+      ---@type table<string, vim.lsp.Config>
       servers = { -- nvim-lspconfig: setup lspconfig servers
         lua_ls = {
           -- mason = false, -- set to false if you don't want this server to be installed with mason
-          ---@type lspconfig.settings.lua_ls
           settings = {
             -- https://github.com/LuaLS/lua-language-server/blob/master/doc/zh-cn/config.md
             Lua = {
@@ -55,6 +54,9 @@ return {
               },
               type = {
                 castNumberToInteger = true,
+              },
+              doc = {
+                privateName = { "^_" },
               },
               diagnostics = {
                 enable = false,

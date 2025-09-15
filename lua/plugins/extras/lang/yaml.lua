@@ -11,8 +11,8 @@ local conf = {
     "yamllint",
   },
   lsp = {
+    ---@type table<string, vim.lsp.Config>
     servers = { -- nvim-lspconfig: setup lspconfig servers
-      ---@type lspconfig.options.yamlls
       yamlls = {
         -- Have to add this for yamlls to understand that we support line folding
         capabilities = {

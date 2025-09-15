@@ -17,8 +17,8 @@ local conf = {
     "shellcheck", -- bashls is integrated, so no need to configure `null-ls` diagnostics
   },
   lsp = {
+    ---@type table<string, vim.lsp.Config>
     servers = { -- nvim-lspconfig: setup lspconfig servers
-      ---@type lspconfig.options.bashls
       bashls = {},
     },
   },

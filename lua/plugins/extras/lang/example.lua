@@ -39,7 +39,7 @@ return {
     ---@class PluginLspOpts
     opts = {
       -- server cmdline will be automatically installed with mason and loaded with lspconfig
-      ---@type lspconfig.options
+      ---@type table<string, vim.lsp.Config>
       servers = {
         gopls = {
           gofumpt = true, -- formatter, default "goimports"

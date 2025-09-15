@@ -10,8 +10,8 @@
 ---@field test LangConfig.test
 
 ---@class LangConfig.lsp
----@field servers lspconfig.options
----@field setup table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+---@field servers table<string, vim.lsp.Config>
+---@field setup table<string, fun(server:string, opts:vim.lsp.Config):boolean?>
 
 ---@alias LangConfig.dap (function|LangDapAdapter)[]
 
@@ -117,7 +117,7 @@ function M:generate(conf)
   -- setup lspconfig servers
   if not vim.tbl_isempty(conf.lsp.servers) then
     local opts = {
-      ---@type lspconfig.options
+      ---@type table<string, vim.lsp.Config>
       servers = conf.lsp.servers,
     }
     if not vim.tbl_isempty(conf.lsp.setup) then

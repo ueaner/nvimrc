@@ -13,8 +13,8 @@ local conf = {
     "clang-format",
   },
   lsp = {
+    ---@type table<string, vim.lsp.Config>
     servers = { -- nvim-lspconfig: setup lspconfig servers
-      ---@type lspconfig.options.clangd
       clangd = {},
     },
   },
