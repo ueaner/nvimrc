@@ -1,15 +1,3 @@
-local function get_codelldb()
-  local extension_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/"
-  local codelldb_path = extension_path .. "adapter/codelldb"
-  local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-  if vim.fn.has("mac") == 1 then
-    liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-  end
-  return codelldb_path, liblldb_path
-end
-
-vim.env.CARGO_BUILD_TARGET_DIR = vim.env.CARGO_BUILD_TARGET_DIR or (vim.env.HOME .. "/.cache/cargo-build")
-
 return {
 
   -- LSP for Cargo.toml
@@ -102,27 +90,18 @@ return {
       },
     },
     config = function(_, opts)
-      local codelldb_path, liblldb_path = get_codelldb()
-      ---@type RustaceanOpts
-      vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
-      vim.g.rustaceanvim.dap = {
-        adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
+      local codelldb = vim.fn.exepath("codelldb")
+
+      local codelldb_lib_ext = vim.fn.has("mac") and ".dylib" or ".so"
+      local library_path = vim.fn.expand("$MASON/opt/lldb/lib/liblldb" .. codelldb_lib_ext)
+      opts.dap = {
+        adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
       }
+      vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
+
+      vim.env.CARGO_BUILD_TARGET_DIR = vim.env.CARGO_BUILD_TARGET_DIR or (vim.env.HOME .. "/.cache/cargo-build")
 
       local dap = require("dap")
-      dap.adapters.codelldb = {
-        type = "server",
-        port = "${port}",
-        host = "127.0.0.1",
-        executable = {
-          command = codelldb_path,
-          args = { "--liblldb", liblldb_path, "--port", "${port}" },
-
-          -- On windows you may have to uncomment this:
-          -- detached = false,
-        },
-      }
-
       dap.configurations.rust = {
         {
           type = "codelldb",

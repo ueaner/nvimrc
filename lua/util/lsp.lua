@@ -1,7 +1,7 @@
 ---@class util.lsp
 local M = {}
 
----@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
+---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: vim.lsp.Client):boolean}
 
 ---@param on_attach fun(client:vim.lsp.Client, buffer)
 ---@param name? string

@@ -1,6 +1,7 @@
 local generator = require("plugins.extras.langspec"):new()
 
 ---@type LangConfig
+---@diagnostic disable-next-line: missing-fields
 local conf = {
   ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
   parsers = { -- nvim-treesitter: language parsers
