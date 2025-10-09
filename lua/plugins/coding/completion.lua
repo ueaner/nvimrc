@@ -17,6 +17,9 @@ return {
       },
     },
     opts = function(_, opts)
+      -- Register nvim-cmp lsp capabilities
+      vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       vim.api.nvim_set_hl(0, "CmpFloatBorder", { fg = U.ui.fg("FloatBorder"), bg = U.ui.bg("Normal"), default = true })
 

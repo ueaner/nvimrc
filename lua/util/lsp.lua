@@ -157,12 +157,12 @@ function M.on_rename(from, to, rename)
   end
 end
 
----@param opts? LazyFormatter| {filter?: (string|lsp.Client.filter)}
+---@param opts? LazyFormatter| {filter?: (string|vim.lsp.get_clients.Filter)}
 function M.formatter(opts)
   opts = opts or {}
   local filter = opts.filter or {}
   filter = type(filter) == "string" and { name = filter } or filter
-  ---@cast filter lsp.Client.filter
+  ---@cast filter vim.lsp.get_clients.Filter
   ---@type LazyFormatter
   local ret = {
     name = "LSP",
@@ -187,7 +187,7 @@ function M.formatter(opts)
   return LazyUtil.merge(ret, opts) --[[@as LazyFormatter]]
 end
 
----@alias lsp.Client.format {timeout_ms?: number, format_options?: table} | lsp.Client.filter
+---@alias lsp.Client.format {timeout_ms?: number, format_options?: table} | vim.lsp.get_clients.Filter
 
 ---@param opts? lsp.Client.format
 function M.format(opts)

@@ -9,7 +9,9 @@ return {
     lazy = true,
     config = function()
       require("refactoring").setup({})
-      require("telescope").load_extension("refactoring")
+      U.on_load("telescope.nvim", function()
+        require("telescope").load_extension("refactoring")
+      end)
     end,
   },
 }
