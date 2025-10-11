@@ -30,6 +30,7 @@ if vim.fn.executable("node") == 1 then
     lsp = {
       servers = { -- nvim-lspconfig: setup lspconfig servers
         ---@type vim.lsp.Config
+        ts_ls = { enabled = false },
         vtsls = {
           -- explicitly add default filetypes, so that we can extend
           -- them in related extras
