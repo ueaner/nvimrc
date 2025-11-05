@@ -17,6 +17,12 @@ lazier.lazy_file()
 -- Configure lazy.nvim
 require("lazy").setup({
   concurrency = 10,
+  -- sudo dnf install compat-lua-devel compat-lua luarocks
+  -- sudo ln -sf /usr/bin/lua-5.1 /usr/bin/lua5.1
+  rocks = {
+    enabled = true,
+    hererocks = false, -- always use luarocks
+  },
   spec = {
     -- { "folke/lazy.nvim", version = "10.24.3" },
     { import = "plugins" },

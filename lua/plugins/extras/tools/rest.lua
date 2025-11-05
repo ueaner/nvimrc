@@ -1,8 +1,6 @@
 return {
   -- HTTP Client
   -- treesitter: http, json, graphql
-  -- for rest.nvim:
-  -- sudo dnf install compat-lua-libs-5.1.5 compat-lua-devel-5.1.5 compat-lua-5.1.5 luajit-devel luarocks
   {
     "mistweaverco/kulala.nvim",
     ft = "http",
