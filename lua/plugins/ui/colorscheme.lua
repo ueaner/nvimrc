@@ -14,8 +14,8 @@ return {
       on_colors = function(colors)
         local black = os.getenv("COLOR_BLACK") or colors.bg
         local dark = os.getenv("COLOR_DARK") or colors.bg_dark
-        colors.bg = black
-        colors.bg_dark = dark
+        colors.bg = dark
+        colors.bg_dark = black
         colors.bg_statusline = os.getenv("TMUX") and black or dark
       end,
       -- on_highlights = function(hl, c)

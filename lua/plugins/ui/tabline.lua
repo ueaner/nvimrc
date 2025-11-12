@@ -22,7 +22,7 @@ return {
             filetype = "neo-tree",
             text = "EXPLORER",
             text_align = "left",
-            highlight = "Directory",
+            highlight = "Normal",
           },
         },
       },
