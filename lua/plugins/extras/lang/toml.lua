@@ -11,7 +11,11 @@ local conf = {
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
-      taplo = {},
+      taplo = {
+        filetypes = { "toml" },
+        -- This is necessary for using taplo LSP in non-git repositories.
+        root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+      },
     },
   },
 }

@@ -154,7 +154,7 @@ return {
 
       -- code lens
       if opts.codelens.enabled then
-        U.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
+        U.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
           vim.lsp.codelens.refresh()
           vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
             buffer = buffer,
@@ -214,17 +214,17 @@ return {
     "mason-org/mason.nvim",
     cmd = "Mason",
     build = ":MasonUpdate",
-    ---@type MasonSettings
+    opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
         "lua-language-server",
-        "stylua",
+        -- "stylua",
       },
-      log_level = vim.log.levels.DEBUG,
-      providers = {
-        -- "mason.providers.registry-api",
-        "mason.providers.client",
-      },
+      -- log_level = vim.log.levels.DEBUG,
+      -- providers = {
+      --   -- "mason.providers.registry-api",
+      --   "mason.providers.client",
+      -- },
       github = {
         download_url_template = download_url_template,
       },
