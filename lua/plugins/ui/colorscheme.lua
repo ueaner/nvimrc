@@ -4,6 +4,8 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
+    ---@module 'tokyonight'
+    ---@type tokyonight.Config
     opts = {
       style = "night",
       transparent = false,
@@ -17,6 +19,7 @@ return {
         colors.bg = dark
         colors.bg_dark = black
         colors.bg_statusline = os.getenv("TMUX") and black or dark
+        colors.border_highlight = os.getenv("COLOR_BLUE") or colors.border_highlight
       end,
       -- on_highlights = function(hl, c)
       --   hl.Normal = {

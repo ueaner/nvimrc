@@ -33,6 +33,7 @@ local conf = {
           yaml = {
             keyOrdering = false,
             format = { enable = true },
+            validate = true,
             schemaStore = {
               -- Must disable built-in schemaStore support to use schemas from SchemaStore.nvim plugin
               enable = false,

@@ -12,8 +12,7 @@ return {
           priority = 100,
           primary = true,
           format = function(buf)
-            local opts = U.opts("conform.nvim")
-            require("conform").format(LazyUtil.merge({}, opts.format, { bufnr = buf }))
+            require("conform").format({ bufnr = buf })
           end,
           sources = function(buf)
             local ret = require("conform").list_formatters(buf)
@@ -30,9 +29,9 @@ return {
       -- LazyVim will use these options when formatting with the conform.nvim formatter
       format = {
         timeout_ms = 1000,
-        async = false, -- not recommended to change
-        quiet = false, -- not recommended to change
-        lsp_format = true,
+        async = false,
+        quiet = false,
+        lsp_format = "fallback",
       },
       formatters_by_ft = {
         lua = { "stylua" },

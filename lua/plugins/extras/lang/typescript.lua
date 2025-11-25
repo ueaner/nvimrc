@@ -128,7 +128,7 @@ if vim.fn.executable("node") == 1 then
       },
       setup = {
         vtsls = function(_, opts)
-          U.lsp.on_attach(function(client, buffer)
+          Snacks.util.lsp.on({ name = "vtsls" }, function(buffer, client)
             client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
               ---@type string, string, lsp.Range
               local action, uri, range = unpack(command.arguments)

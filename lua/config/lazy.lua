@@ -14,26 +14,28 @@ _G.LazyUtil = require("lazy.core.util")
 lazier.lazy_notify()
 lazier.lazy_file()
 
+vim.api.nvim_set_hl(0, "NormalFloat", { link = "Comment", default = true })
+
 -- Configure lazy.nvim
 require("lazy").setup({
+  -- { "folke/lazy.nvim", version = "10.24.3" },
+  { "folke/lazy.nvim", version = "*" },
+  { "folke/snacks.nvim", priority = 1000, lazy = false, opts = {} },
+
+  { import = "plugins" },
+  { import = "plugins.ui" },
+  { import = "plugins.editor" },
+  { import = "plugins.coding" },
+  { import = "plugins.extras.tools" },
+  -- language specific extension modules
+  { import = "plugins.extras.lang" },
+}, {
   concurrency = 10,
   -- sudo dnf install compat-lua-devel compat-lua luarocks
   -- sudo ln -sf /usr/bin/lua-5.1 /usr/bin/lua5.1
   rocks = {
     enabled = true,
     hererocks = false, -- always use luarocks
-  },
-  spec = {
-    -- { "folke/lazy.nvim", version = "10.24.3" },
-    { import = "plugins" },
-    { import = "plugins.ui" },
-    { import = "plugins.editor" },
-    { import = "plugins.coding" },
-
-    { import = "plugins.extras.tools" },
-
-    -- language specific extension modules
-    { import = "plugins.extras.lang" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -48,6 +50,7 @@ require("lazy").setup({
   checker = { enabled = true, concurrency = 10, frequency = 86400 * 7 }, -- automatically check for plugin updates
   ui = {
     size = { width = 0.85, height = 0.8 },
+    border = "rounded",
   },
   performance = {
     rtp = {

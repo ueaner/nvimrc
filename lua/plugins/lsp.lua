@@ -22,6 +22,7 @@ return {
         },
       },
     },
+    opts_extend = { "servers.*.keys" },
     opts = {
       -- options for vim.diagnostic.config()
       ---@type vim.diagnostic.Opts
@@ -49,26 +50,18 @@ return {
           },
         },
       },
-      -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+      -- Enable this to enable the builtin LSP inlay hints on Neovim.
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the inlay hints.
       inlay_hints = {
         enabled = true,
+        exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
       },
-      -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
+      -- Enable this to enable the builtin LSP code lenses on Neovim.
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the code lenses.
       codelens = {
         enabled = false,
-      },
-      -- add any global capabilities here
-      capabilities = {
-        workspace = {
-          fileOperations = {
-            didRename = true,
-            willRename = true,
-          },
-        },
       },
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
@@ -78,8 +71,22 @@ return {
         timeout_ms = nil,
       },
       -- LSP Server Settings
-      ---@type table<string, vim.lsp.Config|{mason?:boolean, enabled?:boolean}|boolean>
+      -- Sets the default configuration for an LSP client (or all clients if the special name "*" is used).
+      ---@alias lazyvim.lsp.Config vim.lsp.Config|{mason?:boolean, enabled?:boolean, keys?:LazyKeysLspSpec[]}
+      ---@type table<string, lazyvim.lsp.Config|boolean>
       servers = {
+        -- configuration for all lsp servers
+        ["*"] = {
+          capabilities = {
+            workspace = {
+              fileOperations = {
+                didRename = true,
+                willRename = true,
+              },
+            },
+          },
+          keys = U.config.keys["nvim-lspconfig keys"] and U.config.keys["nvim-lspconfig keys"] or {},
+        },
         stylua = { enabled = false },
         lua_ls = {
           -- mason = false, -- set to false if you don't want this server to be installed with mason
@@ -134,27 +141,30 @@ return {
     config = vim.schedule_wrap(function(_, opts)
       -- setup autoformat
       U.format.register(U.lsp.formatter())
-      -- setup keymaps
-      U.lsp.on_attach(function(client, buffer)
-        require("plugins.lsp.keymaps").on_attach(client, buffer)
-      end)
 
-      U.lsp.setup()
-      U.lsp.on_dynamic_capability(require("plugins.lsp.keymaps").on_attach)
+      -- setup keymaps
+      for server, server_opts in pairs(opts.servers) do
+        if type(server_opts) == "table" and server_opts.keys then
+          U.lsp.set_keymaps({ name = server ~= "*" and server or nil }, server_opts.keys)
+        end
+      end
 
       -- inlay hints
       if opts.inlay_hints.enabled then
-        U.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
-          if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == "" then
-            -- vim.lsp.inlay_hint.is_enabled()
+        Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
+          if
+            vim.api.nvim_buf_is_valid(buffer)
+            and vim.bo[buffer].buftype == ""
+            and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+          then
             vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
           end
         end)
       end
 
       -- code lens
-      if opts.codelens.enabled then
-        U.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+      if opts.codelens.enabled and vim.lsp.codelens then
+        Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
           vim.lsp.codelens.refresh()
           vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
             buffer = buffer,
@@ -165,8 +175,8 @@ return {
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-      if opts.capabilities then
-        vim.lsp.config("*", { capabilities = opts.capabilities })
+      if opts.servers["*"] then
+        vim.lsp.config("*", opts.servers["*"])
       end
 
       -- get all the servers that are available through mason-lspconfig
@@ -178,6 +188,9 @@ return {
 
       ---@return boolean? exclude automatic setup
       local function configure(server)
+        if server == "*" then
+          return false
+        end
         local sopts = opts.servers[server]
         sopts = sopts == true and {} or (not sopts) and { enabled = false } or sopts --[[@as lazyvim.lsp.Config]]
 
@@ -216,6 +229,9 @@ return {
     build = ":MasonUpdate",
     opts_extend = { "ensure_installed" },
     opts = {
+      ui = {
+        border = "rounded",
+      },
       ensure_installed = {
         "lua-language-server",
         -- "stylua",

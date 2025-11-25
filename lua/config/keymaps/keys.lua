@@ -206,8 +206,14 @@ local keys = {
     { "<leader>cn", function() return ":Rename " .. vim.fn.expand("<cword>") end, expr = true, desc = "Rename", has = "rename" },
     -- <gra>: vim.lsp.buf.code_action()
     { "<leader>cA", U.lsp.action.source, desc = "Source Action", has = "codeAction" },
-    { "]]", function() U.lsp.words.jump(vim.v.count1, true) end, desc = "Next Reference", has = "documentHighlight" },
-    { "[[", function() U.lsp.words.jump(-vim.v.count1, true) end, desc = "Prev Reference", has = "documentHighlight" },
+    { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight",
+      desc = "Next Reference", enabled = function() return Snacks.words.is_enabled() end },
+    { "[[", function() Snacks.words.jump(-vim.v.count1) end, has = "documentHighlight",
+      desc = "Prev Reference", enabled = function() return Snacks.words.is_enabled() end },
+    { "<a-n>", function() Snacks.words.jump(vim.v.count1, true) end, has = "documentHighlight",
+      desc = "Next Reference", enabled = function() return Snacks.words.is_enabled() end },
+    { "<a-p>", function() Snacks.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
+      desc = "Prev Reference", enabled = function() return Snacks.words.is_enabled() end },
   },
 
   ["rustaceanvim"] = {
@@ -343,7 +349,7 @@ local keys = {
   },
 
   ["noice.nvim"] = {
-    { "<leader>mn", function() require("noice").cmd("telescope") end, desc = "Noice History" },
+    { "<leader>mn", function() require("noice").cmd("telescope") end, desc = "Notification History" },
 
     { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<Right>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i"}},
     { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<Left>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i"}},
@@ -358,6 +364,17 @@ local keys = {
 
   ["nvim-notify"] = {
     { "<leader>un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Dismiss All Notifications" },
+  },
+
+  ["snacks.nvim"] = {
+    { "<leader>mn", function()
+      if Snacks.config.picker and Snacks.config.picker.enabled then
+        Snacks.picker.notifications()
+      else
+        Snacks.notifier.show_history()
+      end
+    end, desc = "Notification History" },
+    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
   },
 
   ["mason.nvim"] = {

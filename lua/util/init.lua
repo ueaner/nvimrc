@@ -21,8 +21,6 @@ setmetatable(M, {
   end,
 })
 
-M.root_patterns = { ".git", "lua" }
-
 -- Create a FileType autocommand event handler.
 -- Examples:
 -- ```lua
@@ -74,7 +72,7 @@ end
 
 ---@param name string
 function M.opts(name)
-  local plugin = require("lazy.core.config").plugins[name]
+  local plugin = M.get_plugin(name)
   if not plugin then
     return {}
   end
@@ -126,7 +124,7 @@ function M.safe_keymap_set(mode, lhs, rhs, opts)
       ---@diagnostic disable-next-line: no-unknown
       opts.remap = nil
     end
-    vim.keymap.set(modes, lhs, rhs, opts)
+    Snacks.keymap.set(modes, lhs, rhs, opts)
   end
 end
 
