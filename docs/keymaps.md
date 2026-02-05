@@ -5,7 +5,7 @@ Just press any key like `,` will displays a popup with all possible keymaps star
 
 ![which-key]
 
-# Table of contents
+## Table of contents
 
 1.  [Modes](#modes)
 2.  [General](#general)

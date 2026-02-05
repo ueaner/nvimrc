@@ -9,19 +9,19 @@ return {
   },
 
   -- previewing markdown in terminal
-  {
-    "ellisonleao/glow.nvim",
-    event = { "LazyFile", "VeryLazy" },
-    ft = "markdown",
-    cmd = { "Glow" },
-    config = function()
-      require("glow").setup({
-        style = "dark",
-        width = 120,
-        border = "rounded",
-      })
-    end,
-  },
+  -- {
+  --   "ellisonleao/glow.nvim",
+  --   event = { "LazyFile", "VeryLazy" },
+  --   ft = "markdown",
+  --   cmd = { "Glow" },
+  --   config = function()
+  --     require("glow").setup({
+  --       style = "dark",
+  --       width = 120,
+  --       border = "rounded",
+  --     })
+  --   end,
+  -- },
 
   -- previewing markdown (image) in browser
   -- {

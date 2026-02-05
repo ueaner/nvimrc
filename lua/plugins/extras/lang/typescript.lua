@@ -57,8 +57,10 @@ if vim.fn.executable("node") == 1 then
             typescript = {
               updateImportsOnFileMove = { enabled = "always" },
               suggest = {
+                autoImports = true,
                 completeFunctionCalls = true,
               },
+
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = true },
@@ -69,6 +71,13 @@ if vim.fn.executable("node") == 1 then
               },
               tsserver = {
                 experimental = { enableProjectDiagnostics = false },
+              },
+            },
+            javascript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              suggest = {
+                autoImports = true,
+                completeFunctionCalls = true,
               },
             },
           },
@@ -97,7 +106,7 @@ if vim.fn.executable("node") == 1 then
               desc = "File References",
             },
             {
-              "<leader>cO",
+              "<leader>ci",
               U.lsp.action["source.organizeImports"],
               desc = "Organize Imports",
             },

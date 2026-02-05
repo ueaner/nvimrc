@@ -35,6 +35,7 @@ return {
       },
       formatters_by_ft = {
         lua = { "stylua" },
+        xml = { "xmlformatter" },
       },
       -- LazyVim will merge the options you set here with builtin formatters.
       -- You can also define any custom formatters here.

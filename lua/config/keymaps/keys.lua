@@ -200,8 +200,8 @@ local keys = {
     { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" }, has = "codeAction" },
     { "<leader>cl", vim.lsp.codelens.run, desc = "Code Lens", mode = { "n", "x" }, has = "codeLens" },
     { "<leader>cL", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-    { "<leader>ci", vim.lsp.buf.incoming_calls, desc = "Call Hierarchy Incoming Calls", mode = { "n", "x" }, has = "callHierarchy/incomingCalls" },
-    { "<leader>co", vim.lsp.buf.outgoing_calls, desc = "Call Hierarchy Outgoing Calls", mode = { "n", "x" }, has = "callHierarchy/outgoingCalls" },
+    -- { "<leader>ci", vim.lsp.buf.incoming_calls, desc = "Call Hierarchy Incoming Calls", mode = { "n", "x" }, has = "callHierarchy/incomingCalls" },
+    -- { "<leader>co", vim.lsp.buf.outgoing_calls, desc = "Call Hierarchy Outgoing Calls", mode = { "n", "x" }, has = "callHierarchy/outgoingCalls" },
     -- <grn>: vim.lsp.buf.rename()
     { "<leader>cn", function() return ":Rename " .. vim.fn.expand("<cword>") end, expr = true, desc = "Rename", has = "rename" },
     -- <gra>: vim.lsp.buf.code_action()

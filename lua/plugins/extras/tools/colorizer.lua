@@ -1,7 +1,7 @@
 return {
   -- colorizer
   {
-    "NvChad/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
     event = "LazyFile",
     opts = {
       filetypes = { "*", "!lazy" },
@@ -10,7 +10,8 @@ return {
       user_default_options = {
         RGB      = true,  -- #RGB hex codes
         RRGGBB   = true,  -- #RRGGBB hex codes
-        names    = true,  -- "Name" codes like Blue
+        names    = false, -- "Name" codes like Blue
+        names_custom = vim.g.term_colors,
         RRGGBBAA = true,  -- #RRGGBBAA hex codes
         rgb_fn   = false, -- CSS rgb() and rgba() functions
         hsl_fn   = false, -- CSS hsl() and hsla() functions

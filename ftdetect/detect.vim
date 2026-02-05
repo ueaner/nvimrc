@@ -46,5 +46,7 @@ au BufNewFile,BufRead *.strace,*.strace.*             setlocal ft=strace
 
 au BufNewFile,BufRead */sway/config.d/*.conf          setlocal ft=swayconfig
 
+au BufRead,BufNewFile */fontconfig/conf.d/*.conf      setlocal ft=xml
+
 " ~/.config/Code/User/keybindings.json
 au BufNewFile,BufRead keybindings.json                setlocal ft=jsonc

@@ -7,34 +7,40 @@ local conf = {
     "python",
   },
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
-    "pyright",
-    -- "black",
+    -- "ty",
+    "basedpyright",
+    -- "pyright",
+    -- "mypy",
     "ruff",
     "debugpy",
   },
   lsp = {
     servers = {
-      pyright = {
+      basedpyright = {
         settings = {
           python = {
             analysis = {
               autoImportCompletions = true,
-              typeCheckingMode = "off",
+              typeCheckingMode = "basic", -- strict
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,
-              diagnosticMode = "workspace", -- "openFilesOnly",
+              diagnosticMode = "workspace", -- openFilesOnly
             },
           },
         },
       },
+      -- ty 默认支持自动导入和库代码类型解析，无需手动开启
+      -- ty = { -- type checker
+      --   diagnosticMode = "workspace",
+      -- },
       ruff = { -- linter
         init_options = {
           settings = {
-            args = { "--max-line-length=180" },
+            args = { "--max-line-length=140" },
           },
         },
         keys = {
-          { "<leader>cI", U.lsp.action["source.organizeImports"], desc = "Organize Imports" },
+          { "<leader>ci", U.lsp.action["source.organizeImports"], desc = "Organize Imports" },
         },
       },
     },
@@ -46,6 +52,9 @@ local conf = {
     "ruff_format",
     -- To organize the imports.
     "ruff_organize_imports",
+  },
+  linters = { -- nvim-lint
+    -- "mypy",
   },
   dap = { -- nvim-dap: language specific extensions
     {
