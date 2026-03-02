@@ -4,21 +4,39 @@ return {
     "catgoose/nvim-colorizer.lua",
     event = "LazyFile",
     opts = {
-      filetypes = { "*", "!lazy" },
+      filetypes = {
+        dosini = {
+          parsers = {
+            custom = {
+              {
+                name = "ini_hex",
+                prefixes = { "=" },
+                parse = function(ctx)
+                  local m = ctx.line:match("^(%x%x%x%x%x%x)%f[^%x]", ctx.col + 1)
+                  if m then
+                    -- 返回匹配的长度 (=xxxxxx) 和 提取到的颜色值 (xxxxxx)
+                    return 7, m
+                  end
+                end,
+              },
+            },
+          },
+        },
+        "*",
+        "!lazy",
+      },
       buftypes = { "*", "!prompt", "!nofile" },
-      -- stylua: ignore
-      user_default_options = {
-        RGB      = true,  -- #RGB hex codes
-        RRGGBB   = true,  -- #RRGGBB hex codes
-        names    = false, -- "Name" codes like Blue
-        names_custom = vim.g.term_colors,
-        RRGGBBAA = true,  -- #RRGGBBAA hex codes
-        rgb_fn   = false, -- CSS rgb() and rgba() functions
-        hsl_fn   = false, -- CSS hsl() and hsla() functions
-        css      = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn   = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-        -- Available modes: foreground, background
-        mode     = "background", -- Set the display mode.
+      ---@module 'colorizer'
+      ---@type colorizer.NewOptions
+      options = {
+        parsers = {
+          css = true, -- preset: enables names, hex, rgb, hsl, oklch
+          tailwind = { enable = true },
+          names = {
+            enable = true,
+            custom = vim.g.term_colors,
+          },
+        },
       },
     },
   },
