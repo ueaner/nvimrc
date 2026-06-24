@@ -177,7 +177,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 | `<leader>mz` | Lazy                    | n    | [lazy.nvim]              |
 | `<leader>mm` | Mason                   | n    | [mason.nvim]             |
 | `<leader>ml` | Lsp Info                | n    | [nvim-lspconfig]         |
-| `<leader>mt` | Treesitter Config Info  | n    | [nvim-treesitter]        |
+| `<leader>mt` | Treesitter Health       | n    | [nvim-treesitter]        |
 | `<leader>md` | Dap Show Log            | n    | [nvim-dap]               |
 | `<leader>mc` | Conform Info            | n    | [conform.nvim]           |
 | `<leader>mf` | Lazy Format Info        | n    | LazyFormatInfo           |
@@ -432,7 +432,7 @@ See `:help text-objects`, command usage rules `[command] [text object | motion]`
 [lazy.nvim]: https://github.com/folke/lazy.nvim
 [mason.nvim]: https://github.com/mason-org/mason.nvim
 [nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
-[nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
+[nvim-treesitter]: https://github.com/neovim-treesitter/nvim-treesitter
 [glow.nvim]: https://github.com/ellisonleao/glow.nvim
 [peek.nvim]: https://github.com/toppair/peek.nvim
 [plantuml-previewer.vim]: https://github.com/weirongxu/plantuml-previewer.vim

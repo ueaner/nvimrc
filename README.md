@@ -33,7 +33,8 @@ nvim
 
 - Neovim **nightly** or **latest** version. See [here](https://github.com/neovim/neovim/releases/tag/nightly) and [here](https://github.com/neovim/neovim/releases/tag/stable)
 - a [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**. See [here](https://github.com/ueaner/dotfiles/blob/main/ansible/roles/fonts/tasks/main.yml)
-- a **C** compiler for `nvim-treesitter`. See [here](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
+- a **C** compiler, `curl`, and `tree-sitter` CLI 0.26.1 or later for `nvim-treesitter`. See [here](https://github.com/neovim-treesitter/nvim-treesitter#requirements)
+- use standard proxy environment variables such as `HTTPS_PROXY` or `ALL_PROXY` for Tree-sitter parser/query downloads
 
 ## ⌨️ Keymaps
 
@@ -123,7 +124,7 @@ Contents of ui, editor and coding:
 [LazyVim]: https://github.com/LazyVim/LazyVim/tree/7a36e2989c3d62e8dbaf4036f5c4551929c565a5
 [💤 lazy.nvim]: https://github.com/folke/lazy.nvim
 [mason.nvim]: https://github.com/mason-org/mason.nvim
-[Treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
+[Treesitter]: https://github.com/neovim-treesitter/nvim-treesitter
 [Native LSP]: https://github.com/neovim/nvim-lspconfig
 [nvim-dap]: https://github.com/mfussenegger/nvim-dap
 [neotest]: https://github.com/nvim-neotest/neotest

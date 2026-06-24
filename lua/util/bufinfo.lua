@@ -22,7 +22,8 @@ end
 
 function M.treesitter_has_parser()
   local info = U.config.icons.general.treesitter .. " treesitter has parser(s): "
-  if package.loaded["nvim-treesitter"] and require("nvim-treesitter.parsers").has_parser() then
+  local lang = vim.treesitter.language.get_lang(vim.bo.filetype)
+  if lang and pcall(vim.treesitter.get_parser, 0, lang) then
     return info .. "YES"
   end
   return info .. "NO"

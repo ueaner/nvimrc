@@ -224,9 +224,9 @@ local keys = {
   },
 
   ["nvim-treesitter"] = {
-    { "<space>", desc = "Increment selection" },
-    { "<bs>", desc = "Decrement selection", mode = "x" },
-    { "<leader>mt", "<cmd>TSConfigInfo<cr>", desc = "Treesitter Info" },
+    { "<space>", function() vim.treesitter.select("parent") end, desc = "Increment selection", mode = { "n", "x" } },
+    { "<bs>", function() vim.treesitter.select("child") end, desc = "Decrement selection", mode = "x" },
+    { "<leader>mt", "<cmd>checkhealth nvim-treesitter<cr>", desc = "Treesitter Health" },
   },
 
   -- Motions based on syntax trees

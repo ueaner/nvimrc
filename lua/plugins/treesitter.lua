@@ -1,37 +1,19 @@
--- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
--- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/lua/nvim-treesitter/parsers.lua
+-- https://github.com/neovim-treesitter/nvim-treesitter#supported-languages-and-features
+-- https://github.com/neovim-treesitter/nvim-treesitter/blob/main/lua/nvim-treesitter/parsers.lua
 -- List of installed treesitter parsers `:checkhealth nvim-treesitter`
--- installation directory: ~/.local/share/nvim/lazy/nvim-treesitter/parser
+-- installation directory: ~/.local/share/nvim/site/parser
 return {
   -- Treesitter is a new parser generator tool that we can
   -- use in Neovim to power faster and more accurate
   -- syntax highlighting.
   {
-    "nvim-treesitter/nvim-treesitter",
+    "neovim-treesitter/nvim-treesitter",
+    branch = "main",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
-    event = { "LazyFile", "VeryLazy" },
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    init = function(plugin)
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
-      if vim.env.GITHUB_PROXY ~= nil then
-        -- Using a GitHub mirror
-        for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
-          config.install_info.url =
-            config.install_info.url:gsub("https://github.com/", vim.env.GITHUB_PROXY .. "https://github.com/")
-        end
-      elseif os.execute("lsof -i:1080 &>/dev/null") then
-        -- Using curl with a proxy
-        require("nvim-treesitter.install").command_extra_args = {
-          curl = { "--proxy", "socks5h://127.0.0.1:1080" },
-        }
-      else
-        -- Download the parsers using Git instead of curl
-        require("nvim-treesitter.install").prefer_git = true
-      end
-    end,
+    lazy = false,
+    dependencies = { "neovim-treesitter/treesitter-parser-registry" },
+    cmd = { "TSCacheClear", "TSInstall", "TSLog", "TSStatus", "TSUninstall", "TSUpdate" },
     ---@type TSConfig
     opts = {
       highlight = { enable = true },
@@ -55,23 +37,15 @@ return {
         "gitignore",
         "sql",
         "csv",
+        "tsv",
         "ini",
         "ssh_config",
         "strace",
         "mermaid",
       },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<Space>",
-          node_incremental = "<Space>",
-          node_decremental = "<BS>",
-          scope_incremental = false,
-        },
-      },
       textobjects = {
         move = {
-          enable = true,
+          set_jumps = true,
           goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
           goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
           goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
@@ -84,37 +58,68 @@ return {
       if type(opts.ensure_installed) == "table" then
         opts.ensure_installed = U.dedup(opts.ensure_installed)
       end
-      require("nvim-treesitter.configs").setup(opts)
+
+      local ts = require("nvim-treesitter")
+      ts.setup()
+
+      if type(opts.ensure_installed) == "table" and #opts.ensure_installed > 0 then
+        ts.install(opts.ensure_installed)
+      end
+
+      local group = vim.api.nvim_create_augroup("user_treesitter", { clear = true })
+      vim.api.nvim_create_autocmd("FileType", {
+        group = group,
+        callback = function(event)
+          local lang = vim.treesitter.language.get_lang(vim.bo[event.buf].filetype)
+          if not lang then
+            return
+          end
+
+          if opts.highlight and opts.highlight.enable then
+            pcall(vim.treesitter.start, event.buf, lang)
+          end
+
+          local has_indents = false
+          pcall(function()
+            has_indents = vim.treesitter.query.get(lang, "indents") ~= nil
+          end)
+          if has_indents and opts.indent and opts.indent.enable then
+            vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
     end,
   },
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
     event = "VeryLazy",
-    config = function()
-      -- If treesitter is already loaded, we need to run config again for textobjects
-      if U.is_loaded("nvim-treesitter") then
-        local opts = U.opts("nvim-treesitter")
-        require("nvim-treesitter.configs").setup({ textobjects = opts.textobjects })
-      end
+    opts = function()
+      return U.opts("nvim-treesitter").textobjects
+    end,
+    config = function(_, opts)
+      require("nvim-treesitter-textobjects").setup({ move = { set_jumps = opts.move.set_jumps } })
 
-      -- When in diff mode, we want to use the default
-      -- vim text objects c & C instead of the treesitter ones.
-      local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
-      local configs = require("nvim-treesitter.configs")
-      for name, fn in pairs(move) do
-        if name:find("goto") == 1 then
-          move[name] = function(q, ...)
-            if vim.wo.diff then
-              local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
-              for key, query in pairs(config or {}) do
-                if q == query and key:find("[%]%[][cC]") then
-                  vim.cmd("normal! " .. key)
-                  return
-                end
+      local move = require("nvim-treesitter-textobjects.move")
+      local labels = {
+        goto_next_start = "Next start",
+        goto_next_end = "Next end",
+        goto_previous_start = "Previous start",
+        goto_previous_end = "Previous end",
+      }
+
+      for method, mappings in pairs(opts.move) do
+        if method:find("goto") == 1 then
+          for key, query in pairs(mappings) do
+            vim.keymap.set({ "n", "x", "o" }, key, function()
+              -- In diff mode, keep Vim's native change motions on ]c/[c.
+              if vim.wo.diff and key:find("[%]%[][cC]") then
+                vim.cmd("normal! " .. key)
+                return
               end
-            end
-            return fn(q, ...)
+              move[method](query, "textobjects")
+            end, { desc = labels[method], silent = true })
           end
         end
       end
@@ -139,8 +144,8 @@ return {
     "folke/which-key.nvim",
     opts = {
       spec = {
-        { "<space>", desc = "Increment Selection", mode = { "x", "n" } },
-        { "<BS>", desc = "Decrement Selection", mode = "x" },
+        { "]", group = "Treesitter next" },
+        { "[", group = "Treesitter previous" },
       },
     },
   },

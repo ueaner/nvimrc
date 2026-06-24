@@ -5,7 +5,7 @@ return {
   { "rhysd/npm-filetypes.vim" },
 
   {
-    "nvim-treesitter/nvim-treesitter",
+    "neovim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
         "java",
