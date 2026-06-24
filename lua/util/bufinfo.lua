@@ -5,41 +5,121 @@ local M = setmetatable({}, {
 })
 
 function M.langserver_names()
-  local info = U.config.icons.general.lsp .. " client(s): "
-  local clients = vim.lsp.get_clients()
+  local info = U.config.icons.general.lsp .. " lsp: "
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
   if next(clients) == nil then
     return info .. "<empty>"
   end
   local ls = {}
-  local bufnr = vim.api.nvim_get_current_buf()
   for _, client in ipairs(clients) do
-    if client.attached_buffers[bufnr] then
-      table.insert(ls, "**" .. client.name .. "**")
-    end
+    table.insert(ls, ("**%s#%d**"):format(client.name, client.id))
   end
   return info .. table.concat(ls, ", ")
 end
 
-function M.treesitter_has_parser()
-  local info = U.config.icons.general.treesitter .. " treesitter has parser(s): "
+function M.treesitter_parser()
+  local info = U.config.icons.general.treesitter .. " treesitter: "
   local lang = vim.treesitter.language.get_lang(vim.bo.filetype)
-  if lang and pcall(vim.treesitter.get_parser, 0, lang) then
-    return info .. "YES"
+  if not lang then
+    return info .. "<empty>"
   end
-  return info .. "NO"
+
+  local ok, parser = pcall(vim.treesitter.get_parser, 0, lang)
+  if ok and parser then
+    return info .. lang
+  end
+  return info .. ("no parser for %s"):format(lang)
 end
 
 function M.dap_has_adapter()
-  local info = U.config.icons.general.dap .. " dap has adapter(s): "
-  if require("dap").configurations[vim.bo.filetype] ~= nil then
-    return info .. "YES"
+  local info = U.config.icons.general.dap .. " dap: "
+  if not U.is_loaded("nvim-dap") then
+    return info .. "<not loaded>"
   end
-  return info .. "NO"
+
+  local ok, dap = pcall(require, "dap")
+  local ft = vim.bo.filetype
+  if ok and dap.configurations[ft] ~= nil then
+    return info .. ("configured for %s"):format(ft)
+  end
+  return info .. ("no adapter for %s"):format(ft ~= "" and ft or "<empty>")
+end
+
+function M.formatter_names()
+  local info = "format: "
+  -- Formatter providers are registered on VeryLazy; before that this can be empty.
+  local ok, formatters = pcall(U.format.resolve, vim.api.nvim_get_current_buf())
+  if not ok then
+    return info .. "<empty>"
+  end
+
+  local names = {}
+  for _, formatter in ipairs(formatters) do
+    if formatter.active then
+      vim.list_extend(names, formatter.resolved)
+    end
+  end
+  if #names == 0 then
+    return info .. "<empty>"
+  end
+  return info .. table.concat(names, ", ")
+end
+
+function M.linter_names()
+  local info = "lint: "
+  local ok, lint = pcall(require, "lint")
+  if not ok or type(lint._resolve_linter_by_ft) ~= "function" then
+    return info .. "<empty>"
+  end
+
+  local ft = vim.bo.filetype
+  local names = vim.deepcopy(lint._resolve_linter_by_ft(ft) or {})
+
+  if #names == 0 then
+    vim.list_extend(names, lint.linters_by_ft["_"] or {})
+  end
+  vim.list_extend(names, lint.linters_by_ft["*"] or {})
+
+  local ctx = { filename = vim.api.nvim_buf_get_name(0) }
+  ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
+  names = vim.tbl_filter(function(name)
+    local linter = lint.linters[name]
+    return linter and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
+  end, names)
+
+  if #names == 0 then
+    return info .. "<empty>"
+  end
+  return info .. table.concat(U.dedup(names), ", ")
+end
+
+function M.file_path()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == "" then
+    return "path: <empty>"
+  end
+  return "path: " .. vim.fn.fnamemodify(path, ":~:.")
+end
+
+function M.root_path()
+  local ok, root = pcall(U.root.get)
+  if not ok or root == nil or root == "" then
+    return "root: <empty>"
+  end
+  return "root: " .. vim.fn.fnamemodify(root, ":~")
+end
+
+function M.git_branch()
+  local branch = vim.b.gitsigns_head
+  if (branch == nil or branch == "") and type(vim.b.gitsigns_status_dict) == "table" then
+    branch = vim.b.gitsigns_status_dict.head
+  end
+  return "git: " .. ((branch and branch ~= "") and branch or "<empty>")
 end
 
 function M.info()
-  local vtype = "info42"
-  if vim.bo.filetype == vtype then
+  if vim.b.bufinfo_window then
     print("This buffer is an info window")
     return
   end
@@ -66,7 +146,23 @@ function M.info()
   local lines = {}
   local l = ""
 
+  -- File
+  table.insert(lines, "# File")
+  table.insert(lines, "- " .. M.file_path())
+  table.insert(lines, "- " .. M.root_path())
+  table.insert(lines, "- " .. M.git_branch())
+
+  -- Tools
+  table.insert(lines, "")
+  table.insert(lines, "# Tools")
+  table.insert(lines, M.langserver_names())
+  table.insert(lines, M.formatter_names())
+  table.insert(lines, M.linter_names())
+  table.insert(lines, M.dap_has_adapter())
+  table.insert(lines, M.treesitter_parser())
+
   -- Options
+  table.insert(lines, "")
   table.insert(lines, "# Options")
   for _, o in ipairs(options) do
     local v = vim.opt_local[o]:get()
@@ -90,28 +186,10 @@ function M.info()
     table.insert(lines, l)
   end
 
-  -- Window
-  table.insert(lines, "")
-  table.insert(lines, "# Window")
-  l = string.format("- %s: %s", "winwidth", vim.fn.winwidth(0))
-  table.insert(lines, l)
-
-  -- LSP servers
-  table.insert(lines, "")
-  table.insert(lines, "# LspInfo")
-  table.insert(lines, M.langserver_names())
-  -- DAP adapters
-  table.insert(lines, "")
-  table.insert(lines, "# DAP adapters")
-  table.insert(lines, M.dap_has_adapter())
-  -- TS parsers
-  table.insert(lines, "")
-  table.insert(lines, "# TS parsers")
-  table.insert(lines, M.treesitter_has_parser())
-
   -- MORE
 
   local buf, win = U.floatwin.make(lines)
+  vim.b[buf].bufinfo_window = true
 
   -- Highlight information windows using Markdown syntax
   local lang = "markdown"
