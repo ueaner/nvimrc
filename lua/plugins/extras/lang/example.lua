@@ -27,8 +27,6 @@ return {
         "golangci-lint-langserver", -- Wraps golangci-lint as a language server
         "delve",
         --"staticcheck",
-        "gomodifytags",
-        "impl",
       })
     end,
   },
@@ -43,24 +41,16 @@ return {
       servers = {
         gopls = {
           gofumpt = true, -- formatter, default "goimports"
+          usePlaceholders = true,
+          analyses = {
+            nilness = true,
+            unusedparams = true,
+            unusedwrite = true,
+          },
         },
         golangci_lint_ls = {}, -- linter
       },
     },
-  },
-
-  -- setup code actions
-  {
-    "nvimtools/none-ls.nvim",
-    event = "BufReadPre",
-    dependencies = { "mason.nvim" },
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      vim.list_extend(opts.sources, {
-        nls.builtins.code_actions.gomodifytags,
-        nls.builtins.code_actions.impl,
-      })
-    end,
   },
 
   -- setup DAP

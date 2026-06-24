@@ -21,8 +21,6 @@ if vim.fn.executable("go") == 1 then
       "golangci-lint-langserver", -- Wraps golangci-lint as a language server
       "delve",
       --"staticcheck",
-      "gomodifytags",
-      "impl",
     },
     lsp = {
       servers = { -- nvim-lspconfig: setup lspconfig servers
@@ -31,8 +29,8 @@ if vim.fn.executable("go") == 1 then
             -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
             gopls = {
               gofumpt = true, -- formatter, default "goimports"
+              usePlaceholders = true,
               codelenses = {
-                gc_details = false,
                 generate = true,
                 regenerate_cgo = true,
                 run_govulncheck = true,
@@ -50,23 +48,13 @@ if vim.fn.executable("go") == 1 then
                 parameterNames = true,
                 rangeVariableTypes = true,
               },
-              analyses = {
-                fieldalignment = true,
-                nilness = true,
-                unusedparams = true,
-                unusedwrite = true,
-                useany = true,
-              },
             },
           },
         },
         golangci_lint_ls = {}, -- linter
       },
     },
-    code_actions = { -- null-ls.nvim: builtins code_actions
-      "gomodifytags",
-      "impl",
-    },
+    formatters = { "goimports", "gofumpt" }, -- conform.nvim: formatters
     dap = { -- nvim-dap: language specific extensions
       { "leoluz/nvim-dap-go" },
     },

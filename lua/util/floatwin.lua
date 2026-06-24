@@ -3,8 +3,6 @@ local M = {}
 
 --- Create window that takes up certain percentags of the current screen.
 --
--- reference: https://github.com/nvimtools/none-ls.nvim/blob/main/lua/null-ls/info.lua#L11
---
 -- Examples:
 -- ```lua
 --    local bufnr, winid = make_window(lines)

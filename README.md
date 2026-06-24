@@ -50,7 +50,7 @@ See [keymaps.md](docs/keymaps.md).
 - Tests with [neotest]
 - Formatting with [conform.nvim]
 - Linting with [nvim-lint]
-- Code Actions with [null-ls.nvim]
+- Code Action previews with [actions-preview.nvim]
 - Auto Completion with [nvim-cmp]
 - Snippets with [nvim-snippets] and [friendly-snippets]
 - Fuzzy Finding with [telescope.nvim]
@@ -90,17 +90,18 @@ lua
 │   ├── init.lua         -- configure of icons, close_with_q list, etc.
 │   ├── lazy.lua         -- configure lazy.nvim
 │   ├── autocmds.lua
-│   ├── keymaps.lua
+│   ├── keymaps          -- general and plugin-specific keymaps
 │   └── options.lua
 ├── plugins
-│   ├── ui.lua           -- UI Appearance
-│   ├── editor.lua       -- Editor Features
-│   ├── coding.lua       -- Coding Features
+│   ├── ui              -- UI Appearance
+│   ├── editor          -- Editor Features
+│   ├── coding          -- Coding Features
 │   ├── lsp.lua
 │   ├── dap.lua
 │   ├── test.lua
 │   ├── treesitter.lua
 │   └── extras
+│       ├── langspec.lua -- language spec generator
 │       ├── tools
 │       │   ├── database.lua
 │       │   ├── plantuml.lua
@@ -110,12 +111,11 @@ lua
 │           ├── yaml.lua
 │           ├── python.lua
 │           ├── go.lua
-│           ├── ...
-│           +-- spec.lua
-└── util.lua
+│           └── ...
+└── util                -- shared utilities exposed through _G.U
 ```
 
-Contents of ui, editor and coding:
+Contents of ui, editor and coding directories:
 
 - `UI Appearance`: statusline, tabline, winbar, scrollbar, indent, icons, notify, messages, cmdline, popupmenu, etc.
 - `Editor Features`: which-key, fuzzy finder, file explorer, outline, jump, git signs, todo comments, auto-resize windows, etc.
@@ -128,7 +128,7 @@ Contents of ui, editor and coding:
 [Native LSP]: https://github.com/neovim/nvim-lspconfig
 [nvim-dap]: https://github.com/mfussenegger/nvim-dap
 [neotest]: https://github.com/nvim-neotest/neotest
-[null-ls.nvim]: https://github.com/nvimtools/none-ls.nvim
+[actions-preview.nvim]: https://github.com/aznhe21/actions-preview.nvim
 [conform.nvim]: https://github.com/stevearc/conform.nvim
 [nvim-lint]: https://github.com/mfussenegger/nvim-lint
 [nvim-cmp]: https://github.com/hrsh7th/nvim-cmp

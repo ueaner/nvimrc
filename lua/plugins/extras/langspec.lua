@@ -5,7 +5,6 @@
 ---@field lsp LangConfig.lsp
 ---@field formatters string[]|table<string, conform.FormatterUnit[]>
 ---@field linters string[]|table<string, string[]>
----@field code_actions string[]
 ---@field dap LangConfig.dap
 ---@field test LangConfig.test
 
@@ -49,7 +48,6 @@ local defaults = {
   },
   formatters = {}, -- conform.nvim: formatters
   linters = {}, -- nvim-lint: linters
-  code_actions = {}, -- null-ls.nvim: builtins code_actions
   dap = { -- nvim-dap: language specific extensions
   },
   test = { -- neotest: language specific adapters
@@ -76,13 +74,13 @@ end
 ---@param ... LazyPluginSpec
 function M:append(...)
   vim.list_extend(self.plugin_specs, { ... })
-  return M
+  return self
 end
 
 ---@param ... LazyPluginSpec
 function M:prepend(...)
-  vim.list_extend(self.plugin_specs, { ... })
-  return M
+  self.plugin_specs = vim.list_extend({ ... }, self.plugin_specs)
+  return self
 end
 
 ---Generate language specific specs
@@ -99,6 +97,7 @@ function M:generate(conf)
     table.insert(specs, {
       "neovim-treesitter/nvim-treesitter",
       opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
         vim.list_extend(opts.ensure_installed, conf.parsers)
       end,
     })
@@ -109,6 +108,7 @@ function M:generate(conf)
     table.insert(specs, {
       "mason-org/mason.nvim",
       opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
         vim.list_extend(opts.ensure_installed, conf.cmdtools)
       end,
     })
@@ -131,7 +131,7 @@ function M:generate(conf)
   end
 
   -- setup formatters
-  if not vim.tbl_isempty(conf.formatters) and U.has("conform.nvim") then
+  if not vim.tbl_isempty(conf.formatters) then
     ---@type table<string, conform.FormatterUnit[]>
     local formatters_by_ft = {}
 
@@ -156,7 +156,7 @@ function M:generate(conf)
   end
 
   -- setup linters
-  if not vim.tbl_isempty(conf.linters) and U.has("nvim-lint") then
+  if not vim.tbl_isempty(conf.linters) then
     ---@type table<string, conform.FormatterUnit[]>
     local linters_by_ft = {}
 
@@ -178,28 +178,6 @@ function M:generate(conf)
         linters_by_ft = linters_by_ft,
       },
     })
-  end
-
-  -- setup code actions
-  if not vim.tbl_isempty(conf.code_actions) and U.has("none-ls.nvim") then
-    local actions = {}
-    local nls = require("null-ls")
-    for _, action in pairs(conf.code_actions) do
-      if nls.builtins.code_actions[action] then
-        vim.list_extend(actions, { nls.builtins.code_actions[action] })
-      end
-    end
-
-    if not vim.tbl_isempty(actions) then
-      table.insert(specs, {
-        "nvimtools/none-ls.nvim",
-        optional = true,
-        opts = function(_, opts)
-          opts.sources = opts.sources or {}
-          vim.list_extend(opts.sources, actions)
-        end,
-      })
-    end
   end
 
   -- setup DAP

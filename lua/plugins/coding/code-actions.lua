@@ -1,13 +1,6 @@
 return {
   -- code actions
   {
-    "nvimtools/none-ls.nvim",
-    event = "LazyFile",
-    dependencies = { "mason.nvim" },
-    opts = { sources = {} },
-  },
-
-  {
     "aznhe21/actions-preview.nvim",
     event = "LazyFile",
     opts = {},

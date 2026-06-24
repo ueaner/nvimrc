@@ -14,7 +14,7 @@ local conf = {
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     "bash-language-server",
     "shfmt",
-    "shellcheck", -- bashls is integrated, so no need to configure `null-ls` diagnostics
+    "shellcheck", -- bashls is integrated, so no extra diagnostics bridge is needed
   },
   lsp = {
     ---@type table<string, vim.lsp.Config>

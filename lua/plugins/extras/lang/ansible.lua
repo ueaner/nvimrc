@@ -11,7 +11,7 @@ local conf = {
   cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
     "ansible-language-server",
     -- https://github.com/microsoft/vscode-python/issues/14327#issuecomment-757408341
-    "ansible-lint", -- ansiblels is integrated, so no need to configure `null-ls` diagnostics
+    "ansible-lint", -- ansiblels is integrated, so no extra diagnostics bridge is needed
   },
   lsp = {
     servers = { -- nvim-lspconfig: setup lspconfig servers
