@@ -54,6 +54,13 @@ return {
         icons = {},
       },
       latex = { enabled = false },
+      win_options = {
+        -- Force nowrap when markdown rendering is active
+        wrap = {
+            default = false,
+            rendered = false,
+        },
+      },
     },
   },
 }

@@ -110,3 +110,5 @@ if vim.g.neovide then
   vim.env.TERM = "xterm-256color"
   vim.env.COLORTERM = "truecolor"
 end
+
+vim.opt.fileencodings = { "ucs-bom", "utf-8", "gb18030", "gbk", "gb2312", "cp936" }
