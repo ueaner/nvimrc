@@ -186,8 +186,9 @@ local keys = {
     { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     -- NOTE: method textDocument/declaration is not supported by any of the servers registered for the current buffer
     { "ge", vim.lsp.buf.declaration, desc = "Go to D[e]claration", has = "declaration" },
-    -- <grt>: vim.lsp.buf.type_definition()
-    { "gd", vim.lsp.buf.type_definition, desc = "Go to Type Definition" },
+    { "gd", vim.lsp.buf.definition, desc = "Go to Definition" },
+    -- <grt>: vim.lsp.buf.type_definition() (built-in default)
+    -- <gri>: vim.lsp.buf.implementation() (built-in default)
     { "K", function() return vim.lsp.buf.hover() end, desc = "Hover" },
     { "gK", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
     { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },

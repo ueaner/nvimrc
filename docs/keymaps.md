@@ -115,8 +115,8 @@ Command-line mode uses readline-style keymaps.
 | `<leader>cf` | Format Document                   | n    | LSP        |
 | `<leader>cf` | Format Range                      | v    | LSP        |
 | `ge`         | Goto D[e]claration                | n    | LSP        |
-| `gd`         | Goto Type Definition              | n    | LSP        |
-| `grt`        | Goto Definition                   | n    | LSP        |
+| `gd`         | Goto Definition                   | n    | LSP        |
+| `grt`        | Goto Type Definition              | n    | LSP        |
 | `gri`        | Goto Implementation               | n    | LSP        |
 | `grr`        | Find References                   | n    | LSP        |
 | `<leader>cn` | Rename                            | n    | LSP        |
