@@ -19,8 +19,9 @@ if vim.fn.executable("node") == 1 then
     cmdtools = { -- mason.nvim: cmdline tools for LSP servers, DAP servers, formatters and linters
       "css-lsp",
       "html-lsp",
-      -- "vtsls",
-      "tsgo",
+      "vtsls",
+      --- "typescript-language-server",
+      -- "tsc",
       "js-debug-adapter",
       -- "firefox-debug-adapter",
       -- "prettier",
@@ -30,8 +31,11 @@ if vim.fn.executable("node") == 1 then
     },
     lsp = {
       servers = { -- nvim-lspconfig: setup lspconfig servers
-        ---@type lspconfig.settings.tsgo
-        tsgo = {
+        --- 暂时使用 typescript
+        tsc = { enabled = false },
+        ts_ls = { enabled = false },
+        ---@type lspconfig.settings.vtsls
+        vtsls = {
           -- explicitly add default filetypes, so that we can extend
           -- them in related extras
           filetypes = {
