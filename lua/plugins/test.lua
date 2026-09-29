@@ -6,7 +6,7 @@ return {
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
-      "neovim-treesitter/nvim-treesitter",
+      "nvim-treesitter/nvim-treesitter",
       {
         "andythigpen/nvim-coverage",
         config = function()

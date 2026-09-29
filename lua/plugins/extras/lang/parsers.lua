@@ -5,16 +5,18 @@ return {
   { "rhysd/npm-filetypes.vim" },
 
   {
-    "neovim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
+    "nvim-treesitter/nvim-treesitter",
+    -- Use a function to append: a plain table would replace the whole list during opts merge.
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
         "java",
         "groovy",
         "kotlin",
         "xml",
         "swift",
         "nginx",
-      },
-    },
+      })
+    end,
   },
 }

@@ -4,7 +4,7 @@ return {
     dependencies = {
       "lewis6991/async.nvim",
       "nvim-lua/plenary.nvim",
-      "neovim-treesitter/nvim-treesitter",
+      "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim",
     },
     lazy = true,

@@ -6,7 +6,6 @@ local conf = {
   parsers = { -- nvim-treesitter: language parsers
     "json",
     "json5",
-    "jsonc",
   },
   lsp = {
     ---@type table<string, vim.lsp.Config>

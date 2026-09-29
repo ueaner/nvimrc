@@ -95,7 +95,7 @@ function M:generate(conf)
   -- add language parsers to treesitter
   if not vim.tbl_isempty(conf.parsers) then
     table.insert(specs, {
-      "neovim-treesitter/nvim-treesitter",
+      "nvim-treesitter/nvim-treesitter",
       opts = function(_, opts)
         opts.ensure_installed = opts.ensure_installed or {}
         vim.list_extend(opts.ensure_installed, conf.parsers)

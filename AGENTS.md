@@ -18,8 +18,8 @@ This is a personal Neovim configuration (not a plugin), heavily inspired by [Laz
 - **Run / test config**: `nvim` (normal start), `nvim --headless +qa` (sanity check for startup errors), and `find lua -name '*.lua' -print0 | xargs -0 -n1 luac -p` (Lua syntax check).
 - **Check health**: `:checkhealth` inside Neovim; use `:checkhealth nvim-treesitter` for Tree-sitter-specific validation.
 - **Format Lua**: `stylua .` (uses `stylua.toml`; stylua itself may need to be installed separately — it is referenced as the Lua formatter but is not guaranteed to be on `$PATH` or in Mason here).
-- **Inspect plugin state**: `:Lazy`, `:Mason`, `:LspInfo`, `:ConformInfo`, completion status commands when provided by the active completion plugin, and `:TSStatus`.
-- **Tree-sitter maintenance**: `:Lazy update nvim-treesitter treesitter-parser-registry`, `:TSCacheClear`, and `:TSUpdate!`.
+- **Inspect plugin state**: `:Lazy`, `:Mason`, `:LspInfo`, `:ConformInfo`, completion status commands when provided by the active completion plugin.
+- **Tree-sitter maintenance**: `:Lazy update nvim-treesitter`, `:TSUpdate`, and `:TSInstall! <lang>` (force reinstall parser + queries).
 - **No Makefile / package.json / CI**: This is a dotfile-style repo. There are no automated test suites; correctness is validated by starting Neovim and running `:checkhealth`.
 
 ## Code Organization and Conventions
@@ -109,10 +109,10 @@ Note: the generator does not automatically check host runtimes. Existing languag
 
 ### Treesitter
 
-- Uses `neovim-treesitter/nvim-treesitter` on the `main` branch with the new API (`require("nvim-treesitter").setup()`, `.install()`).
-- Requires `neovim-treesitter/treesitter-parser-registry`. The registry is loaded from that plugin's local `registry.json`; update it with the plugin manager, not with `:TSUpdate`.
-- Parser/query version checks are cached in `~/.local/share/nvim/site/registry/registry-cache.lua` for 24 hours. Use `:TSCacheClear` or `:TSUpdate!` when forcing version refreshes; `:TSRegistryUpdate` is documented upstream but is not implemented by the currently installed plugin code.
-- Installed parser metadata lives under `~/.local/share/nvim/site/parser-info/`; compiled parsers and downloaded queries live under `~/.local/share/nvim/site/parser/` and `~/.local/share/nvim/site/queries/`.
+- Uses `nvim-treesitter/nvim-treesitter` on the `main` branch with the new API (`require("nvim-treesitter").setup()`, `.install()`).
+- Uses upstream `nvim-treesitter/nvim-treesitter` (`main` branch) only; the `neovim-treesitter` fork and its `treesitter-parser-registry` dependency are no longer used.
+- Parsers are compiled to `~/.local/share/nvim/site/parser/`, revisions are recorded in `~/.local/share/nvim/site/parser-info/<lang>.revision`, and queries are symlinked from the plugin's `runtime/queries/` into `~/.local/share/nvim/site/queries/`. A language counts as installed if either its parser or its queries entry exists, so if highlighting is missing while the `.so` exists, the queries link is gone: run `:TSInstall! <lang>`.
+- Add parsers to `ensure_installed` with an `opts = function(_, opts) vim.list_extend(...) end` (or `LangSpec.parsers`). A plain-table `ensure_installed` in another spec replaces the whole list during lazy.nvim opts merge.
 - Features are enabled manually on `FileType`: `vim.treesitter.start()` for highlighting and `require("nvim-treesitter").indentexpr()` for indentation.
 - `ftdetect/detect.vim` sets custom filetypes (`*.service` → `systemd`, `go.mod` → `go.mod`, etc.).
 - Custom Tree-sitter queries live in `queries/`.

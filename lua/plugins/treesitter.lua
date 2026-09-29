@@ -1,5 +1,5 @@
--- https://github.com/neovim-treesitter/nvim-treesitter#supported-languages-and-features
--- https://github.com/neovim-treesitter/nvim-treesitter/blob/main/lua/nvim-treesitter/parsers.lua
+-- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages-and-features
+-- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/lua/nvim-treesitter/parsers.lua
 -- List of installed treesitter parsers `:checkhealth nvim-treesitter`
 -- installation directory: ~/.local/share/nvim/site/parser
 return {
@@ -7,13 +7,12 @@ return {
   -- use in Neovim to power faster and more accurate
   -- syntax highlighting.
   {
-    "neovim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter",
     branch = "main",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
     lazy = false,
-    dependencies = { "neovim-treesitter/treesitter-parser-registry" },
-    cmd = { "TSCacheClear", "TSInstall", "TSLog", "TSStatus", "TSUninstall", "TSUpdate" },
+    cmd = { "TSInstall", "TSInstallFromGrammar", "TSLog", "TSUninstall", "TSUpdate" },
     ---@type TSConfig
     opts = {
       highlight = { enable = true },
